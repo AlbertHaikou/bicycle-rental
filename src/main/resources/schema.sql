@@ -1,5 +1,5 @@
-create database RentBike_DB;
-use RentBike_DB;
+create database bicycle_rent;
+use bicycle_rent;
 CREATE TABLE `Users` (
   `id` INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
   `firstName` varchar(20) NOT NULL,
