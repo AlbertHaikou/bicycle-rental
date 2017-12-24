@@ -15,7 +15,7 @@
     <center style="color:graytext;"><h3><fmt:message key="ADD_NEW_PARKING"/></h3>
         <br/>  
         <div id="centerLayer" >
-            <form method="post" action="main?command=${empty parking ? 'createParking' : 'updateParking'}">
+            <form method="post" action="ParkingController?action=${empty parking ? 'create' : 'update'}">
                 <input type="hidden"  name="id"
                        value="<c:out value="${parking.parkingId}" />" /> <br /> 
                 <label>Улица:</label> <input

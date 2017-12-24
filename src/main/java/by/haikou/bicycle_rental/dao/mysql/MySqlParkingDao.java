@@ -4,7 +4,7 @@ import by.haikou.bicycle_rental.dao.ParkingDao;
 import by.haikou.bicycle_rental.dao.exceptions.DAOException;
 import by.haikou.bicycle_rental.dao.mysql.db.ConnectionPool;
 import by.haikou.bicycle_rental.dao.mysql.db.ResultSetConverter;
-import by.haikou.bicycle_rental.entity.Parking;
+import by.haikou.bicycle_rental.entity.ParkingEntity;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -17,7 +17,7 @@ public class MySqlParkingDao implements ParkingDao {
     private final ConnectionPool pool = ConnectionPool.getPool();
 
     @Override
-    public void addParking(Parking parking) throws DAOException {
+    public void addParking(ParkingEntity parking) throws DAOException {
         Connection connection = null;
         PreparedStatement statement = null;
 
@@ -55,7 +55,7 @@ public class MySqlParkingDao implements ParkingDao {
     }
 
     @Override
-    public void updateParking(Parking parking) throws DAOException {
+    public void updateParking(ParkingEntity parking) throws DAOException {
         Connection connection = null;
         PreparedStatement statement = null;
 
@@ -74,12 +74,12 @@ public class MySqlParkingDao implements ParkingDao {
     }
 
     @Override
-    public List<Parking> getAllParking() throws DAOException {
+    public List<ParkingEntity> getAllParking() throws DAOException {
         Connection connection = null;
         PreparedStatement statement = null;
         ResultSet set = null;
 
-        List<Parking> result = new ArrayList<>();
+        List<ParkingEntity> result = new ArrayList<>();
 
         try {
             connection = pool.getConnection();
@@ -87,7 +87,7 @@ public class MySqlParkingDao implements ParkingDao {
             set = statement.executeQuery();
 
             while (set.next()) {
-                Parking entity = ResultSetConverter.createParkingEntity(set);
+                ParkingEntity entity = ResultSetConverter.createParkingEntity(set);
                 result.add(entity);
             }
         } catch (SQLException e) {
@@ -101,7 +101,7 @@ public class MySqlParkingDao implements ParkingDao {
     }
 
     @Override
-    public Parking getParkingById(Integer parkingId) throws DAOException {
+    public ParkingEntity getParkingById(Integer parkingId) throws DAOException {
         if (parkingId == null) {
             return null;
         }
@@ -116,7 +116,7 @@ public class MySqlParkingDao implements ParkingDao {
             set = statement.executeQuery();
 
             if (set.next()) {
-                Parking entity = ResultSetConverter.createParkingEntity(set);
+                ParkingEntity entity = ResultSetConverter.createParkingEntity(set);
                 return entity;
             }
         } catch (SQLException e) {

@@ -1,24 +1,23 @@
 package by.haikou.bicycle_rental.service;
 
-import by.haikou.bicycle_rental.entity.User;
-
+import by.haikou.bicycle_rental.entity.UserEntity;
 import java.util.List;
 
 public interface UserService {
 
-    User getUser(String login, String password);
+    UserEntity getUser(String login, String password);
 
-    User getUser(String login);
+    UserEntity getUser(String login);
 
-    List<User> getAllUsers();
+    List<UserEntity> getAllUsers();
 
     void deleteUser(Integer userId);
 
-    User getUserById(Integer userId);
+    UserEntity getUserById(Integer userId);
 
-    void addUser(User user);
+    void addUser(UserEntity user);
 
-    void updateUser(User user);
+    void updateUser(UserEntity user);
 
-    List<User> getAllSupports();
+    List<UserEntity> getAllSupports();
 }

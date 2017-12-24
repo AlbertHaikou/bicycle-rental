@@ -1,6 +1,6 @@
   window.initialize = function(){
     var myLatlng = new google.maps.LatLng(53.9,27.565);
-        var pos1 = new google.maps.LatLng(53.950968, 27.691108);
+        var pos1 = new google.maps.LatLng(53.9,27.5);
         var pos2 = new google.maps.LatLng(53.85,27.55);
 	var pos3 = new google.maps.LatLng(53.89,27.45);
 var pos4 = new google.maps.LatLng(53.86,27.63);
@@ -38,3 +38,4 @@ var pos6 = new google.maps.LatLng(53.93,27.623);
   });
     }
 google.maps.event.addDomListener(window, 'load', initialize);
+  //&key=AIzaSyAzilovi5xP3lY1UiXP7arjvOsrNB6b77s

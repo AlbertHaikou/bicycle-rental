@@ -4,9 +4,9 @@ import java.util.List;
 
 import by.haikou.bicycle_rental.dao.RentItemDao;
 import by.haikou.bicycle_rental.dao.factory.DAOFactory;
-import by.haikou.bicycle_rental.entity.User;
 import by.haikou.bicycle_rental.service.UserService;
 import by.haikou.bicycle_rental.dao.UserDao;
+import by.haikou.bicycle_rental.entity.UserEntity;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -18,16 +18,16 @@ public class UserServiceImpl implements UserService {
     private RentItemDao rentItemDao = DAOFactory.getFactory().getRentItemDao();
 
     @Override
-    public User getUser(String login, String password) {
-        User user = userDao.getUser(login, password);
+    public UserEntity getUser(String login, String password) {
+        UserEntity user = userDao.getUser(login, password);
         return user;
     }
 
   
 
     @Override
-    public User getUser(String login) {
-        User user = null;
+    public UserEntity getUser(String login) {
+        UserEntity user = null;
         try {
             user = userDao.getUser(login);
         } catch (Exception e) {
@@ -37,7 +37,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> getAllUsers() {
+    public List<UserEntity> getAllUsers() {
         return userDao.getAllUsers();
     }
 
@@ -47,23 +47,23 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getUserById(Integer userId) {
+    public UserEntity getUserById(Integer userId) {
         return userDao.getUserById(userId);
     }
 
     @Override
-    public void addUser(User user) {
+    public void addUser(UserEntity user) {
         userDao.addUser(user);
     }
 
 
     @Override
-    public void updateUser(User user) {
+    public void updateUser(UserEntity user) {
         userDao.updateUser(user);
     }
 
     @Override
-    public List<User> getAllSupports() {
+    public List<UserEntity> getAllSupports() {
         return userDao.getAllSupports();
     }
 

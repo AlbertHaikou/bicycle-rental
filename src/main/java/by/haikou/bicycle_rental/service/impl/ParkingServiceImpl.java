@@ -1,7 +1,7 @@
 package by.haikou.bicycle_rental.service.impl;
 
 import by.haikou.bicycle_rental.dao.ParkingDao;
-import by.haikou.bicycle_rental.entity.Parking;
+import by.haikou.bicycle_rental.entity.ParkingEntity;
 import by.haikou.bicycle_rental.service.ParkingService;
 import by.haikou.bicycle_rental.dao.factory.DAOFactory;
 
@@ -17,22 +17,22 @@ public class ParkingServiceImpl implements ParkingService {
     }
 
     @Override
-    public Parking getParkingById(Integer id) {
+    public ParkingEntity getParkingById(Integer id) {
         return parkingDao.getParkingById(id);
     }
 
     @Override
-    public List<Parking> getAllParking() {
+    public List<ParkingEntity> getAllParking() {
         return parkingDao.getAllParking();
     }
 
     @Override
-    public void addParking(Parking parking) {
+    public void addParking(ParkingEntity parking) {
         parkingDao.addParking(parking);
     }
 
     @Override
-    public void updateParking(Parking parking) {
+    public void updateParking(ParkingEntity parking) {
         parkingDao.updateParking(parking);
     }
 

@@ -37,7 +37,7 @@
                 <td><c:out value="${profile.lastName}" /></td>
                 <td><c:out value="${profile.email}" /></td>
                 <td><c:out value="${profile.password}" /></td>
-                <c:if test="${sessionScope.user.role.value=='CLIENT'}">
+                <c:if test="${sessionScope.user.getRoles().contains(client)}"> 
                 <td><a href="ProfileController?action=edit&id=<c:out value="${profile.id}"/>">
                         <fmt:message key="UPDATE"/></a></td>
                 </c:if>

@@ -4,8 +4,8 @@ import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import by.haikou.bicycle_rental.entity.Bicycle;
-import by.haikou.bicycle_rental.entity.User;
+import by.haikou.bicycle_rental.entity.BikeEntity;
+import by.haikou.bicycle_rental.entity.UserEntity;
 import by.haikou.bicycle_rental.service.BikeService;
 import by.haikou.bicycle_rental.service.ParkingService;
 import by.haikou.bicycle_rental.service.RentItemService;
@@ -50,7 +50,7 @@ public class BikeController extends CRUDController {
     @Override
     void create(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Bicycle bike = new Bicycle();
+        BikeEntity bike = new BikeEntity();
         bike.setType(request.getParameter("type"));
         bike.setModel(request.getParameter("model"));
         bike.setSize(request.getParameter("size"));
@@ -71,9 +71,9 @@ public class BikeController extends CRUDController {
     void list(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("user");
+        UserEntity user = (UserEntity) session.getAttribute("user");
         Integer userId = user.getId();
-//        RentItem rentItem = rentItemService.findTakenByUser(userId);
+//        RentItemEntity rentItem = rentItemService.findTakenByUser(userId);
 //        if (rentItem != null) {
 //            request.setAttribute("userRentedBikeId", rentItem.getBicycleId());
 //        }
@@ -84,7 +84,7 @@ public class BikeController extends CRUDController {
     @Override
     void update(Integer id, HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Bicycle bike = new Bicycle();
+        BikeEntity bike = new BikeEntity();
         bike.setType(request.getParameter("type"));
         bike.setModel(request.getParameter("model"));
         bike.setSize(request.getParameter("size"));
@@ -98,7 +98,7 @@ public class BikeController extends CRUDController {
     @Override
     void edit(Integer id, HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Bicycle bike = bikeService.getBikeById(id);
+        BikeEntity bike = bikeService.getBikeById(id);
         request.setAttribute("bike", bike);
         request.setAttribute("parkings", parkingService.getAllParking());
         forward(ConstantsMng.ADD_OR_EDIT_BIKE, request, response);
@@ -118,7 +118,7 @@ public class BikeController extends CRUDController {
 
     void rentBike(Integer id, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("user");
+        UserEntity user = (UserEntity) session.getAttribute("user");
         Integer userId = user.getId();
         bikeService.rentBike(id, userId);
         response.sendRedirect(request.getContextPath() + "/BikeController?action=list");
@@ -126,7 +126,7 @@ public class BikeController extends CRUDController {
 
     void returnBike(Integer id, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("user");
+        UserEntity user = (UserEntity) session.getAttribute("user");
         Integer userId = user.getId();
         bikeService.returnBike(id, userId);
         response.sendRedirect(request.getContextPath() + "/BikeController?action=list");

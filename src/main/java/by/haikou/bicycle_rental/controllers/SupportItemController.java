@@ -1,6 +1,6 @@
 package by.haikou.bicycle_rental.controllers;
 
-import by.haikou.bicycle_rental.entity.Bicycle;
+import by.haikou.bicycle_rental.entity.BikeEntity;
 import by.haikou.bicycle_rental.entity.SupportItemEntity;
 import by.haikou.bicycle_rental.service.BikeService;
 import by.haikou.bicycle_rental.service.SupportItemService;
@@ -70,7 +70,7 @@ public class SupportItemController extends CRUDController {
     @Override
     void add(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Integer bikeId = Integer.parseInt(request.getParameter("id"));
-        Bicycle bike = bikeService.getBikeById(bikeId);
+        BikeEntity bike = bikeService.getBikeById(bikeId);
         request.setAttribute("bike", bike);
         forward(ConstantsMng.ADD_ITEMS, request, response);
     }

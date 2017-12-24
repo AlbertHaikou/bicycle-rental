@@ -29,7 +29,7 @@
         </thead>
         <tbody>
             <c:set var="support" value="support"/>
-            <c:if test="${sessionScope.user.role.value=='SUPPORT'}">
+            <c:if test="${sessionScope.user.getRoles().contains(support)}"> 
 
                 <c:choose>
                     <c:when test="${'unperformeditem'.equalsIgnoreCase(param.action)}">

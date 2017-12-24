@@ -1,6 +1,6 @@
 package by.haikou.bicycle_rental.service;
 
-import by.haikou.bicycle_rental.entity.Bicycle;
+import by.haikou.bicycle_rental.entity.BikeEntity;
 
 import java.util.List;
 
@@ -8,20 +8,20 @@ public interface BikeService {
 
     void deleteBike(Integer bikeId);
 
-    Bicycle getBikeById(Integer bikeId);
+    BikeEntity getBikeById(Integer bikeId);
 
-    List<Bicycle> getAllBikes();
+    List<BikeEntity> getAllBikes();
 
-    void createBike(Bicycle bike);
+    void createBike(BikeEntity bike);
 
-    void updateBike(Bicycle bike);
+    void updateBike(BikeEntity bike);
 
-    List<Bicycle> showAvailableBike();
+    List<BikeEntity> showAvailableBike();
 
     void rentBike(Integer bikeId, Integer userId);
 
     void returnBike(Integer bikeId, Integer userId);
 
-    List<Bicycle> showBikeByParkingId(Integer parkingId);
+    List<BikeEntity> showBikeByParkingId(Integer parkingId);
 
 }

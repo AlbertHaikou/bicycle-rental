@@ -25,13 +25,13 @@
                     <th><fmt:message key="SIZE"/></th>
                     <th><fmt:message key="STATUS"/></th>
                     <th><fmt:message key="№_PARKING"/></th>
-                        <c:set var="CLIENT" value="CLIENT"/>
-                        <c:if test="${not empty sessionScope.user}">
+                        <c:set var="client" value="client"/>
+                        <c:if test="${sessionScope.user.getRoles().contains(client)}"> 
                         <th><fmt:message key="RENT"/></th>
                         <th><fmt:message key="REPAIRS"/></th>
                         </c:if>
-                        <c:set var="ADMINISTRATOR" value="ADMINISTRATOR"/>
-                        <c:if test="${sessionScope.user.role.value=='ADMINISTRATOR'}">
+                        <c:set var="admin" value="admin"/>
+                        <c:if test="${sessionScope.user.getRoles().contains(admin)}"> 
                         <th colspan=2><fmt:message key="ACTION"/></th>
                         </c:if>
                 </tr>
@@ -40,7 +40,7 @@
                 <c:choose>
                     <c:when test="${'isAvailable'.equalsIgnoreCase(param.action)}">
                     <center>
-                        <a href="main?command=listBikes"><button class="btn btn-mini"
+                        <a href="BikeController?action=listBike"><button class="btn btn-mini" 
      type="button" style="border-top-width: 2px;padding-left: 0px;
     padding-right: 0px; padding-top: 0px; padding-bottom: 0px;border-bottom-width: 2px;
     border-left-width: 5px; border-right-width: 5px;
@@ -49,7 +49,7 @@
                 </c:when>
                 <c:otherwise>
                     <center>
-                        <a href="main?command=listAvailableBikes"><button class="btn btn-mini"
+                        <a href="BikeController?action=isAvailable"><button class="btn btn-mini"
             type="button" style="border-top-width: 2px;padding-left: 0px;
             padding-right: 0px; padding-top: 0px; padding-bottom: 0px;border-bottom-width: 2px;
             border-left-width: 5px; border-right-width: 5px;color: navy;">
@@ -73,17 +73,17 @@
                     </c:choose>
                               <input type="hidden" name="parkingId" value="<c:out value="${bike.parkingId}" />" /> 
                     <td><c:out value="${bike.parkingId}" /></td>
-                    <c:if test="${sessionScope.user.role.value=='ADMINISTRATOR'}">
-                        <td><a href="BikeController?action=editBike&id=<c:out value="${bike.bicycleId}"/>"><fmt:message key="UPDATE"/></a></td>
-                        <td><a href="BikeController?action=deleteBike&id=<c:out value="${bike.bicycleId}"/>"><fmt:message key="DELETE"/></a></td>
+                    <c:if test="${sessionScope.user.getRoles().contains(admin)}"> 
+                        <td><a href="BikeController?action=edit&id=<c:out value="${bike.bicycleId}"/>"><fmt:message key="UPDATE"/></a></td>
+                        <td><a href="BikeController?action=delete&id=<c:out value="${bike.bicycleId}"/>"><fmt:message key="DELETE"/></a></td>
                     </c:if>
-                    <c:set var="CLIENT" value="CLIENT"/>
-                    <c:if test="${not empty sessionScope.user}">
+                    <c:set var="client" value="client"/>
+                    <c:if test="${sessionScope.user.getRoles().contains(client)}"> 
                         <c:choose>
                             <c:when test="${bike.isAvailable}">
                                 <td>
                                     <c:if test="${empty userRentedBikeId}">
-                                        <a href="main?command=rentBike&id=<c:out value="${bike.bicycleId}"/>"><fmt:message key="TO_RENT"/></a>
+                                        <a href="BikeController?action=rentbike&id=<c:out value="${bike.bicycleId}"/>"><fmt:message key="TO_RENT"/></a>
                                     </c:if>
                                 </td>
                                 <td><a href="SupportItemController?action=add&id=<c:out value="${bike.bicycleId}"/>"><fmt:message key="BID"/></a></td>
@@ -91,7 +91,7 @@
                             <c:otherwise>
                                 <td>
                                     <c:if test="${not empty userRentedBikeId && bike.bicycleId == userRentedBikeId}">
-                                        <a href="main?command=returnBike&id=<c:out value="${bike.bicycleId}"/>"><fmt:message key="TO_RETURN"/></a>
+                                        <a href="BikeController?action=returnbike&id=<c:out value="${bike.bicycleId}"/>"><fmt:message key="TO_RETURN"/></a>
                                     </c:if>
                                 </td>                                    
                                 <td></td>   
@@ -103,8 +103,8 @@
         </tbody>
     </table>
     <br/>
-    <c:if test="${sessionScope.user.getRole().getValue().equalsIgnoreCase(ADMINISTRATOR)}">
-    <center><a href="main?command=addBike"><button><fmt:message key="ADD_BIKE"/></button></a>
+    <c:if test="${sessionScope.user.getRoles().contains(admin)}"> 
+    <center><a href="BikeController?action=add"><button><fmt:message key="ADD_BIKE"/></button></a>
     </center>
 </c:if>
 <jsp:include page="footer.jsp"/>

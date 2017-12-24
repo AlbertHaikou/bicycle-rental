@@ -4,6 +4,7 @@ import by.haikou.bicycle_rental.command.CommandEnum;
 import by.haikou.bicycle_rental.command.ICommand;
 import by.haikou.bicycle_rental.command.factory.CommandFactory;
 import by.haikou.bicycle_rental.exception.UnauthorizedException;
+import by.haikou.bicycle_rental.util.MessageUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -36,22 +37,13 @@ public class MainController extends HttpServlet {
             req.getRequestDispatcher("error_page.jsp").forward(req, resp);
         } catch (Exception exc) {
             log.error(exc);
+            req.setAttribute("message", MessageUtils.getProperty("err.smth-error", req));
             req.getRequestDispatcher("error_page.jsp").forward(req, resp);
         }
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        processRequest(req, resp);
-    }
-
-    @Override
-    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        processRequest(req, resp);;
-    }
-
-    @Override
-    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         processRequest(req, resp);
     }
 }

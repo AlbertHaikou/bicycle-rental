@@ -4,7 +4,7 @@ import by.haikou.bicycle_rental.dao.BikeDao;
 import by.haikou.bicycle_rental.dao.exceptions.DAOException;
 import by.haikou.bicycle_rental.dao.mysql.db.ConnectionPool;
 import by.haikou.bicycle_rental.dao.mysql.db.ResultSetConverter;
-import by.haikou.bicycle_rental.entity.Bicycle;
+import by.haikou.bicycle_rental.entity.BikeEntity;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -20,7 +20,7 @@ public class MySqlBikeDao implements BikeDao {
     private final ConnectionPool pool = ConnectionPool.getPool();
 
     @Override
-    public void createBike(Bicycle bike) throws DAOException {
+    public void createBike(BikeEntity bike) throws DAOException {
         Connection connection = null;
         PreparedStatement statement = null;
 
@@ -62,7 +62,7 @@ public class MySqlBikeDao implements BikeDao {
     }
 
     @Override
-    public void updateBike(Bicycle bike) throws DAOException {
+    public void updateBike(BikeEntity bike) throws DAOException {
         Connection connection = null;
         PreparedStatement statement = null;
 
@@ -85,12 +85,12 @@ public class MySqlBikeDao implements BikeDao {
     }
 
     @Override
-    public List<Bicycle> getAllBikes() throws DAOException {
+    public List<BikeEntity> getAllBikes() throws DAOException {
         Connection connection = null;
         PreparedStatement statement = null;
         ResultSet set = null;
 
-        List<Bicycle> result = new ArrayList<>();
+        List<BikeEntity> result = new ArrayList<>();
 
         try {
             connection = pool.getConnection();
@@ -98,7 +98,7 @@ public class MySqlBikeDao implements BikeDao {
             set = statement.executeQuery();
 
             while (set.next()) {
-                Bicycle entity = ResultSetConverter.createBikeEntity(set);
+                BikeEntity entity = ResultSetConverter.createBikeEntity(set);
                 result.add(entity);
             }
         } catch (SQLException e) {
@@ -112,7 +112,7 @@ public class MySqlBikeDao implements BikeDao {
     }
 
     @Override
-    public Bicycle getBikeById(Integer bikeId) throws DAOException {
+    public BikeEntity getBikeById(Integer bikeId) throws DAOException {
         if (bikeId == null) {
             return null;
         }
@@ -127,7 +127,7 @@ public class MySqlBikeDao implements BikeDao {
             set = statement.executeQuery();
 
             if (set.next()) {
-                Bicycle entity = ResultSetConverter.createBikeEntity(set);
+                BikeEntity entity = ResultSetConverter.createBikeEntity(set);
                 return entity;
             }
         } catch (SQLException e) {
@@ -141,18 +141,18 @@ public class MySqlBikeDao implements BikeDao {
     }
 
     @Override
-    public List<Bicycle> showAvailableBike() {
+    public List<BikeEntity> showAvailableBike() {
         Connection connection = null;
         PreparedStatement statement = null;
         ResultSet set = null;
-        List<Bicycle> result = new ArrayList<>();
+        List<BikeEntity> result = new ArrayList<>();
         try {
             connection = pool.getConnection();
             statement = connection.prepareStatement("select * from bicycle where available=1");
             set = statement.executeQuery();
 
             while (set.next()) {
-                Bicycle entity = ResultSetConverter.createBikeEntity(set);
+                BikeEntity entity = ResultSetConverter.createBikeEntity(set);
                 result.add(entity);
             }
         } catch (SQLException e) {
@@ -201,7 +201,7 @@ public class MySqlBikeDao implements BikeDao {
     }
 
     @Override
-    public List<Bicycle> showBikeByParkingId(Integer parkingId) throws DAOException {
+    public List<BikeEntity> showBikeByParkingId(Integer parkingId) throws DAOException {
 
         if (parkingId == null) {
             return null;
@@ -210,7 +210,7 @@ public class MySqlBikeDao implements BikeDao {
         Connection connection = null;
         PreparedStatement statement = null;
         ResultSet set = null;
-        List<Bicycle> result = new ArrayList<>();
+        List<BikeEntity> result = new ArrayList<>();
         try {
             connection = pool.getConnection();
 
@@ -220,7 +220,7 @@ public class MySqlBikeDao implements BikeDao {
             set = statement.executeQuery();
 
             while (set.next()) {
-                Bicycle entity = ResultSetConverter.createBikeEntity(set);
+                BikeEntity entity = ResultSetConverter.createBikeEntity(set);
                 result.add(entity);
             }
         } catch (SQLException e) {

@@ -1,9 +1,9 @@
 package by.haikou.bicycle_rental.exception;
 
-import by.haikou.bicycle_rental.entity.User;
+import by.haikou.bicycle_rental.entity.UserEntity;
 
 public class UserException extends Exception {
-    private User user;
+    private UserEntity user;
 
     public UserException() {
         super();
@@ -21,12 +21,12 @@ public class UserException extends Exception {
         super(cause);
     }
 
-    public UserException(String message, User user) {
+    public UserException(String message, UserEntity user) {
         this(message);
         this.user = user;
     }
 
-    public User getUser() {
+    public UserEntity getUser() {
         return user;
     }
 }

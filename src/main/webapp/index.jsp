@@ -10,7 +10,7 @@
     </head>
     <body style="margin-bottom: 0px;">
         <jsp:include page="navigation.jsp"/>
-           <div id="maps" class="maps" style="width:100%;height: 700px;"></div>
+           <div id="maps" class="maps" style="width:100%;height:530px;"></div>
         <jsp:include page="footer.jsp"/>
     </body>
 </html>
