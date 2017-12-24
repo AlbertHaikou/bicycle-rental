@@ -1,5 +1,7 @@
 package by.haikou.bicycle_rental.command;
 
+import by.haikou.bicycle_rental.command.exception.CommandException;
+import by.haikou.bicycle_rental.exception.UnauthorizedException;
 import sport.totalizator.command.exception.CommandException;
 import sport.totalizator.entity.User;
 import sport.totalizator.exception.UnauthorizedException;
