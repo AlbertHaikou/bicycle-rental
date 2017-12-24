@@ -1,10 +1,7 @@
 package by.haikou.bicycle_rental.dao.mysql.db;
 
-import by.haikou.bicycle_rental.entity.BikeEntity;
-import by.haikou.bicycle_rental.entity.ParkingEntity;
-import by.haikou.bicycle_rental.entity.RentItemEntity;
-import by.haikou.bicycle_rental.entity.SupportItemEntity;
-import by.haikou.bicycle_rental.entity.UserEntity;
+import by.haikou.bicycle_rental.entity.*;
+import by.haikou.bicycle_rental.entity.User;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
@@ -15,13 +12,13 @@ public final class ResultSetConverter {
         throw new AssertionError("Class contains static methods only. You should not instantiate it!");
     }
 
-    public static UserEntity createUserEntity(ResultSet set) throws SQLException {
+    public static User createUserEntity(ResultSet set) throws SQLException {
         Integer userId = set.getInt("id");
         String firstName = set.getString("firstName");
         String lastName = set.getString("lastName");
         String email = set.getString("email");
         String password = set.getString("password");
-        UserEntity entity = new UserEntity();
+        User entity = new User();
 
         entity.setId(userId);
         entity.setFirstName(firstName);
@@ -31,7 +28,7 @@ public final class ResultSetConverter {
         return entity;
     }
 
-    public static BikeEntity createBikeEntity(ResultSet set) throws SQLException {
+    public static Bicycle createBikeEntity(ResultSet set) throws SQLException {
         Integer bikeId = set.getInt("id");
         String type = set.getString("type");
         String model = set.getString("model");
@@ -39,7 +36,7 @@ public final class ResultSetConverter {
         Boolean available = set.getBoolean("available");
         Integer parkingId = set.getInt("fk_Parking_id");
 
-        BikeEntity entity = new BikeEntity();
+        Bicycle entity = new Bicycle();
 
         entity.setBicycleId(bikeId);
         entity.setType(type);
@@ -51,18 +48,18 @@ public final class ResultSetConverter {
         return entity;
     }
 
-    public static ParkingEntity createParkingEntity(ResultSet set) throws SQLException {
+    public static Parking createParkingEntity(ResultSet set) throws SQLException {
         Integer parkingId = set.getInt("id");
         String street = set.getString("street");
 
-        ParkingEntity entity = new ParkingEntity();
+        Parking entity = new Parking();
 
         entity.setParkingId(parkingId);
         entity.setStreet(street);
         return entity;
     }
 
-    public static RentItemEntity createRentItemEntity(ResultSet set) throws SQLException {
+    public static RentItem createRentItemEntity(ResultSet set) throws SQLException {
 
         Integer rentItem_id = set.getInt("id");
         Integer bikes_id = set.getInt("fk_bikes_id");
@@ -70,7 +67,7 @@ public final class ResultSetConverter {
         Date date = set.getTimestamp("date");
         Boolean status = set.getBoolean("status");
 
-        RentItemEntity entity = new RentItemEntity();
+        RentItem entity = new RentItem();
         entity.setId(rentItem_id);
         entity.setBikeId(bikes_id);
         entity.setUserId(users_id);

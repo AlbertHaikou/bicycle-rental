@@ -34,7 +34,7 @@
 
 ﻿<div class="auth-window animated fadeInDown" style="margin-top: 10px;">
     <div class="title"><fmt:message key="LOGIN"/></div>
-    <form roles="form" method="post" name="myForm"
+    <form role="form" method="post" name="myForm"
           onsubmit="return validateForm()" action="LoginController">
         <div class="wrap">
             <div class="form-group">

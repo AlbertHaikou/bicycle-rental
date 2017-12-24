@@ -1,10 +1,8 @@
 package by.haikou.bicycle_rental.command;
 
 import by.haikou.bicycle_rental.command.exception.CommandException;
+import by.haikou.bicycle_rental.entity.User;
 import by.haikou.bicycle_rental.exception.UnauthorizedException;
-import sport.totalizator.command.exception.CommandException;
-import sport.totalizator.entity.User;
-import sport.totalizator.exception.UnauthorizedException;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -13,13 +11,13 @@ import java.io.IOException;
 
 public interface ICommand {
     default void checkRoots(HttpServletRequest req, User.Role[] needLevels)
-            throws ServletException, IOException, CommandException, UnauthorizedException{
-        if((needLevels.length == 0) || (needLevels == null)){
+            throws ServletException, IOException, CommandException, UnauthorizedException {
+        if ((needLevels.length == 0) || (needLevels == null)) {
             return;
         }
         String currentLevel = (String) req.getSession().getAttribute("role");
         for (User.Role needLevel : needLevels) {
-            if(needLevel.getValue().equals(currentLevel)){
+            if (needLevel.getValue().equals(currentLevel)) {
                 return;
             }
         }

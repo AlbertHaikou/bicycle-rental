@@ -2,12 +2,12 @@ package by.haikou.bicycle_rental.service.impl;
 
 import by.haikou.bicycle_rental.dao.BikeDao;
 import by.haikou.bicycle_rental.dao.RentItemDao;
-import by.haikou.bicycle_rental.entity.BikeEntity;
+import by.haikou.bicycle_rental.entity.Bicycle;
+import by.haikou.bicycle_rental.entity.RentItem;
 import by.haikou.bicycle_rental.service.BikeService;
 import by.haikou.bicycle_rental.dao.factory.DAOFactory;
 import java.util.List;
 
-import by.haikou.bicycle_rental.entity.RentItemEntity;
 import java.util.Date;
 
 public class BikeServiceImpl implements BikeService {
@@ -21,30 +21,30 @@ public class BikeServiceImpl implements BikeService {
     }
 
     @Override
-    public BikeEntity getBikeById(Integer id) {
+    public Bicycle getBikeById(Integer id) {
         return bikeDao.getBikeById(id);
     }
 
     @Override
-    public List<BikeEntity> getAllBikes() {
+    public List<Bicycle> getAllBikes() {
         return bikeDao.getAllBikes();
     }
     @Override
-    public void createBike(BikeEntity bike) {
+    public void createBike(Bicycle bike) {
         bikeDao.createBike(bike);
     }
     @Override
-    public void updateBike(BikeEntity bike) {
+    public void updateBike(Bicycle bike) {
         bikeDao.updateBike(bike);
     }
     @Override
-    public List<BikeEntity> showAvailableBike() {
+    public List<Bicycle> showAvailableBike() {
         return bikeDao.showAvailableBike();
     }
     @Override
     public void rentBike(Integer bikeId, Integer userId) {
         bikeDao.rentBike(bikeId);
-        RentItemEntity rentItem = new RentItemEntity();
+        RentItem rentItem = new RentItem();
         rentItem.setUserId(userId);
         rentItem.setBikeId(bikeId);
         rentItem.setStatus(false);
@@ -54,7 +54,7 @@ public class BikeServiceImpl implements BikeService {
     @Override
     public void returnBike(Integer bikeid, Integer userId) {
         bikeDao.returnBike(bikeid);
-        RentItemEntity rentItem = new RentItemEntity();
+        RentItem rentItem = new RentItem();
         rentItem.setUserId(userId);
         rentItem.setBikeId(bikeid);
         rentItem.setStatus(true);
@@ -62,7 +62,7 @@ public class BikeServiceImpl implements BikeService {
         rentItemDao.createItem(rentItem);
     }
     @Override
-    public List<BikeEntity> showBikeByParkingId(Integer id) {
+    public List<Bicycle> showBikeByParkingId(Integer id) {
         return bikeDao.showBikeByParkingId(id);
     }
 

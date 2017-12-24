@@ -2,7 +2,7 @@ package by.haikou.bicycle_rental.dao.mysql;
 
 import by.haikou.bicycle_rental.dao.RentItemDao;
 import by.haikou.bicycle_rental.dao.exceptions.DAOException;
-import by.haikou.bicycle_rental.entity.RentItemEntity;
+import by.haikou.bicycle_rental.entity.RentItem;
 import by.haikou.bicycle_rental.dao.mysql.db.ConnectionPool;
 import by.haikou.bicycle_rental.dao.mysql.db.ResultSetConverter;
 import java.sql.Connection;
@@ -17,7 +17,7 @@ public class MySqlRentItemDao implements RentItemDao {
     private final ConnectionPool pool = ConnectionPool.getPool();
 
     @Override
-    public void createItem(RentItemEntity rentItem) throws DAOException {
+    public void createItem(RentItem rentItem) throws DAOException {
         Connection connection = null;
         PreparedStatement statement = null;
 
@@ -40,12 +40,12 @@ public class MySqlRentItemDao implements RentItemDao {
     }
 
     @Override
-    public List<RentItemEntity> historyRent(Integer id) throws DAOException {
+    public List<RentItem> historyRent(Integer id) throws DAOException {
         Connection connection = null;
         PreparedStatement statement = null;
         ResultSet set = null;
 
-        List<RentItemEntity> result = new ArrayList<>();
+        List<RentItem> result = new ArrayList<>();
 
         try {
             connection = pool.getConnection();
@@ -54,7 +54,7 @@ public class MySqlRentItemDao implements RentItemDao {
             set = statement.executeQuery();
 
             while (set.next()) {
-                RentItemEntity entity = ResultSetConverter.createRentItemEntity(set);
+                RentItem entity = ResultSetConverter.createRentItemEntity(set);
                 result.add(entity);
             }
         } catch (SQLException e) {
@@ -67,11 +67,11 @@ public class MySqlRentItemDao implements RentItemDao {
     }
 
     @Override
-    public RentItemEntity findTakenByUser(Integer userId) {
+    public RentItem findTakenByUser(Integer userId) {
         Connection connection = null;
         PreparedStatement statement = null;
         ResultSet set = null;
-        RentItemEntity result = null;
+        RentItem result = null;
 
         try {
             connection = pool.getConnection();

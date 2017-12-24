@@ -39,7 +39,7 @@
         <jsp:include page="navigation.jsp"/>
         ﻿<div class="auth-window animated  fadeInDown" style="margin-top: 50px;">
             <div class="title"><fmt:message key="REGISTRATION"/></div>
-            <form roles="form" action="RegisterController" name="myForm"
+            <form role="form" action="RegisterController" name="myForm"
                   onsubmit="return validateForm()" method="post">
                 <div class="wrap">
                     <div class="form-inline">

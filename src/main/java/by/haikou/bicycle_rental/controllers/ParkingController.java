@@ -5,7 +5,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import by.haikou.bicycle_rental.entity.ParkingEntity;
+import by.haikou.bicycle_rental.entity.Parking;
 import by.haikou.bicycle_rental.service.ParkingService;
 import by.haikou.bicycle_rental.service.factory.ServiceFactory;
 import by.haikou.bicycle_rental.util.ConstantsMng;
@@ -20,7 +20,7 @@ public class ParkingController extends CRUDController {
     @Override
     void create(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        ParkingEntity parking = new ParkingEntity();
+        Parking parking = new Parking();
         parking.setStreet(request.getParameter("street"));
         parkingService.addParking(parking);
         response.sendRedirect(request.getContextPath() + "/ParkingController?action=list");
@@ -43,7 +43,7 @@ public class ParkingController extends CRUDController {
     @Override
     void update(Integer id, HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        ParkingEntity parking = new ParkingEntity();
+        Parking parking = new Parking();
         parking.setStreet(request.getParameter("street"));
         parking.setParkingId(id);
         parkingService.updateParking(parking);
@@ -53,7 +53,7 @@ public class ParkingController extends CRUDController {
     @Override
     void edit(Integer id, HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        ParkingEntity parking = parkingService.getParkingById(id);
+        Parking parking = parkingService.getParkingById(id);
         request.setAttribute("parking", parking);
         forward(ConstantsMng.ADD_OR_EDIT_PARKING, request, response);
     }

@@ -1,6 +1,6 @@
 package by.haikou.bicycle_rental.controllers;
 
-import by.haikou.bicycle_rental.entity.UserEntity;
+import by.haikou.bicycle_rental.entity.User;
 import by.haikou.bicycle_rental.service.UserService;
 import by.haikou.bicycle_rental.service.factory.ServiceFactory;
 import by.haikou.bicycle_rental.util.ConstantsMng;
@@ -31,7 +31,7 @@ public class LoginController extends HttpServlet {
         String password = request.getParameter(ConstantsMng.PARAM_NAME_PASSWORD);
         Map<String, String> errorMap = validateLoginDetails(login, password, request);
         if (errorMap.isEmpty()) {
-            UserEntity user = userService.getUser(login, password);
+            User user = userService.getUser(login, password);
             if (user != null) {
                 HttpSession session = request.getSession(true);
                 session.setAttribute("user", user);

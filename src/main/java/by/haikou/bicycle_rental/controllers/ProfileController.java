@@ -1,8 +1,8 @@
 package by.haikou.bicycle_rental.controllers;
 
+import by.haikou.bicycle_rental.entity.User;
 import by.haikou.bicycle_rental.service.RentItemService;
 import by.haikou.bicycle_rental.service.UserService;
-import by.haikou.bicycle_rental.entity.UserEntity;
 import by.haikou.bicycle_rental.service.factory.ServiceFactory;
 import by.haikou.bicycle_rental.util.ConstantsMng;
 import java.io.IOException;
@@ -49,7 +49,7 @@ public class ProfileController extends CRUDController {
     void list(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
-        UserEntity user = (UserEntity) session.getAttribute("user");
+        User user = (User) session.getAttribute("user");
         Integer userId = user.getId();
         request.setAttribute("profile", userService.getUserById(userId));
         forward(ConstantsMng.LIST_PROFILE, request, response);
@@ -58,7 +58,7 @@ public class ProfileController extends CRUDController {
     @Override
     void update(Integer id, HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        UserEntity user = new UserEntity();
+        User user = new User();
         user.setId(Integer.valueOf(request.getParameter("id")));
         user.setFirstName(request.getParameter("firstName"));
         user.setLastName(request.getParameter("lastName"));
@@ -72,7 +72,7 @@ public class ProfileController extends CRUDController {
     void edit(Integer id, HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
-        UserEntity user = (UserEntity) session.getAttribute("user");
+        User user = (User) session.getAttribute("user");
         Integer userId = user.getId();
         request.setAttribute("profile", userService.getUserById(userId));
         forward(ConstantsMng.ADD_OR_EDIT_PROFILE, request, response);
@@ -84,7 +84,7 @@ public class ProfileController extends CRUDController {
 
     private void historyRent(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
-        UserEntity user = (UserEntity) session.getAttribute("user");
+        User user = (User) session.getAttribute("user");
         Integer userId = user.getId();
         request.setAttribute("rents", rentItemService.historyRent(userId));
         forward(ConstantsMng.LIST_HISTORY_RENT, request, response);

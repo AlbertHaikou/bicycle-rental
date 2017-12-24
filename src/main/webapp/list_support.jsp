@@ -23,8 +23,8 @@
                     <th><fmt:message key="LAST_NAME"/></th>
                     <th><fmt:message key="EMAIL"/></th>
                     <th><fmt:message key="PASSWORD"/></th>
-                        <c:set var="admin" value="admin"/>
-                        <c:if test="${sessionScope.user.getRoles().contains(admin)}"> 
+                        <c:set var="ADMINISTRATOR" value="ADMINISTRATOR"/>
+                        <c:if test="${sessionScope.user.getRole().getValue().equalsIgnoreCase(ADMINISTRATOR)}">
                          <th colspan=2><fmt:message key="ACTION"/></th>
                         </c:if>
                 </tr>
@@ -37,7 +37,7 @@
                         <td><c:out value="${support.lastName}"/></td>
                         <td><c:out value="${support.email}"/></td>
                         <td><c:out value="${support.password}"/></td>
-                        <c:if test="${sessionScope.user.getRoles().contains(admin)}"> 
+                        <c:if test="${sessionScope.user.getRole().getValue().equalsIgnoreCase(ADMINISTRATOR)}">
                             <td><a href="UserController?action=edit&id=<c:out value="${support.id}"/>"><fmt:message key="UPDATE"/></a></td>
                             <td><a href="UserController?action=delete&id=<c:out value="${support.id}"/>"><fmt:message key="DELETE"/></a></td>
                         </c:if>
@@ -46,7 +46,7 @@
             </tbody>
         </table>
         <br/>
-        <c:if test="${sessionScope.user.getRoles().contains(admin)}"> 
+        <c:if test="${sessionScope.user.getRole().getValue().equalsIgnoreCase(ADMINISTRATOR)}">
         <center><a href="UserController?action=add"><button><fmt:message key="ADD_SERVICE_STUFF"/></button></a></center>
         </c:if>
         <jsp:include page="footer.jsp"/>

@@ -1,11 +1,12 @@
 package by.haikou.bicycle_rental.service;
 
-import by.haikou.bicycle_rental.entity.RentItemEntity;
+import by.haikou.bicycle_rental.entity.RentItem;
+
 import java.util.List;
 
 public interface RentItemService {
 
-    List<RentItemEntity> historyRent(Integer userId);
+    List<RentItem> historyRent(Integer userId);
 
-    RentItemEntity findTakenByUser(Integer userId);
+    RentItem findTakenByUser(Integer userId);
 }

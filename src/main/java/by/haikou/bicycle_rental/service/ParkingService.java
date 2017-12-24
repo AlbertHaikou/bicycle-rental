@@ -1,6 +1,6 @@
 package by.haikou.bicycle_rental.service;
 
-import by.haikou.bicycle_rental.entity.ParkingEntity;
+import by.haikou.bicycle_rental.entity.Parking;
 
 import java.util.List;
 
@@ -8,12 +8,12 @@ public interface ParkingService {
 
     void deleteParking(Integer parkingId);
 
-    ParkingEntity getParkingById(Integer parkingId);
+    Parking getParkingById(Integer parkingId);
 
-    List<ParkingEntity> getAllParking();
+    List<Parking> getAllParking();
 
-    void addParking(ParkingEntity parking);
+    void addParking(Parking parking);
 
-    void updateParking(ParkingEntity parking);
+    void updateParking(Parking parking);
 
 }
