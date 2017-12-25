@@ -15,7 +15,7 @@
 <center style="color:graytext;"><h3><fmt:message key="EDITING"/></h3>
     <br/>
     <div id="centerLayer">
-        <form method="post" action="BikeController?action=${empty bike ? 'create' : 'update'}">
+        <form method="post" action="main?action=${empty bike ? 'createBicycle' : 'updateBicycle'}">
             <input type="hidden" name="id"
                    value="<c:out value="${bike.bicycleId}" />"/> <br/>
             <label><fmt:message key="TYPE"/> :</label> <input

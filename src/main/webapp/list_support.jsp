@@ -13,7 +13,7 @@
     </head>
     <body style="margin-bottom: 0px;">
         <jsp:include page="navigation.jsp"/>
-           <center style="color:graytext;"><h3><fmt:message key="SERVICE_STAFF"/></h3></center>
+           <center style="color:graytext;"><h3><fmt:message key="MANAGER"/></h3></center>
         <br/>
         <table border=2>
             <thead>
@@ -24,7 +24,7 @@
                     <th><fmt:message key="EMAIL"/></th>
                     <th><fmt:message key="PASSWORD"/></th>
                         <c:set var="ADMINISTRATOR" value="ADMINISTRATOR"/>
-                        <c:if test="${sessionScope.user.getRole().getValue().equalsIgnoreCase(ADMINISTRATOR)}">
+                        <c:if test="${sessionScope.user.role.value=='ADMINISTRATOR'}">
                          <th colspan=2><fmt:message key="ACTION"/></th>
                         </c:if>
                 </tr>
@@ -38,16 +38,16 @@
                         <td><c:out value="${support.email}"/></td>
                         <td><c:out value="${support.password}"/></td>
                         <c:if test="${sessionScope.user.getRole().getValue().equalsIgnoreCase(ADMINISTRATOR)}">
-                            <td><a href="UserController?action=edit&id=<c:out value="${support.id}"/>"><fmt:message key="UPDATE"/></a></td>
-                            <td><a href="UserController?action=delete&id=<c:out value="${support.id}"/>"><fmt:message key="DELETE"/></a></td>
+                            <td><a href="main?command=editUser&id=<c:out value="${support.id}"/>"><fmt:message key="UPDATE"/></a></td>
+                            <td><a href="main?command=deleteUser&id=<c:out value="${support.id}"/>"><fmt:message key="DELETE"/></a></td>
                         </c:if>
                     </tr>
                 </c:forEach>
             </tbody>
         </table>
         <br/>
-        <c:if test="${sessionScope.user.getRole().getValue().equalsIgnoreCase(ADMINISTRATOR)}">
-        <center><a href="UserController?action=add"><button><fmt:message key="ADD_SERVICE_STUFF"/></button></a></center>
+        <c:if test="${sessionScope.user.role.value=='ADMINISTRATOR'}">
+        <center><a href="main?command=addManager"><button><fmt:message key="ADD_MANAGER"/></button></a></center>
         </c:if>
         <jsp:include page="footer.jsp"/>
 </body>

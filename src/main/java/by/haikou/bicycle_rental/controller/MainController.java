@@ -37,13 +37,22 @@ public class MainController extends HttpServlet {
             req.getRequestDispatcher("error_page.jsp").forward(req, resp);
         } catch (Exception exc) {
             log.error(exc);
-            req.setAttribute("message", MessageUtils.getProperty("err.smth-error", req));
             req.getRequestDispatcher("error_page.jsp").forward(req, resp);
         }
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        processRequest(req, resp);
+    }
+
+    @Override
+    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        processRequest(req, resp);;
+    }
+
+    @Override
+    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         processRequest(req, resp);
     }
 }
