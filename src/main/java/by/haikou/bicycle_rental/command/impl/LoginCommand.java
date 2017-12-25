@@ -1,0 +1,57 @@
+package by.haikou.bicycle_rental.command.impl;
+
+import by.haikou.bicycle_rental.command.CommandEnum;
+import by.haikou.bicycle_rental.command.ICommand;
+import by.haikou.bicycle_rental.command.exception.CommandException;
+import by.haikou.bicycle_rental.command.factory.CommandFactory;
+import by.haikou.bicycle_rental.entity.User;
+import by.haikou.bicycle_rental.exception.UnauthorizedException;
+import by.haikou.bicycle_rental.exception.UserException;
+import by.haikou.bicycle_rental.service.UserService;
+import by.haikou.bicycle_rental.service.factory.ServiceFactory;
+import by.haikou.bicycle_rental.util.MessageLocalizer;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import sport.totalizator.command.CommandEnum;
+import sport.totalizator.command.exception.CommandException;
+import sport.totalizator.command.factory.CommandFactory;
+import sport.totalizator.entity.User;
+import sport.totalizator.exception.UnauthorizedException;
+import sport.totalizator.exception.UserException;
+import sport.totalizator.service.exception.ServiceException;
+import sport.totalizator.util.MessageLocalizer;
+
+import javax.naming.ServiceUnavailableException;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.io.IOException;
+
+public class LoginCommand implements ICommand {
+    private static final Logger log = LogManager.getLogger(LoginCommand.class);
+
+    @Override
+    public void execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException, CommandException, UnauthorizedException {
+        UserService userService = ServiceFactory.getFactory().getUserService();
+        String login = req.getParameter("login");
+        String password = req.getParameter("password");
+        try {
+            User user = userService.login(login, password);
+            if (user != null) {
+                HttpSession session = req.getSession();
+                session.setAttribute("username", login);
+                session.setAttribute("role", user.getRole().getValue());
+            }
+
+        } catch (ServiceUnavailableException exc) {
+            log.error(exc);
+        } catch (UserException exc) {
+            req.setAttribute("user", exc.getUser());
+            req.setAttribute("error", MessageLocalizer.getLocalizedForCurrentLocaleMessage(exc.getMessage(), req));
+            CommandFactory.getFactory().createCommand(CommandEnum.SHOW_LOGIN_PAGE).execute(req, resp);
+        }
+
+        CommandFactory.getFactory().createCommand(CommandEnum.SHOW_MAIN_PAGE).execute(req, resp);
+    }
+}
