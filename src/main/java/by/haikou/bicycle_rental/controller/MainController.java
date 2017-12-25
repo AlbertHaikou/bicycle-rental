@@ -4,7 +4,6 @@ import by.haikou.bicycle_rental.command.CommandEnum;
 import by.haikou.bicycle_rental.command.ICommand;
 import by.haikou.bicycle_rental.command.factory.CommandFactory;
 import by.haikou.bicycle_rental.exception.UnauthorizedException;
-import by.haikou.bicycle_rental.util.MessageUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
