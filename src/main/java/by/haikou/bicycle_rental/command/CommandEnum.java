@@ -11,7 +11,14 @@ public enum CommandEnum {
     SHOW_USERS("showUsers"),
     SHOW_MANAGERS("showManagers"),
     SHOW_BIKES("showBikes"),
-    SHOW_PARKINGS("showParkings");
+    SHOW_PARKINGS("showParkings"),
+    SHOW_ADD_BIKE_PAGE("addBikePage"),
+    ADD_BIKE("addBike"),
+    DELETE_BIKE("deleteBike"),
+    EDIT_BIKE("editBike"),
+    SHOW_EDIT_BIKE_PAGE("showEditBikePage"),
+    RENT_BIKE("rentBike"),
+    SHOW_AVAILABLE_BIKES("listAvailableBikes");
 
     private String value;
 

@@ -38,9 +38,9 @@
             </thead>
             <tbody>   
                 <c:choose>
-                    <c:when test="${'isAvailable'.equalsIgnoreCase(param.action)}">
+                    <c:when test="${'true'.equalsIgnoreCase(param.available)}">
                     <center>
-                        <a href="main?command=listBikes"><button class="btn btn-mini"
+                        <a href="main?command=showBikes"><button class="btn btn-mini"
      type="button" style="border-top-width: 2px;padding-left: 0px;
     padding-right: 0px; padding-top: 0px; padding-bottom: 0px;border-bottom-width: 2px;
     border-left-width: 5px; border-right-width: 5px;
@@ -49,7 +49,7 @@
                 </c:when>
                 <c:otherwise>
                     <center>
-                        <a href="main?command=listAvailableBikes"><button class="btn btn-mini"
+                        <a href="main?command=showBikes&available=true"><button class="btn btn-mini"
             type="button" style="border-top-width: 2px;padding-left: 0px;
             padding-right: 0px; padding-top: 0px; padding-bottom: 0px;border-bottom-width: 2px;
             border-left-width: 5px; border-right-width: 5px;color: navy;">
@@ -74,8 +74,8 @@
                               <input type="hidden" name="parkingId" value="<c:out value="${bike.parkingId}" />" /> 
                     <td><c:out value="${bike.parkingId}" /></td>
                     <c:if test="${sessionScope.user.role.value=='ADMINISTRATOR'}">
-                        <td><a href="BikeController?action=editBike&id=<c:out value="${bike.bicycleId}"/>"><fmt:message key="UPDATE"/></a></td>
-                        <td><a href="BikeController?action=deleteBike&id=<c:out value="${bike.bicycleId}"/>"><fmt:message key="DELETE"/></a></td>
+                        <td><a href="main?command=showEditBikePage&id=<c:out value="${bike.bicycleId}"/>"><fmt:message key="UPDATE"/></a></td>
+                        <td><a href="main?command=deleteBike&id=<c:out value="${bike.bicycleId}"/>"><fmt:message key="DELETE"/></a></td>
                     </c:if>
                     <c:set var="CLIENT" value="CLIENT"/>
                     <c:if test="${not empty sessionScope.user}">
@@ -103,8 +103,8 @@
         </tbody>
     </table>
     <br/>
-    <c:if test="${sessionScope.user.getRole().getValue().equalsIgnoreCase(ADMINISTRATOR)}">
-    <center><a href="main?command=addBike"><button><fmt:message key="ADD_BIKE"/></button></a>
+    <c:if test="${sessionScope.user.role.value.equalsIgnoreCase(ADMINISTRATOR)}">
+    <center><a href="main?command=addBikePage"><button><fmt:message key="ADD_BIKE"/></button></a>
     </center>
 </c:if>
 <jsp:include page="footer.jsp"/>

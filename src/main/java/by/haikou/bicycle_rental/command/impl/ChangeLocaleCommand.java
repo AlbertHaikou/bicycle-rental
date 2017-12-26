@@ -5,7 +5,6 @@ import by.haikou.bicycle_rental.command.ICommand;
 import by.haikou.bicycle_rental.command.exception.CommandException;
 import by.haikou.bicycle_rental.command.factory.CommandFactory;
 import by.haikou.bicycle_rental.exception.UnauthorizedException;
-import by.haikou.bicycle_rental.util.ConstantsMng;
 import by.haikou.bicycle_rental.util.RequestUtils;
 
 import javax.servlet.ServletException;

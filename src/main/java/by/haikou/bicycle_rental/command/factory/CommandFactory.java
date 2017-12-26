@@ -26,6 +26,12 @@ public class CommandFactory {
         commands.put(SHOW_MANAGERS, new ShowManagersListCommand());
         commands.put(SHOW_BIKES, new ShowBikesListCommand());
         commands.put(SHOW_PARKINGS, new ShowParkingsListCommand());
+        commands.put(SHOW_ADD_BIKE_PAGE, new ShowAddBikePageCommand());
+        commands.put(ADD_BIKE, new AddBikeCommand());
+        commands.put(EDIT_BIKE, new EditBikeCommand());
+        commands.put(DELETE_BIKE, new DeleteBikeCommand());
+        commands.put(SHOW_EDIT_BIKE_PAGE, new ShowEditBikePageCommand());
+        commands.put(RENT_BIKE, new RentBikeCommand());
     }
 
     public static CommandFactory getFactory() {
