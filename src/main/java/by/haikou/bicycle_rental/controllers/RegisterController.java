@@ -19,10 +19,8 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-@WebServlet(name = "Register", urlPatterns = {"/RegisterController"})
 public class RegisterController extends HttpServlet {
 
-    private static final long serialVersionUID = 629738330207823052L;
     private UserService userService = ServiceFactory.getFactory().getUserService();
 
     @Override

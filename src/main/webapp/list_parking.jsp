@@ -33,7 +33,7 @@
             <td><c:out value="${parking.parkingId}"/></td>
             <td><c:out value="${parking.street}"/></td>
             <td><a href="main?command=showBike&id=<c:out value="${parking.parkingId}"/>"><fmt:message key="LIST_BIKES"/></a></td>
-            <c:if test="${sessionScope.user.getRole().getValue().equalsIgnoreCase(ADMINISTRATOR)}">
+            <c:if test="${sessionScope.user.role.value=='ADMINISTRATOR'}">
                 <td><a href="main?command=editParking&id=<c:out value="${parking.parkingId}"/>"><fmt:message key="UPDATE"/></a></td>
                 <td><a href="main?command=deleteParking&id=<c:out value="${parking.parkingId}"/>"><fmt:message key="DELETE"/></a></td>
             </c:if>
@@ -43,7 +43,7 @@
 </table>
 <br/>
 
-<c:if test="${sessionScope.user.getRole().getValue().equalsIgnoreCase(ADMINISTRATOR)}">
+<c:if test="${sessionScope.user.role.value=='ADMINISTRATOR'}">
     <center><a href="main?command=addParking"><button><fmt:message key="ADD_PARKING"/></button></a></center>
 </c:if>
 

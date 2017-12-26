@@ -4,7 +4,6 @@ import java.util.Date;
 
 public class RentItem extends AbstractEntity {
 
-    private static final long serialVersionUID = 6297383302078230511L;
     private int id;
     private int bikeId;
     private int userId;

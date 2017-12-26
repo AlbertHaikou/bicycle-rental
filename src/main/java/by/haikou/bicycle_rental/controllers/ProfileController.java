@@ -12,10 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpSession;
 
-@WebServlet(name = "ProfileController", urlPatterns = {"/ProfileController"})
 public class ProfileController extends CRUDController {
 
-    private static final long serialVersionUID = 6297383302078130511L;
 
     private UserService userService = ServiceFactory.getFactory().getUserService();
     private RentItemService rentItemService = ServiceFactory.getFactory().getRentItemService();

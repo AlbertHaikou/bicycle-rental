@@ -19,14 +19,14 @@
                 return false;
             }
             if (password == null || password.trim() == "") {
-                 alert("<fmt:message key="EMPTY_PASSWORD_ERROR_MESSAGE"/>");
+                alert("<fmt:message key="EMPTY_PASSWORD_ERROR_MESSAGE"/>");
                 return false;
             }
         }
     </script>
 </head>
 <body style="margin-bottom: 0px;">
-    <jsp:include page="navigation.jsp"/>
+<jsp:include page="navigation.jsp"/>
 <center style="color:graytext;">
     <h3>  <c:out value="${successMsg}" /></h3></center>
 <center style="color:graytext;">
@@ -35,7 +35,7 @@
 ﻿<div class="auth-window animated fadeInDown" style="margin-top: 10px;">
     <div class="title"><fmt:message key="LOGIN"/></div>
     <form role="form" method="post" name="myForm"
-          onsubmit="return validateForm()" action="main?command=login">
+          onsubmit="return validateForm()" action="Login">
         <div class="wrap">
             <div class="form-group">
                 <label for="email"></label>
@@ -59,7 +59,7 @@
         <div class="auth-window__bottom">
             <div class="row">
                 <div class="col-md-6">
-                    <button type="submit" class="btn btn-primary btn-block btn-lg" 
+                    <button type="submit" class="btn btn-primary btn-block btn-lg"
                             data-loading-text="Авторизация..."><fmt:message key="LOGIN"/></button>
                 </div>
                 <div class="col-md-6">

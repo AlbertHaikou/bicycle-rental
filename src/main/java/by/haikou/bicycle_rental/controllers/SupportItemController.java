@@ -15,10 +15,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.annotation.WebServlet;
 
-@WebServlet(name = "SupportItemController", urlPatterns = {"/SupportItemController"})
 public class SupportItemController extends CRUDController {
 
-    private static final long serialVersionUID = 6297383302778230511L;
     private SupportItemService supportItemService = ServiceFactory.getFactory().getSupportItemService();
     private BikeService bikeService = ServiceFactory.getFactory().getBikeService();
 

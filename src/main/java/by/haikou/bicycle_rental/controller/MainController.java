@@ -11,12 +11,13 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 
 public class MainController extends HttpServlet {
     private static final CommandFactory commandFactory = CommandFactory.getFactory();
-    private final static Logger log = LogManager.getLogger(MainController.class);
+    private final static Logger LOGGER = LogManager.getLogger(MainController.class);
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -31,27 +32,17 @@ public class MainController extends HttpServlet {
             command = commandFactory.createCommand(commandEnum);
             command.execute(req, resp);
         } catch (UnauthorizedException exc) {
-            log.error(exc);
+            LOGGER.error(exc);
             req.setAttribute("message", exc.getMessage());
             req.getRequestDispatcher("error_page.jsp").forward(req, resp);
         } catch (Exception exc) {
-            log.error(exc);
+            LOGGER.error(exc);
             req.getRequestDispatcher("error_page.jsp").forward(req, resp);
         }
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        processRequest(req, resp);
-    }
-
-    @Override
-    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        processRequest(req, resp);;
-    }
-
-    @Override
-    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         processRequest(req, resp);
     }
 }

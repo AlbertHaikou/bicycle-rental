@@ -7,10 +7,10 @@ public class RequestUtils {
 
     public static void setLocale(HttpServletRequest request) {
         HttpSession session = request.getSession(true);
-        String action = request.getParameter("action");
-        if (action.equals("eng")) {
+        String locale = request.getParameter("locale");
+        if (locale.equals("eng")) {
             session.setAttribute("locale", "en_US");
-        } else if (action.equals("rus")) {
+        } else if (locale.equals("rus")) {
             session.setAttribute("locale", "ru_RU");
         }
 

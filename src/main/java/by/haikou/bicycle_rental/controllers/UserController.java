@@ -7,21 +7,18 @@ import by.haikou.bicycle_rental.service.factory.ServiceFactory;
 import by.haikou.bicycle_rental.util.ConstantsMng;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(name = "UserController", urlPatterns = {"/UserController"})
 public class UserController extends CRUDController {
 
-    private static final long serialVersionUID = 6297383302078210511L;
 
     private UserService userService = ServiceFactory.getFactory().getUserService();
 
     @Override
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String action = request.getParameter("action");
+        String action = request.getParameter("command");
         if (action != null) {
             action = action.trim().toLowerCase();
         }
@@ -32,6 +29,8 @@ public class UserController extends CRUDController {
             default:
                 super.service(request, response);
         }
+
+
     }
 
     @Override
@@ -93,6 +92,7 @@ public class UserController extends CRUDController {
     }
 
     void getAllUsers(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
         request.setAttribute("users", userService.getAllUsers());
         forward(ConstantsMng.LIST_USERS, request, response);
     }

@@ -11,10 +11,7 @@ import by.haikou.bicycle_rental.service.factory.ServiceFactory;
 import by.haikou.bicycle_rental.util.ConstantsMng;
 import javax.servlet.annotation.WebServlet;
 
-@WebServlet(name = "ParkingController", urlPatterns = {"/ParkingController"})
 public class ParkingController extends CRUDController {
-
-    private static final long serialVersionUID = 6297383302078230511L;
     private ParkingService parkingService = ServiceFactory.getFactory().getParkingService();
 
     @Override

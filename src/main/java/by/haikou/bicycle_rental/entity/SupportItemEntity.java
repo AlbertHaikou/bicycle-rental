@@ -2,7 +2,6 @@ package by.haikou.bicycle_rental.entity;
 
 public class SupportItemEntity extends AbstractEntity {
 
-    private static final long serialVersionUID = 6296383302078230511L;
     private int itemId;
     private int bikeId;
     private String description;

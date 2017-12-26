@@ -8,9 +8,6 @@ import by.haikou.bicycle_rental.util.MessageUtils;
 import by.haikou.bicycle_rental.util.RequestUtils;
 import by.haikou.bicycle_rental.util.StringUtils;
 
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,32 +15,35 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
-@WebServlet(name = "Login", urlPatterns = {"/LoginController"})
+@WebServlet(name = "Login", urlPatterns = {"/Login"})
 public class LoginController extends HttpServlet {
- private static final long serialVersionUID = 6297383302078230514L;
     private UserService userService = ServiceFactory.getFactory().getUserService();
-
     @Override
-    protected void service(HttpServletRequest request,
-            HttpServletResponse response) throws ServletException, IOException {
+    protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String login = request.getParameter(ConstantsMng.PARAM_NAME_LOGIN);
         String password = request.getParameter(ConstantsMng.PARAM_NAME_PASSWORD);
         Map<String, String> errorMap = validateLoginDetails(login, password, request);
-        if (errorMap.isEmpty()) {
-            User user = userService.getUser(login, password);
-            if (user != null) {
-                HttpSession session = request.getSession(true);
-                session.setAttribute("user", user);
-                response.sendRedirect(request.getContextPath() + ConstantsMng.INDEX);
+        try {
+            if (errorMap.isEmpty()) {
+                User user = userService.login(login, password);
+                if (user != null) {
+                    HttpSession session = request.getSession(true);
+                    session.setAttribute("user", user);
+                    request.getRequestDispatcher(ConstantsMng.INDEX).forward(request, response);
+                } else {
+                    String message = MessageUtils.getProperty(RequestUtils.getLocale(request), MessageUtils.VALIDATION_ERRORS_PARAM);
+                    request.setAttribute(ConstantsMng.ATR_ERRORS, message);
+                    forwardToView(ConstantsMng.LOGIN, request, response);
+                }
             } else {
-                String message = MessageUtils.getProperty(RequestUtils.getLocale(request), MessageUtils.VALIDATION_ERRORS_PARAM);
-                request.setAttribute(ConstantsMng.ATR_ERRORS, message);
+                request.setAttribute("error", errorMap);
                 forwardToView(ConstantsMng.LOGIN, request, response);
             }
-        } else {
-            request.setAttribute("error", errorMap);
-            forwardToView(ConstantsMng.LOGIN, request, response);
+        } catch (Exception e) {
         }
     }
 

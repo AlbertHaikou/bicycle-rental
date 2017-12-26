@@ -2,14 +2,15 @@ package by.haikou.bicycle_rental.dao;
 
 import by.haikou.bicycle_rental.dao.exceptions.DAOException;
 import by.haikou.bicycle_rental.entity.User;
+import by.haikou.bicycle_rental.exception.UserException;
 
 import java.util.List;
 
 public interface UserDao {
-    
-    User getUser(String login) throws DAOException;
 
-    User getUser(String login, String password) throws DAOException;
+    User getUser(String login) throws DAOException, UserException;
+
+    User getUser(String login, String password) throws DAOException, UserException;
 
     List<User> getAllUsers()throws DAOException;
 

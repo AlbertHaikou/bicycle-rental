@@ -1,14 +1,15 @@
 package by.haikou.bicycle_rental.service;
 
 import by.haikou.bicycle_rental.entity.User;
+import by.haikou.bicycle_rental.exception.UserException;
 
 import java.util.List;
 
 public interface UserService {
 
-    User getUser(String login, String password);
+    User login(String login, String password) throws UserException;
 
-    User getUser(String login);
+    User login(String login) throws UserException;
 
     List<User> getAllUsers();
 

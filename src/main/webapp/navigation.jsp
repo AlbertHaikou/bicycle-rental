@@ -5,7 +5,7 @@
 <fmt:setLocale value="${not empty sessionScope.locale ? sessionScope.locale : 'en_US'}"/>
 <fmt:setBundle basename="messages" />
 <header class="navbar navbar-default" role="navigation" style="
-        height: 70px;" >        
+        height: 70px;" >
     <div class="container">
         <div class="navbar-header" >
             <a class="logo" href="index.jsp" style="padding-top: 5px">
@@ -35,24 +35,24 @@
                     <c:when test="${empty sessionScope.user}">
                         <li ><a href="login.jsp"><fmt:message key="LOGIN"/></a></li>
                         <li ><a href="registration.jsp"><fmt:message key="REGISTRATION"/></a></li>
-                        </c:when>
-                        <c:otherwise>
-                        <li class=""><a href="main?command=showListParking"><fmt:message key="BIKE_PARKINGS"/></a></li>
-                        <li class=""><a href="main?command=showListBike"><fmt:message key="BIKES"/></a></li>
-                            <c:if test="${sessionScope.user.role.value=='ADMINISTRATOR'}">
+                    </c:when>
+                    <c:otherwise>
+                        <li class=""><a href="main?command=showParkings"><fmt:message key="BIKE_PARKINGS"/></a></li>
+                        <li class=""><a href="main?command=showBikes"><fmt:message key="BIKES"/></a></li>
+                        <c:if test="${sessionScope.user.role.value=='ADMINISTRATOR'}">
                             <li class=""><a href="main?command=showManagers"><fmt:message key="MANAGER"/></a></li>
                             <li class=""><a href="main?command=showUsers"><fmt:message key="CLIENTS"/></a></li>
-                            </c:if>
-                            <c:if test="${sessionScope.user.role.value=='MANAGER'}">
+                        </c:if>
+                        <c:if test="${sessionScope.user.role.value=='MANAGER'}">
                             <li class=""><a href="main?command=showListItem"><fmt:message key="REQUEST_FOR_REPAIR"/></a></li>
-                            </c:if>
-                            <c:if test="${sessionScope.user.role.value=='CLIENT'}">
-                            <li class=""><a href="main?command=showListProfile"><fmt:message key="MY_PROFILE"/></a></li>
+                        </c:if>
+                        <c:if test="${sessionScope.user.role.value=='CLIENT'}">
+                            <li class=""><a href="main?command=showProfile"><fmt:message key="MY_PROFILE"/></a></li>
                             <li class=""><a href="main?command=showHistoryRent"><fmt:message key="RENTAL_OF_HISTORY"/></a></li>
-                            </c:if>
+                        </c:if>
                         <li class=""><a href="main?command=logout"><fmt:message key="EXIT"/></a></li>
-                        </c:otherwise>
-                    </c:choose>
+                    </c:otherwise>
+                </c:choose>
             </ul>
         </div>
     </div>

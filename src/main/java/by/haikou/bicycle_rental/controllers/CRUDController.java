@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletResponse;
 
 abstract class CRUDController extends HttpServlet {
 
-    private static final long serialVersionUID = 6296383302078230511L;
 
     @Override
     protected void service(HttpServletRequest request, HttpServletResponse response)

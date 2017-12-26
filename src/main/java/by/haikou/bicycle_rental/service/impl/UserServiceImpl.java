@@ -1,14 +1,15 @@
 package by.haikou.bicycle_rental.service.impl;
 
-import java.util.List;
-
 import by.haikou.bicycle_rental.dao.RentItemDao;
+import by.haikou.bicycle_rental.dao.UserDao;
 import by.haikou.bicycle_rental.dao.factory.DAOFactory;
 import by.haikou.bicycle_rental.entity.User;
+import by.haikou.bicycle_rental.exception.UserException;
 import by.haikou.bicycle_rental.service.UserService;
-import by.haikou.bicycle_rental.dao.UserDao;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import java.util.List;
 
 
 public class UserServiceImpl implements UserService {
@@ -18,15 +19,14 @@ public class UserServiceImpl implements UserService {
     private RentItemDao rentItemDao = DAOFactory.getFactory().getRentItemDao();
 
     @Override
-    public User getUser(String login, String password) {
+    public User login(String login, String password) throws UserException {
         User user = userDao.getUser(login, password);
         return user;
     }
 
-  
 
     @Override
-    public User getUser(String login) {
+    public User login(String login) {
         User user = null;
         try {
             user = userDao.getUser(login);
@@ -55,7 +55,6 @@ public class UserServiceImpl implements UserService {
     public void addUser(User user) {
         userDao.addUser(user);
     }
-
 
     @Override
     public void updateUser(User user) {
