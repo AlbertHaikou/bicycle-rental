@@ -25,7 +25,7 @@
         <th><fmt:message key="EMAIL"/></th>
         <th><fmt:message key="PASSWORD"/></th>
         <c:set var="client" value="client"/>
-        <c:if test="${sessionScope.role.value=='CLIENT'}">
+        <c:if test="${sessionScope.role.value eq 'CLIENT'}">
             <th><fmt:message key="ACTION"/></th>
         </c:if>
     </tr>

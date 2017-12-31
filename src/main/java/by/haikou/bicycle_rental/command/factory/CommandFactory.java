@@ -3,6 +3,9 @@ package by.haikou.bicycle_rental.command.factory;
 import by.haikou.bicycle_rental.command.CommandEnum;
 import by.haikou.bicycle_rental.command.ICommand;
 import by.haikou.bicycle_rental.command.impl.*;
+import by.haikou.bicycle_rental.command.impl.bike.*;
+import by.haikou.bicycle_rental.command.impl.manager.*;
+import by.haikou.bicycle_rental.command.impl.parking.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -23,15 +26,29 @@ public class CommandFactory {
         commands.put(LOGOUT, new LogoutCommand());
         commands.put(CHANGE_LOCALE, new ChangeLocaleCommand());
         commands.put(SHOW_USERS, new ShowUsersListCommand());
-        commands.put(SHOW_MANAGERS, new ShowManagersListCommand());
+        commands.put(SHOW_MANAGERS, new ShowManagersPageCommand());
+
         commands.put(SHOW_BIKES, new ShowBikesListCommand());
-        commands.put(SHOW_PARKINGS, new ShowParkingsListCommand());
         commands.put(SHOW_ADD_BIKE_PAGE, new ShowAddBikePageCommand());
         commands.put(ADD_BIKE, new AddBikeCommand());
-        commands.put(EDIT_BIKE, new EditBikeCommand());
+        commands.put(EDIT_BIKE, new UpdateBikeCommand());
         commands.put(DELETE_BIKE, new DeleteBikeCommand());
         commands.put(SHOW_EDIT_BIKE_PAGE, new ShowEditBikePageCommand());
         commands.put(RENT_BIKE, new RentBikeCommand());
+
+        commands.put(SHOW_PARKINGS, new ShowParkingPageCommand());
+        commands.put(ADD_PARKING, new AddParkingCommand());
+        commands.put(EDIT_PARKING, new UpdateParkingCommand());
+        commands.put(SHOW_EDIT_PARKING_PAGE, new ShowEditParkingPageCommand());
+        commands.put(SHOW_ADD_PARKING_PAGE, new ShowAddParkingPageCommand());
+        commands.put(DELETE_PARKING, new DeleteParkingCommand());
+        commands.put(SHOW_BIKES_IN_PARKING_PAGE, new ShowBikesInParkingCommand());
+
+        commands.put(SHOW_ADD_MANAGER_PAGE, new ShowAddManagerPageCommand());
+        commands.put(ADD_MANAGER, new AddManagerCommand());
+        commands.put(EDIT_MANAGER, new UpdateManagerCommand());
+        commands.put(DELETE_MANAGER, new DeleteManagerCommand());
+        commands.put(SHOW_EDIT_MANAGER_PAGE, new ShowEditManagerPageCommand());
     }
 
     public static CommandFactory getFactory() {

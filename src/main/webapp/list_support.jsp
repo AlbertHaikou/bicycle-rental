@@ -38,8 +38,8 @@
                         <td><c:out value="${support.email}"/></td>
                         <td><c:out value="${support.password}"/></td>
                         <c:if test="${sessionScope.user.getRole().getValue().equalsIgnoreCase(ADMINISTRATOR)}">
-                            <td><a href="main?command=editUser&id=<c:out value="${support.id}"/>"><fmt:message key="UPDATE"/></a></td>
-                            <td><a href="main?command=deleteUser&id=<c:out value="${support.id}"/>"><fmt:message key="DELETE"/></a></td>
+                            <td><a href="main?command=showEditManagerPage&id=<c:out value="${support.id}"/>"><fmt:message key="UPDATE"/></a></td>
+                            <td><a href="main?command=deleteManager&id=<c:out value="${support.id}"/>"><fmt:message key="DELETE"/></a></td>
                         </c:if>
                     </tr>
                 </c:forEach>
@@ -47,7 +47,7 @@
         </table>
         <br/>
         <c:if test="${sessionScope.user.role.value=='ADMINISTRATOR'}">
-        <center><a href="main?command=addManager"><button><fmt:message key="ADD_MANAGER"/></button></a></center>
+        <center><a href="main?command=showAddManagerPage"><button><fmt:message key="ADD_MANAGER"/></button></a></center>
         </c:if>
         <jsp:include page="footer.jsp"/>
 </body>

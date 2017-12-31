@@ -18,11 +18,22 @@ public enum CommandEnum {
     EDIT_BIKE("editBike"),
     SHOW_EDIT_BIKE_PAGE("showEditBikePage"),
     RENT_BIKE("rentBike"),
-    SHOW_AVAILABLE_BIKES("listAvailableBikes");
+    SHOW_AVAILABLE_BIKES("listAvailableBikes"),
+    ADD_PARKING("addParking"),
+    EDIT_PARKING("editParking"),
+    SHOW_ADD_PARKING_PAGE("addParkingPage"),
+    DELETE_PARKING("deleteParking"),
+    SHOW_EDIT_PARKING_PAGE("showEditParkingPage"),
+    SHOW_BIKES_IN_PARKING_PAGE("showBikesInParkingPage"),
+    ADD_MANAGER("addManager"),
+    SHOW_ADD_MANAGER_PAGE("showAddManagerPage"),
+    DELETE_MANAGER("deleteManager"),
+    SHOW_EDIT_MANAGER_PAGE("showEditManagerPage"),
+    EDIT_MANAGER("editManager");
 
     private String value;
 
-    private CommandEnum(String value) {
+    CommandEnum(String value) {
         this.value = value;
     }
 

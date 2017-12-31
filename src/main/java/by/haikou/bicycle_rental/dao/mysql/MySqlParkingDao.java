@@ -43,7 +43,7 @@ public class MySqlParkingDao implements ParkingDao {
 
         try {
             connection = pool.getConnection();
-            statement = connection.prepareStatement("delete from Parking where id=?");
+            statement = connection.prepareStatement("delete from parking where id=?");
             statement.setInt(1, parkingId);
             statement.executeUpdate();
         } catch (SQLException e) {

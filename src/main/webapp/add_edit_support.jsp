@@ -15,7 +15,7 @@
     <center style="color:graytext;"><h3><fmt:message key="EDITING"/></h3>
         <br/>  
         <div id="centerLayer" >
-            <form method="post" action="UserController?action=${empty manager ? 'create' : 'update'}">
+            <form method="post" action="main?command=${empty manager ? 'addManager' : 'editManager'}">
                 <input type="hidden" name="id" value="<c:out value="${manager.id}" />" />
                 <label><fmt:message key="FIRST_NAME"/>:</label> <input
                     type="text" name="firstName"
@@ -27,7 +27,6 @@
                     value="<c:out value="${manager.email}"/>" /><br/><br/>
                 <label><fmt:message key="PASSWORD"/>:</label> <input type="text" name="password"
                     value="<c:out value="${manager.password}"/>" />
-                <input type="hidden" name="manager" value="manager" />
                 <br/><br/> 
                 <input  type="submit" value="<fmt:message key="SAVE"/>"/>
             </form>   
