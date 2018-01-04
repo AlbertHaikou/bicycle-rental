@@ -11,7 +11,7 @@
         <link rel="stylesheet" href="css/bootstrap.css">
     </head>
     <body style="margin-bottom: 0px;">
-        <jsp:include page="navigation.jsp"/>
+        <jsp:include page="parts/navigation.jsp"/>
     <center style="color:graytext;"><h3><fmt:message key="ADD_NEW_PARKING"/></h3>
         <br/>  
         <div id="centerLayer" >
@@ -25,6 +25,6 @@
                     type="submit" value="<fmt:message key="SAVE"/>"/>
             </form>   
         </div>      </center>
-        <jsp:include page="footer.jsp"/>
+        <jsp:include page="parts/footer.jsp"/>
 </body>
 </html>

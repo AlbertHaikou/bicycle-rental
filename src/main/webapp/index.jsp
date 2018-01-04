@@ -9,9 +9,9 @@
         <script src="js/map.js"></script>
     </head>
     <body style="margin-bottom: 0px;">
-        <jsp:include page="navigation.jsp"/>
+        <jsp:include page="parts/navigation.jsp"/>
            <div id="maps" class="maps" style="width:100%;height: 700px;"></div>
-        <jsp:include page="footer.jsp"/>
+        <jsp:include page="parts/footer.jsp"/>
     </body>
 </html>
 

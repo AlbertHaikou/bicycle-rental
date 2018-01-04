@@ -8,8 +8,8 @@
         height: 70px;" >
     <div class="container">
         <div class="navbar-header" >
-            <a class="logo" href="index.jsp" style="padding-top: 5px">
-                <img src="img/logo.png" alt="" class="animated bounceInDown">
+            <a class="logo" href="../index.jsp" style="padding-top: 5px">
+                <img src="../img/logo.png" alt="" class="animated bounceInDown">
                 <span class="name" style="padding-bottom: 0px; border-top-width: 5px;
                       margin-top: 0px;
                       "> rent-bike </span>
@@ -33,8 +33,8 @@
                 <c:set var="MANAGER" value="MANAGER"/>
                 <c:choose>
                     <c:when test="${empty sessionScope.user}">
-                        <li ><a href="login.jsp"><fmt:message key="LOGIN"/></a></li>
-                        <li ><a href="registration.jsp"><fmt:message key="REGISTRATION"/></a></li>
+                        <li ><a href="../login.jsp"><fmt:message key="LOGIN"/></a></li>
+                        <li ><a href="../registration.jsp"><fmt:message key="REGISTRATION"/></a></li>
                     </c:when>
                     <c:otherwise>
                         <li class=""><a href="main?command=showParkings"><fmt:message key="BIKE_PARKINGS"/></a></li>

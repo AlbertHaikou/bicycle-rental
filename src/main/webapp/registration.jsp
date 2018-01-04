@@ -36,7 +36,7 @@
         </script>
     </head>
     <body style="margin-bottom: 0px;">
-        <jsp:include page="navigation.jsp"/>
+        <jsp:include page="parts/navigation.jsp"/>
         ﻿<div class="auth-window animated  fadeInDown" style="margin-top: 50px;">
             <div class="title"><fmt:message key="REGISTRATION"/></div>
             <form role="form" action="main?command=register" name="myForm"
@@ -46,14 +46,14 @@
                         <div class="form-group">
                             <label for="firstName" class="sr-only"></label>
                             <input type="text" class="form-control "
-                                   name="firstName" placeholder="<fmt:message key="FIRST_NAME"/>"  
+                                   name="firstName" placeholder="<fmt:message key="FIRST_NAME"/>"
                                    rel="tooltp" title="<fmt:message key="ENTER_FIRST_NAME"/>">
                             <c:out value="${errormsg.firstName}" />
                         </div>
                         <div class="form-group">
                             <label for="lastName" class="sr-only"></label>
                             <input type="text" class="form-control "
-                                   name="lastName" placeholder="<fmt:message key="LAST_NAME"/>" 
+                                   name="lastName" placeholder="<fmt:message key="LAST_NAME"/>"
                                    rel="tooltp" title="<fmt:message key="ENTER_LAST_NAME"/>">
                             <c:out value="${errormsg.lastName}" />
                         </div>
@@ -80,13 +80,13 @@
                 <div class="auth-window__bottom">
                     <div class="row">
                         <div class="col-md-12">
-                            <button type="submit" class="btn btn-primary btn-lg" 
+                            <button type="submit" class="btn btn-primary btn-lg"
                            data-loading-text="Регистрация..."><fmt:message key="REGISTRATION"/></button>
                         </div>
                     </div>
                 </div>
             </form>
         </div>
-        <jsp:include page="footer.jsp"/>
+        <jsp:include page="parts/footer.jsp"/>
     </body>
 </html>

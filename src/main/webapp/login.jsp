@@ -26,7 +26,7 @@
     </script>
 </head>
 <body style="margin-bottom: 0px;">
-<jsp:include page="navigation.jsp"/>
+<jsp:include page="parts/navigation.jsp"/>
 <center style="color:graytext;">
     <h3>  <c:out value="${successMsg}" /></h3></center>
 <center style="color:graytext;">
@@ -70,7 +70,7 @@
         </div>
     </form>
 </div>
-<jsp:include page="footer.jsp"/>
+<jsp:include page="parts/footer.jsp"/>
 </body>
 </html>
 

@@ -29,7 +29,8 @@ public enum CommandEnum {
     SHOW_ADD_MANAGER_PAGE("showAddManagerPage"),
     DELETE_MANAGER("deleteManager"),
     SHOW_EDIT_MANAGER_PAGE("showEditManagerPage"),
-    EDIT_MANAGER("editManager");
+    EDIT_MANAGER("editManager"),
+    SHOW_ERROR_PAGE("errorPage");
 
     private String value;
 

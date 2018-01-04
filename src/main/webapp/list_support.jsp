@@ -12,7 +12,7 @@
         <link rel="stylesheet" href="css/bootstrap.css">
     </head>
     <body style="margin-bottom: 0px;">
-        <jsp:include page="navigation.jsp"/>
+        <jsp:include page="parts/navigation.jsp"/>
            <center style="color:graytext;"><h3><fmt:message key="MANAGER"/></h3></center>
         <br/>
         <table border=2>
@@ -49,6 +49,6 @@
         <c:if test="${sessionScope.user.role.value=='ADMINISTRATOR'}">
         <center><a href="main?command=showAddManagerPage"><button><fmt:message key="ADD_MANAGER"/></button></a></center>
         </c:if>
-        <jsp:include page="footer.jsp"/>
+        <jsp:include page="parts/footer.jsp"/>
 </body>
 </html>

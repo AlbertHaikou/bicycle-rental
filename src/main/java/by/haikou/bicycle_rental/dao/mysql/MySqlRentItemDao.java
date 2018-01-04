@@ -24,11 +24,10 @@ public class MySqlRentItemDao implements RentItemDao {
         try {
             connection = pool.getConnection();
 
-            statement = connection.prepareStatement("insert into RentItem (fk_bikes_id,fk_users_id,date,status) values (?, ?, ?, ?)");
+            statement = connection.prepareStatement("insert into RentItem (bicycle_id,user_id,start_date) values (?, ?, ?)");
             statement.setInt(1, rentItem.getBikeId());
             statement.setInt(2, rentItem.getUserId());
             statement.setTimestamp(3, new Timestamp(rentItem.getDate().getTime()));
-            statement.setBoolean(4, rentItem.getStatus());
             statement.executeUpdate();
 
         } catch (SQLException e) {

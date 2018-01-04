@@ -194,26 +194,15 @@ public class MySqlUserDao implements UserDao {
     public void addUser(User user) throws DAOException {
         Connection connection = null;
         PreparedStatement statement = null;
-        Integer idUsers;
         try {
             connection = pool.getConnection();
-            statement = connection.prepareStatement("insert into user(firstName,lastName,email,password, role) values (?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
+            statement = connection.prepareStatement("insert into user(firstName,lastName,email,password, role) values (?,?,?,?,?)");
             statement.setString(1, user.getFirstName());
             statement.setString(2, user.getLastName());
             statement.setString(3, user.getEmail());
             statement.setString(4, user.getPassword());
             statement.setString(5, user.getRole().getValue());
-            int affectedRows = statement.executeUpdate();
-            if (affectedRows == 0) {
-                throw new SQLException("Creating user failed, no rows affected.");
-            }
-            try (ResultSet generatedKeys = statement.getGeneratedKeys()) {
-                if (generatedKeys.next()) {
-                    idUsers = generatedKeys.getInt(1);
-                } else {
-                    throw new SQLException("Creating user failed, no ID obtained.");
-                }
-            }
+            statement.execute();
         } catch (SQLException e) {
             throw new DAOException(e);
         } finally {

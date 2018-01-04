@@ -13,7 +13,7 @@
         
     </head>
     <body style="margin-bottom: 0px;">
-        <jsp:include page="navigation.jsp"/>
+        <jsp:include page="parts/navigation.jsp"/>
     <center style="color:graytext;"><h3><fmt:message key="REQUEST_FOR_REPAIR"/></h3></center>
     <table border=2>
         <thead>
@@ -69,6 +69,6 @@
     </tbody>
 </table>
 <br/>
-<jsp:include page="footer.jsp"/>
+<jsp:include page="parts/footer.jsp"/>
 </body>
 </html>

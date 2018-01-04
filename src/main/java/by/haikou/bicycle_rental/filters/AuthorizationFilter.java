@@ -22,8 +22,8 @@ public class AuthorizationFilter implements Filter {
 
     private static final Set<String> ALLOWED_PATHS = Collections.unmodifiableSet(
             new HashSet<>(Arrays.asList("/css", "/js", "/img", "/Login",
-                    "/Logout", "/Register", "/login.jsp", "/registration.jsp",
-                    "/ChangeLangController")
+                    "/Logout", "register", "/login.jsp", "/registration.jsp",
+                    "changeLocale")
             )
     );
 
@@ -37,9 +37,12 @@ public class AuthorizationFilter implements Filter {
             FilterChain chain) throws IOException, ServletException {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpSession session = req.getSession(true);
-        String path = req.getRequestURI().substring(req.getContextPath().length()).replaceAll("[/]+$", "");
-
-        if (session.getAttribute("user") == null && !isPathAllowedAnonymously(path)) {
+        String path = req.getRequestURI();
+        String command = req.getParameter("command");
+        if(null==command){
+            command = "";
+        }
+        if (session.getAttribute("user") == null && !isPathAllowedAnonymously(path)&&!isPathAllowedAnonymously(command)) {
             req.getRequestDispatcher("/login.jsp").forward(request, response);
         } else {
             chain.doFilter(request, response);
@@ -56,7 +59,6 @@ public class AuthorizationFilter implements Filter {
                 return true;
             }
         }
-
         return false;
     }
 }

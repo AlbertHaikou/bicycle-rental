@@ -34,9 +34,6 @@ public class BikeController extends CRUDController {
             case "isavailable":
                 this.showAvailableBike(request, response);
                 break;
-            case "rentbike":
-                this.rentBike(getIdParameter(request), request, response);
-                break;
             case "returnbike":
                 this.returnBike(getIdParameter(request), request, response);
                 break;
@@ -114,13 +111,6 @@ public class BikeController extends CRUDController {
         forward(ConstantsMng.LIST_BIKES, request, response);
     }
 
-    void rentBike(Integer id, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("user");
-        Integer userId = user.getId();
-        bikeService.rentBike(id, userId);
-        response.sendRedirect(request.getContextPath() + "/BikeController?action=list");
-    }
 
     void returnBike(Integer id, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
