@@ -33,7 +33,8 @@ public enum CommandEnum {
     SHOW_ERROR_PAGE("errorPage"),
     BAN_USER("banUser"),
     UNBAN_USER("unbanUser"),
-    APPOINT_AS_MANAGER("appointAsManager");
+    APPOINT_AS_MANAGER("appointAsManager"),
+    WITHDRAW_PRIVILEGES("withdrawPrivileges");
 
     private String value;
 

@@ -23,6 +23,10 @@ public interface UserService {
 
     void banUser(Integer id);
 
+    void appointUserAsManager(Integer id);
+
+    void withdrawUserPrivileges(Integer id);
+
     void unBanUser(Integer id);
 
     List<User> getAllSupports();

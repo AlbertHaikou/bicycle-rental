@@ -24,6 +24,8 @@ public interface UserDao {
 
     void unBanUser(Integer userId) throws DAOException;
 
+    void changeUserRole(Integer userId, User.Role role) throws DAOException;
+
     List<User> getAllSupports()throws DAOException;
 
     void addUser(User user) throws DAOException;

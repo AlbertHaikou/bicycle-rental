@@ -204,6 +204,24 @@ public class MySqlUserDao implements UserDao {
     }
 
     @Override
+    public void changeUserRole(Integer userId, User.Role role) throws DAOException {
+        Connection connection = null;
+        PreparedStatement statement = null;
+        try {
+            connection = pool.getConnection();
+            statement = connection.prepareStatement("update user set role=? where id=?");
+            statement.setString(1, role.getValue());
+            statement.setInt(2, userId);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new DAOException(e);
+        } finally {
+            pool.returnConnectionToPool(connection);
+            ConnectionPool.getPool().closeDbResources(statement);
+        }
+    }
+
+    @Override
     public List<User> getAllSupports() throws DAOException {
         Connection connection = null;
         PreparedStatement statement = null;

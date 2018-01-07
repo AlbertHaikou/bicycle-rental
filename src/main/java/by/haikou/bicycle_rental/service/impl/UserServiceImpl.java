@@ -67,6 +67,16 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public void appointUserAsManager(Integer id) {
+        userDao.changeUserRole(id, User.Role.MANAGER);
+    }
+
+    @Override
+    public void withdrawUserPrivileges(Integer id) {
+        userDao.changeUserRole(id, User.Role.USER);
+    }
+
+    @Override
     public void unBanUser(Integer id) {
         userDao.unBanUser(id);
     }

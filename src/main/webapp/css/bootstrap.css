@@ -4103,7 +4103,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   }
 }
 .navbar-default {
-  background: rgba(51, 156, 108, 0.88);
+  background: rgba(107, 188, 94, 0.88);
   border-color: none;
   z-index: 1090000000;
 }
@@ -6010,7 +6010,7 @@ button.close {
 .auth-area,
 .dark-block {
   background: #242427 !important;
-  background-color: rgba(51, 156, 108, 0.88) !important;
+  background-color: rgba(107, 188, 94, 0.88) !important;
   padding: 20px 0;
 }
 .auth-area button,
