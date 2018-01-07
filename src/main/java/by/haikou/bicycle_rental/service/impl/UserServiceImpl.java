@@ -62,6 +62,16 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public void banUser(Integer id) {
+        userDao.banUser(id);
+    }
+
+    @Override
+    public void unBanUser(Integer id) {
+        userDao.unBanUser(id);
+    }
+
+    @Override
     public List<User> getAllSupports() {
         return userDao.getAllSupports();
     }

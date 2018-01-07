@@ -20,6 +20,10 @@ public interface UserDao {
 
     void delete(Integer userId) throws DAOException;
 
+    void banUser(Integer userId) throws DAOException;
+
+    void unBanUser(Integer userId) throws DAOException;
+
     List<User> getAllSupports()throws DAOException;
 
     void addUser(User user) throws DAOException;

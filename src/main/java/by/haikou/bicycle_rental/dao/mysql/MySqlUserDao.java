@@ -28,7 +28,7 @@ public class MySqlUserDao implements UserDao {
             connection = pool.getConnection();
 
             statement = connection.prepareStatement("SELECT id,firstName,lastName, "
-                    + "email,password,role from user \n"
+                    + "email,password,role, banned from user \n"
                     + "where email=?");
             statement.setString(1, login);
             set = statement.executeQuery();
@@ -78,7 +78,7 @@ public class MySqlUserDao implements UserDao {
 
         try {
             connection = pool.getConnection();
-            statement = connection.prepareStatement("SELECT id,firstName,lastName,email,password from user \n"
+            statement = connection.prepareStatement("SELECT id,firstName,lastName,email,password, banned from user \n"
                     + "where role=\"user\"");
             set = statement.executeQuery();
 
@@ -120,6 +120,7 @@ public class MySqlUserDao implements UserDao {
             ConnectionPool.getPool().closeDbResources(statement);
         }
     }
+
 
     @Override
     public User getUserById(Integer userId) throws DAOException {
@@ -169,6 +170,40 @@ public class MySqlUserDao implements UserDao {
     }
 
     @Override
+    public void banUser(Integer userId) throws DAOException {
+        Connection connection = null;
+        PreparedStatement statement = null;
+        try {
+            connection = pool.getConnection();
+            statement = connection.prepareStatement("update user set banned=1 where id=?");
+            statement.setInt(1, userId);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new DAOException(e);
+        } finally {
+            pool.returnConnectionToPool(connection);
+            ConnectionPool.getPool().closeDbResources(statement);
+        }
+    }
+
+    @Override
+    public void unBanUser(Integer userId) throws DAOException {
+        Connection connection = null;
+        PreparedStatement statement = null;
+        try {
+            connection = pool.getConnection();
+            statement = connection.prepareStatement("update user set banned=0 where id=?");
+            statement.setInt(1, userId);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new DAOException(e);
+        } finally {
+            pool.returnConnectionToPool(connection);
+            ConnectionPool.getPool().closeDbResources(statement);
+        }
+    }
+
+    @Override
     public List<User> getAllSupports() throws DAOException {
         Connection connection = null;
         PreparedStatement statement = null;
@@ -177,7 +212,7 @@ public class MySqlUserDao implements UserDao {
         List<User> result = new ArrayList<>();
         try {
             connection = pool.getConnection();
-            statement = connection.prepareStatement("SELECT id,firstName,lastName, email,password,role from user \n"
+            statement = connection.prepareStatement("SELECT id,firstName,lastName, email,password,role, banned from user \n"
                     + "where role = \"manager\"");
             set = statement.executeQuery();
 
@@ -201,12 +236,13 @@ public class MySqlUserDao implements UserDao {
         PreparedStatement statement = null;
         try {
             connection = pool.getConnection();
-            statement = connection.prepareStatement("insert into user(firstName,lastName,email,password, role) values (?,?,?,?,?)");
+            statement = connection.prepareStatement("insert into user(firstName,lastName,email,password, role, banned) values (?,?,?,?,?,?)");
             statement.setString(1, user.getFirstName());
             statement.setString(2, user.getLastName());
             statement.setString(3, user.getEmail());
             statement.setString(4, user.getPassword());
             statement.setString(5, user.getRole().getValue());
+            statement.setBoolean(6, false);
             statement.execute();
         } catch (SQLException e) {
             throw new DAOException(e);

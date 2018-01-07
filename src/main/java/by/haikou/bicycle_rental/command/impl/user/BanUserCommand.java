@@ -24,10 +24,8 @@ public class BanUserCommand implements ICommand {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("user");
-        user.setBanned(true);
-        userService.updateUser(user);
+        Integer id = Integer.parseInt(request.getParameter("id"));
+        userService.banUser(id);
         try {
             CommandFactory.getFactory().createCommand(CommandEnum.SHOW_USERS).execute(request, response);
         } catch (CommandException e) {

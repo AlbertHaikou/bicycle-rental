@@ -21,5 +21,9 @@ public interface UserService {
 
     void updateUser(User user);
 
+    void banUser(Integer id);
+
+    void unBanUser(Integer id);
+
     List<User> getAllSupports();
 }
