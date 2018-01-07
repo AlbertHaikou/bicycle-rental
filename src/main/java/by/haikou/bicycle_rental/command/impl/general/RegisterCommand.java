@@ -1,9 +1,7 @@
-package by.haikou.bicycle_rental.command.impl;
+package by.haikou.bicycle_rental.command.impl.general;
 
-import by.haikou.bicycle_rental.command.CommandEnum;
 import by.haikou.bicycle_rental.command.ICommand;
 import by.haikou.bicycle_rental.command.exception.CommandException;
-import by.haikou.bicycle_rental.command.factory.CommandFactory;
 import by.haikou.bicycle_rental.entity.User;
 import by.haikou.bicycle_rental.exception.UnauthorizedException;
 import by.haikou.bicycle_rental.service.UserService;

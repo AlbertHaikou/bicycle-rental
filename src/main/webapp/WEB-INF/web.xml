@@ -16,7 +16,7 @@
 
     <error-page>
         <error-code>404</error-code>
-        <location>/404.jsp</location>
+        <location>/index.jsp</location>
     </error-page>
 
     <session-config>

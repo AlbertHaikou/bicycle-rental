@@ -18,6 +18,7 @@ public final class ResultSetConverter {
         String lastName = set.getString("lastName");
         String email = set.getString("email");
         String password = set.getString("password");
+       // Boolean banned = set.getBoolean("banned");
         User entity = new User();
 
         entity.setId(userId);
@@ -25,6 +26,7 @@ public final class ResultSetConverter {
         entity.setLastName(lastName);
         entity.setEmail(email);
         entity.setPassword(password);
+        //entity.setBanned(banned);
         return entity;
     }
 

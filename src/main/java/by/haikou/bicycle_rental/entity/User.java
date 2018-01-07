@@ -1,22 +1,6 @@
 package by.haikou.bicycle_rental.entity;
 
-import java.util.List;
-
 public class User extends AbstractEntity {
-    public static enum Role {
-        ADMINISTRATOR("ADMINISTRATOR"), USER("USER"), MANAGER("MANAGER");
-
-        private String value;
-
-        private Role(String value){
-            this.value = value;
-        }
-
-        public String getValue() {
-            return value;
-        }
-    }
-
     private String firstName;
     private String email;
     private Integer id;
@@ -29,7 +13,7 @@ public class User extends AbstractEntity {
         super();
     }
 
-    public boolean isBanned() {
+    public boolean getBanned() {
         return banned;
     }
 
@@ -95,6 +79,20 @@ public class User extends AbstractEntity {
         return "User{" + "firstName=" + firstName + ", email=" + email +
                 ", id=" + id + ", lastName=" + lastName + ", password=" + password +
                 ", role=" + role + '}';
+    }
+
+    public static enum Role {
+        ADMINISTRATOR("ADMINISTRATOR"), USER("USER"), MANAGER("MANAGER");
+
+        private String value;
+
+        private Role(String value) {
+            this.value = value;
+        }
+
+        public String getValue() {
+            return value;
+        }
     }
 
 }

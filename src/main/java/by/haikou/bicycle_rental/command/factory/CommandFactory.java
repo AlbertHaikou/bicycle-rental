@@ -2,10 +2,16 @@ package by.haikou.bicycle_rental.command.factory;
 
 import by.haikou.bicycle_rental.command.CommandEnum;
 import by.haikou.bicycle_rental.command.ICommand;
+import by.haikou.bicycle_rental.command.impl.general.ChangeLocaleCommand;
+import by.haikou.bicycle_rental.command.impl.general.LoginCommand;
+import by.haikou.bicycle_rental.command.impl.general.LogoutCommand;
+import by.haikou.bicycle_rental.command.impl.general.RegisterCommand;
 import by.haikou.bicycle_rental.command.impl.*;
 import by.haikou.bicycle_rental.command.impl.bike.*;
 import by.haikou.bicycle_rental.command.impl.manager.*;
 import by.haikou.bicycle_rental.command.impl.parking.*;
+import by.haikou.bicycle_rental.command.impl.user.BanUserCommand;
+import by.haikou.bicycle_rental.command.impl.user.UnBanUserCommand;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -50,6 +56,9 @@ public class CommandFactory {
         commands.put(EDIT_MANAGER, new UpdateManagerCommand());
         commands.put(DELETE_MANAGER, new DeleteManagerCommand());
         commands.put(SHOW_EDIT_MANAGER_PAGE, new ShowEditManagerPageCommand());
+
+        commands.put(BAN_USER, new BanUserCommand());
+        commands.put(UNBAN_USER, new UnBanUserCommand());
     }
 
     public static CommandFactory getFactory() {

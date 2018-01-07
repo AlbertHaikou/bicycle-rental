@@ -1,4 +1,4 @@
-package by.haikou.bicycle_rental.command.impl;
+package by.haikou.bicycle_rental.command.impl.general;
 
 import by.haikou.bicycle_rental.command.CommandEnum;
 import by.haikou.bicycle_rental.command.ICommand;

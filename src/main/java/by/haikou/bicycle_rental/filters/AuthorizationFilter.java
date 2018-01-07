@@ -21,7 +21,7 @@ public class AuthorizationFilter implements Filter {
     private FilterConfig filterConfig;
 
     private static final Set<String> ALLOWED_PATHS = Collections.unmodifiableSet(
-            new HashSet<>(Arrays.asList("/css", "/js", "/img", "/Login",
+            new HashSet<>(Arrays.asList("/css", "/js", "/img", "login",
                     "/Logout", "register", "/login.jsp", "/registration.jsp",
                     "changeLocale")
             )

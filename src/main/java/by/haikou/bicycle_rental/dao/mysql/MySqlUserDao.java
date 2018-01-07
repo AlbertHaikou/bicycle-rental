@@ -6,7 +6,10 @@ import by.haikou.bicycle_rental.dao.mysql.db.ConnectionPool;
 import by.haikou.bicycle_rental.dao.mysql.db.ResultSetConverter;
 import by.haikou.bicycle_rental.entity.User;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -100,13 +103,15 @@ public class MySqlUserDao implements UserDao {
 
         try {
             connection = pool.getConnection();
-            statement = connection.prepareStatement("update user set firstName=?, lastName=?, email=? , password=?"
+            statement = connection.prepareStatement("update user set firstName=?, lastName=?, email=? , password=?, role=?, banned=?"
                     + "where id=?");
             statement.setString(1, user.getFirstName());
             statement.setString(2, user.getLastName());
             statement.setString(3, user.getEmail());
             statement.setString(4, user.getPassword());
-            statement.setInt(5, user.getId());
+            statement.setString(5, user.getRole().getValue());
+            statement.setBoolean(6, (user.getBanned()));
+            statement.setInt(7, user.getId());
             statement.executeUpdate();
         } catch (SQLException e) {
             throw new DAOException(e);
