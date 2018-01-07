@@ -90,9 +90,11 @@
                 <c:choose>
                     <c:when test="${bike.isAvailable}">
                         <td>
-                            <c:if test="${empty userRentedBikeId}">
-                                <a href="main?command=rentBike&id=<c:out value="${bike.bicycleId}"/>"><fmt:message
-                                        key="TO_RENT"/></a>
+                            <c:if test="${not user.banned}">
+                                <c:if test="${empty userRentedBikeId}">
+                                    <a href="main?command=rentBike&id=<c:out value="${bike.bicycleId}"/>"><fmt:message
+                                            key="TO_RENT"/></a>
+                                </c:if>
                             </c:if>
                         </td>
                         <td>
