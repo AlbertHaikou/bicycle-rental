@@ -1,5 +1,7 @@
 package by.haikou.bicycle_rental.entity;
 
+import java.math.BigDecimal;
+
 public class User extends AbstractEntity {
     private String firstName;
     private String email;
@@ -8,9 +10,18 @@ public class User extends AbstractEntity {
     private String password;
     private Role role;
     private boolean banned;
+    private BigDecimal balance;
 
     public User() {
         super();
+    }
+
+    public BigDecimal getBalance() {
+        return balance;
+    }
+
+    public void setBalance(BigDecimal balance) {
+        this.balance = balance;
     }
 
     public boolean getBanned() {

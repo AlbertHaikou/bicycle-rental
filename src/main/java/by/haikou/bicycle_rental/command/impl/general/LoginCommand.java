@@ -6,10 +6,7 @@ import by.haikou.bicycle_rental.entity.User;
 import by.haikou.bicycle_rental.exception.UnauthorizedException;
 import by.haikou.bicycle_rental.service.UserService;
 import by.haikou.bicycle_rental.service.factory.ServiceFactory;
-import by.haikou.bicycle_rental.util.ConstantsMng;
-import by.haikou.bicycle_rental.util.MessageUtils;
-import by.haikou.bicycle_rental.util.RequestUtils;
-import by.haikou.bicycle_rental.util.StringUtils;
+import by.haikou.bicycle_rental.util.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -29,7 +26,7 @@ public class LoginCommand implements ICommand {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, UnauthorizedException, CommandException {
         String login = request.getParameter(ConstantsMng.PARAM_NAME_LOGIN);
-        String password = request.getParameter(ConstantsMng.PARAM_NAME_PASSWORD);
+        String password = MD5Converter.getHash(request.getParameter(ConstantsMng.PARAM_NAME_PASSWORD));
         Map<String, String> errorMap = validateLoginDetails(login, password, request);
         try {
             if (errorMap.isEmpty()) {

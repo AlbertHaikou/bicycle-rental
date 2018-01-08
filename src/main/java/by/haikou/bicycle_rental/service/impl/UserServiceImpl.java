@@ -16,14 +16,12 @@ public class UserServiceImpl implements UserService {
 
     private static Logger log = LogManager.getLogger(UserService.class);
     private UserDao userDao = DAOFactory.getFactory().getUserDao();
-    private RentItemDao rentItemDao = DAOFactory.getFactory().getRentItemDao();
 
     @Override
     public User login(String login, String password) throws UserException {
         User user = userDao.getUser(login, password);
         return user;
     }
-
 
     @Override
     public User login(String login) {
@@ -83,7 +81,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<User> getAllSupports() {
-        return userDao.getAllSupports();
+        return userDao.getAllManagers();
     }
 
 }

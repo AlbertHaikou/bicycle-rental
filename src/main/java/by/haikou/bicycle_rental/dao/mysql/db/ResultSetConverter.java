@@ -13,51 +13,38 @@ public final class ResultSetConverter {
     }
 
     public static User createUserEntity(ResultSet set) throws SQLException {
-        Integer userId = set.getInt("id");
-        String firstName = set.getString("firstName");
-        String lastName = set.getString("lastName");
-        String email = set.getString("email");
-        String password = set.getString("password");
-        Boolean banned = set.getBoolean("banned");
         User entity = new User();
 
-        entity.setId(userId);
-        entity.setFirstName(firstName);
-        entity.setLastName(lastName);
-        entity.setEmail(email);
-        entity.setPassword(password);
-        entity.setBanned(banned);
+        entity.setId(set.getInt("id"));
+        entity.setFirstName(set.getString("firstName"));
+        entity.setLastName(set.getString("lastName"));
+        entity.setEmail(set.getString("email"));
+        entity.setPassword(set.getString("password"));
+        entity.setBanned(set.getBoolean("banned"));
+        entity.setBalance(set.getBigDecimal("balance"));
+
         return entity;
     }
 
     public static Bicycle createBikeEntity(ResultSet set) throws SQLException {
-        Integer bikeId = set.getInt("id");
-        String type = set.getString("type");
-        String model = set.getString("model");
-        String size = set.getString("size");
-        Boolean available = set.getBoolean("available");
-        Integer parkingId = set.getInt("fk_Parking_id");
-
         Bicycle entity = new Bicycle();
 
-        entity.setBicycleId(bikeId);
-        entity.setType(type);
-        entity.setModel(model);
-        entity.setSize(size);
-        entity.setIsAvailable(available);
-        entity.setParkingId(parkingId);
+        entity.setBicycleId(set.getInt("id"));
+        entity.setType(set.getString("type"));
+        entity.setModel(set.getString("model"));
+        entity.setSize(set.getString("size"));
+        entity.setIsAvailable(set.getBoolean("available"));
+        entity.setParkingId(set.getInt("fk_Parking_id"));
 
         return entity;
     }
 
     public static Parking createParkingEntity(ResultSet set) throws SQLException {
-        Integer parkingId = set.getInt("id");
-        String street = set.getString("street");
-
         Parking entity = new Parking();
 
-        entity.setParkingId(parkingId);
-        entity.setStreet(street);
+        entity.setParkingId(set.getInt("id"));
+        entity.setStreet(set.getString("street"));
+
         return entity;
     }
 

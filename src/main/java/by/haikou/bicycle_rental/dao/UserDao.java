@@ -26,7 +26,7 @@ public interface UserDao {
 
     void changeUserRole(Integer userId, User.Role role) throws DAOException;
 
-    List<User> getAllSupports()throws DAOException;
+    List<User> getAllManagers()throws DAOException;
 
     void addUser(User user) throws DAOException;
 }

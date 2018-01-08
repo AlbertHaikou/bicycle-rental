@@ -16,13 +16,13 @@
     <br/>
     <div id="centerLayer">
         <form method="post" action="main?command=${empty bike ? 'addBike' : 'editBike'}">
-            <input type="hidden" name="id"
+            <input type="hidden" name="id" required
                    value="<c:out value="${bike.bicycleId}" />"/> <br/>
             <label><fmt:message key="TYPE"/> :</label> <input
-                type="text" name="type"
+                type="text" name="type" required
                 value="<c:out value="${bike.type}" />"/> <br/><br/>
             <label><fmt:message key="MODEL"/> :</label> <input
-                type="text" name="model"
+                type="text" name="model" required
                 value="<c:out value="${bike.model}" />"/> <br/><br/>
             <label><fmt:message key="STATUS"/> :</label>
             <select name="available">
@@ -34,7 +34,7 @@
                 </option>
             </select><br/><br/>
 
-            <label><fmt:message key="SIZE"/> :</label> <input type="text" name="size"
+            <label><fmt:message key="SIZE"/> :</label> <input type="text" name="size" required
                                                               value="<c:out value="${bike.size}" />"/> <br/><br/>
             <label><fmt:message key="PARKING"/>:</label>
             <select name="parkingId">

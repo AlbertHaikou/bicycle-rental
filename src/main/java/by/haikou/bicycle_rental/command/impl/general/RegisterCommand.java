@@ -28,7 +28,7 @@ public class RegisterCommand implements ICommand {
         String firstName = request.getParameter(ConstantsMng.PARAM_NAME_FIRST_NAME);
         String lastName = request.getParameter(ConstantsMng.PARAM_NAME_LAST_NAME);
         String login = request.getParameter(ConstantsMng.PARAM_NAME_LOGIN);
-        String password = request.getParameter(ConstantsMng.PARAM_NAME_PASSWORD);
+        String password = MD5Converter.getHash(request.getParameter(ConstantsMng.PARAM_NAME_PASSWORD));
 
         Map<String, String> errorMap = validateRegisterDetails(request, firstName, lastName, login, password);
 
