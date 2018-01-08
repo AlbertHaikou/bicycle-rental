@@ -30,7 +30,7 @@ public class ConnectionPool {
         String url = properties.getProperty("url");
         String username = properties.getProperty("username");
         String password = properties.getProperty("password");
-        connections = new ArrayBlockingQueue<Connection>(poolSize);
+        connections = new ArrayBlockingQueue<>(poolSize);
         lockForReturnConnection = new ReentrantLock();
         Connection connection;
         for (int i = 0; i < poolSize; i++) {

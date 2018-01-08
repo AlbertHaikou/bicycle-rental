@@ -8,9 +8,8 @@
     position: absolute;">
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1"
              style="width: 1170px;">
-            <ul class="nav navbar-nav navbar-right" style="
-                height: 74px;">
-                <li class="">
+            <ul>
+                <li>
                     <form role="form" method="post" name="myForm" action="main?command=changeLocale&locale=rus">
                         <input type="hidden" name="urlAdd"
                                value="<c:out value="${pageContext.request.queryString}" />"/>
@@ -18,7 +17,7 @@
             background-color: transparent; color: #df0000"><img src="/img/Russia.png"></button>
                     </form>
                 </li>
-                <li class="">
+                <li>
                     <form role="form" method="post" name="myForm" action="main?command=changeLocale&locale=eng">
                         <input type="hidden" name="urlAdd"
                                value="<c:out value="${pageContext.request.queryString}" />"/>

@@ -4,6 +4,7 @@ import by.haikou.bicycle_rental.command.CommandEnum;
 import by.haikou.bicycle_rental.command.ICommand;
 import by.haikou.bicycle_rental.command.factory.CommandFactory;
 import by.haikou.bicycle_rental.exception.UnauthorizedException;
+import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -24,18 +25,19 @@ public class MainController extends HttpServlet {
     }
 
     private void processRequest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        ICommand command = null;
+        ICommand command;
         String commandName = req.getParameter("command");
         try {
             CommandEnum commandEnum = CommandEnum.getEnum(commandName);
             command = commandFactory.createCommand(commandEnum);
             command.execute(req, resp);
         } catch (UnauthorizedException exc) {
-            LOGGER.error(exc);
+            LOGGER.log(Level.ERROR, exc.getMessage());
             req.setAttribute("message", exc.getMessage());
             req.getRequestDispatcher("error_page.jsp").forward(req, resp);
         } catch (Exception exc) {
-            LOGGER.error(exc);
+            LOGGER.log(Level.ERROR, exc);
+            req.setAttribute("message", exc.getMessage());
             req.getRequestDispatcher("error_page.jsp").forward(req, resp);
         }
     }

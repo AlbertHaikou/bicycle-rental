@@ -16,17 +16,17 @@
     <br/>
     <div id="centerLayer">
         <form method="post" action="main?command=${empty manager ? 'addManager' : 'editManager'}">
-            <input type="hidden" name="id" value="<c:out value="${manager.id}" />"/>
+            <input type="hidden" name="id" required value="<c:out value="${manager.id}" />"/>
             <label><fmt:message key="FIRST_NAME"/>:</label>
-            <input type="text" name="firstName"
+            <input type="text" name="firstName" required
                    value="<c:out value="${manager.firstName}"/>"/> <br/><br/>
             <label><fmt:message key="LAST_NAME"/>:</label>
-            <input type="text" name="lastName"
+            <input type="text" name="lastName" required
                    value="<c:out value="${manager.lastName}"/>"/> <br/><br/>
             <label><fmt:message key="EMAIL"/>:</label>
-            <input type="text" name="email" value="<c:out value="${manager.email}"/>"/><br/><br/>
+            <input type="email" name="email" required value="<c:out value="${manager.email}"/>"/><br/><br/>
             <label><fmt:message key="PASSWORD"/>:</label>
-            <input type="text" name="password" value="<c:out value="${manager.password}"/>"/>
+            <input type="text" name="password" required value="<c:out value="${manager.password}"/>"/>
             <br/><br/>
             <input type="submit" value="<fmt:message key="SAVE"/>"/>
         </form>

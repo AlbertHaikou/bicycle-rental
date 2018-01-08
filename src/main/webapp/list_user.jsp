@@ -24,6 +24,7 @@
                     <th><fmt:message key="FIRST_NAME"/></th>
                     <th><fmt:message key="LAST_NAME"/></th>
                     <th><fmt:message key="EMAIL"/></th>
+                    <th><fmt:message key="BALANCE"/></th>
                     <th><fmt:message key="ACTION"/></th>
                     <c:if test="${sessionScope.user.role.value eq 'ADMINISTRATOR'}">
                         <th><fmt:message key="CHANGE_ROLE"/></th>
@@ -37,6 +38,7 @@
                         <td><c:out value="${user.firstName}"/></td>
                         <td><c:out value="${user.lastName}"/></td>
                         <td><c:out value="${user.email}"/></td>
+                        <td><c:out value="${user.balance}"/></td>
                         <c:choose>
                             <c:when test="${user.banned}">
                                 <td><a href="main?command=unbanUser&id=<c:out value="${user.id}"/>"><fmt:message key="UNBAN"/></a></td>

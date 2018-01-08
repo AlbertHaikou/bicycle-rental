@@ -22,7 +22,6 @@
         <th><fmt:message key="FIRST_NAME"/></th>
         <th><fmt:message key="LAST_NAME"/></th>
         <th><fmt:message key="EMAIL"/></th>
-        <th><fmt:message key="PASSWORD"/></th>
         <c:set var="ADMINISTRATOR" value="ADMINISTRATOR"/>
         <c:if test="${sessionScope.user.role.value=='ADMINISTRATOR'}">
             <th colspan=2><fmt:message key="ACTION"/></th>
@@ -37,7 +36,6 @@
             <td><c:out value="${support.firstName}"/></td>
             <td><c:out value="${support.lastName}"/></td>
             <td><c:out value="${support.email}"/></td>
-            <td><c:out value="${support.password}"/></td>
             <c:if test="${sessionScope.user.role eq 'ADMINISTRATOR'}">
                 <td><a href="main?command=showEditManagerPage&id=<c:out value="${support.id}"/>"><fmt:message
                         key="UPDATE"/></a></td>

@@ -34,7 +34,7 @@
                 </option>
             </select><br/><br/>
 
-            <label><fmt:message key="SIZE"/> :</label> <input type="text" name="size" required
+            <label><fmt:message key="SIZE"/> :</label> <input type="number" maxlength="3" name="size" required
                                                               value="<c:out value="${bike.size}" />"/> <br/><br/>
             <label><fmt:message key="PARKING"/>:</label>
             <select name="parkingId">

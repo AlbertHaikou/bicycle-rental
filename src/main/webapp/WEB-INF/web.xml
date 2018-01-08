@@ -14,10 +14,7 @@
         <url-pattern>/main</url-pattern>
     </servlet-mapping>
 
-    <error-page>
-        <error-code>404</error-code>
-        <location>/index.jsp</location>
-    </error-page>
+
 
     <session-config>
         <session-timeout>30</session-timeout>

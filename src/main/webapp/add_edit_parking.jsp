@@ -19,10 +19,10 @@
                 <input type="hidden"  name="id"
                        value="<c:out value="${parking.parkingId}" />" /> <br /> 
                 <label>Улица:</label> <input
-                    type="text" name="street"
+                    type="text" required name="street"
                     value="<c:out value="${parking.street}" />" /> <br /><br />
                 <br /><br /> <input
-                    type="submit" value="<fmt:message key="SAVE"/>"/>
+                    type="submit"  value="<fmt:message key="SAVE"/>"/>
             </form>   
         </div>      </center>
         <jsp:include page="parts/footer.jsp"/>

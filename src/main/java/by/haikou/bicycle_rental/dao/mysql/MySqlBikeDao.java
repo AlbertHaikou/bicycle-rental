@@ -67,13 +67,13 @@ public class MySqlBikeDao implements BikeDao {
 
         try {
             connection = pool.getConnection();
-            statement = connection.prepareStatement("update bicycle set type=?, model=?, size=?, available=?, fk_parking_id=? where id=?");
+            statement = connection.prepareStatement("UPDATE `bicycle` SET `type`=?, `model`=?, `size`=?, `available`=?, `fk_parking_id`=? WHERE `id`=?");
             statement.setString(1, bike.getType());
             statement.setString(2, bike.getModel());
             statement.setString(3, bike.getSize());
             statement.setBoolean(4, bike.getIsAvailable());
             statement.setInt(5, bike.getParkingId());
-            statement.setInt(6, bike.getId());
+            statement.setInt(6, bike.getBicycleId());
             statement.executeUpdate();
         } catch (SQLException e) {
             throw new DAOException(e);
