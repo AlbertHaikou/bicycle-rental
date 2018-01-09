@@ -8,6 +8,7 @@ import by.haikou.bicycle_rental.entity.User;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -25,9 +26,12 @@ public class MySqlUserDao implements UserDao {
     private static final String SQL_FOR_GET_USER = "SELECT `id`,`firstName`,`lastName`,`email`,`password`,`role`, `banned`, `balance`" +
             "FROM `user` \n" +
             "WHERE `email`=?";
-    private static final String SQL_FOR_UPDATE_USER = "UPDATE `user` SET `firstName`=?, `lastName`=?, `email`=? , `password`=?, `role`=?, `banned`=?\n" +
+    private static final String SQL_FOR_UPDATE_USER = "UPDATE `user` SET `firstName`=?, `lastName`=?, `email`=? , `password`=?, `role`=?, `banned`=?, `balance`=?\n" +
             "WHERE `id`=?";
-    private static final String SQL_FOR_GET_USER_BY_ID = "SELECT `id`,`firstName`,`lastName`,`email`,`password`,`role`, `banned` " +
+    private static final String SQL_FOR_UPDATE_PROFILE = "UPDATE `user` SET `firstName`=?, `lastName`=?, `email`=?\n" +
+            "WHERE `id`=?";
+
+    private static final String SQL_FOR_GET_USER_BY_ID = "SELECT `id`,`firstName`,`lastName`,`email`,`password`,`role`, `banned`, `balance` " +
             "FROM `user` \n" +
             "WHERE `id`=?";
     private static final String SQL_FOR_DELETE_USER = "DELETE " +
@@ -125,6 +129,27 @@ public class MySqlUserDao implements UserDao {
     }
 
     @Override
+    public void updateProfile(User user) throws DAOException {
+        Connection connection = null;
+        PreparedStatement statement = null;
+
+        try {
+            connection = pool.getConnection();
+            statement = connection.prepareStatement(SQL_FOR_UPDATE_PROFILE);
+            statement.setString(1, user.getFirstName());
+            statement.setString(2, user.getLastName());
+            statement.setString(3, user.getEmail());
+            statement.setInt(4, user.getId());
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new DAOException(e);
+        } finally {
+            pool.returnConnectionToPool(connection);
+            ConnectionPool.getPool().closeDbResources(statement);
+        }
+    }
+
+    @Override
     public void updateUser(User user) throws DAOException {
         Connection connection = null;
         PreparedStatement statement = null;
@@ -138,7 +163,8 @@ public class MySqlUserDao implements UserDao {
             statement.setString(4, user.getPassword());
             statement.setString(5, user.getRole().getValue());
             statement.setBoolean(6, (user.getBanned()));
-            statement.setInt(7, user.getId());
+            statement.setBigDecimal(7, user.getBalance());
+            statement.setInt(8, user.getId());
             statement.executeUpdate();
         } catch (SQLException e) {
             throw new DAOException(e);
@@ -287,7 +313,7 @@ public class MySqlUserDao implements UserDao {
             statement.setString(4, user.getPassword());
             statement.setString(5, user.getRole().getValue());
             statement.setBoolean(6, false);
-            statement.setDouble(7, 0);
+            statement.setBigDecimal(7, new BigDecimal(0));
             statement.executeUpdate();
         } catch (SQLException e) {
             throw new DAOException(e);

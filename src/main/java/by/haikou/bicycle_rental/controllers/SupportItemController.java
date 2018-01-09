@@ -13,7 +13,6 @@ import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.annotation.WebServlet;
 
 public class SupportItemController extends CRUDController {
 
@@ -49,7 +48,7 @@ public class SupportItemController extends CRUDController {
         supportItemService.createItem(supportItem);
 
         request.setAttribute("items", supportItemService.getAllItems());
-        String message = MessageUtils.getProperty(RequestUtils.getLocale(request), MessageUtils.BID_MEASSAGE);
+        String message = MessageUtils.getProperty(RequestUtils.getLocale(request), MessageUtils.BID_MESSAGE);
         request.setAttribute("bid", message);
         request.setAttribute("bikes", bikeService.getAllBikes());
         forward(ConstantsMng.LIST_BIKES, request, response);

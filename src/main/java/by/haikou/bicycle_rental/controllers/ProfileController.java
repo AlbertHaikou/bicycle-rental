@@ -50,7 +50,7 @@ public class ProfileController extends CRUDController {
         User user = (User) session.getAttribute("user");
         Integer userId = user.getId();
         request.setAttribute("profile", userService.getUserById(userId));
-        forward(ConstantsMng.LIST_PROFILE, request, response);
+        forward(ConstantsMng.PROFILE, request, response);
     }
 
     @Override

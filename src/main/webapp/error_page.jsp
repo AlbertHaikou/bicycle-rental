@@ -8,7 +8,7 @@
     <title>Error</title>
 </head>
 <body>
-    <div>
+    <div class="error-div">
         <h1>${message}</h1>
         Here the message!
         <a href="<c:url value="main?command=showMainPage" />"><fmt:message  key="MAIN" /></a>

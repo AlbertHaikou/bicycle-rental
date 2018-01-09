@@ -29,6 +29,7 @@ public class AddBikeCommand implements ICommand {
         bike.setSize(request.getParameter("size"));
         bike.setIsAvailable(request.getParameter("available").equals("free"));
         bike.setParkingId(Integer.valueOf(request.getParameter("parkingId")));
+        bike.setPrice(Double.valueOf(request.getParameter("price")));
         bikeService.createBike(bike);
         try {
             CommandFactory.getFactory().createCommand(CommandEnum.SHOW_BIKES).execute(request, response);

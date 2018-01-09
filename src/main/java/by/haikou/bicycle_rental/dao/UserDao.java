@@ -16,6 +16,8 @@ public interface UserDao {
 
     void updateUser(User user) throws DAOException;
 
+    void updateProfile(User user) throws DAOException;
+
     User getUserById(Integer userId)throws DAOException;
 
     void delete(Integer userId) throws DAOException;

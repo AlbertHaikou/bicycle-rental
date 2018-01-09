@@ -60,6 +60,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public void updateProfile(User user) {
+        userDao.updateProfile(user);
+    }
+
+    @Override
     public void banUser(Integer id) {
         userDao.banUser(id);
     }

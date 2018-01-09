@@ -19,8 +19,11 @@
             <input type="hidden" name="id" required
                    value="<c:out value="${bike.bicycleId}" />"/> <br/>
             <label><fmt:message key="TYPE"/> :</label> <input
-                type="text" name="type" required
+                type="text" name="type" pattern="[a-zA-Z]{4,}" required
                 value="<c:out value="${bike.type}" />"/> <br/><br/>
+            <label><fmt:message key="PRICE"/> :</label> <input
+                type="number" name="price" min="1" max="100" required
+                value="<c:out value="${bike.price}" />"/> <br/><br/>
             <label><fmt:message key="MODEL"/> :</label> <input
                 type="text" name="model" required
                 value="<c:out value="${bike.model}" />"/> <br/><br/>
@@ -34,7 +37,7 @@
                 </option>
             </select><br/><br/>
 
-            <label><fmt:message key="SIZE"/> :</label> <input type="number" maxlength="3" name="size" required
+            <label><fmt:message key="SIZE"/> :</label> <input type="number" maxlength="2" name="size" required
                                                               value="<c:out value="${bike.size}" />"/> <br/><br/>
             <label><fmt:message key="PARKING"/>:</label>
             <select name="parkingId">

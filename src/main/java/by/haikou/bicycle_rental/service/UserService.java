@@ -21,6 +21,8 @@ public interface UserService {
 
     void updateUser(User user);
 
+    void updateProfile(User user);
+
     void banUser(Integer id);
 
     void appointUserAsManager(Integer id);

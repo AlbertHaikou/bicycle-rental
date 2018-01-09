@@ -34,7 +34,11 @@ public enum CommandEnum {
     BAN_USER("banUser"),
     UNBAN_USER("unbanUser"),
     APPOINT_AS_MANAGER("appointAsManager"),
-    WITHDRAW_PRIVILEGES("withdrawPrivileges");
+    WITHDRAW_PRIVILEGES("withdrawPrivileges"),
+    RETURN_BIKE("returnBike"),
+    SHOW_PROFILE("showProfile"),
+    SHOW_EDIT_PROFILE("showEditProfilePage"),
+    UPDATE_PROFILE("updateProfile");
 
     private String value;
 

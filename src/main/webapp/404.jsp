@@ -6,7 +6,6 @@
 <html>
 <head>
     <title>Error</title>
-    <link href="<c:url value="css/form.css" />" rel="stylesheet"/>
 </head>
 <body>
 <div class="error-div">

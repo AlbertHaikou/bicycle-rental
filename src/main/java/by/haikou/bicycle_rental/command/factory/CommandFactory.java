@@ -10,6 +10,9 @@ import by.haikou.bicycle_rental.command.impl.general.LogoutCommand;
 import by.haikou.bicycle_rental.command.impl.general.RegisterCommand;
 import by.haikou.bicycle_rental.command.impl.manager.*;
 import by.haikou.bicycle_rental.command.impl.parking.*;
+import by.haikou.bicycle_rental.command.impl.profile.ShowEditProfilePageCommand;
+import by.haikou.bicycle_rental.command.impl.profile.ShowProfileCommand;
+import by.haikou.bicycle_rental.command.impl.profile.UpdateProfileCommand;
 import by.haikou.bicycle_rental.command.impl.user.AppointAsManagerCommand;
 import by.haikou.bicycle_rental.command.impl.user.BanUserCommand;
 import by.haikou.bicycle_rental.command.impl.user.UnBanUserCommand;
@@ -26,6 +29,7 @@ public class CommandFactory {
 
     private CommandFactory() {
         commands = new HashMap<>();
+
         commands.put(SHOW_MAIN_PAGE, new ShowMainPageCommand());
         commands.put(SHOW_REGISTRATION_PAGE, new ShowRegistrationPageCommand());
         commands.put(REGISTER, new RegisterCommand());
@@ -44,6 +48,7 @@ public class CommandFactory {
         commands.put(DELETE_BIKE, new DeleteBikeCommand());
         commands.put(SHOW_EDIT_BIKE_PAGE, new ShowEditBikePageCommand());
         commands.put(RENT_BIKE, new RentBikeCommand());
+        commands.put(RETURN_BIKE, new ReturnBikeCommand());
 
         commands.put(SHOW_PARKINGS, new ShowParkingPageCommand());
         commands.put(ADD_PARKING, new AddParkingCommand());
@@ -63,6 +68,10 @@ public class CommandFactory {
         commands.put(UNBAN_USER, new UnBanUserCommand());
         commands.put(APPOINT_AS_MANAGER, new AppointAsManagerCommand());
         commands.put(WITHDRAW_PRIVILEGES, new WithdrawPrivilegesCommand());
+
+        commands.put(SHOW_PROFILE, new ShowProfileCommand());
+        commands.put(SHOW_EDIT_PROFILE, new ShowEditProfilePageCommand());
+        commands.put(UPDATE_PROFILE, new UpdateProfileCommand());
     }
 
     public static CommandFactory getFactory() {

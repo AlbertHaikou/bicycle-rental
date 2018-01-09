@@ -25,15 +25,17 @@
         <th><fmt:message key="SIZE"/></th>
         <th><fmt:message key="STATUS"/></th>
         <th><fmt:message key="№_PARKING"/></th>
-        <c:set var="CLIENT" value="CLIENT"/>
+        <th><fmt:message key="PRICE"/></th>
+        <c:set var="USER" value="USER"/>
+        <c:if test="${sessionScope.user.role.value=='ADMINISTRATOR'}">
+            <th colspan=2><fmt:message key="ACTION"/></th>
+        </c:if>
         <c:if test="${not empty sessionScope.user}">
             <th><fmt:message key="RENT"/></th>
             <th><fmt:message key="REPAIRS"/></th>
         </c:if>
         <c:set var="ADMINISTRATOR" value="ADMINISTRATOR"/>
-        <c:if test="${sessionScope.user.role.value=='ADMINISTRATOR'}">
-            <th colspan=2><fmt:message key="ACTION"/></th>
-        </c:if>
+
     </tr>
     </thead>
     <tbody>
@@ -79,6 +81,7 @@
             </c:choose>
             <input type="hidden" name="parkingId" value="<c:out value="${bike.parkingId}" />"/>
             <td><c:out value="${bike.parkingId}"/></td>
+            <td><c:out value="${bike.price}"/></td>
             <c:if test="${sessionScope.user.role.value=='ADMINISTRATOR'}">
                 <td><a href="main?command=showEditBikePage&id=<c:out value="${bike.bicycleId}"/>"><fmt:message
                         key="UPDATE"/></a></td>
@@ -98,7 +101,7 @@
                             </c:if>
                         </td>
                         <td>
-                            <a href="SupportItemController?action=add&id=<c:out value="${bike.bicycleId}"/>"><fmt:message
+                            <a href="main?command=repair&id=<c:out value="${bike.bicycleId}"/>"><fmt:message
                                     key="BID"/></a></td>
                     </c:when>
                     <c:otherwise>

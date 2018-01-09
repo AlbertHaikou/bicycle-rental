@@ -10,7 +10,8 @@ public class PaginationObject<T> {
     private int pageCount;
     private List<T> elementList;
 
-    public PaginationObject(){}
+    public PaginationObject() {
+    }
 
     public PaginationObject(int page, int pageCount, List<T> elementList) {
         this.page = page;

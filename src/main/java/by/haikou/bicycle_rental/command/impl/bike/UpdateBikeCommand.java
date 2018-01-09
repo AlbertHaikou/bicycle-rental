@@ -29,6 +29,7 @@ public class UpdateBikeCommand implements ICommand {
         bike.setSize(request.getParameter("size"));
         bike.setIsAvailable(request.getParameter("available").equalsIgnoreCase("free"));
         bike.setParkingId(Integer.valueOf(request.getParameter("parkingId")));
+        bike.setPrice(Double.valueOf(request.getParameter("price")));
         bike.setBicycleId(Integer.valueOf(request.getParameter("id")));
         bikeService.updateBike(bike);
         try {

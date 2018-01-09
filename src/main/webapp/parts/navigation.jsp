@@ -48,7 +48,7 @@
                             </li>
                             <li class=""><a href="main?command=showUsers"><fmt:message key="CLIENTS"/></a></li>
                         </c:if>
-                        <c:if test="${sessionScope.user.role.value eq 'CLIENT'}">
+                        <c:if test="${not empty sessionScope.user.role}">
                             <li class=""><a href="main?command=showProfile"><fmt:message key="MY_PROFILE"/></a></li>
                             <li class=""><a href="main?command=showHistoryRent"><fmt:message
                                     key="RENTAL_OF_HISTORY"/></a></li>

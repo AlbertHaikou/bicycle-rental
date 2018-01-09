@@ -35,6 +35,7 @@ public final class ResultSetConverter {
         entity.setSize(set.getString("size"));
         entity.setIsAvailable(set.getBoolean("available"));
         entity.setParkingId(set.getInt("fk_Parking_id"));
+        entity.setPrice(set.getDouble("price"));
 
         return entity;
     }
