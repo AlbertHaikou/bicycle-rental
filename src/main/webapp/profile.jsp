@@ -46,8 +46,8 @@
 </table>
 <br/>
 <div class="center-block">
-    <a href="main?command=showBalanceManagePage"/>
-    <button type="button" class="btn btn-success center-block"><fmt:message key="BALANCE_MANAGE"/></button>
+    <a href="main?command=showBalanceManagePage">
+        <button type="button" class="btn btn-success center-block"><fmt:message key="BALANCE_MANAGE"/></button>
     </a>
 </div>
 <br/>

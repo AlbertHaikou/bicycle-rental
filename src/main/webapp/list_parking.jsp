@@ -15,7 +15,7 @@
 <jsp:include page="parts/navigation.jsp"/>
 <center style="color:graytext;"><h3><fmt:message key="BIKE_PARKINGS"/></h3></center>
 <br/>
-<table border=2>
+<table class="table table-hover">
     <thead>
     <tr>
         <th>№</th>
@@ -32,12 +32,15 @@
         <tr>
             <td><c:out value="${parking.parkingId}"/></td>
             <td><c:out value="${parking.street}"/></td>
-            <td><a href="main?command=showBikesInParkingPage&id=<c:out value="${parking.parkingId}"/>"><fmt:message
+            <td><a class="btn btn-info
+custom-width" href="main?command=showBikesInParkingPage&id=<c:out value="${parking.parkingId}"/>"><fmt:message
                     key="LIST_BIKES"/></a></td>
             <c:if test="${sessionScope.user.role.value eq 'ADMINISTRATOR'}">
-                <td><a href="main?command=showEditParkingPage&id=<c:out value="${parking.parkingId}"/>"><fmt:message
+                <td><a class="btn btn-success
+custom-width" href="main?command=showEditParkingPage&id=<c:out value="${parking.parkingId}"/>"><fmt:message
                         key="UPDATE"/></a></td>
-                <td><a href="main?command=deleteParking&id=<c:out value="${parking.parkingId}"/>"><fmt:message
+                <td><a class="btn btn-danger
+custom-width" href="main?command=deleteParking&id=<c:out value="${parking.parkingId}"/>"><fmt:message
                         key="DELETE"/></a></td>
             </c:if>
         </tr>

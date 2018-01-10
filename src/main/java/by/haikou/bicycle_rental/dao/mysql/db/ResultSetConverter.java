@@ -52,17 +52,20 @@ public final class ResultSetConverter {
     public static RentItem createRentItemEntity(ResultSet set) throws SQLException {
 
         Integer rentItem_id = set.getInt("id");
-        Integer bikes_id = set.getInt("fk_bikes_id");
-        Integer users_id = set.getInt("fk_users_id");
-        Date date = set.getTimestamp("date");
-        Boolean status = set.getBoolean("status");
+        Integer bikes_id = set.getInt("bicycle_id");
+        Integer users_id = set.getInt("user_id");
+        Integer parking_from_id = set.getInt("parking_from_id");
+        Date date = set.getTimestamp("start_date");
+
+        //Boolean status = set.getBoolean("status");
 
         RentItem entity = new RentItem();
         entity.setId(rentItem_id);
         entity.setBikeId(bikes_id);
         entity.setUserId(users_id);
         entity.setDate(date);
-        entity.setStatus(status);
+        entity.setParkingFromId(parking_from_id);
+        //entity.setStatus(status);
         return entity;
 
     }

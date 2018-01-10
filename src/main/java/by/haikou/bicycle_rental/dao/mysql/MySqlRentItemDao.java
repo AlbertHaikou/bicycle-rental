@@ -24,10 +24,11 @@ public class MySqlRentItemDao implements RentItemDao {
         try {
             connection = pool.getConnection();
 
-            statement = connection.prepareStatement("insert into RentItem (bicycle_id,user_id,start_date) values (?, ?, ?)");
+            statement = connection.prepareStatement("insert into rent_item (bicycle_id,user_id,start_date, parking_from_id) values (?, ?, ?,?)");
             statement.setInt(1, rentItem.getBikeId());
             statement.setInt(2, rentItem.getUserId());
             statement.setTimestamp(3, new Timestamp(rentItem.getDate().getTime()));
+            statement.setInt(4, rentItem.getParkingFromId());
             statement.executeUpdate();
 
         } catch (SQLException e) {
@@ -48,7 +49,7 @@ public class MySqlRentItemDao implements RentItemDao {
 
         try {
             connection = pool.getConnection();
-            statement = connection.prepareStatement("select * from RentItem where fk_users_id =? order by date desc");
+            statement = connection.prepareStatement("select * from rent_item where user_id =? order by start_date desc");
             statement.setInt(1, id);
             set = statement.executeQuery();
 
@@ -74,15 +75,15 @@ public class MySqlRentItemDao implements RentItemDao {
 
         try {
             connection = pool.getConnection();
-            statement = connection.prepareStatement("SELECT * FROM rentitem where fk_users_id=? order by date desc");
+            statement = connection.prepareStatement("SELECT * FROM rent_item where user_id=? order by start_date desc");
             statement.setInt(1, userId);
             set = statement.executeQuery();
 
             if (set.next()) {
                 result = ResultSetConverter.createRentItemEntity(set);
-                if (result.getStatus()) {
-                    result = null;
-                }
+//                if (result.getStatus()) {
+//                    result = null;
+//                }
             }            
         } catch (SQLException e) {
             throw new DAOException(e);

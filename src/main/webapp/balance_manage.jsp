@@ -18,12 +18,12 @@
     <div class="panel-heading center-block"><h3><fmt:message key="BALANCE_MANAGE"/></h3></div>
     <label class="info"><c:out value="Your balance: ${balance}"></c:out></label>
     <form class="form-horizontal" method="post" action="main?command=fillUpBalance">
-        <input type="number" min="5" max="1000" name="sum" placeholder="Введите сумму">
+        <input type="number" required min="5" max="1000" name="sum" placeholder="Введите сумму">
         <button type="submit" class="btn-info">Пополнить баланс</button>
     </form>
     <br/>
     <form class="form-horizontal" method="post" action="main?command=takeCredit">
-        <input type="number" min="5" max="1000" name="sum" placeholder="Введите сумму"/>
+        <input type="number" required min="5" max="1000" name="sum" placeholder="Введите сумму"/>
         <button type="submit"  class="btn-info">Взять кредит</button>
     </form>
 </div>
