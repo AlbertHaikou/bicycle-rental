@@ -48,6 +48,10 @@ public class MySqlUserDao implements UserDao {
             "WHERE `id`=?";
     private static final String SQL_FOR_ADD_USER = "INSERT INTO `user` (`firstName`,`lastName`,`email`,`password`, `role`, `banned`, `balance`) " +
             "VALUES (?,?,?,?,?,?,?)";
+    private static final String SQL_FOR_GET_BALANCE_BY_USER_ID = "SELECT `balance` " +
+            "FROM `user` \n" +
+            "WHERE `id`=?";
+    private static final String SQL_FOR_FILL_UP_USER_BALANCE = "UPDATE `user` SET `balance`=? WHERE `id`=?";
 
 
     private final ConnectionPool pool = ConnectionPool.getPool();
@@ -202,6 +206,51 @@ public class MySqlUserDao implements UserDao {
         }
 
         return null;
+    }
+
+    @Override
+    public BigDecimal getBalanceByUserId(Integer userId) throws DAOException {
+        if (userId == null) {
+            return null;
+        }
+        Connection connection = null;
+        PreparedStatement statement = null;
+        ResultSet set = null;
+
+        try {
+            connection = pool.getConnection();
+            statement = connection.prepareStatement(SQL_FOR_GET_BALANCE_BY_USER_ID);
+            statement.setInt(1, userId);
+            set = statement.executeQuery();
+            if (set.next()) {
+                BigDecimal balance = set.getBigDecimal("balance");
+                return balance;
+            }
+        } catch (SQLException e) {
+            throw new DAOException(e);
+        } finally {
+            pool.returnConnectionToPool(connection);
+            ConnectionPool.getPool().closeDbResources(statement, set);
+        }
+        return null;
+    }
+
+    @Override
+    public void fillUpBalance(BigDecimal balance, Integer userId) throws DAOException {
+        Connection connection = null;
+        PreparedStatement statement = null;
+        try {
+            connection = pool.getConnection();
+            statement = connection.prepareStatement(SQL_FOR_FILL_UP_USER_BALANCE);
+            statement.setBigDecimal(1, balance);
+            statement.setInt(2, userId);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new DAOException(e);
+        } finally {
+            pool.returnConnectionToPool(connection);
+            ConnectionPool.getPool().closeDbResources(statement);
+        }
     }
 
     @Override

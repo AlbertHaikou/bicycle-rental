@@ -1,6 +1,5 @@
 package by.haikou.bicycle_rental.service.impl;
 
-import by.haikou.bicycle_rental.dao.RentItemDao;
 import by.haikou.bicycle_rental.dao.UserDao;
 import by.haikou.bicycle_rental.dao.factory.DAOFactory;
 import by.haikou.bicycle_rental.entity.User;
@@ -9,6 +8,7 @@ import by.haikou.bicycle_rental.service.UserService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 
@@ -47,6 +47,15 @@ public class UserServiceImpl implements UserService {
     @Override
     public User getUserById(Integer userId) {
         return userDao.getUserById(userId);
+    }
+
+    public BigDecimal getBalanceByUserId(Integer userId) {
+        return userDao.getBalanceByUserId(userId);
+    }
+
+    @Override
+    public void fillUpUserBalance(BigDecimal balance, Integer id) {
+        userDao.fillUpBalance(userDao.getBalanceByUserId(id).add(balance), id);
     }
 
     @Override

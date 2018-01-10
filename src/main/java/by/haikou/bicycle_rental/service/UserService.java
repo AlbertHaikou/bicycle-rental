@@ -3,6 +3,7 @@ package by.haikou.bicycle_rental.service;
 import by.haikou.bicycle_rental.entity.User;
 import by.haikou.bicycle_rental.exception.UserException;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public interface UserService {
@@ -16,6 +17,10 @@ public interface UserService {
     void deleteUser(Integer userId);
 
     User getUserById(Integer userId);
+
+    BigDecimal getBalanceByUserId(Integer userId);
+
+    void fillUpUserBalance(BigDecimal balance, Integer id);
 
     void addUser(User user);
 

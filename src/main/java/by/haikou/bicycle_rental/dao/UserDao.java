@@ -4,6 +4,7 @@ import by.haikou.bicycle_rental.dao.exceptions.DAOException;
 import by.haikou.bicycle_rental.entity.User;
 import by.haikou.bicycle_rental.exception.UserException;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public interface UserDao {
@@ -12,13 +13,17 @@ public interface UserDao {
 
     User getUser(String login, String password) throws DAOException, UserException;
 
-    List<User> getAllUsers()throws DAOException;
+    List<User> getAllUsers() throws DAOException;
 
     void updateUser(User user) throws DAOException;
 
     void updateProfile(User user) throws DAOException;
 
-    User getUserById(Integer userId)throws DAOException;
+    User getUserById(Integer userId) throws DAOException;
+
+    BigDecimal getBalanceByUserId(Integer userId) throws DAOException;
+
+    void fillUpBalance(BigDecimal balance, Integer userId) throws DAOException;
 
     void delete(Integer userId) throws DAOException;
 
@@ -26,9 +31,10 @@ public interface UserDao {
 
     void unBanUser(Integer userId) throws DAOException;
 
+
     void changeUserRole(Integer userId, User.Role role) throws DAOException;
 
-    List<User> getAllManagers()throws DAOException;
+    List<User> getAllManagers() throws DAOException;
 
     void addUser(User user) throws DAOException;
 }

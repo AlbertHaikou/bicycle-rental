@@ -3,6 +3,8 @@ package by.haikou.bicycle_rental.command.factory;
 import by.haikou.bicycle_rental.command.CommandEnum;
 import by.haikou.bicycle_rental.command.ICommand;
 import by.haikou.bicycle_rental.command.impl.*;
+import by.haikou.bicycle_rental.command.impl.balance.FillUpBalanceCommand;
+import by.haikou.bicycle_rental.command.impl.balance.ShowBalanceManagePageCommand;
 import by.haikou.bicycle_rental.command.impl.bike.*;
 import by.haikou.bicycle_rental.command.impl.general.ChangeLocaleCommand;
 import by.haikou.bicycle_rental.command.impl.general.LoginCommand;
@@ -72,6 +74,8 @@ public class CommandFactory {
         commands.put(SHOW_PROFILE, new ShowProfileCommand());
         commands.put(SHOW_EDIT_PROFILE, new ShowEditProfilePageCommand());
         commands.put(UPDATE_PROFILE, new UpdateProfileCommand());
+        commands.put(SHOW_BALANCE_MANAGE_PAGE, new ShowBalanceManagePageCommand());
+        commands.put(FILL_UP_BALANCE, new FillUpBalanceCommand());
     }
 
     public static CommandFactory getFactory() {

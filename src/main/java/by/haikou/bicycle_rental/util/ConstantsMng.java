@@ -24,6 +24,8 @@ public class ConstantsMng {
     public static final String LIST_ITEMS = "/list_item.jsp";
     public static final String LIST_SUPPORTS = "/list_manager.jsp";
     public static final String LIST_USERS = "/list_user.jsp";
+    public static final String BALANCE_MANAGE = "/balance_manage.jsp";
+
 
     private ConstantsMng() {
     }

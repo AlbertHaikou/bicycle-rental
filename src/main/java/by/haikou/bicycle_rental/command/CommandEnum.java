@@ -38,7 +38,9 @@ public enum CommandEnum {
     RETURN_BIKE("returnBike"),
     SHOW_PROFILE("showProfile"),
     SHOW_EDIT_PROFILE("showEditProfilePage"),
-    UPDATE_PROFILE("updateProfile");
+    UPDATE_PROFILE("updateProfile"),
+    SHOW_BALANCE_MANAGE_PAGE("showBalanceManagePage"),
+    FILL_UP_BALANCE("fillUpBalance");
 
     private String value;
 
