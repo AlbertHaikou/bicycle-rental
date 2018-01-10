@@ -1,6 +1,5 @@
 *.log
 target/*
-*.iml
 .idea/*
 /out
 *.git*
