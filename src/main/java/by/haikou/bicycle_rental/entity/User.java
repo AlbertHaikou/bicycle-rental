@@ -93,16 +93,10 @@ public class User extends AbstractEntity {
     }
 
     public static enum Role {
-        ADMINISTRATOR("ADMINISTRATOR"), USER("USER"), MANAGER("MANAGER");
-
-        private String value;
-
-        private Role(String value) {
-            this.value = value;
-        }
+        ADMINISTRATOR, USER, MANAGER;
 
         public String getValue() {
-            return value;
+            return this.name();
         }
     }
 

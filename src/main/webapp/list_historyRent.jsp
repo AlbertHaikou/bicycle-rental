@@ -30,7 +30,7 @@
                 <tr>
                     <td><c:out value="${rent.id}" /></td>
                     <td><c:out value="${rent.bicycleId}" /></td>
-                    <td><fmt:formatDate type="both" value="${rent.date}" /></td>
+                    <td><fmt:formatDate type="both" value="${rent.fromDate}" /></td>
                     <c:choose>
                         <c:when test="${'true'.equalsIgnoreCase(rent.status)}">
                             <td><fmt:message key="RETURNED"/></td>

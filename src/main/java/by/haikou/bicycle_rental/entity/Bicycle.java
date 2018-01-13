@@ -1,12 +1,14 @@
 package by.haikou.bicycle_rental.entity;
 
+import java.math.BigDecimal;
+
 public class Bicycle extends AbstractEntity {
 
     private Integer bicycleId;
     private String type;
     private String model;
     private String size;
-    private Double price;
+    private BigDecimal price;
     private Boolean isAvailable;
     private Integer parkingId;
 
@@ -14,11 +16,11 @@ public class Bicycle extends AbstractEntity {
         super();
     }
 
-    public Double getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(Double price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 

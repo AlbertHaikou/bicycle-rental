@@ -1,5 +1,6 @@
 package by.haikou.bicycle_rental.entity;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 public class RentItem extends AbstractEntity {
@@ -9,8 +10,35 @@ public class RentItem extends AbstractEntity {
     private int userId;
     private int parkingFromId;
     private int parkingToId;
-    private Date date;
+    private Date fromDate;
+    private Date toDate;
+    private BigDecimal price;
     private Boolean status;
+    private BigDecimal totalPrice;
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
+
+    public Date getToDate() {
+        return toDate;
+    }
+
+    public void setToDate(Date toDate) {
+        this.toDate = toDate;
+    }
+
+    public BigDecimal getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(BigDecimal totalPrice) {
+        this.totalPrice = totalPrice;
+    }
 
     public void setId(int id) {
         this.id = id;
@@ -24,12 +52,12 @@ public class RentItem extends AbstractEntity {
         this.bikeId = bikeId;
     }
 
-    public Date getDate() {
-        return date;
+    public Date getFromDate() {
+        return fromDate;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setFromDate(Date fromDate) {
+        this.fromDate = fromDate;
     }
 
     public int getUserId() {
@@ -51,7 +79,7 @@ public class RentItem extends AbstractEntity {
     @Override
     public String toString() {
         return "RentItem{" + "id=" + id + ", bikeId=" + bikeId + ", userId="
-                + userId + ", date=" + date + ", status=" + status + '}';
+                + userId + ", fromDate=" + fromDate + ", status=" + status + '}';
     }
 
     public int getParkingFromId() {

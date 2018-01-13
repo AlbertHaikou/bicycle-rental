@@ -55,7 +55,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void fillUpUserBalance(BigDecimal balance, Integer id) {
-        userDao.fillUpBalance(userDao.getBalanceByUserId(id).add(balance), id);
+        userDao.fillUpBalance(balance, id);
     }
 
     @Override

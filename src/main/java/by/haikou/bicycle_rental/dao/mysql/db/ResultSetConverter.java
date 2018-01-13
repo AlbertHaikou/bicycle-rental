@@ -2,6 +2,7 @@ package by.haikou.bicycle_rental.dao.mysql.db;
 
 import by.haikou.bicycle_rental.entity.*;
 
+import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
@@ -35,7 +36,7 @@ public final class ResultSetConverter {
         entity.setSize(set.getString("size"));
         entity.setIsAvailable(set.getBoolean("available"));
         entity.setParkingId(set.getInt("fk_Parking_id"));
-        entity.setPrice(set.getDouble("price"));
+        entity.setPrice(set.getBigDecimal("price"));
 
         return entity;
     }
@@ -56,6 +57,7 @@ public final class ResultSetConverter {
         Integer users_id = set.getInt("user_id");
         Integer parking_from_id = set.getInt("parking_from_id");
         Date date = set.getTimestamp("start_date");
+        BigDecimal price = set.getBigDecimal("price");
 
         //Boolean status = set.getBoolean("status");
 
@@ -63,8 +65,9 @@ public final class ResultSetConverter {
         entity.setId(rentItem_id);
         entity.setBikeId(bikes_id);
         entity.setUserId(users_id);
-        entity.setDate(date);
+        entity.setFromDate(date);
         entity.setParkingFromId(parking_from_id);
+        entity.setPrice(price);
         //entity.setStatus(status);
         return entity;
 

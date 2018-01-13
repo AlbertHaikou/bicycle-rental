@@ -2,18 +2,17 @@ package by.haikou.bicycle_rental.dao.mysql;
 
 import by.haikou.bicycle_rental.dao.RentItemDao;
 import by.haikou.bicycle_rental.dao.exceptions.DAOException;
-import by.haikou.bicycle_rental.entity.RentItem;
 import by.haikou.bicycle_rental.dao.mysql.db.ConnectionPool;
 import by.haikou.bicycle_rental.dao.mysql.db.ResultSetConverter;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Timestamp;
+import by.haikou.bicycle_rental.entity.RentItem;
+
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class MySqlRentItemDao implements RentItemDao {
+    private static final String SQL_FOR_UPDATE_RENT_ITEM = "UPDATE `rent_item` SET `end_date`=?, `parking_to_id`=?, `total_price`=?\n" +
+            "WHERE `id`=?";
     private final ConnectionPool pool = ConnectionPool.getPool();
 
     @Override
@@ -24,11 +23,35 @@ public class MySqlRentItemDao implements RentItemDao {
         try {
             connection = pool.getConnection();
 
-            statement = connection.prepareStatement("insert into rent_item (bicycle_id,user_id,start_date, parking_from_id) values (?, ?, ?,?)");
+            statement = connection.prepareStatement("insert into rent_item (bicycle_id,user_id,start_date, parking_from_id, price) values (?, ?, ?,?,?)");
             statement.setInt(1, rentItem.getBikeId());
             statement.setInt(2, rentItem.getUserId());
-            statement.setTimestamp(3, new Timestamp(rentItem.getDate().getTime()));
+            statement.setTimestamp(3, new Timestamp(rentItem.getFromDate().getTime()));
             statement.setInt(4, rentItem.getParkingFromId());
+            statement.setBigDecimal(5, rentItem.getPrice());
+            statement.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new DAOException(e);
+        } finally {
+            pool.returnConnectionToPool(connection);
+            ConnectionPool.getPool().closeDbResources(statement);
+        }
+    }
+
+    @Override
+    public void updateItem(RentItem rentItem) throws DAOException {
+        Connection connection = null;
+        PreparedStatement statement = null;
+
+        try {
+            connection = pool.getConnection();
+
+            statement = connection.prepareStatement(SQL_FOR_UPDATE_RENT_ITEM);
+            statement.setTimestamp(1, new Timestamp(rentItem.getToDate().getTime()));
+            statement.setInt(2, 1);
+            statement.setBigDecimal(3, rentItem.getTotalPrice());
+            statement.setInt(4, rentItem.getId());
             statement.executeUpdate();
 
         } catch (SQLException e) {
@@ -75,7 +98,7 @@ public class MySqlRentItemDao implements RentItemDao {
 
         try {
             connection = pool.getConnection();
-            statement = connection.prepareStatement("SELECT * FROM rent_item where user_id=? order by start_date desc");
+            statement = connection.prepareStatement("SELECT * FROM rent_item where user_id=? and total_price is null order by start_date desc");
             statement.setInt(1, userId);
             set = statement.executeQuery();
 
@@ -84,14 +107,14 @@ public class MySqlRentItemDao implements RentItemDao {
 //                if (result.getStatus()) {
 //                    result = null;
 //                }
-            }            
+            }
         } catch (SQLException e) {
             throw new DAOException(e);
         } finally {
             pool.returnConnectionToPool(connection);
             ConnectionPool.getPool().closeDbResources(statement, set);
         }
-        
+
         return result;
     }
 }

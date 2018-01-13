@@ -242,7 +242,7 @@ public class MySqlUserDao implements UserDao {
         try {
             connection = pool.getConnection();
             statement = connection.prepareStatement(SQL_FOR_FILL_UP_USER_BALANCE);
-            statement.setBigDecimal(1, balance);
+            statement.setBigDecimal(1, getBalanceByUserId(userId).add(balance));
             statement.setInt(2, userId);
             statement.executeUpdate();
         } catch (SQLException e) {

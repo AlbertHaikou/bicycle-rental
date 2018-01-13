@@ -72,7 +72,7 @@ CREATE TABLE `RentItem` (
   `id`          INTEGER   NOT NULL PRIMARY KEY AUTO_INCREMENT,
   `fk_bikes_id` INTEGER   NOT NULL,
   `fk_users_id` INTEGER   NOT NULL,
-  `date`        TIMESTAMP NOT NULL,
+  `fromDate`        TIMESTAMP NOT NULL,
   `status`      BOOLEAN   NOT NULL,
 
   CONSTRAINT `fk_RentItem_to_Bikes` FOREIGN KEY (`fk_bikes_id`) REFERENCES `Bikes` (`id`)

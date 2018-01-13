@@ -32,7 +32,7 @@ public class MySqlBikeDao implements BikeDao {
             statement.setString(3, bike.getSize());
             statement.setBoolean(4, bike.getIsAvailable());
             statement.setInt(5, bike.getParkingId());
-            statement.setDouble(6, bike.getPrice());
+            statement.setBigDecimal(6, bike.getPrice());
             statement.executeUpdate();
 
         } catch (SQLException e) {
@@ -74,7 +74,7 @@ public class MySqlBikeDao implements BikeDao {
             statement.setString(3, bike.getSize());
             statement.setBoolean(4, bike.getIsAvailable());
             statement.setInt(5, bike.getParkingId());
-            statement.setDouble(6, bike.getPrice());
+            statement.setBigDecimal(6, bike.getPrice());
             statement.setInt(7, bike.getBicycleId());
 
             statement.executeUpdate();

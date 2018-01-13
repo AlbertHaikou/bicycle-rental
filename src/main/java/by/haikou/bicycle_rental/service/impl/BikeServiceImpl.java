@@ -2,11 +2,13 @@ package by.haikou.bicycle_rental.service.impl;
 
 import by.haikou.bicycle_rental.dao.BikeDao;
 import by.haikou.bicycle_rental.dao.RentItemDao;
+import by.haikou.bicycle_rental.dao.UserDao;
 import by.haikou.bicycle_rental.dao.factory.DAOFactory;
 import by.haikou.bicycle_rental.entity.Bicycle;
 import by.haikou.bicycle_rental.entity.RentItem;
 import by.haikou.bicycle_rental.service.BikeService;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -14,6 +16,7 @@ public class BikeServiceImpl implements BikeService {
 
     private BikeDao bikeDao = DAOFactory.getFactory().getBikeDao();
     private RentItemDao rentItemDao = DAOFactory.getFactory().getRentItemDao();
+    private UserDao userDao = DAOFactory.getFactory().getUserDao();
 
     @Override
     public void deleteBike(Integer id) {
@@ -51,21 +54,26 @@ public class BikeServiceImpl implements BikeService {
         RentItem rentItem = new RentItem();
         rentItem.setUserId(userId);
         rentItem.setBikeId(bikeId);
+        rentItem.setPrice(bikeDao.getBikeById(bikeId).getPrice());
         //rentItem.setStatus(true);
-        rentItem.setDate(new Date());
+        rentItem.setFromDate(new Date());
         rentItem.setParkingFromId(1);
         rentItemDao.createItem(rentItem);
     }
 
     @Override
-    public void returnBike(Integer bikeid, Integer userId) {
-        bikeDao.returnBike(bikeid);
-        RentItem rentItem = new RentItem();
-        rentItem.setUserId(userId);
-        rentItem.setBikeId(bikeid);
-        rentItem.setStatus(true);
-        rentItem.setDate(new Date());
-        rentItemDao.createItem(rentItem);
+    public void returnBike(Integer bikeId, Integer userId) {
+        RentItem rentItem = rentItemDao.findTakenByUser(userId);
+        Date fromDate = rentItem.getFromDate();
+        Date newDate = new Date();
+        BigDecimal amount = rentItem.getPrice().multiply(new BigDecimal((newDate.getTime() - fromDate.getTime()) / 3600000.));
+        userDao.fillUpBalance(amount.negate(), userId);
+        rentItem.setToDate(newDate);
+        rentItem.setParkingToId(1);
+        rentItem.setTotalPrice(amount);
+        //rentItem.setStatus(true);
+        rentItemDao.updateItem(rentItem);
+        bikeDao.returnBike(bikeId);
     }
 
     @Override

@@ -16,6 +16,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.math.BigDecimal;
 
 public class UpdateBikeCommand implements ICommand {
     private static final Logger LOGGER = LogManager.getLogger(UpdateBikeCommand.class);
@@ -29,7 +30,7 @@ public class UpdateBikeCommand implements ICommand {
         bike.setSize(request.getParameter("size"));
         bike.setIsAvailable(request.getParameter("available").equalsIgnoreCase("free"));
         bike.setParkingId(Integer.valueOf(request.getParameter("parkingId")));
-        bike.setPrice(Double.valueOf(request.getParameter("price")));
+        bike.setPrice(new BigDecimal(request.getParameter("price")));
         bike.setBicycleId(Integer.valueOf(request.getParameter("id")));
         bikeService.updateBike(bike);
         try {

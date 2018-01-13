@@ -9,6 +9,8 @@ public interface RentItemDao {
 
     void createItem(RentItem rentItem) throws DAOException;
 
+    void updateItem(RentItem rentItem) throws DAOException;
+
     List<RentItem> historyRent(Integer userId) throws DAOException;
 
     RentItem findTakenByUser(Integer userId);
