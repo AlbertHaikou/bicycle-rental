@@ -38,7 +38,6 @@ public class CommandFactory {
         commands.put(LOGIN, new LoginCommand());
         commands.put(SHOW_LOGIN_PAGE, new ShowLoginPageCommand());
         commands.put(LOGOUT, new LogoutCommand());
-        commands.put(SHOW_ERROR_PAGE, new ShowErrorPageCommand());
         commands.put(CHANGE_LOCALE, new ChangeLocaleCommand());
         commands.put(SHOW_USERS, new ShowUsersListCommand());
         commands.put(SHOW_MANAGERS, new ShowManagersPageCommand());

@@ -30,7 +30,6 @@ public enum CommandEnum {
     DELETE_MANAGER("deleteManager"),
     SHOW_EDIT_MANAGER_PAGE("showEditManagerPage"),
     EDIT_MANAGER("editManager"),
-    SHOW_ERROR_PAGE("errorPage"),
     BAN_USER("banUser"),
     UNBAN_USER("unbanUser"),
     APPOINT_AS_MANAGER("appointAsManager"),
