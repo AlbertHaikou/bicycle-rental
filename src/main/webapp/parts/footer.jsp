@@ -18,6 +18,14 @@
                     </form>
                 </li>
                 <li>
+                    <form role="form" method="post" name="myForm" action="main?command=changeLocale&locale=bel">
+                        <input type="hidden" name="urlAdd"
+                               value="<c:out value="${pageContext.request.queryString}" />"/>
+                        <button type="submit" class="btn" style="background-image: none;
+            background-color: transparent; color: #df0000"><img src="/img/Belarus.png"></button>
+                    </form>
+                </li>
+                <li>
                     <form role="form" method="post" name="myForm" action="main?command=changeLocale&locale=eng">
                         <input type="hidden" name="urlAdd"
                                value="<c:out value="${pageContext.request.queryString}" />"/>

@@ -12,8 +12,9 @@ public class RequestUtils {
             session.setAttribute("locale", "en_US");
         } else if (locale.equals("rus")) {
             session.setAttribute("locale", "ru_RU");
+        } else if (locale.equals("bel")) {
+            session.setAttribute("locale", "by_BY");
         }
-
     }
 
     public static String getLocale(HttpServletRequest request) {
