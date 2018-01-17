@@ -1,15 +1,10 @@
 package by.haikou.bicycle_rental.command.impl.manager;
 
-import by.haikou.bicycle_rental.command.CommandEnum;
 import by.haikou.bicycle_rental.command.ICommand;
-import by.haikou.bicycle_rental.command.exception.CommandException;
-import by.haikou.bicycle_rental.command.factory.CommandFactory;
 import by.haikou.bicycle_rental.entity.User;
-import by.haikou.bicycle_rental.exception.UnauthorizedException;
 import by.haikou.bicycle_rental.service.UserService;
 import by.haikou.bicycle_rental.service.factory.ServiceFactory;
 import by.haikou.bicycle_rental.util.MD5Converter;
-import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -31,13 +26,9 @@ public class AddManagerCommand implements ICommand {
         user.setPassword(MD5Converter.getHash(request.getParameter("password")));
         user.setRole(User.Role.MANAGER);
         userService.addUser(user);
-        try {
-            CommandFactory.getFactory().createCommand(CommandEnum.SHOW_MANAGERS).execute(request, response);
-        } catch (CommandException e) {
-            LOGGER.log(Level.ERROR, e);
-        } catch (UnauthorizedException e) {
-            LOGGER.log(Level.ERROR, e);
-        }
+
+        response.sendRedirect("main?command=showManagers");
+
     }
 
 }

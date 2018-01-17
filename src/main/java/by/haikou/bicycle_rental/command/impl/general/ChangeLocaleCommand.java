@@ -15,13 +15,14 @@ import java.io.IOException;
 public class ChangeLocaleCommand implements ICommand {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, CommandException, UnauthorizedException {
+        if(null!=request){
         RequestUtils.setLocale(request);
-        if (null != request.getParameter("urlAdd") && !request.getParameter("urlAdd").equals("") &&
+        if (null != request.getParameter("urlAdd") && !request.getParameter("urlAdd").isEmpty() &&
                 !request.getParameter("urlAdd").contains("changeLocale")) {
             String s = request.getParameter("urlAdd");
             request.getRequestDispatcher("/main?" + s).forward(request, response);
         } else {
             CommandFactory.getFactory().createCommand(CommandEnum.SHOW_MAIN_PAGE).execute(request, response);
         }
-    }
+    }}
 }
