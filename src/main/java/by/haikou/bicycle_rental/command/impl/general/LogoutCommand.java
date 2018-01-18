@@ -17,6 +17,6 @@ public class LogoutCommand implements ICommand {
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException, CommandException, UnauthorizedException {
         HttpSession session = req.getSession();
         session.invalidate();
-        CommandFactory.getFactory().createCommand(CommandEnum.SHOW_MAIN_PAGE).execute(req, resp);
+        resp.sendRedirect("main?");
     }
 }

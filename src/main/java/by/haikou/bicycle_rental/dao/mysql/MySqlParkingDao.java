@@ -14,6 +14,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MySqlParkingDao implements ParkingDao {
+    private static final String SQL_FOR_CREATE_PARKING = "INSERT INTO `parking` (`street`) VALUES (?)";
+    private static final String SQL_FOR_DELETE_PARKING = "DELETE FROM `parking` WHERE `id`=?";
+    private static final String SQL_FOR_UPDATE_PARKING = "UPDATE `parking` SET `street`=? WHERE `id`=?";
+    private static final String SQL_FOR_GET_ALL_PARKING = "SELECT `id`, `street` from parking order by id asc";
+    private static final String SQL_FOR_GET_PARKING_BY_ID = "SELECT `id`, `street` from parking WHERE `id`=?";
+
+
     private final ConnectionPool pool = ConnectionPool.getPool();
 
     @Override
@@ -24,7 +31,7 @@ public class MySqlParkingDao implements ParkingDao {
         try {
             connection = pool.getConnection();
 
-            statement = connection.prepareStatement("insert into parking(street) values (?)");
+            statement = connection.prepareStatement(SQL_FOR_CREATE_PARKING);
             statement.setString(1, parking.getStreet());
             statement.executeUpdate();
 
@@ -43,7 +50,7 @@ public class MySqlParkingDao implements ParkingDao {
 
         try {
             connection = pool.getConnection();
-            statement = connection.prepareStatement("delete from parking where id=?");
+            statement = connection.prepareStatement(SQL_FOR_DELETE_PARKING);
             statement.setInt(1, parkingId);
             statement.executeUpdate();
         } catch (SQLException e) {
@@ -61,7 +68,7 @@ public class MySqlParkingDao implements ParkingDao {
 
         try {
             connection = pool.getConnection();
-            statement = connection.prepareStatement("update Parking set street=? where id=?");
+            statement = connection.prepareStatement(SQL_FOR_UPDATE_PARKING);
             statement.setString(1, parking.getStreet());
             statement.setInt(2, parking.getParkingId());
             statement.executeUpdate();
@@ -83,7 +90,7 @@ public class MySqlParkingDao implements ParkingDao {
 
         try {
             connection = pool.getConnection();
-            statement = connection.prepareStatement("select * from Parking order by id asc");
+            statement = connection.prepareStatement(SQL_FOR_GET_ALL_PARKING);
             set = statement.executeQuery();
 
             while (set.next()) {
@@ -111,7 +118,7 @@ public class MySqlParkingDao implements ParkingDao {
 
         try {
             connection = pool.getConnection();
-            statement = connection.prepareStatement("select * from Parking where id=?");
+            statement = connection.prepareStatement(SQL_FOR_GET_PARKING_BY_ID);
             statement.setInt(1, parkingId);
             set = statement.executeQuery();
 

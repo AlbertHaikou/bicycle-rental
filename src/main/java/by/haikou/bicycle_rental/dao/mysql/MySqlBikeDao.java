@@ -17,6 +17,20 @@ import java.util.List;
 
 public class MySqlBikeDao implements BikeDao {
     private static final Logger LOGGER = LogManager.getLogger(MySqlBikeDao.class);
+    private static final String SQL_FOR_CREATE_BIKE = "INSERT INTO `bicycle` (`type`,`model`,`size`,`available`,`fk_parking_id`,`price`)" +
+            " VALUES (?, ?, ?, ?, ?, ?)";
+    private static final String SQL_FOR_DELETE_BIKE = "DELETE FROM `bicycle` WHERE `id`= ?";
+    private static final String SQL_FOR_RENT_BIKE = "UPDATE `bicycle` SET `available`= '0' WHERE `id`=?";
+    private static final String SQL_FOR_RETURN_BIKE = "UPDATE `bicycle` SET `available`= '1' WHERE `id`=?";
+    private static final String SQL_FOR_UPDATE_BIKE = "UPDATE `bicycle` SET `type`=?, `model`=?, `size`=?, `available`=?, `fk_parking_id`=?, `price`=? WHERE `id`=?";
+    private static final String SQL_FOR_GET_ALL_BIKES = "SELECT `id`,`type`,`model`,`size`,`available`,`fk_parking_id`,`price` FROM `bicycle`";
+    private static final String SQL_FOR_GET_BIKE_BY_ID = "SELECT `id`,`type`,`model`,`size`,`available`,`fk_parking_id`,`price` FROM `bicycle` WHERE `id` = ?";
+    private static final String SQL_FOR_GET_AVAILABLE_BIKES = "SELECT `id`,`type`,`model`,`size`,`available`,`fk_parking_id`,`price` " +
+            "FROM `bicycle` WHERE `available` = '1'";
+    private static final String SQL_FOR_GET_BIKES_BY_PARKING_ID = "SELECT `id`,`type`,`model`,`size`,`available`,`fk_parking_id`,`price` " +
+            "FROM `bicycle` WHERE `fk_parking_id` = ?";
+
+
     private final ConnectionPool pool = ConnectionPool.getPool();
 
     @Override
@@ -26,7 +40,7 @@ public class MySqlBikeDao implements BikeDao {
 
         try {
             connection = pool.getConnection();
-            statement = connection.prepareStatement("insert into bicycle(type,model,size,available,fk_parking_id,price) values (?, ?, ?, ?, ?, ?)");
+            statement = connection.prepareStatement(SQL_FOR_CREATE_BIKE);
             statement.setString(1, bike.getType());
             statement.setString(2, bike.getModel());
             statement.setString(3, bike.getSize());
@@ -50,7 +64,7 @@ public class MySqlBikeDao implements BikeDao {
 
         try {
             connection = pool.getConnection();
-            statement = connection.prepareStatement("delete from bicycle where id=?");
+            statement = connection.prepareStatement(SQL_FOR_DELETE_BIKE);
             statement.setInt(1, bikeId);
             statement.executeUpdate();
         } catch (SQLException e) {
@@ -68,7 +82,7 @@ public class MySqlBikeDao implements BikeDao {
 
         try {
             connection = pool.getConnection();
-            statement = connection.prepareStatement("UPDATE `bicycle` SET `type`=?, `model`=?, `size`=?, `available`=?, `fk_parking_id`=?, `price`=? WHERE `id`=?");
+            statement = connection.prepareStatement(SQL_FOR_UPDATE_BIKE);
             statement.setString(1, bike.getType());
             statement.setString(2, bike.getModel());
             statement.setString(3, bike.getSize());
@@ -96,7 +110,7 @@ public class MySqlBikeDao implements BikeDao {
 
         try {
             connection = pool.getConnection();
-            statement = connection.prepareStatement("select * from bicycle");
+            statement = connection.prepareStatement(SQL_FOR_GET_ALL_BIKES);
             set = statement.executeQuery();
 
             while (set.next()) {
@@ -124,7 +138,7 @@ public class MySqlBikeDao implements BikeDao {
 
         try {
             connection = pool.getConnection();
-            statement = connection.prepareStatement("select * from bicycle where id=?");
+            statement = connection.prepareStatement(SQL_FOR_GET_BIKE_BY_ID);
             statement.setInt(1, bikeId);
             set = statement.executeQuery();
 
@@ -150,7 +164,7 @@ public class MySqlBikeDao implements BikeDao {
         List<Bicycle> result = new ArrayList<>();
         try {
             connection = pool.getConnection();
-            statement = connection.prepareStatement("select * from bicycle where available=1");
+            statement = connection.prepareStatement(SQL_FOR_GET_AVAILABLE_BIKES);
             set = statement.executeQuery();
 
             while (set.next()) {
@@ -173,7 +187,7 @@ public class MySqlBikeDao implements BikeDao {
 
         try {
             connection = pool.getConnection();
-            statement = connection.prepareStatement("update bicycle set available=false where id=?");
+            statement = connection.prepareStatement(SQL_FOR_RENT_BIKE);
             statement.setInt(1, bikeId);
             statement.executeUpdate();
         } catch (SQLException e) {
@@ -191,7 +205,7 @@ public class MySqlBikeDao implements BikeDao {
 
         try {
             connection = pool.getConnection();
-            statement = connection.prepareStatement("update bicycle set available=true where id=?");
+            statement = connection.prepareStatement(SQL_FOR_RETURN_BIKE);
             statement.setInt(1, bikeId);
             statement.executeUpdate();
         } catch (SQLException e) {
@@ -216,7 +230,7 @@ public class MySqlBikeDao implements BikeDao {
         try {
             connection = pool.getConnection();
 
-            statement = connection.prepareStatement("select * from bicycle where fk_parking_id=?");
+            statement = connection.prepareStatement(SQL_FOR_GET_BIKES_BY_PARKING_ID);
             statement.setInt(1, parkingId);
 
             set = statement.executeQuery();

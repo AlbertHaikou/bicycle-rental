@@ -30,12 +30,7 @@ public class FillUpBalanceCommand implements ICommand {
         Integer userId = user.getId();
         BigDecimal sum = new BigDecimal(request.getParameter("sum"));
         userService.fillUpUserBalance(sum, userId);
-        try {
-            CommandFactory.getFactory().createCommand(CommandEnum.SHOW_BALANCE_MANAGE_PAGE).execute(request, response);
-        } catch (CommandException e) {
-            LOGGER.log(Level.ERROR, e);
-        } catch (UnauthorizedException e) {
-            LOGGER.log(Level.ERROR, e);
-        }
+
+        response.sendRedirect("main?command=showBalanceManagePage");
     }
 }

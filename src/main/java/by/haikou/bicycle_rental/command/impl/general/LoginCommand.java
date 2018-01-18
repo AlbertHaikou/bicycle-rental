@@ -34,7 +34,7 @@ public class LoginCommand implements ICommand {
                 if (user != null) {
                     HttpSession session = request.getSession(true);
                     session.setAttribute("user", user);
-                    request.getRequestDispatcher(ConstantsMng.INDEX).forward(request, response);
+                    response.sendRedirect(ConstantsMng.MAIN);
                 } else {
                     String message = MessageUtils.getProperty(RequestUtils.getLocale(request), MessageUtils.VALIDATION_ERRORS_PARAM);
                     request.setAttribute(ConstantsMng.ATR_ERRORS, message);

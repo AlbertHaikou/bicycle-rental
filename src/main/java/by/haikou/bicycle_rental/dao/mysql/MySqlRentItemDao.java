@@ -13,6 +13,15 @@ import java.util.List;
 public class MySqlRentItemDao implements RentItemDao {
     private static final String SQL_FOR_UPDATE_RENT_ITEM = "UPDATE `rent_item` SET `end_date`=?, `parking_to_id`=?, `total_price`=?\n" +
             "WHERE `id`=?";
+    private static final String SQL_FOR_CREATE_RENT_ITEM = "INSERT INTO `rent_item` (`bicycle_id`,`user_id`,`start_date`,`parking_from_id`,`price`) " +
+            "VALUES (?,?,?,?,?)";
+    private static final String SQL_FOR_GET_RENT_HISTORY = "SELECT `id`,`bicycle_id`,`user_id`,`start_date`,`parking_from_id`," +
+            "`start_date`, `end_date`,`parking_to_id`,`price`,`total_price` FROM `rent_item`  WHERE `user_id`=? ORDER BY `start_date` DESC";
+    private static final String SQL_FOR_FIND_TAKEN_BY_USER = "SELECT `id`,`bicycle_id`,`user_id`,`start_date`,`parking_from_id`," +
+            "`start_date`, `end_date`,`parking_to_id`,`price`,`total_price` FROM `rent_item`  " +
+            "WHERE `user_id`=? AND `total_price` IS NULL ORDER BY `start_date` DESC";
+
+
     private final ConnectionPool pool = ConnectionPool.getPool();
 
     @Override
@@ -23,7 +32,7 @@ public class MySqlRentItemDao implements RentItemDao {
         try {
             connection = pool.getConnection();
 
-            statement = connection.prepareStatement("insert into rent_item (bicycle_id,user_id,start_date, parking_from_id, price) values (?, ?, ?,?,?)");
+            statement = connection.prepareStatement(SQL_FOR_CREATE_RENT_ITEM);
             statement.setInt(1, rentItem.getBikeId());
             statement.setInt(2, rentItem.getUserId());
             statement.setTimestamp(3, new Timestamp(rentItem.getFromDate().getTime()));
@@ -72,7 +81,7 @@ public class MySqlRentItemDao implements RentItemDao {
 
         try {
             connection = pool.getConnection();
-            statement = connection.prepareStatement("select * from rent_item where user_id =? order by start_date desc");
+            statement = connection.prepareStatement(SQL_FOR_GET_RENT_HISTORY);
             statement.setInt(1, id);
             set = statement.executeQuery();
 
@@ -98,7 +107,7 @@ public class MySqlRentItemDao implements RentItemDao {
 
         try {
             connection = pool.getConnection();
-            statement = connection.prepareStatement("SELECT * FROM rent_item where user_id=? and total_price is null order by start_date desc");
+            statement = connection.prepareStatement(SQL_FOR_FIND_TAKEN_BY_USER);
             statement.setInt(1, userId);
             set = statement.executeQuery();
 
