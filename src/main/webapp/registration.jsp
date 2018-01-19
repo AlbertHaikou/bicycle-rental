@@ -37,7 +37,10 @@
 </head>
 <body style="margin-bottom: 0px;">
 <jsp:include page="parts/navigation.jsp"/>
-﻿
+
+<center style="color:graytext;">
+    <h3><c:out value="${errorMsg.email}"/></h3></center>
+</h3></center>
 <div class="auth-window animated  fadeInDown" style="margin-top: 50px;">
     <div class="title"><fmt:message key="REGISTRATION"/></div>
     <form role="form" action="main?command=register" name="myForm"

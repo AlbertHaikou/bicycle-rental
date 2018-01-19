@@ -1,12 +1,8 @@
 package by.haikou.bicycle_rental.filters;
 
 import javax.servlet.*;
-import javax.servlet.annotation.WebFilter;
-import javax.servlet.annotation.WebInitParam;
 import java.io.IOException;
 
-@WebFilter(urlPatterns = {"/*"},
-        initParams = {@WebInitParam(name = "defaultEncoding", value = "UTF-8")})
 public class EncodingFilter implements Filter {
     private String defaultEncoding;
 

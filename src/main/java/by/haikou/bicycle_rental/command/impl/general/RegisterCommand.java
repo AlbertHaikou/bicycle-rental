@@ -20,8 +20,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class RegisterCommand implements ICommand {
-    private static final Logger log = LogManager.getLogger(RegisterCommand.class);
+    private static final Logger LOGGER = LogManager.getLogger(RegisterCommand.class);
     UserService userService = ServiceFactory.getFactory().getUserService();
+
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, CommandException, UnauthorizedException {
 
@@ -59,7 +60,11 @@ public class RegisterCommand implements ICommand {
     private Map<String, String> validateRegisterDetails(HttpServletRequest request,
                                                         String firstName, String lastName, String login, String password) {
         Map<String, String> errorMap = new HashMap<>();
-        String loginMsg = MessageUtils.getProperty(RequestUtils.getLocale(request),
+        String loginMsg = MessageUtils.getProperty(RequestUtils.getLocale(request), MessageUtils.NOT_UNIQ_LIGIN_ERROR_MESSAGE);
+        if (!userService.isLoginFree(login)) {
+            errorMap.put(ConstantsMng.PARAM_NAME_LOGIN, loginMsg);
+        }
+        loginMsg = MessageUtils.getProperty(RequestUtils.getLocale(request),
                 MessageUtils.EMPTY_EMAIL_ERROR_MESSAGE);
         if (StringUtils.isEmpty(login)) {
             errorMap.put(ConstantsMng.PARAM_NAME_LOGIN, loginMsg);
@@ -86,7 +91,7 @@ public class RegisterCommand implements ICommand {
         RequestDispatcher dispatcher = request.getRequestDispatcher(viewName);
         dispatcher.forward(request, response);
     }
-    }
+}
 
 
 

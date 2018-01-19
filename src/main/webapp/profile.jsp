@@ -10,47 +10,117 @@
     <meta charset="UTF-8">
     <title> rent-bike </title>
     <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/profile.css">
 
 </head>
 <body style="margin-bottom: 0px;">
-<jsp:include page="parts/navigation.jsp"/>
-<center style="color:graytext;"><h3><fmt:message key="MY_PROFILE"/></h3></center>
-<br/>
-<table border=2>
-    <thead>
-    <tr>
-        <th>№</th>
-        <th><fmt:message key="FIRST_NAME"/></th>
-        <th><fmt:message key="LAST_NAME"/></th>
-        <th><fmt:message key="EMAIL"/></th>
-        <th><fmt:message key="BALANCE"/></th>
-        <c:set var="profile" value="profile"/>
-        <c:if test="${not empty sessionScope.user.role}">
-            <th><fmt:message key="ACTION"/></th>
-        </c:if>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-        <td><c:out value="${requestScope.profile.id}"/></td>
-        <td><c:out value="${requestScope.profile.firstName}"/></td>
-        <td><c:out value="${requestScope.profile.lastName}"/></td>
-        <td><c:out value="${requestScope.profile.email}"/></td>
-        <td><c:out value="${requestScope.profile.balance}"/></td>
-        <c:if test="${not empty sessionScope.user.role}">
-            <td><a href="main?command=showEditProfilePage&id=<c:out value="${requestScope.profile.id}"/>">
-                <fmt:message key="UPDATE"/></a></td>
-        </c:if>
-    </tr>
-    </tbody>
-</table>
-<br/>
-<div class="center-block">
-    <a href="main?command=showBalanceManagePage">
-        <button type="button" class="btn btn-success center-block"><fmt:message key="BALANCE_MANAGE"/></button>
-    </a>
-</div>
-<br/>
-<jsp:include page="parts/footer.jsp"/>
+<header>
+    <jsp:include page="parts/navigation.jsp"/>
+</header>
+<main>
+    <div class="container">
+        <div class="row profile">
+            <div class="col-md-4">
+                <div class="profile-sidebar">
+                    <!-- SIDEBAR USERPIC -->
+                    <div class="profile-userpic">
+                        <img src="http://keenthemes.com/preview/metronic/theme/assets/admin/pages/media/profile/profile_user.jpg"
+                             class="img-responsive" alt="">
+                    </div>
+                    <!-- END SIDEBAR USERPIC -->
+                    <!-- SIDEBAR USER TITLE -->
+                    <div class="profile-usertitle">
+                        <div class="profile-usertitle-name">
+                            <c:out value="${requestScope.profile.firstName}"/> <c:out
+                                value="${requestScope.profile.lastName}"/>
+                        </div>
+                        <div class="profile-usertitle-job">
+                            <c:out value="${sessionScope.user.role}"/>
+                        </div>
+                        <div class="profile-usertitle-name">
+                            <fmt:message key="BALANCE"/>:<c:out value="${requestScope.profile.balance}"/>
+                        </div>
+                    </div>
+                    <!-- END SIDEBAR USER TITLE -->
+                    <!-- SIDEBAR BUTTONS -->
+                    <div class="profile-userbuttons">
+
+                    </div>
+                    <!-- END SIDEBAR BUTTONS -->
+                    <!-- SIDEBAR MENU -->
+                    <div class="profile-usermenu">
+                        <ul class="nav">
+                            <li>
+                            </li>
+                            <li>
+                                <a href="main?command=showEditProfilePage&id=<c:out value="${requestScope.profile.id}"/>">
+                                    <i class="glyphicon glyphicon-user"></i>
+                                    <fmt:message key="UPDATE"/> </a>
+                            </li>
+                            <li>
+                                <a href="main?command=showBalanceManagePage">
+                                    <i class="glyphicon glyphicon-ok"></i>
+                                    <fmt:message key="BALANCE_MANAGE"/> </a>
+                            </li>
+                            <li>
+                                <a href="main?command=showRentalHistory">
+                                    <i class="glyphicon glyphicon-flag"></i>
+                                    <fmt:message key="FULL_RENTAL_HISTORY"/> </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- END MENU -->
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="profile-content">
+                    <center style="color:graytext;"><h3><fmt:message key="RENTAL_HISTORY"/></h3></center>
+                    <table class="table">
+                        <thead>
+                        <tr class="tab-pane">
+                            <th><fmt:message key="DATE_OF_RENT"/></th>
+                            <th><fmt:message key="№_BIKE"/></th>
+                            <th><fmt:message key="PRICE"/></th>
+                            <th><fmt:message key="DATE_OF_RETURN"/></th>
+                            <th><fmt:message key="TOTAL_PRICE"/></th>
+                            <th><fmt:message key="STATUS"/></th>
+
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <c:forEach items="${rents}" var="rent">
+                            <tr>
+                                <td><fmt:formatDate type="both" value="${rent.fromDate}"/></td>
+                                <td><c:out value="${rent.bikeId}"/></td>
+                                <td><c:out value="${rent.price}"/></td>
+                                <td><fmt:formatDate type="both" value="${rent.toDate}"/></td>
+                                <td><c:out value="${rent.totalPrice}"/></td>
+                                <c:choose>
+                                    <c:when test="${null eq (rent.totalPrice)}">
+                                        <td><fmt:message key="TAKEN"/></p><a
+                                                href="main?command=returnBike&id=<c:out value="${rent.bikeId}"/>">
+                                            <button class="btn btn-success"><fmt:message key="TO_RETURN"/></button>
+                                        </a>
+                                        </td>
+
+                                    </c:when>
+                                    <c:otherwise>
+                                        <td><fmt:message key="RETURNED"/></td>
+                                    </c:otherwise>
+                                </c:choose>
+                            </tr>
+                        </c:forEach>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    </br>
+    </br>
+</main>
+<footer>
+    <jsp:include page="parts/footer.jsp"/>
+</footer>
 </body>
 </html>

@@ -5,6 +5,7 @@ import by.haikou.bicycle_rental.dao.factory.DAOFactory;
 import by.haikou.bicycle_rental.entity.User;
 import by.haikou.bicycle_rental.exception.UserException;
 import by.haikou.bicycle_rental.service.UserService;
+import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -14,7 +15,7 @@ import java.util.List;
 
 public class UserServiceImpl implements UserService {
 
-    private static Logger log = LogManager.getLogger(UserService.class);
+    private static Logger LOGGER = LogManager.getLogger(UserService.class);
     private UserDao userDao = DAOFactory.getFactory().getUserDao();
 
     @Override
@@ -29,7 +30,7 @@ public class UserServiceImpl implements UserService {
         try {
             user = userDao.getUser(login);
         } catch (Exception e) {
-            log.error(e);
+            LOGGER.log(Level.ERROR, e);
         }
         return user;
     }
@@ -47,6 +48,16 @@ public class UserServiceImpl implements UserService {
     @Override
     public User getUserById(Integer userId) {
         return userDao.getUserById(userId);
+    }
+
+    public Boolean isLoginFree(String login) {
+        boolean userNotFound = false;
+        try {
+            userNotFound = null == userDao.getUser(login);
+        } catch (Exception e) {
+            LOGGER.log(Level.ERROR, e);
+        }
+        return userNotFound;
     }
 
     public BigDecimal getBalanceByUserId(Integer userId) {

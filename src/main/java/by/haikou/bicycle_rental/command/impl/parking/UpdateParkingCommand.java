@@ -1,14 +1,12 @@
 package by.haikou.bicycle_rental.command.impl.parking;
 
-import by.haikou.bicycle_rental.command.CommandEnum;
 import by.haikou.bicycle_rental.command.ICommand;
 import by.haikou.bicycle_rental.command.exception.CommandException;
-import by.haikou.bicycle_rental.command.factory.CommandFactory;
 import by.haikou.bicycle_rental.entity.Parking;
 import by.haikou.bicycle_rental.exception.UnauthorizedException;
 import by.haikou.bicycle_rental.service.ParkingService;
 import by.haikou.bicycle_rental.service.factory.ServiceFactory;
-import org.apache.logging.log4j.Level;
+import by.haikou.bicycle_rental.util.ConstantsMng;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -27,13 +25,7 @@ public class UpdateParkingCommand implements ICommand {
         parking.setStreet(req.getParameter("street"));
         parking.setParkingId(Integer.parseInt(req.getParameter("id")));
         parkingService.updateParking(parking);
-        try {
-            CommandFactory.getFactory().createCommand(CommandEnum.SHOW_PARKINGS).execute(req, resp);
-        } catch (CommandException e) {
-            LOGGER.log(Level.ERROR, e);
-        } catch (UnauthorizedException e) {
-            LOGGER.log(Level.ERROR, e);
-        }
+        resp.sendRedirect(ConstantsMng.SHOW_PARKINGS);
 
     }
 }

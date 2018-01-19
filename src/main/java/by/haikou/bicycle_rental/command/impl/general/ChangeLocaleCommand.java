@@ -18,7 +18,7 @@ public class ChangeLocaleCommand implements ICommand {
         if(null!=request){
         RequestUtils.setLocale(request);
         if (null != request.getParameter("urlAdd") && !request.getParameter("urlAdd").isEmpty() &&
-                !request.getParameter("urlAdd").contains("changeLocale")) {
+                !request.getParameter("urlAdd").contains("changeLocale")&&!request.getParameter("urlAdd").contains("register")) {
             String s = request.getParameter("urlAdd");
             request.getRequestDispatcher("/main?" + s).forward(request, response);
         } else {

@@ -50,9 +50,9 @@ custom-width" href="main?command=deleteParking&id=<c:out value="${parking.parkin
 <br/>
 
 <c:if test="${sessionScope.user.role.value=='ADMINISTRATOR'}">
-    <center><a href="main?command=addParkingPage">
-        <button><fmt:message key="ADD_PARKING"/></button>
-    </a></center>
+    <div class="center-block"><a href="main?command=addParkingPage">
+        <button class="center-block btn-add btn"><fmt:message key="ADD_PARKING"/></button>
+    </a></div>
 </c:if>
 
 <jsp:include page="parts/footer.jsp"/>

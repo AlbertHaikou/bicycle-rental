@@ -1,5 +1,11 @@
 package by.haikou.bicycle_rental.dao.mysql;
 
+import by.haikou.bicycle_rental.dao.SupportItemDao;
+import by.haikou.bicycle_rental.dao.exceptions.DAOException;
+import by.haikou.bicycle_rental.dao.mysql.db.ConnectionPool;
+import by.haikou.bicycle_rental.dao.mysql.db.ResultSetConverter;
+import by.haikou.bicycle_rental.entity.SupportItemEntity;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -7,24 +13,24 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import by.haikou.bicycle_rental.dao.SupportItemDao;
-import by.haikou.bicycle_rental.dao.exceptions.DAOException;
-import by.haikou.bicycle_rental.dao.mysql.db.ConnectionPool;
-import by.haikou.bicycle_rental.entity.SupportItemEntity;
-import by.haikou.bicycle_rental.dao.mysql.db.ResultSetConverter;
-
 public class MySqlSupportItemDao implements SupportItemDao {
+    private final static String SQL_FOR_CREATE_ITEM = "INSERT INTO `support_item` (`fk_Bikes_id`,`description`,`status`) VALUES (?,?,?)";
+    private final static String SQL_FOR_GET_ALL_ITEMS = "SELECT `id`,`fk_Bikes_id`,`description`,`status` FROM support_item";
+    private final static String SQL_FOR_GET_UNPERFORMED_ITEMS = "SELECT `id`,`fk_Bikes_id`,`description`,`status` FROM support_item WHERE `status`='0'";
+    private final static String SQL_FOR_GET_ITEM_BY_BIKE_ID = "SELECT `id`,`fk_Bikes_id`,`description`,`status` FROM support_item WHERE `fk_Bikes_id`=?";
+    private final static String SQL_FOR_GET_REPAIR_BIKE = "UPDATE support_item SET `status` = 1 WHERE `fk_Bikes_id`=?";
+
     private final ConnectionPool pool = ConnectionPool.getPool();
 
     @Override
-    public void createItem (SupportItemEntity supportItem) throws DAOException {
+    public void createItem(SupportItemEntity supportItem) throws DAOException {
         Connection connection = null;
         PreparedStatement statement = null;
 
         try {
             connection = pool.getConnection();
 
-            statement = connection.prepareStatement("insert into SupportItem(fk_Bikes_id,description,status) values (?, ?, ?)");
+            statement = connection.prepareStatement(SQL_FOR_CREATE_ITEM);
             statement.setInt(1, supportItem.getBikeId());
             statement.setString(2, supportItem.getDescription());
             statement.setBoolean(3, supportItem.getStatus());
@@ -48,7 +54,7 @@ public class MySqlSupportItemDao implements SupportItemDao {
 
         try {
             connection = pool.getConnection();
-            statement = connection.prepareStatement("select * from SupportItem");
+            statement = connection.prepareStatement(SQL_FOR_GET_ALL_ITEMS);
             set = statement.executeQuery();
 
             while (set.next()) {
@@ -75,7 +81,7 @@ public class MySqlSupportItemDao implements SupportItemDao {
 
         try {
             connection = pool.getConnection();
-            statement = connection.prepareStatement("select * from SupportItem where status=0");
+            statement = connection.prepareStatement(SQL_FOR_GET_UNPERFORMED_ITEMS);
             set = statement.executeQuery();
 
             while (set.next()) {
@@ -103,7 +109,7 @@ public class MySqlSupportItemDao implements SupportItemDao {
 
         try {
             connection = pool.getConnection();
-            statement = connection.prepareStatement("select * from SupportItem where fk_Bikes_id=?");
+            statement = connection.prepareStatement(SQL_FOR_GET_ITEM_BY_BIKE_ID);
             statement.setInt(1, bikeId);
             set = statement.executeQuery();
 
@@ -128,7 +134,7 @@ public class MySqlSupportItemDao implements SupportItemDao {
 
         try {
             connection = pool.getConnection();
-            statement = connection.prepareStatement("update SupportItem set status=true where fk_Bikes_id=?");
+            statement = connection.prepareStatement(SQL_FOR_GET_REPAIR_BIKE);
             statement.setInt(1, id);
             statement.executeUpdate();
         } catch (SQLException e) {

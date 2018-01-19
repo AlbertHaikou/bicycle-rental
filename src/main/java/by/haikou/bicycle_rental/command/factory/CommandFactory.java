@@ -14,6 +14,7 @@ import by.haikou.bicycle_rental.command.impl.manager.*;
 import by.haikou.bicycle_rental.command.impl.parking.*;
 import by.haikou.bicycle_rental.command.impl.profile.ShowEditProfilePageCommand;
 import by.haikou.bicycle_rental.command.impl.profile.ShowProfileCommand;
+import by.haikou.bicycle_rental.command.impl.profile.ShowRentalHistory;
 import by.haikou.bicycle_rental.command.impl.profile.UpdateProfileCommand;
 import by.haikou.bicycle_rental.command.impl.user.AppointAsManagerCommand;
 import by.haikou.bicycle_rental.command.impl.user.BanUserCommand;
@@ -75,6 +76,7 @@ public class CommandFactory {
         commands.put(UPDATE_PROFILE, new UpdateProfileCommand());
         commands.put(SHOW_BALANCE_MANAGE_PAGE, new ShowBalanceManagePageCommand());
         commands.put(FILL_UP_BALANCE, new FillUpBalanceCommand());
+        commands.put(SHOW_RENTAL_HISTORY, new ShowRentalHistory());
     }
 
     public static CommandFactory getFactory() {

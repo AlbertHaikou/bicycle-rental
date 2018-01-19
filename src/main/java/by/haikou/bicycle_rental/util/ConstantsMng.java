@@ -17,6 +17,7 @@ public class ConstantsMng {
     public static final String ADD_OR_EDIT_PROFILE = "/edit_profile.jsp";
     public static final String LIST_BIKES = "/list_bike.jsp";
     public static final String SHOW_BIKES = "main?command=showBikes";
+    public static final String SHOW_PARKINGS = "main?command=showParkings";
     public static final String INDEX = "/index.jsp";
     public static final String MAIN = "main?";
     public static final String LIST_PARKING = "/list_parking.jsp";

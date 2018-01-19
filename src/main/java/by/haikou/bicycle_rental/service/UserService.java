@@ -18,6 +18,8 @@ public interface UserService {
 
     User getUserById(Integer userId);
 
+    Boolean isLoginFree(String login);
+
     BigDecimal getBalanceByUserId(Integer userId);
 
     void fillUpUserBalance(BigDecimal balance, Integer id);

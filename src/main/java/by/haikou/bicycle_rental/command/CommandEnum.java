@@ -39,7 +39,8 @@ public enum CommandEnum {
     SHOW_EDIT_PROFILE("showEditProfilePage"),
     UPDATE_PROFILE("updateProfile"),
     SHOW_BALANCE_MANAGE_PAGE("showBalanceManagePage"),
-    FILL_UP_BALANCE("fillUpBalance");
+    FILL_UP_BALANCE("fillUpBalance"),
+    SHOW_RENTAL_HISTORY("showRentalHistory");
 
     private String value;
 

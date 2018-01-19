@@ -56,19 +56,26 @@ public final class ResultSetConverter {
         Integer bikes_id = set.getInt("bicycle_id");
         Integer users_id = set.getInt("user_id");
         Integer parking_from_id = set.getInt("parking_from_id");
-        Date date = set.getTimestamp("start_date");
+        Date startDate = set.getTimestamp("start_date");
         BigDecimal price = set.getBigDecimal("price");
+        Date endDate = set.getTimestamp("end_date");
+        BigDecimal totalPrice = set.getBigDecimal("total_price");
 
-        //Boolean status = set.getBoolean("status");
 
         RentItem entity = new RentItem();
         entity.setId(rentItem_id);
         entity.setBikeId(bikes_id);
         entity.setUserId(users_id);
-        entity.setFromDate(date);
+        entity.setFromDate(startDate);
         entity.setParkingFromId(parking_from_id);
         entity.setPrice(price);
-        //entity.setStatus(status);
+
+        if (null != endDate) {
+            entity.setToDate(endDate);
+        }
+        if (null != totalPrice) {
+            entity.setTotalPrice(totalPrice);
+        }
         return entity;
 
     }
