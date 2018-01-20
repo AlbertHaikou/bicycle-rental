@@ -97,10 +97,10 @@
                                 <td><c:out value="${rent.totalPrice}"/></td>
                                 <c:choose>
                                     <c:when test="${null eq (rent.totalPrice)}">
-                                        <td><fmt:message key="TAKEN"/></p><a
-                                                href="main?command=returnBike&id=<c:out value="${rent.bikeId}"/>">
-                                            <button class="btn btn-success"><fmt:message key="TO_RETURN"/></button>
-                                        </a>
+                                        <td><fmt:message key="TAKEN"/>
+                                            </p><a href="main?command=returnBike&id=<c:out value="${rent.bikeId}"/>">
+                                                <button class="btn btn-success"><fmt:message key="TO_RETURN"/></button>
+                                            </a>
                                         </td>
 
                                     </c:when>
