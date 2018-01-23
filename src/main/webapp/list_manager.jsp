@@ -11,11 +11,11 @@
     <title> rent-bike </title>
     <link rel="stylesheet" href="css/bootstrap.css">
 </head>
-<body style="margin-bottom: 0px;">
+<body>
 <jsp:include page="parts/navigation.jsp"/>
-<center style="color:graytext;"><h3><fmt:message key="MANAGER"/></h3></center>
+<center><h3><fmt:message key="MANAGER"/></h3></center>
 <br/>
-<table class="table table-hover">
+<table class="table">
     <thead>
     <tr class="tab-pane">
         <th>№</th>
@@ -24,8 +24,8 @@
         <th><fmt:message key="EMAIL"/></th>
         <c:set var="ADMINISTRATOR" value="ADMINISTRATOR"/>
         <c:if test="${sessionScope.user.role.value=='ADMINISTRATOR'}">
-            <th colspan=2 width="200"><fmt:message key="ACTION"/></th>
-            <th width="150"><fmt:message key="CHANGE_ROLE"/></th>
+            <th colspan=2><fmt:message key="ACTION"/></th>
+            <th><fmt:message key="CHANGE_ROLE"/></th>
         </c:if>
     </tr>
     </thead>

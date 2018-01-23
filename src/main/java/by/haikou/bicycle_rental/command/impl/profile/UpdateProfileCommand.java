@@ -24,6 +24,7 @@ public class UpdateProfileCommand implements ICommand {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         User user = new User();
+        user.setId(Integer.valueOf(request.getParameter("id")));
         user.setFirstName(request.getParameter("firstName"));
         user.setLastName(request.getParameter("lastName"));
         user.setEmail(request.getParameter("email"));
