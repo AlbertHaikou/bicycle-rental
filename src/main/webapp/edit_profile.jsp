@@ -33,7 +33,7 @@
                                    class="form-control"
                                    pattern="[A-Za-z]{3,}"
                                    placeholder="First name"
-                                   title="First symbol latin, 3+ latin symbols only"
+                                   title="3+ latin symbols only"
                                    value="<c:out value="${profile.firstName}" />"/>
                         </div>
                         <div class="form-group float-label-control">
@@ -43,7 +43,7 @@
                                    placeholder="Last name"
                                    required
                                    pattern="[A-Za-z]{3,}"
-                                   title="First symbol latin, 3+ latin symbols only"
+                                   title="3+ latin symbols only"
                                    value="<c:out value="${profile.lastName}" />"/>
                         </div>
                         <div class="form-group float-label-control">

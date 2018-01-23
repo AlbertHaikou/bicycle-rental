@@ -124,10 +124,9 @@ custom-width" href="main?command=deleteBike&id=<c:out value="${bike.bicycleId}" 
 </table>
 <br/>
 <c:if test="${sessionScope.user.role.value.equalsIgnoreCase(ADMINISTRATOR)}">
-    <center><a href="main?command=addBikePage">
-        <button><fmt:message key="ADD_BIKE"/></button>
-    </a>
-    </center>
+    <div class="center-block"><a href="main?command=addBikePage">
+        <button class="center-block btn-add btn"><fmt:message key="ADD_BIKE"/></button>
+    </a></div>
 </c:if>
 <jsp:include page="parts/footer.jsp"/>
 </body>

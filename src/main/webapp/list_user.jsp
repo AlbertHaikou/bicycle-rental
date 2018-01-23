@@ -14,7 +14,7 @@
 <jsp:include page="parts/navigation.jsp"/>
 <center style="color:graytext;"><h3><fmt:message key="CLIENTS"/></h3></center>
 <br/>
-<table class="table table-hover">
+<table class="table">
     <thead>
     <tr>
         <th>№</th>
@@ -38,16 +38,19 @@
             <td><c:out value="${user.balance}"/></td>
             <c:choose>
                 <c:when test="${user.banned}">
-                    <td><a href="main?command=unbanUser&id=<c:out value="${user.id}"/>"><fmt:message key="UNBAN"/></a>
+                    <td><a class="btn btn-success custom-width"
+                           href="main?command=unbanUser&id=<c:out value="${user.id}"/>"><fmt:message key="UNBAN"/></a>
                     </td>
                 </c:when>
                 <c:otherwise>
-                    <td><a href="main?command=banUser&id=<c:out value="${user.id}"/>"><fmt:message key="BAN"/></a></td>
+                    <td><a class="btn btn-danger custom-width"
+                           href="main?command=banUser&id=<c:out value="${user.id}"/>"><fmt:message key="BAN"/></a></td>
                 </c:otherwise>
             </c:choose>
             <c:if test="${sessionScope.user.role.value eq 'ADMINISTRATOR'}">
-                <td><a href="main?command=appointAsManager&id=<c:out value="${user.id}"/>"><fmt:message
-                        key="APPOINT_AS_MANAGER"/></a></td>
+                <td><a class="btn btn-info custom-width"
+                       href="main?command=appointAsManager&id=<c:out value="${user.id}"/>">
+                    <fmt:message key="APPOINT_AS_MANAGER"/></a></td>
             </c:if>
         </tr>
     </c:forEach>

@@ -45,8 +45,15 @@
                                    value="<c:out value="${bike.model}" />"/>
                         </div>
                         <div class="form-group float-label-control">
-                            <label><fmt:message key="STATUS"/></label>
-                            <select name="available">
+                            <label><fmt:message key="SIZE"/></label>
+                            <input type="number" maxlength="2" name="size" class="form-control"
+                                   placeholder="<fmt:message key="SIZE"/>"
+                                   required value="<c:out value="${bike.size}"/>"/>
+                        </div>
+
+                        <div>
+                            <label><fmt:message key="STATUS"/></label><br/>
+                            <select class="input-sm" name="available">
                                 <option value="free" }>
                                     <c:out value="free"/>
                                 </option>
@@ -55,14 +62,10 @@
                                 </option>
                             </select>
                         </div>
-                        <div class="form-group float-label-control">
-                            <label><fmt:message key="SIZE"/></label>
-                            <input type="number" maxlength="2" name="size" class="form-control"
-                                   placeholder="<fmt:message key="SIZE"/>"
-                                   required value="<c:out value="${bike.size}"/>"/>
-                        </div>
-                        <div class="styled-select">
-                            <select name="parkingId">
+                        <br/>
+                        <div>
+                            <label><fmt:message key="PARKING"/></label><br/>
+                            <select class="input-sm" name="parkingId">
                                 <c:forEach items="${parkings}" var="parking">
                                     <option value="${parking.parkingId}"  ${parking.parkingId == bike.parkingId ? 'selected' : ''}>
                                         <c:out value="${parking.street}"/>

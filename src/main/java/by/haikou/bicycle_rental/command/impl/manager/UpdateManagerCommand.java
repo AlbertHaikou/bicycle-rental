@@ -19,14 +19,12 @@ public class UpdateManagerCommand implements ICommand {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         User user = new User();
+        user.setId(Integer.valueOf(request.getParameter("id")));
         user.setFirstName(request.getParameter("firstName"));
         user.setLastName(request.getParameter("lastName"));
         user.setEmail(request.getParameter("email"));
-        user.setPassword(request.getParameter("password"));
         user.setRole(User.Role.MANAGER);
-        String userId = request.getParameter("id");
-        user.setId(Integer.parseInt(userId));
-        userService.updateUser(user);
+        userService.updateProfile(user);
 
         response.sendRedirect("main?command=showManagers");
     }

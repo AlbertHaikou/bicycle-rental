@@ -24,11 +24,11 @@
                 <div class="profile-sidebar">
                     <!-- SIDEBAR USERPIC -->
                     <div class="profile-userpic">
-                        <img src="http://keenthemes.com/preview/metronic/theme/assets/admin/pages/media/profile/profile_user.jpg"
+                        <img src="img/Belarus.png"
                              class="img-responsive" alt="">
                     </div>
                     <!-- END SIDEBAR USERPIC -->
-                    <!-- SIDEBAR USER TITLE -->
+
                     <div class="profile-usertitle">
                         <div class="profile-usertitle-name">
                             <c:out value="${requestScope.profile.firstName}"/> <c:out
@@ -41,13 +41,11 @@
                             <fmt:message key="BALANCE"/>:<c:out value="${requestScope.profile.balance}"/>
                         </div>
                     </div>
-                    <!-- END SIDEBAR USER TITLE -->
-                    <!-- SIDEBAR BUTTONS -->
+
                     <div class="profile-userbuttons">
 
                     </div>
-                    <!-- END SIDEBAR BUTTONS -->
-                    <!-- SIDEBAR MENU -->
+
                     <div class="profile-usermenu">
                         <ul class="nav">
                             <li>
@@ -69,7 +67,7 @@
                             </li>
                         </ul>
                     </div>
-                    <!-- END MENU -->
+
                 </div>
             </div>
             <div class="col-md-8">
