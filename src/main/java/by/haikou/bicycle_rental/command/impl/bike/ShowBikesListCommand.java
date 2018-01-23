@@ -5,6 +5,7 @@ import by.haikou.bicycle_rental.entity.RentItem;
 import by.haikou.bicycle_rental.entity.User;
 import by.haikou.bicycle_rental.service.BikeService;
 import by.haikou.bicycle_rental.service.RentItemService;
+import by.haikou.bicycle_rental.service.UserService;
 import by.haikou.bicycle_rental.service.factory.ServiceFactory;
 import by.haikou.bicycle_rental.util.ConstantsMng;
 
@@ -18,6 +19,7 @@ import java.util.Map;
 public class ShowBikesListCommand implements ICommand {
     private BikeService bikeService = ServiceFactory.getFactory().getBikeService();
     private RentItemService rentItemService = ServiceFactory.getFactory().getRentItemService();
+    private UserService userService = ServiceFactory.getFactory().getUserService();
 
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -30,6 +32,8 @@ public class ShowBikesListCommand implements ICommand {
         HttpSession session = req.getSession();
         User user = (User) session.getAttribute("user");
         Integer userId = user.getId();
+        user = userService.getUserById(userId);
+        req.setAttribute("user", user);
         RentItem rentItem = rentItemService.findTakenByUser(userId);
         if (rentItem != null) {
             req.setAttribute("userRentedBikeId", rentItem.getBikeId());

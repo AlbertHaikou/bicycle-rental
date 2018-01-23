@@ -9,9 +9,6 @@
     <meta charset="UTF-8">
     <title> rent-bike </title>
     <link rel="stylesheet" href="css/bootstrap.css">
-    <style>
-
-    </style>
 </head>
 <body style="margin-bottom: 0px;">
 <jsp:include page="parts/navigation.jsp"/>
@@ -56,7 +53,8 @@
     </c:forEach>
     </tbody>
 </table>
-<br/>
-<jsp:include page="parts/footer.jsp"/>
+<footer>
+    <jsp:include page="parts/footer.jsp"/>
+</footer>
 </body>
 </html>
