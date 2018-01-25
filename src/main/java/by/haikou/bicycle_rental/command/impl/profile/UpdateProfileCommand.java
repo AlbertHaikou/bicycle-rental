@@ -8,6 +8,9 @@ import by.haikou.bicycle_rental.entity.User;
 import by.haikou.bicycle_rental.exception.UnauthorizedException;
 import by.haikou.bicycle_rental.service.UserService;
 import by.haikou.bicycle_rental.service.factory.ServiceFactory;
+import by.haikou.bicycle_rental.util.ConstantsMng;
+import by.haikou.bicycle_rental.util.MessageUtils;
+import by.haikou.bicycle_rental.util.RequestUtils;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -15,6 +18,7 @@ import org.apache.logging.log4j.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 public class UpdateProfileCommand implements ICommand {
@@ -23,18 +27,26 @@ public class UpdateProfileCommand implements ICommand {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        User user = new User();
-        user.setId(Integer.valueOf(request.getParameter("id")));
-        user.setFirstName(request.getParameter("firstName"));
-        user.setLastName(request.getParameter("lastName"));
-        user.setEmail(request.getParameter("email"));
-        userService.updateProfile(user);
-        try {
-            CommandFactory.getFactory().createCommand(CommandEnum.SHOW_PROFILE).execute(request, response);
-        } catch (CommandException e) {
-            LOGGER.log(Level.ERROR, e);
-        } catch (UnauthorizedException e) {
-            LOGGER.log(Level.ERROR, e);
+        String loginMsg = MessageUtils.getProperty(RequestUtils.getLocale(request), MessageUtils.NOT_UNIQ_LIGIN_ERROR_MESSAGE);
+        HttpSession session = request.getSession();
+        User sessionUser = (User) session.getAttribute("user");
+        if (!sessionUser.getEmail().equals(request.getParameter("email")) && !userService.isLoginFree(request.getParameter("email"))) {
+            request.setAttribute(ConstantsMng.ATR_ERRORS, sessionUser.getEmail()+request.getParameter("email"));
+            try {
+                CommandFactory.getFactory().createCommand(CommandEnum.SHOW_EDIT_PROFILE).execute(request, response);
+            } catch (CommandException e) {
+                LOGGER.log(Level.ERROR, e);
+            } catch (UnauthorizedException e) {
+                LOGGER.log(Level.ERROR, e);
+            }
+        } else {
+            User user = new User();
+            user.setId(Integer.valueOf(request.getParameter("id")));
+            user.setFirstName(request.getParameter("firstName"));
+            user.setLastName(request.getParameter("lastName"));
+            user.setEmail(request.getParameter("email"));
+            userService.updateProfile(user);
+            response.sendRedirect("main?command=showProfile");
         }
     }
 }

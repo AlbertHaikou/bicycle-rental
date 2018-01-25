@@ -17,6 +17,9 @@
 <header>
     <jsp:include page="parts/navigation.jsp"/>
 </header>
+
+<center><h3><c:out value="${errorMsg}"/></h3></center>
+
 <div class="container">
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
@@ -29,6 +32,8 @@
                         <div class="form-group float-label-control">
                             <label><fmt:message key="FIRST_NAME"/></label>
                             <input type="text" name="firstName" required
+                                   pattern="[A-Za-zа-яА-Я]{3,}"
+                                   title="3+ letters"
                                    placeholder="<fmt:message key="FIRST_NAME"/>"
                                    class="form-control" value="<c:out value="${manager.firstName}"/>"/>
                         </div>
@@ -36,12 +41,16 @@
                             <label><fmt:message key="LAST_NAME"/></label>
                             <input type="text" name="lastName" required
                                    placeholder="<fmt:message key="LAST_NAME"/>"
+                                   pattern="[A-Za-zа-яА-Я]{3,}"
+                                   title="3+ letters"
                                    class="form-control" value="<c:out value="${manager.lastName}"/>"/>
                         </div>
                         <div class="form-group float-label-control">
                             <label><fmt:message key="EMAIL"/></label>
                             <input type="email" name="email" required
                                    placeholder="<fmt:message key="EMAIL"/>"
+                                   title="Use Latin letters, ._%+- and digits, then @, followed by Latin letters, symbols -. and numbers. Further . and after it domain of 2-4 Latin letters"
+                                   pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
                                    class="form-control" value="<c:out value="${manager.email}"/>"/>
                         </div>
                         <c:if test="${empty manager}">

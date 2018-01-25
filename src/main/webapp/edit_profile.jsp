@@ -17,6 +17,7 @@
 <header>
     <jsp:include page="parts/navigation.jsp"/>
 </header>
+<center><h3><c:out value="${errorMsg}"/></h3></center>
 <div class="container">
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
@@ -31,9 +32,9 @@
                             <input type="text" name="firstName"
                                    required
                                    class="form-control"
-                                   pattern="[A-Za-z]{3,}"
+                                   pattern="[A-Za-zа-яА-Я]{3,}"
                                    placeholder="First name"
-                                   title="3+ latin symbols only"
+                                   title="3+ letters"
                                    value="<c:out value="${profile.firstName}" />"/>
                         </div>
                         <div class="form-group float-label-control">
@@ -42,8 +43,8 @@
                                    class="form-control"
                                    placeholder="Last name"
                                    required
-                                   pattern="[A-Za-z]{3,}"
-                                   title="3+ latin symbols only"
+                                   pattern="[A-Za-zа-яА-Я]{3,}"
+                                   title="3+ letters"
                                    value="<c:out value="${profile.lastName}" />"/>
                         </div>
                         <div class="form-group float-label-control">

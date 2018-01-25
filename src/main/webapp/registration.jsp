@@ -51,8 +51,8 @@
                     <label for="firstName" class="sr-only"></label>
                     <input type="text" class="form-control" id="firstName"
                            required
-                           pattern="[a-zA-Z][A-Za-z0-9_]{4,}"
-                           title="First symbol latin, 5+ latin symbols, numbers and _ only"
+                           pattern="[A-Za-zа-яА-Я]{3,}"
+                           title="3+ letters"
                            name="firstName" placeholder="<fmt:message key="FIRST_NAME"/>"
                            rel="tooltp" title="<fmt:message key="ENTER_FIRST_NAME"/>">
                     <c:out value="${errormsg.firstName}"/>
@@ -61,8 +61,8 @@
                     <label for="lastName" class="sr-only"></label>
                     <input type="text" class="form-control" id="lastName"
                            required
-                           pattern="[a-zA-Z][A-Za-z0-9_]{4,}"
-                           title="First symbol latin, 5+ latin symbols, numbers and _ only"
+                           pattern="[A-Za-zа-яА-Я]{3,}"
+                           title="3+ letters"
                            name="lastName" placeholder="<fmt:message key="LAST_NAME"/>"
                            rel="tooltp" title="<fmt:message key="ENTER_LAST_NAME"/>">
                     <c:out value="${errormsg.lastName}"/>

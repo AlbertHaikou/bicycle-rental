@@ -28,5 +28,4 @@ public class UpdateManagerCommand implements ICommand {
 
         response.sendRedirect("main?command=showManagers");
     }
-
 }
