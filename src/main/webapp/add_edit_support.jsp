@@ -29,6 +29,7 @@
                 <form method="post" action="main?command=${empty manager ? 'addManager' : 'editManager'}">
                     <div role="form">
                         <input type="hidden" name="id" required value="<c:out value="${manager.id}" />"/>
+                        <input type="hidden" name="currentEmail" required value="<c:out value="${manager.email}" />"/>
                         <div class="form-group float-label-control">
                             <label><fmt:message key="FIRST_NAME"/></label>
                             <input type="text" name="firstName" required

@@ -27,6 +27,7 @@
                     <div role="form">
                         <input type="hidden" name="id" class="form-control"
                                value="<c:out value="${profile.id}" />"/>
+                        <input type="hidden" name="currentEmail" required value="<c:out value="${profile.email}" />"/>
                         <div class="form-group float-label-control">
                             <label><fmt:message key="FIRST_NAME"/></label>
                             <input type="text" name="firstName"

@@ -14,20 +14,39 @@
 <body>
 <jsp:include page="parts/navigation.jsp"/>
 <!-- Default panel contents -->
-<div class="center-block">
-    <div class="panel-heading center-block"><h3><fmt:message key="BALANCE_MANAGE"/></h3></div>
-    <label class="info"><c:out value="Your balance: ${balance}"></c:out></label>
-    <form class="form-horizontal" method="post" action="main?command=fillUpBalance">
-        <input type="number" required min="5" max="1000" name="sum" placeholder="Введите сумму">
-        <button type="submit" class="btn-info">Пополнить баланс</button>
-    </form>
-    <br/>
-    <form class="form-horizontal" method="post" action="main?command=takeCredit">
-        <input type="number" required min="5" max="1000" name="sum" placeholder="Введите сумму"/>
-        <button type="submit"  class="btn-info">Взять кредит</button>
-    </form>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <div class=" profile profile-content">
+                <center><h3><fmt:message key="BALANCE_MANAGE"/></h3></center>
+                <br/>
+                <center><h3><label><c:out value="Your balance: ${balance}"></c:out></label></h3></center>
+                <form method="post" action="main?command=fillUpBalance">
+                    <div role="form">
+                        <div class="form-group float-label-control">
+                            <input type="number" class="form-control" required min="5" max="1000" name="sum"
+                                   placeholder="Enter amount of money">
+                            <button type="submit" class="btn btn-primary btn-success btn-block btn-lg"><fmt:message
+                                    key="FILL_UP_BALANCE"/></button>
+                        </div>
+                    </div>
+                </form>
+                <br/>
+                <form method="post" action="main?command=takeCredit">
+                    <div role="form">
+                        <div class="form-group float-label-control">
+                            <input type="number" class="form-control" required min="5" max="1000" name="sum"
+                                   placeholder="Enter amount of money"/>
+                            <button type="submit" class="btn btn-primary btn-info btn-block btn-lg">
+                                <fmt:message key="TAKE_A_LOAN"/>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
-
 <jsp:include page="parts/footer.jsp"/>
 </body>
 </html>

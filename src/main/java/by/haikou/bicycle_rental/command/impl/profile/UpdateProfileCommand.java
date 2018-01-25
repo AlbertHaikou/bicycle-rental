@@ -18,7 +18,6 @@ import org.apache.logging.log4j.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 public class UpdateProfileCommand implements ICommand {
@@ -28,10 +27,9 @@ public class UpdateProfileCommand implements ICommand {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String loginMsg = MessageUtils.getProperty(RequestUtils.getLocale(request), MessageUtils.NOT_UNIQ_LIGIN_ERROR_MESSAGE);
-        HttpSession session = request.getSession();
-        User sessionUser = (User) session.getAttribute("user");
-        if (!sessionUser.getEmail().equals(request.getParameter("email")) && !userService.isLoginFree(request.getParameter("email"))) {
-            request.setAttribute(ConstantsMng.ATR_ERRORS, sessionUser.getEmail()+request.getParameter("email"));
+        if (!request.getParameter("currentEmail").equals(request.getParameter("email"))
+                && !userService.isLoginFree(request.getParameter("email"))) {
+            request.setAttribute(ConstantsMng.ATR_ERRORS, loginMsg);
             try {
                 CommandFactory.getFactory().createCommand(CommandEnum.SHOW_EDIT_PROFILE).execute(request, response);
             } catch (CommandException e) {
