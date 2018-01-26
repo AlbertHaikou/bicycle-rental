@@ -4747,9 +4747,9 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 }
 
 .logo {
+    padding-top: 5px;
     float: left;
     text-decoration: none;
-    padding-top: 10.714285714285715px;
     z-index: 109000;
     font-family: 'PlumbMedium';
 }
@@ -4789,8 +4789,10 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 }
 
 .logo .name {
+    padding-bottom: 0px;
+    border-top-width: 5px;
+    margin-top: 0px;
     font-size: 1.5em;
-    padding-bottom: 0.2em;
     line-height: 1.3em;
     font-weight: 300;
     text-transform: uppercase;
@@ -4799,6 +4801,18 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 
 .logo small {
     color: #181517;
+}
+
+.logo h5 {
+    text-align: left;
+    padding-left: 78px;
+    margin-bottom: 0px;
+    margin-top: 3px;
+    font-size: 14px;
+}
+
+.logo h5 p {
+    margin-bottom: 5px;
 }
 
 @media (min-width: 992px) {

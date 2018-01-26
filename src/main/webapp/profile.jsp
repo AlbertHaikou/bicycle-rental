@@ -49,8 +49,6 @@
                     <div class="profile-usermenu">
                         <ul class="nav">
                             <li>
-                            </li>
-                            <li>
                                 <a href="main?command=showEditProfilePage&id=<c:out value="${requestScope.profile.id}"/>">
                                     <i class="glyphicon glyphicon-user"></i>
                                     <fmt:message key="UPDATE"/> </a>

@@ -8,12 +8,11 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="css/bootstrap.css">
-    <link href="<c:url value='css/bootstrap.css' />" rel="stylesheet"></link>
+    <link href="<c:url value='css/bootstrap.css'/>" rel="stylesheet"></link>
     <title>Bicycle Rental</title>
 </head>
 <body>
 <jsp:include page="parts/navigation.jsp"/>
-<!-- Default panel contents -->
 <div class="container">
     <div class="row">
         <div class="col-md-6 col-md-offset-3">

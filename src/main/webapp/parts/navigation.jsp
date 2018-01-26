@@ -5,6 +5,7 @@
 <link rel="stylesheet" href="css/bootstrap.css">
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="ctg" uri="customtags" %>
 <%@ page session="true" %>
 <fmt:setLocale value="${not empty sessionScope.locale ? sessionScope.locale : 'en_US'}"/>
 <fmt:setBundle basename="messages"/>
@@ -17,18 +18,15 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="logo" href="../index.jsp" style="padding-top: 5px">
+            <a class="logo" href="../index.jsp">
                 <img src="../img/logo.png" alt="" class="animated bounceInDown">
-                <span class="name" style="padding-bottom: 0px; border-top-width: 5px;
-                      margin-top: 0px;
-                      "> rent-bike </span>
+                <span class="name"> rent-bike </span>
                 <small><fmt:message key="BIKE_RENTAL_SYSTEM"/></small>
                 <c:if test="${not empty sessionScope.user}">
-                    <h5 style="text-align:left;padding-left: 78px;margin-bottom: 0px;
-                        margin-top: 3px;"><p style="
-                         margin-bottom: 5px;
-                         ">${sessionScope.user.email}
-                            ${sessionScope.user.role}</p>
+                    <h5>
+                        <p>
+                            <ctg:hello role="${sessionScope.user.role}" name="${sessionScope.user.firstName}"/>
+                        </p>
                     </h5>
                 </c:if>
             </a>
