@@ -19,7 +19,12 @@
             <div class=" profile profile-content">
                 <center><h3><fmt:message key="BALANCE_MANAGE"/></h3></center>
                 <br/>
-                <center><h3><label><c:out value="Your balance: ${balance}"></c:out></label></h3></center>
+                <center><h3><label><fmt:message key="BALANCE"/><c:out value=": ${balance}"></c:out></label></h3>
+                </center>
+                <c:if test="${debtor}">
+                    <center><h3><label><fmt:message key="CREDIT"/><c:out
+                            value=": ${credit}"></c:out></label></h3></center>
+                </c:if>
                 <form method="post" action="main?command=fillUpBalance">
                     <div role="form">
                         <div class="form-group float-label-control">
@@ -31,17 +36,19 @@
                     </div>
                 </form>
                 <br/>
-                <form method="post" action="main?command=takeCredit">
-                    <div role="form">
-                        <div class="form-group float-label-control">
-                            <input type="number" class="form-control" required min="5" max="1000" name="sum"
-                                   placeholder="Enter amount of money"/>
-                            <button type="submit" class="btn btn-primary btn-info btn-block btn-lg">
-                                <fmt:message key="TAKE_A_LOAN"/>
-                            </button>
+                <c:if test="${balance < 10 && not debtor}">
+                    <form method="post" action="main?command=takeALoan">
+                        <div role="form">
+                            <div class="form-group float-label-control">
+                                <input type="number" class="form-control" required min="5" max="50" name="sum"
+                                       placeholder="Enter amount of money"/>
+                                <button type="submit" class="btn btn-primary btn-info btn-block btn-lg">
+                                    <fmt:message key="TAKE_A_LOAN"/>
+                                </button>
+                            </div>
                         </div>
-                    </div>
-                </form>
+                    </form>
+                </c:if>
             </div>
         </div>
     </div>

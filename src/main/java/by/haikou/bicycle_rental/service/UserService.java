@@ -26,7 +26,11 @@ public interface UserService {
 
     void addUser(User user);
 
-    void updateUser(User user);
+    void takeALoan(BigDecimal balance, Integer id);
+
+    void repayALoan(BigDecimal balance, Integer id);
+
+    Boolean isUserDebtor(Integer id);
 
     void updateProfile(User user);
 

@@ -40,6 +40,7 @@ public enum CommandEnum {
     UPDATE_PROFILE("updateProfile"),
     SHOW_BALANCE_MANAGE_PAGE("showBalanceManagePage"),
     FILL_UP_BALANCE("fillUpBalance"),
+    TAKE_A_LOAN("takeALoan"),
     SHOW_RENTAL_HISTORY("showRentalHistory");
 
     private String value;

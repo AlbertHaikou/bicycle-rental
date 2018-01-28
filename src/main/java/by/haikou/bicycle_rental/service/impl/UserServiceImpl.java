@@ -75,9 +75,22 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void updateUser(User user) {
-        userDao.updateUser(user);
+    public void takeALoan(BigDecimal balance, Integer id) {
+        userDao.repayALoan(balance, id);
+        userDao.fillUpBalance(balance, id);
+        userDao.updateIsDebtor(true, id);
     }
+
+    @Override
+    public void repayALoan(BigDecimal balance, Integer id) {
+
+    }
+
+    @Override
+    public Boolean isUserDebtor(Integer id) {
+        return userDao.isUserDebtor(id);
+    }
+
 
     @Override
     public void updateProfile(User user) {

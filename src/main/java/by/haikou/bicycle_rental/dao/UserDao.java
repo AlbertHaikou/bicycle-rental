@@ -31,6 +31,11 @@ public interface UserDao {
 
     void unBanUser(Integer userId) throws DAOException;
 
+    void repayALoan(BigDecimal sum, Integer userId) throws DAOException;
+
+    void updateIsDebtor(Boolean debtor, Integer userId) throws DAOException;
+
+    Boolean isUserDebtor(Integer userId) throws DAOException;
 
     void changeUserRole(Integer userId, User.Role role) throws DAOException;
 

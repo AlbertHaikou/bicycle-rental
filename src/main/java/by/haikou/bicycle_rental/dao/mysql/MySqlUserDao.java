@@ -17,21 +17,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MySqlUserDao implements UserDao {
-    private static final Logger log = LogManager.getLogger(MySqlUserDao.class);
+    private static final Logger LOGGER = LogManager.getLogger(MySqlUserDao.class);
 
-    private static final String SQL_FOR_GET_ALL_USERS = "SELECT `id`,`firstName`,`lastName`,`email`,`password`, `banned`, `balance` FROM `user` \n" +
+    private static final String SQL_FOR_GET_ALL_USERS = "SELECT `id`,`first_name`,`last_name`,`email`,`password`, `banned`, `balance` FROM `user` \n" +
             "WHERE `role`=\"user\"";
-    private static final String SQL_FOR_GET_ALL_MANAGERS = "SELECT `id`,`firstName`,`lastName`,`email`,`password`, `banned`, `balance` FROM `user` \n" +
+    private static final String SQL_FOR_GET_ALL_MANAGERS = "SELECT `id`,`first_name`,`last_name`,`email`,`password`, `banned`, `balance` FROM `user` \n" +
             "WHERE `role`=\"manager\"";
-    private static final String SQL_FOR_GET_USER = "SELECT `id`,`firstName`,`lastName`,`email`,`password`,`role`, `banned`, `balance`" +
+    private static final String SQL_FOR_GET_USER = "SELECT `id`,`first_name`,`last_name`,`email`,`password`,`role`, `banned`, `balance`" +
             "FROM `user` \n" +
             "WHERE `email`=?";
-    private static final String SQL_FOR_UPDATE_USER = "UPDATE `user` SET `firstName`=?, `lastName`=?, `email`=? , `password`=?, `role`=?, `banned`=?, `balance`=?\n" +
+    private static final String SQL_FOR_UPDATE_USER = "UPDATE `user` SET `first_name`=?, `last_name`=?, `email`=? , `password`=?, `role`=?, `banned`=?, `balance`=?\n" +
             "WHERE `id`=?";
-    private static final String SQL_FOR_UPDATE_PROFILE = "UPDATE `user` SET `firstName`=?, `lastName`=?, `email`=?\n" +
+    private static final String SQL_FOR_UPDATE_PROFILE = "UPDATE `user` SET `first_name`=?, `last_name`=?, `email`=?\n" +
             "WHERE `id`=?";
 
-    private static final String SQL_FOR_GET_USER_BY_ID = "SELECT `id`,`firstName`,`lastName`,`email`,`password`,`role`, `banned`, `balance` " +
+    private static final String SQL_FOR_GET_USER_BY_ID = "SELECT `id`,`first_name`,`last_name`,`email`,`password`,`role`, `banned`, `balance` " +
             "FROM `user` \n" +
             "WHERE `id`=?";
     private static final String SQL_FOR_DELETE_USER = "DELETE " +
@@ -46,12 +46,16 @@ public class MySqlUserDao implements UserDao {
     private static final String SQL_FOR_CHANGE_ROLE = "UPDATE `user` " +
             "SET `role`=? " +
             "WHERE `id`=?";
-    private static final String SQL_FOR_ADD_USER = "INSERT INTO `user` (`firstName`,`lastName`,`email`,`password`, `role`, `banned`, `balance`) " +
-            "VALUES (?,?,?,?,?,?,?)";
+    private static final String SQL_FOR_ADD_USER = "INSERT INTO `user` (`first_name`,`last_name`,`email`,`password`, `role`," +
+            " `banned`, `balance`, `credit_sum`, `deptor`) " +
+            "VALUES (?,?,?,?,?,?,?,?,?)";
     private static final String SQL_FOR_GET_BALANCE_BY_USER_ID = "SELECT `balance` " +
             "FROM `user` \n" +
             "WHERE `id`=?";
     private static final String SQL_FOR_FILL_UP_USER_BALANCE = "UPDATE `user` SET `balance`=? WHERE `id`=?";
+    private static final String SQL_FOR_REPAY_A_LOAN = "UPDATE `user` SET `credit_sum`=? WHERE `id`=?";
+    private static final String SQL_FOR_UPDATE_IS_DEBTOR = "UPDATE `user` SET `debtor`=? WHERE `id`=?";
+    private static final String SQL_FOR_IS_USER_DEBTOR = "SELECT `debtor FROM `user` WHERE `id`=?";
 
 
     private final ConnectionPool pool = ConnectionPool.getPool();
@@ -166,7 +170,7 @@ public class MySqlUserDao implements UserDao {
             statement.setString(3, user.getEmail());
             statement.setString(4, user.getPassword());
             statement.setString(5, user.getRole().getValue());
-            statement.setBoolean(6, (user.getBanned()));
+            statement.setBoolean(6, (user.getIsBanned()));
             statement.setBigDecimal(7, user.getBalance());
             statement.setInt(8, user.getId());
             statement.executeUpdate();
@@ -363,6 +367,8 @@ public class MySqlUserDao implements UserDao {
             statement.setString(5, user.getRole().getValue());
             statement.setBoolean(6, false);
             statement.setBigDecimal(7, new BigDecimal(0));
+            statement.setBigDecimal(8, new BigDecimal(0));
+            statement.setBoolean(9, false);
             statement.executeUpdate();
         } catch (SQLException e) {
             throw new DAOException(e);
@@ -370,6 +376,70 @@ public class MySqlUserDao implements UserDao {
             pool.returnConnectionToPool(connection);
             ConnectionPool.getPool().closeDbResources(statement);
         }
+    }
+
+    @Override
+    public void repayALoan(BigDecimal sum, Integer userId) throws DAOException {
+        Connection connection = null;
+        PreparedStatement statement = null;
+        try {
+            connection = pool.getConnection();
+            statement = connection.prepareStatement(SQL_FOR_REPAY_A_LOAN);
+            statement.setBigDecimal(1, getBalanceByUserId(userId).add(sum));
+            statement.setInt(2, userId);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new DAOException(e);
+        } finally {
+            pool.returnConnectionToPool(connection);
+            ConnectionPool.getPool().closeDbResources(statement);
+        }
+    }
+
+    @Override
+    public void updateIsDebtor(Boolean debtor, Integer userId) throws DAOException {
+        Connection connection = null;
+        PreparedStatement statement = null;
+        try {
+            connection = pool.getConnection();
+            statement = connection.prepareStatement(SQL_FOR_UPDATE_IS_DEBTOR);
+            statement.setBoolean(1, debtor);
+            statement.setInt(2, userId);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new DAOException(e);
+        } finally {
+            pool.returnConnectionToPool(connection);
+            ConnectionPool.getPool().closeDbResources(statement);
+        }
+    }
+
+
+    @Override
+    public Boolean isUserDebtor(Integer userId) throws DAOException {
+
+        Connection connection = null;
+        PreparedStatement statement = null;
+        ResultSet set = null;
+
+        try {
+            connection = pool.getConnection();
+            statement = connection.prepareStatement(SQL_FOR_IS_USER_DEBTOR);
+            statement.setInt(1, userId);
+            set = statement.executeQuery();
+
+            if (set.next()) {
+                Boolean isDebtor = set.getBoolean("debtor");
+                return isDebtor;
+            }
+        } catch (SQLException e) {
+            throw new DAOException(e);
+        } finally {
+            pool.returnConnectionToPool(connection);
+            ConnectionPool.getPool().closeDbResources(statement, set);
+        }
+
+        return null;
     }
 
 }

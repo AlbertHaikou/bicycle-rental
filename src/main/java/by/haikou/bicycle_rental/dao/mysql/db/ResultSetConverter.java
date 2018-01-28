@@ -17,11 +17,11 @@ public final class ResultSetConverter {
         User entity = new User();
 
         entity.setId(set.getInt("id"));
-        entity.setFirstName(set.getString("firstName"));
-        entity.setLastName(set.getString("lastName"));
+        entity.setFirstName(set.getString("first_name"));
+        entity.setLastName(set.getString("last_name"));
         entity.setEmail(set.getString("email"));
         entity.setPassword(set.getString("password"));
-        entity.setBanned(set.getBoolean("banned"));
+        entity.setIsBanned(set.getBoolean("banned"));
         entity.setBalance(set.getBigDecimal("balance"));
 
         return entity;

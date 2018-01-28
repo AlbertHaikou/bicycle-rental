@@ -2,17 +2,18 @@ package by.haikou.bicycle_rental.command.factory;
 
 import by.haikou.bicycle_rental.command.CommandEnum;
 import by.haikou.bicycle_rental.command.ICommand;
-import by.haikou.bicycle_rental.command.impl.*;
-import by.haikou.bicycle_rental.command.impl.balance.FillUpBalanceCommand;
-import by.haikou.bicycle_rental.command.impl.balance.ShowBalanceManagePageCommand;
+import by.haikou.bicycle_rental.command.impl.ShowMainPage;
+import by.haikou.bicycle_rental.command.impl.balance.FillUpBalance;
+import by.haikou.bicycle_rental.command.impl.balance.ShowBalanceManagePage;
+import by.haikou.bicycle_rental.command.impl.balance.TakeALoan;
 import by.haikou.bicycle_rental.command.impl.bike.*;
 import by.haikou.bicycle_rental.command.impl.general.*;
 import by.haikou.bicycle_rental.command.impl.manager.*;
 import by.haikou.bicycle_rental.command.impl.parking.*;
-import by.haikou.bicycle_rental.command.impl.profile.ShowEditProfilePageCommand;
-import by.haikou.bicycle_rental.command.impl.profile.ShowProfileCommand;
+import by.haikou.bicycle_rental.command.impl.profile.ShowEditProfilePage;
+import by.haikou.bicycle_rental.command.impl.profile.ShowProfile;
 import by.haikou.bicycle_rental.command.impl.profile.ShowRentalHistory;
-import by.haikou.bicycle_rental.command.impl.profile.UpdateProfileCommand;
+import by.haikou.bicycle_rental.command.impl.profile.UpdateProfile;
 import by.haikou.bicycle_rental.command.impl.user.*;
 
 import java.util.HashMap;
@@ -27,49 +28,50 @@ public class CommandFactory {
     private CommandFactory() {
         commands = new HashMap<>();
 
-        commands.put(SHOW_MAIN_PAGE, new ShowMainPageCommand());
-        commands.put(SHOW_REGISTRATION_PAGE, new ShowRegistrationPageCommand());
-        commands.put(REGISTER, new RegisterCommand());
-        commands.put(LOGIN, new LoginCommand());
-        commands.put(SHOW_LOGIN_PAGE, new ShowLoginPageCommand());
-        commands.put(LOGOUT, new LogoutCommand());
-        commands.put(CHANGE_LOCALE, new ChangeLocaleCommand());
-        commands.put(SHOW_USERS, new ShowUsersListCommand());
-        commands.put(SHOW_MANAGERS, new ShowManagersPageCommand());
+        commands.put(SHOW_MAIN_PAGE, new ShowMainPage());
+        commands.put(SHOW_REGISTRATION_PAGE, new ShowRegistrationPage());
+        commands.put(REGISTER, new Register());
+        commands.put(LOGIN, new Login());
+        commands.put(SHOW_LOGIN_PAGE, new ShowLoginPage());
+        commands.put(LOGOUT, new Logout());
+        commands.put(CHANGE_LOCALE, new ChangeLocale());
+        commands.put(SHOW_USERS, new ShowUsersList());
+        commands.put(SHOW_MANAGERS, new ShowManagersPage());
 
-        commands.put(SHOW_BIKES, new ShowBikesListCommand());
-        commands.put(SHOW_ADD_BIKE_PAGE, new ShowAddBikePageCommand());
-        commands.put(ADD_BIKE, new AddBikeCommand());
-        commands.put(EDIT_BIKE, new UpdateBikeCommand());
-        commands.put(DELETE_BIKE, new DeleteBikeCommand());
-        commands.put(SHOW_EDIT_BIKE_PAGE, new ShowEditBikePageCommand());
-        commands.put(RENT_BIKE, new RentBikeCommand());
-        commands.put(RETURN_BIKE, new ReturnBikeCommand());
+        commands.put(SHOW_BIKES, new ShowBikesList());
+        commands.put(SHOW_ADD_BIKE_PAGE, new ShowAddBikePage());
+        commands.put(ADD_BIKE, new AddBike());
+        commands.put(EDIT_BIKE, new UpdateBike());
+        commands.put(DELETE_BIKE, new DeleteBike());
+        commands.put(SHOW_EDIT_BIKE_PAGE, new ShowEditBikePage());
+        commands.put(RENT_BIKE, new RentBike());
+        commands.put(RETURN_BIKE, new ReturnBike());
 
-        commands.put(SHOW_PARKINGS, new ShowParkingPageCommand());
-        commands.put(ADD_PARKING, new AddParkingCommand());
-        commands.put(EDIT_PARKING, new UpdateParkingCommand());
-        commands.put(SHOW_EDIT_PARKING_PAGE, new ShowEditParkingPageCommand());
-        commands.put(SHOW_ADD_PARKING_PAGE, new ShowAddParkingPageCommand());
-        commands.put(DELETE_PARKING, new DeleteParkingCommand());
-        commands.put(SHOW_BIKES_IN_PARKING_PAGE, new ShowBikesInParkingCommand());
+        commands.put(SHOW_PARKINGS, new ShowParkingPage());
+        commands.put(ADD_PARKING, new AddParking());
+        commands.put(EDIT_PARKING, new UpdateParking());
+        commands.put(SHOW_EDIT_PARKING_PAGE, new ShowEditParkingPage());
+        commands.put(SHOW_ADD_PARKING_PAGE, new ShowAddParkingPage());
+        commands.put(DELETE_PARKING, new DeleteParking());
+        commands.put(SHOW_BIKES_IN_PARKING_PAGE, new ShowBikesInParking());
 
-        commands.put(SHOW_ADD_MANAGER_PAGE, new ShowAddManagerPageCommand());
-        commands.put(ADD_MANAGER, new AddManagerCommand());
-        commands.put(EDIT_MANAGER, new UpdateManagerCommand());
-        commands.put(DELETE_MANAGER, new DeleteManagerCommand());
-        commands.put(SHOW_EDIT_MANAGER_PAGE, new ShowEditManagerPageCommand());
+        commands.put(SHOW_ADD_MANAGER_PAGE, new ShowAddManagerPage());
+        commands.put(ADD_MANAGER, new AddManager());
+        commands.put(EDIT_MANAGER, new UpdateManager());
+        commands.put(DELETE_MANAGER, new DeleteManager());
+        commands.put(SHOW_EDIT_MANAGER_PAGE, new ShowEditManagerPage());
 
-        commands.put(BAN_USER, new BanUserCommand());
-        commands.put(UNBAN_USER, new UnBanUserCommand());
-        commands.put(APPOINT_AS_MANAGER, new AppointAsManagerCommand());
-        commands.put(WITHDRAW_PRIVILEGES, new WithdrawPrivilegesCommand());
+        commands.put(BAN_USER, new BanUser());
+        commands.put(UNBAN_USER, new UnBanUser());
+        commands.put(APPOINT_AS_MANAGER, new AppointAsManager());
+        commands.put(WITHDRAW_PRIVILEGES, new WithdrawPrivileges());
 
-        commands.put(SHOW_PROFILE, new ShowProfileCommand());
-        commands.put(SHOW_EDIT_PROFILE, new ShowEditProfilePageCommand());
-        commands.put(UPDATE_PROFILE, new UpdateProfileCommand());
-        commands.put(SHOW_BALANCE_MANAGE_PAGE, new ShowBalanceManagePageCommand());
-        commands.put(FILL_UP_BALANCE, new FillUpBalanceCommand());
+        commands.put(SHOW_PROFILE, new ShowProfile());
+        commands.put(SHOW_EDIT_PROFILE, new ShowEditProfilePage());
+        commands.put(UPDATE_PROFILE, new UpdateProfile());
+        commands.put(SHOW_BALANCE_MANAGE_PAGE, new ShowBalanceManagePage());
+        commands.put(FILL_UP_BALANCE, new FillUpBalance());
+        commands.put(TAKE_A_LOAN, new TakeALoan());
         commands.put(SHOW_RENTAL_HISTORY, new ShowRentalHistory());
     }
 
