@@ -8,7 +8,6 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="css/bootstrap.css">
-    <link href="<c:url value='css/bootstrap.css'/>" rel="stylesheet"></link>
     <title>Bicycle Rental</title>
 </head>
 <body>
@@ -40,7 +39,7 @@
                     <form method="post" action="main?command=takeALoan">
                         <div role="form">
                             <div class="form-group float-label-control">
-                                <input type="number" class="form-control" required min="5" max="50" name="sum"
+                                <input type="number" class="form-control" required min="5" max="50" name="loan"
                                        placeholder="Enter amount of money"/>
                                 <button type="submit" class="btn btn-primary btn-info btn-block btn-lg">
                                     <fmt:message key="TAKE_A_LOAN"/>

@@ -47,7 +47,7 @@ public class MySqlUserDao implements UserDao {
             "SET `role`=? " +
             "WHERE `id`=?";
     private static final String SQL_FOR_ADD_USER = "INSERT INTO `user` (`first_name`,`last_name`,`email`,`password`, `role`," +
-            " `banned`, `balance`, `credit_sum`, `deptor`) " +
+            " `banned`, `balance`, `credit_sum`, `debtor`) " +
             "VALUES (?,?,?,?,?,?,?,?,?)";
     private static final String SQL_FOR_GET_BALANCE_BY_USER_ID = "SELECT `balance` " +
             "FROM `user` \n" +
@@ -55,8 +55,10 @@ public class MySqlUserDao implements UserDao {
     private static final String SQL_FOR_FILL_UP_USER_BALANCE = "UPDATE `user` SET `balance`=? WHERE `id`=?";
     private static final String SQL_FOR_REPAY_A_LOAN = "UPDATE `user` SET `credit_sum`=? WHERE `id`=?";
     private static final String SQL_FOR_UPDATE_IS_DEBTOR = "UPDATE `user` SET `debtor`=? WHERE `id`=?";
-    private static final String SQL_FOR_IS_USER_DEBTOR = "SELECT `debtor FROM `user` WHERE `id`=?";
-
+    private static final String SQL_FOR_IS_USER_DEBTOR = "SELECT `debtor` FROM `user` WHERE `id`=?";
+    private static final String SQL_FOR_GET_CREDIT_BY_USER_ID = "SELECT `credit_sum`" +
+            "FROM `user` \n" +
+            "WHERE `id`=?";
 
     private final ConnectionPool pool = ConnectionPool.getPool();
 
@@ -170,7 +172,7 @@ public class MySqlUserDao implements UserDao {
             statement.setString(3, user.getEmail());
             statement.setString(4, user.getPassword());
             statement.setString(5, user.getRole().getValue());
-            statement.setBoolean(6, (user.getIsBanned()));
+            statement.setBoolean(6, (user.getBanned()));
             statement.setBigDecimal(7, user.getBalance());
             statement.setInt(8, user.getId());
             statement.executeUpdate();
@@ -229,6 +231,33 @@ public class MySqlUserDao implements UserDao {
             if (set.next()) {
                 BigDecimal balance = set.getBigDecimal("balance");
                 return balance;
+            }
+        } catch (SQLException e) {
+            throw new DAOException(e);
+        } finally {
+            pool.returnConnectionToPool(connection);
+            ConnectionPool.getPool().closeDbResources(statement, set);
+        }
+        return null;
+    }
+
+    @Override
+    public BigDecimal getCreditByUserId(Integer userId) throws DAOException {
+        if (userId == null) {
+            return null;
+        }
+        Connection connection = null;
+        PreparedStatement statement = null;
+        ResultSet set = null;
+
+        try {
+            connection = pool.getConnection();
+            statement = connection.prepareStatement(SQL_FOR_GET_CREDIT_BY_USER_ID);
+            statement.setInt(1, userId);
+            set = statement.executeQuery();
+            if (set.next()) {
+                BigDecimal creditSum = set.getBigDecimal("credit_sum");
+                return creditSum;
             }
         } catch (SQLException e) {
             throw new DAOException(e);
@@ -385,7 +414,7 @@ public class MySqlUserDao implements UserDao {
         try {
             connection = pool.getConnection();
             statement = connection.prepareStatement(SQL_FOR_REPAY_A_LOAN);
-            statement.setBigDecimal(1, getBalanceByUserId(userId).add(sum));
+            statement.setBigDecimal(1, getCreditByUserId(userId).add(sum));
             statement.setInt(2, userId);
             statement.executeUpdate();
         } catch (SQLException e) {
@@ -417,7 +446,9 @@ public class MySqlUserDao implements UserDao {
 
     @Override
     public Boolean isUserDebtor(Integer userId) throws DAOException {
-
+        if (userId == null) {
+            return null;
+        }
         Connection connection = null;
         PreparedStatement statement = null;
         ResultSet set = null;

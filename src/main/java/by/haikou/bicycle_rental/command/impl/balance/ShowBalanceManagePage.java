@@ -22,7 +22,7 @@ public class ShowBalanceManagePage implements ICommand {
         User user = (User) session.getAttribute("user");
         Integer userId = user.getId();
         BigDecimal balance = userService.getBalanceByUserId(userId);
-        BigDecimal credit = userService.getBalanceByUserId(userId);
+        BigDecimal credit = userService.getCreditByUserId(userId);
         Boolean isDebtor = userService.isUserDebtor(userId);
         request.setAttribute("balance", balance);
         request.setAttribute("credit", credit);

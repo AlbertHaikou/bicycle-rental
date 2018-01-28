@@ -10,6 +10,7 @@
     <meta charset="UTF-8">
     <title> rent-bike </title>
     <link rel="stylesheet" href="css/bootstrap.css">
+    <link href="<c:url value="css/pagination.css"/>" rel="stylesheet" />
 </head>
 <body style="margin-bottom: 0px;">
 <jsp:include page="parts/navigation.jsp"/>
@@ -64,7 +65,7 @@
             </br>
         </c:otherwise>
     </c:choose>
-    <c:forEach items="${bikes}" var="bike">
+    <c:forEach items="${items.elementList}" var="bike">
         <tr>
             <td><c:out value="${bike.bicycleId}"/></td>
             <td><c:out value="${bike.type}"/></td>
@@ -82,13 +83,9 @@
             <td><c:out value="${bike.parkingId}"/></td>
             <td><c:out value="${bike.price}"/></td>
             <c:if test="${sessionScope.user.role.value=='ADMINISTRATOR'}">
-                <td><a href="main?command=showEditBikePage&id=<c:out value="${bike.bicycleId}" />" class="btn btn-success
-
-custom-width"><fmt:message
+                <td><a href="main?command=showEditBikePage&id=<c:out value="${bike.bicycleId}" />" class="btn btn-success"><fmt:message
                         key="UPDATE"/></a></td>
-                <td><a class="btn btn-danger
-
-custom-width" href="main?command=deleteBike&id=<c:out value="${bike.bicycleId}" />"><fmt:message
+                <td><a class="btn btn-danger" href="main?command=deleteBike&id=<c:out value="${bike.bicycleId}" />"><fmt:message
                         key="DELETE"/></a></td>
             </c:if>
             <c:set var="CLIENT" value="CLIENT"/>
@@ -122,11 +119,12 @@ custom-width" href="main?command=deleteBike&id=<c:out value="${bike.bicycleId}" 
     </c:forEach>
     </tbody>
 </table>
-<br/>
+<%@ include file="parts/pagination.jsp" %>
 <c:if test="${sessionScope.user.role.value.equalsIgnoreCase(ADMINISTRATOR)}">
     <div class="center-block"><a href="main?command=addBikePage">
         <button class="center-block btn-add btn"><fmt:message key="ADD_BIKE"/></button>
     </a></div>
+    <br/><br/>
 </c:if>
 <jsp:include page="parts/footer.jsp"/>
 </body>

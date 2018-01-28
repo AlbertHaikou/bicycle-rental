@@ -23,6 +23,8 @@ public interface UserDao {
 
     BigDecimal getBalanceByUserId(Integer userId) throws DAOException;
 
+    BigDecimal getCreditByUserId(Integer userId) throws DAOException;
+
     void fillUpBalance(BigDecimal balance, Integer userId) throws DAOException;
 
     void delete(Integer userId) throws DAOException;

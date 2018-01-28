@@ -7,6 +7,7 @@ import by.haikou.bicycle_rental.dao.factory.DAOFactory;
 import by.haikou.bicycle_rental.entity.Bicycle;
 import by.haikou.bicycle_rental.entity.RentItem;
 import by.haikou.bicycle_rental.service.BikeService;
+import by.haikou.bicycle_rental.util.PaginationObject;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -34,6 +35,18 @@ public class BikeServiceImpl implements BikeService {
     }
 
     @Override
+    public PaginationObject<Bicycle> getAllBikes(Integer page) {
+        PaginationObject<Bicycle> paginationObject = new PaginationObject<>();
+        List<Bicycle> bikes = bikeDao.getAllBikes();
+        paginationObject.setPageCount((int) Math.ceil((double) bikes.size() / PaginationObject.PER_PAGE));
+        paginationObject.setPage(page);
+        int start = (paginationObject.getPage() - 1) * PaginationObject.PER_PAGE;
+        int end = start + PaginationObject.PER_PAGE > bikes.size() ? bikes.size() : start + PaginationObject.PER_PAGE;
+        paginationObject.setElementList(bikes.subList(start, end));
+        return paginationObject;
+    }
+
+    @Override
     public void createBike(Bicycle bike) {
         bikeDao.createBike(bike);
     }
@@ -46,6 +59,18 @@ public class BikeServiceImpl implements BikeService {
     @Override
     public List<Bicycle> showAvailableBike() {
         return bikeDao.showAvailableBike();
+    }
+
+    @Override
+    public PaginationObject<Bicycle> showAvailableBike(Integer page) {
+        PaginationObject<Bicycle> paginationObject = new PaginationObject<>();
+        List<Bicycle> bikes = bikeDao.showAvailableBike();
+        paginationObject.setPageCount((int) Math.ceil((double) bikes.size() / PaginationObject.PER_PAGE));
+        paginationObject.setPage(page);
+        int start = (paginationObject.getPage() - 1) * PaginationObject.PER_PAGE;
+        int end = start + PaginationObject.PER_PAGE > bikes.size() ? bikes.size() : start + PaginationObject.PER_PAGE;
+        paginationObject.setElementList(bikes.subList(start, end));
+        return paginationObject;
     }
 
     @Override

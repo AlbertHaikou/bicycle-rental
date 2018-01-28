@@ -9,7 +9,7 @@ public class User extends AbstractEntity {
     private String lastName;
     private String password;
     private Role role;
-    private boolean isBanned;
+    private boolean banned;
     private BigDecimal balance;
 
     public User() {
@@ -24,12 +24,12 @@ public class User extends AbstractEntity {
         this.balance = balance;
     }
 
-    public boolean getIsBanned() {
-        return isBanned;
+    public boolean getBanned() {
+        return banned;
     }
 
-    public void setIsBanned(boolean banned) {
-        this.isBanned = banned;
+    public void setBanned(boolean banned) {
+        this.banned = banned;
     }
 
     public void setName(String firstName) {

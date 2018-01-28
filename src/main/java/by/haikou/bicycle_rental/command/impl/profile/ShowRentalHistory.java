@@ -2,6 +2,7 @@ package by.haikou.bicycle_rental.command.impl.profile;
 
 import by.haikou.bicycle_rental.command.ICommand;
 import by.haikou.bicycle_rental.command.exception.CommandException;
+import by.haikou.bicycle_rental.dao.exceptions.DAOException;
 import by.haikou.bicycle_rental.entity.User;
 import by.haikou.bicycle_rental.exception.UnauthorizedException;
 import by.haikou.bicycle_rental.service.RentItemService;
@@ -14,6 +15,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
+import static by.haikou.bicycle_rental.command.CommandEnum.SHOW_RENTAL_HISTORY;
+import static by.haikou.bicycle_rental.util.PaginationObject.DEFAULT_PAGE;
+
 public class ShowRentalHistory implements ICommand {
     private RentItemService rentItemService = ServiceFactory.getFactory().getRentItemService();
 
@@ -22,7 +26,20 @@ public class ShowRentalHistory implements ICommand {
         HttpSession session = req.getSession();
         User user = (User) session.getAttribute("user");
         Integer userId = user.getId();
-        req.setAttribute("rents", rentItemService.historyRent(userId));
+
+        int page;
+        try {
+            page = Integer.parseInt(req.getParameter("page"));
+        } catch (NumberFormatException exc) {
+            page = DEFAULT_PAGE;
+        }
+
+        try {
+            req.setAttribute("items", rentItemService.historyRent(userId, page));
+        } catch (DAOException exc) {
+            throw new CommandException(exc);
+        }
+        req.setAttribute("command", SHOW_RENTAL_HISTORY.getValue());
         req.getRequestDispatcher(ConstantsMng.LIST_HISTORY_RENT).forward(req, resp);
     }
 }

@@ -10,6 +10,7 @@
     <meta charset="UTF-8">
     <title> rent-bike </title>
     <link rel="stylesheet" href="css/bootstrap.css">
+    <link href="<c:url value="css/pagination.css"/>" rel="stylesheet" />
 </head>
 <body style="margin-bottom: 0px;">
 <jsp:include page="parts/navigation.jsp"/>
@@ -30,7 +31,7 @@
         </tr>
         </thead>
         <tbody>
-        <c:forEach items="${rents}" var="rent">
+        <c:forEach items="${items.elementList}" var="rent">
             <tr>
                 <td><c:out value="${rent.id}"/></td>
                 <td><c:out value="${rent.bikeId}"/></td>
@@ -51,6 +52,7 @@
         </tbody>
     </table>
     <br/>
+    <%@ include file="parts/pagination.jsp" %>
 </main>
 <jsp:include page="parts/footer.jsp"/>
 </body>

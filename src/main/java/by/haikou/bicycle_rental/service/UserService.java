@@ -2,6 +2,7 @@ package by.haikou.bicycle_rental.service;
 
 import by.haikou.bicycle_rental.entity.User;
 import by.haikou.bicycle_rental.exception.UserException;
+import by.haikou.bicycle_rental.util.PaginationObject;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -28,9 +29,9 @@ public interface UserService {
 
     void takeALoan(BigDecimal balance, Integer id);
 
-    void repayALoan(BigDecimal balance, Integer id);
-
     Boolean isUserDebtor(Integer id);
+
+    BigDecimal getCreditByUserId(Integer userId);
 
     void updateProfile(User user);
 
@@ -43,4 +44,8 @@ public interface UserService {
     void unBanUser(Integer id);
 
     List<User> getAllSupports();
+
+    PaginationObject<User> getAllSupports(Integer page);
+
+    PaginationObject<User> getAllUsers(Integer page);
 }

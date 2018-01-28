@@ -20,7 +20,7 @@ public class TakeALoan implements ICommand {
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
         Integer userId = user.getId();
-        BigDecimal sum = new BigDecimal(request.getParameter("sum"));
+        BigDecimal sum = new BigDecimal(request.getParameter("loan"));
         userService.takeALoan(sum, userId);
 
         response.sendRedirect("main?command=showBalanceManagePage");

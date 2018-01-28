@@ -5,6 +5,7 @@ import by.haikou.bicycle_rental.dao.factory.DAOFactory;
 import by.haikou.bicycle_rental.entity.User;
 import by.haikou.bicycle_rental.exception.UserException;
 import by.haikou.bicycle_rental.service.UserService;
+import by.haikou.bicycle_rental.util.PaginationObject;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -65,8 +66,22 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void fillUpUserBalance(BigDecimal balance, Integer id) {
-        userDao.fillUpBalance(balance, id);
+    public void fillUpUserBalance(BigDecimal sum, Integer id) {
+        if (!userDao.isUserDebtor(id)) {
+            userDao.fillUpBalance(sum, id);
+        } else {
+            BigDecimal credit = userDao.getCreditByUserId(id);
+            if (sum.compareTo(credit) > 0) {
+                userDao.repayALoan(credit.negate(), id);
+                userDao.updateIsDebtor(false, id);
+                userDao.fillUpBalance(sum.add(credit.negate()), id);
+            } else if (sum.compareTo(credit) < 0) {
+                userDao.repayALoan(sum.negate(), id);
+            } else {
+                userDao.repayALoan(credit.negate(), id);
+                userDao.updateIsDebtor(false, id);
+            }
+        }
     }
 
     @Override
@@ -75,22 +90,21 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void takeALoan(BigDecimal balance, Integer id) {
-        userDao.repayALoan(balance, id);
-        userDao.fillUpBalance(balance, id);
+    public void takeALoan(BigDecimal sum, Integer id) {
+        userDao.repayALoan(sum, id);
+        userDao.fillUpBalance(sum, id);
         userDao.updateIsDebtor(true, id);
     }
 
     @Override
-    public void repayALoan(BigDecimal balance, Integer id) {
-
+    public Boolean isUserDebtor(Integer userId) {
+        return userDao.isUserDebtor(userId);
     }
 
     @Override
-    public Boolean isUserDebtor(Integer id) {
-        return userDao.isUserDebtor(id);
+    public BigDecimal getCreditByUserId(Integer userId) {
+        return userDao.getCreditByUserId(userId);
     }
-
 
     @Override
     public void updateProfile(User user) {
@@ -120,6 +134,30 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> getAllSupports() {
         return userDao.getAllManagers();
+    }
+
+    @Override
+    public PaginationObject<User> getAllSupports(Integer page) {
+        PaginationObject<User> paginationObject = new PaginationObject<>();
+        List<User> users = userDao.getAllManagers();
+        paginationObject.setPageCount((int) Math.ceil((double) users.size() / PaginationObject.PER_PAGE));
+        paginationObject.setPage(page);
+        int start = (paginationObject.getPage() - 1) * PaginationObject.PER_PAGE;
+        int end = start + PaginationObject.PER_PAGE > users.size() ? users.size() : start + PaginationObject.PER_PAGE;
+        paginationObject.setElementList(users.subList(start, end));
+        return paginationObject;
+    }
+
+    @Override
+    public PaginationObject<User> getAllUsers(Integer page) {
+        PaginationObject<User> paginationObject = new PaginationObject<>();
+        List<User> users = userDao.getAllUsers();
+        paginationObject.setPageCount((int) Math.ceil((double) users.size() / PaginationObject.PER_PAGE));
+        paginationObject.setPage(page);
+        int start = (paginationObject.getPage() - 1) * PaginationObject.PER_PAGE;
+        int end = start + PaginationObject.PER_PAGE > users.size() ? users.size() : start + PaginationObject.PER_PAGE;
+        paginationObject.setElementList(users.subList(start, end));
+        return paginationObject;
     }
 
 }

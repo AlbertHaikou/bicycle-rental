@@ -27,7 +27,7 @@ public class ShowProfile implements ICommand {
         Integer userId = user.getId();
         userService.getUserById(userId);
         List<RentItem> rentItems = new ArrayList<>();
-        List<RentItem> temp = rentItemService.historyRent(userId);
+        List<RentItem> temp = rentItemService.allHistoryRent(userId);
         if (temp.size() > 5) {
             for (int i = 0; i < 5; i++) {
                 rentItems.add(temp.get(i));

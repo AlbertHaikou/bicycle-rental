@@ -21,7 +21,7 @@ public final class ResultSetConverter {
         entity.setLastName(set.getString("last_name"));
         entity.setEmail(set.getString("email"));
         entity.setPassword(set.getString("password"));
-        entity.setIsBanned(set.getBoolean("banned"));
+        entity.setBanned(set.getBoolean("banned"));
         entity.setBalance(set.getBigDecimal("balance"));
 
         return entity;
