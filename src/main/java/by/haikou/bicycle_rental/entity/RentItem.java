@@ -3,7 +3,7 @@ package by.haikou.bicycle_rental.entity;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class RentItem extends AbstractEntity {
+public class RentItem {
 
     private int id;
     private int bikeId;
@@ -15,6 +15,14 @@ public class RentItem extends AbstractEntity {
     private BigDecimal price;
     private Boolean status;
     private BigDecimal totalPrice;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public BigDecimal getPrice() {
         return price;
@@ -38,10 +46,6 @@ public class RentItem extends AbstractEntity {
 
     public void setTotalPrice(BigDecimal totalPrice) {
         this.totalPrice = totalPrice;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public int getBikeId() {

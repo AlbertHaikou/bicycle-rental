@@ -2,7 +2,7 @@ package by.haikou.bicycle_rental.entity;
 
 import java.math.BigDecimal;
 
-public class Bicycle extends AbstractEntity {
+public class Bicycle {
 
     private Integer bicycleId;
     private String type;

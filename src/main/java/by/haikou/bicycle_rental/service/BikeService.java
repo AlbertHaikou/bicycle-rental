@@ -27,6 +27,6 @@ public interface BikeService {
 
     void returnBike(Integer bikeId, Integer userId);
 
-    List<Bicycle> showBikeByParkingId(Integer parkingId);
+    PaginationObject<Bicycle> showBikeByParkingId(Integer parkingId, Integer page);
 
 }

@@ -58,6 +58,8 @@
                             <div class="form-group float-label-control">
                                 <label><fmt:message key="PASSWORD"/></label>
                                 <input type="text" name="password" class="form-control"
+                                       pattern="(?=^.{6,}$)^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$"
+                                       title="Min 1 UpperCase latin, 1 LowerCase latin and 1 Number, 6+ symbols"
                                        placeholder="<fmt:message key="PASSWORD"/>"
                                        required value="<c:out value="${manager.password}"/>"/>
                             </div>

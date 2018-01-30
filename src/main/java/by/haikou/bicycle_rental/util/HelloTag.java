@@ -4,6 +4,9 @@ import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.TagSupport;
 import java.io.IOException;
 
+/**
+ * Custom tag for user greeting depending on the role
+ */
 public class HelloTag extends TagSupport {
     private String role;
     private String name;
@@ -19,7 +22,7 @@ public class HelloTag extends TagSupport {
     @Override
     public int doStartTag() throws JspException {
         try {
-            String to = null;
+            String to;
             if ("administrator".equalsIgnoreCase(role)) {
                 to = "Hello, " + name;
             } else {

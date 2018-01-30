@@ -10,7 +10,7 @@
     <meta charset="UTF-8">
     <title> rent-bike </title>
     <link rel="stylesheet" href="css/bootstrap.css">
-    <link href="<c:url value="css/pagination.css"/>" rel="stylesheet" />
+    <link href="<c:url value="css/pagination.css"/>" rel="stylesheet"/>
 </head>
 <body style="margin-bottom: 0px;">
 <jsp:include page="parts/navigation.jsp"/>

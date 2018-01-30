@@ -16,6 +16,13 @@ import java.math.BigDecimal;
 public class ShowBalanceManagePage implements ICommand {
     UserService userService = ServiceFactory.getFactory().getUserService();
 
+    /**
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     * @see ICommand
+     */
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();

@@ -1,8 +1,6 @@
 package by.haikou.bicycle_rental.command.impl.manager;
 
 import by.haikou.bicycle_rental.command.ICommand;
-import by.haikou.bicycle_rental.service.ParkingService;
-import by.haikou.bicycle_rental.service.factory.ServiceFactory;
 import by.haikou.bicycle_rental.util.ConstantsMng;
 
 import javax.servlet.ServletException;

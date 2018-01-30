@@ -80,16 +80,16 @@ public final class ResultSetConverter {
 
     }
 
-    public static SupportItemEntity createSupportItemEntity(ResultSet set) throws SQLException {
+    public static RepairItemEntity createRepairItemEntity(ResultSet set) throws SQLException {
 
-        Integer supportItem_id = set.getInt("id");
+        Integer repairItem_id = set.getInt("id");
         Integer bikes_id = set.getInt("fk_bikes_id");
         String description = set.getString("description");
         Boolean status = set.getBoolean("status");
 
-        SupportItemEntity entity = new SupportItemEntity();
+        RepairItemEntity entity = new RepairItemEntity();
 
-        entity.setId(supportItem_id);
+        entity.setItemId(repairItem_id);
         entity.setBikeId(bikes_id);
         entity.setDescription(description);
         entity.setStatus(status);

@@ -2,12 +2,26 @@ package by.haikou.bicycle_rental.util;
 
 import java.util.List;
 
+/**
+ * @param <T> the type of objects that need to be stored and divided into several pages.
+ */
 public class PaginationObject<T> {
     public static final int PER_PAGE = 8;
     public static final int DEFAULT_PAGE = 1;
 
+    /**
+     * Current page.
+     */
     private int page;
+
+    /**
+     * Total number of pages for a given list of objects.
+     */
     private int pageCount;
+
+    /**
+     * List of objects for the current page.
+     */
     private List<T> elementList;
 
     public PaginationObject() {

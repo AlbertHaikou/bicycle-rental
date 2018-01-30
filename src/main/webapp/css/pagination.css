@@ -4,7 +4,9 @@ ul.pagination {
     margin: 0;
 }
 
-ul.pagination li {display: inline;}
+ul.pagination li {
+    display: inline;
+}
 
 ul.pagination li a.current-page {
     background: #7fc472;

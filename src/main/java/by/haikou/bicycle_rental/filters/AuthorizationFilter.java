@@ -10,9 +10,15 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * Limits the site's capabilities for unauthorized users.
+ */
 @WebFilter("/*")
 public class AuthorizationFilter implements Filter {
 
+    /**
+     * Set of addresses and commands allowed for unauthorized visits.
+     */
     private static final Set<String> ALLOWED_PATHS = Collections.unmodifiableSet(
             new HashSet<>(Arrays.asList("/css", "/js", "/img", "login", "register", "/login.jsp", "/registration.jsp",
                     "changeLocale")
@@ -46,6 +52,10 @@ public class AuthorizationFilter implements Filter {
     public void destroy() {
     }
 
+    /**
+     * @param path
+     * @return is path allowed to visit without authorization.
+     */
     private boolean isPathAllowedAnonymously(String path) {
         for (String allowedPath : ALLOWED_PATHS) {
             if (path.startsWith(allowedPath)) {

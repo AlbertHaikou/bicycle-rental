@@ -46,7 +46,7 @@
                        required
                        title="Use Latin letters, ._%+- and digits, then @, followed by Latin letters, symbols -. and numbers. Further . and after it domain of 2-4 Latin letters"
                        name="email" placeholder="<fmt:message key="EMAIL"/>"
-                       rel="tooltp"  pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+                       rel="tooltp" pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
                        title='<fmt:message key="ENTER_EMAIL"/>'>
                 <c:out value="${error.login}"/>
             </div>

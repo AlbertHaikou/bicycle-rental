@@ -80,7 +80,6 @@ public class BikeServiceImpl implements BikeService {
         rentItem.setUserId(userId);
         rentItem.setBikeId(bikeId);
         rentItem.setPrice(bikeDao.getBikeById(bikeId).getPrice());
-        //rentItem.setStatus(true);
         rentItem.setFromDate(new Date());
         rentItem.setParkingFromId(1);
         rentItemDao.createItem(rentItem);
@@ -96,14 +95,19 @@ public class BikeServiceImpl implements BikeService {
         rentItem.setToDate(newDate);
         rentItem.setParkingToId(1);
         rentItem.setTotalPrice(amount);
-        //rentItem.setStatus(true);
         rentItemDao.updateItem(rentItem);
         bikeDao.returnBike(bikeId);
     }
 
     @Override
-    public List<Bicycle> showBikeByParkingId(Integer id) {
-        return bikeDao.showBikeByParkingId(id);
+    public PaginationObject<Bicycle> showBikeByParkingId(Integer id, Integer page) {
+        PaginationObject<Bicycle> paginationObject = new PaginationObject<>();
+        List<Bicycle> bikes = bikeDao.showBikeByParkingId(id);
+        paginationObject.setPageCount((int) Math.ceil((double) bikes.size() / PaginationObject.PER_PAGE));
+        paginationObject.setPage(page);
+        int start = (paginationObject.getPage() - 1) * PaginationObject.PER_PAGE;
+        int end = start + PaginationObject.PER_PAGE > bikes.size() ? bikes.size() : start + PaginationObject.PER_PAGE;
+        paginationObject.setElementList(bikes.subList(start, end));
+        return paginationObject;
     }
-
 }

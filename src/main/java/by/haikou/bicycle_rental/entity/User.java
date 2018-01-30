@@ -2,7 +2,7 @@ package by.haikou.bicycle_rental.entity;
 
 import java.math.BigDecimal;
 
-public class User extends AbstractEntity {
+public class User {
     private String firstName;
     private String email;
     private Integer id;
@@ -76,7 +76,6 @@ public class User extends AbstractEntity {
         this.role = role;
     }
 
-    @Override
     public Integer getId() {
         return id;
     }

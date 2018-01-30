@@ -16,7 +16,7 @@ public abstract class DAOFactory {
 
     public abstract ParkingDao getParkingDao();
 
-    public abstract SupportItemDao getSupportItemDao();
+    public abstract RepairItemDao getRepairItemDao();
 
     public abstract RentItemDao getRentItemDao();
 

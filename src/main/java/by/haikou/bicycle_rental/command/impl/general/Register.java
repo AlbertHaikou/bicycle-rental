@@ -52,8 +52,8 @@ public class Register implements ICommand {
             forwardToView(ConstantsMng.LOGIN, request, response);
 
         } else {
-                request.setAttribute(ConstantsMng.ATR_ERRORS, errorMap);
-                forwardToView(ConstantsMng.REGISTRATION, request, response);
+            request.setAttribute(ConstantsMng.ATR_ERRORS, errorMap);
+            forwardToView(ConstantsMng.REGISTRATION, request, response);
         }
     }
 

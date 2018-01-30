@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-import static by.haikou.bicycle_rental.command.CommandEnum.SHOW_PARKINGS;
 import static by.haikou.bicycle_rental.command.CommandEnum.SHOW_USERS;
 import static by.haikou.bicycle_rental.util.PaginationObject.DEFAULT_PAGE;
 

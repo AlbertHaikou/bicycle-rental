@@ -1,8 +1,9 @@
 package by.haikou.bicycle_rental.dao;
 
-import java.util.List;
 import by.haikou.bicycle_rental.dao.exceptions.DAOException;
 import by.haikou.bicycle_rental.entity.Bicycle;
+
+import java.util.List;
 
 public interface BikeDao {
 

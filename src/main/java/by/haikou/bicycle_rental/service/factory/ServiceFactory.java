@@ -1,10 +1,6 @@
 package by.haikou.bicycle_rental.service.factory;
 
-import by.haikou.bicycle_rental.service.BikeService;
-import by.haikou.bicycle_rental.service.RentItemService;
-import by.haikou.bicycle_rental.service.SupportItemService;
-import by.haikou.bicycle_rental.service.UserService;
-import by.haikou.bicycle_rental.service.ParkingService;
+import by.haikou.bicycle_rental.service.*;
 
 public abstract class ServiceFactory {
 
@@ -16,7 +12,7 @@ public abstract class ServiceFactory {
 
     public abstract ParkingService getParkingService();
 
-    public abstract SupportItemService getSupportItemService();
+    public abstract RepairItemService getRepairItemService();
 
     public abstract RentItemService getRentItemService();
 

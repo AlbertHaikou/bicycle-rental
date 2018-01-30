@@ -14,10 +14,24 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.math.BigDecimal;
 
+/**
+ * Used to transfer money to a user account.
+ * When the work is done, <code>response.sendRedirect</code> is used to avoid re-querying.
+ * If the user has a loan - first the money is used to repay it.
+ *
+ * @see TakeALoan
+ */
 public class FillUpBalance implements ICommand {
     private static final Logger LOGGER = LogManager.getLogger(FillUpBalance.class);
     UserService userService = ServiceFactory.getFactory().getUserService();
 
+    /**
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     * @see ICommand
+     */
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();

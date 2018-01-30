@@ -3,6 +3,9 @@ package by.haikou.bicycle_rental.filters;
 import javax.servlet.*;
 import java.io.IOException;
 
+/**
+ * Sets the encoding of the request, the value of the default encoding is specified in the web.xml file.
+ */
 public class EncodingFilter implements Filter {
     private String defaultEncoding;
 

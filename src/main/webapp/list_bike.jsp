@@ -10,7 +10,7 @@
     <meta charset="UTF-8">
     <title> rent-bike </title>
     <link rel="stylesheet" href="css/bootstrap.css">
-    <link href="<c:url value="css/pagination.css"/>" rel="stylesheet" />
+    <link href="<c:url value="css/pagination.css"/>" rel="stylesheet"/>
 </head>
 <body style="margin-bottom: 0px;">
 <jsp:include page="parts/navigation.jsp"/>
@@ -27,12 +27,11 @@
         <th><fmt:message key="№_PARKING"/></th>
         <th><fmt:message key="PRICE"/></th>
         <c:set var="USER" value="USER"/>
-        <c:if test="${sessionScope.user.role.value=='ADMINISTRATOR'}">
-            <th colspan=2 width="100"><fmt:message key="ACTION"/></th>
+        <c:if test="${sessionScope.user.role.value eq 'ADMINISTRATOR' or sessionScope.user.role.value eq 'MANAGER'}">
+            <th colspan=3 width="100"><fmt:message key="ACTION"/></th>
         </c:if>
         <c:if test="${not empty sessionScope.user}">
             <th width="50"><fmt:message key="RENT"/></th>
-            <th width="50"><fmt:message key="REPAIRS"/></th>
         </c:if>
         <c:set var="ADMINISTRATOR" value="ADMINISTRATOR"/>
 
@@ -82,11 +81,16 @@
             <input type="hidden" name="parkingId" value="<c:out value="${bike.parkingId}" />"/>
             <td><c:out value="${bike.parkingId}"/></td>
             <td><c:out value="${bike.price}"/></td>
-            <c:if test="${sessionScope.user.role.value=='ADMINISTRATOR'}">
-                <td><a href="main?command=showEditBikePage&id=<c:out value="${bike.bicycleId}" />" class="btn btn-success"><fmt:message
+            <c:if test="${sessionScope.user.role.value eq 'ADMINISTRATOR' or sessionScope.user.role.value eq 'MANAGER'}">
+                <td><a href="main?command=showEditBikePage&id=<c:out value="${bike.bicycleId}" />"
+                       class="btn btn-success"><fmt:message
                         key="UPDATE"/></a></td>
-                <td><a class="btn btn-danger" href="main?command=deleteBike&id=<c:out value="${bike.bicycleId}" />"><fmt:message
+                <td><a class="btn btn-danger"
+                       href="main?command=deleteBike&id=<c:out value="${bike.bicycleId}" />"><fmt:message
                         key="DELETE"/></a></td>
+                <td><a class="btn btn-info"
+                       href="main?command=repair&id=<c:out value="${bike.bicycleId}"/>"><fmt:message
+                        key="BID"/></a></td>
             </c:if>
             <c:set var="CLIENT" value="CLIENT"/>
             <c:if test="${not empty sessionScope.user}">
@@ -100,9 +104,6 @@
                                 </c:if>
                             </c:if>
                         </td>
-                        <td>
-                            <a href="main?command=repair&id=<c:out value="${bike.bicycleId}"/>"><fmt:message
-                                    key="BID"/></a></td>
                     </c:when>
                     <c:otherwise>
                         <td>
@@ -111,7 +112,6 @@
                                         key="TO_RETURN"/></a>
                             </c:if>
                         </td>
-                        <td></td>
                     </c:otherwise>
                 </c:choose>
             </c:if>

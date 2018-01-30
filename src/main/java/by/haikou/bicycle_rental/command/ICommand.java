@@ -9,6 +9,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * Base Interface for all Command classes.
+ *
+ * @author Albert Haikou
+ */
 public interface ICommand {
     default void checkRoots(HttpServletRequest req, User.Role[] needLevels)
             throws ServletException, IOException, CommandException, UnauthorizedException {
@@ -24,5 +29,16 @@ public interface ICommand {
         throw new UnauthorizedException("Not enough permissions for this operation");
     }
 
-    void execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException, CommandException, UnauthorizedException;
+    /**
+     * Main project method. Used in all Command classes to realize program logic.
+     * After completing its task, the method directs the user to the jsp page or passes it to another class.
+     *
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     * @throws CommandException
+     * @throws UnauthorizedException
+     */
+    void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, CommandException, UnauthorizedException;
 }

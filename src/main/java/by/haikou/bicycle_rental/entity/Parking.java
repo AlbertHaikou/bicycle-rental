@@ -1,6 +1,6 @@
 package by.haikou.bicycle_rental.entity;
 
-public class Parking extends AbstractEntity {
+public class Parking {
 
     private Integer parkingId;
     private String street;
@@ -9,20 +9,20 @@ public class Parking extends AbstractEntity {
         super();
     }
 
-    public void setParkingId(Integer parkingId) {
-        this.parkingId = parkingId;
-    }
-
-    public void setStreet(String street) {
-        this.street = street;
-    }
-
     public Integer getParkingId() {
         return parkingId;
     }
 
+    public void setParkingId(Integer parkingId) {
+        this.parkingId = parkingId;
+    }
+
     public String getStreet() {
         return street;
+    }
+
+    public void setStreet(String street) {
+        this.street = street;
     }
 
     @Override

@@ -1,29 +1,21 @@
 package by.haikou.bicycle_rental.service.factory;
 
-import by.haikou.bicycle_rental.service.BikeService;
-import by.haikou.bicycle_rental.service.RentItemService;
-import by.haikou.bicycle_rental.service.SupportItemService;
-import by.haikou.bicycle_rental.service.UserService;
-import by.haikou.bicycle_rental.service.impl.ParkingServiceImpl;
-import by.haikou.bicycle_rental.service.ParkingService;
-import by.haikou.bicycle_rental.service.impl.BikeServiceImpl;
-import by.haikou.bicycle_rental.service.impl.RentItemServiceImpl;
-import by.haikou.bicycle_rental.service.impl.SupportItemServiceImpl;
-import by.haikou.bicycle_rental.service.impl.UserServiceImpl;
+import by.haikou.bicycle_rental.service.*;
+import by.haikou.bicycle_rental.service.impl.*;
 
 public class ServiceFactoryImpl extends ServiceFactory {
 
     private final UserService userService;
     private final BikeService bikeService;
     private final ParkingService parkingService;
-    private final SupportItemService supportItemService;
+    private final RepairItemService repairItemService;
     private final RentItemService rentItemService;
 
     public ServiceFactoryImpl() {
         this.userService = new UserServiceImpl();
         this.bikeService = new BikeServiceImpl();
         this.parkingService = new ParkingServiceImpl();
-        this.supportItemService = new SupportItemServiceImpl();
+        this.repairItemService = new RepairItemServiceImpl();
         this.rentItemService = new RentItemServiceImpl();
     }
 
@@ -43,8 +35,8 @@ public class ServiceFactoryImpl extends ServiceFactory {
     }
 
     @Override
-    public SupportItemService getSupportItemService() {
-        return supportItemService;
+    public RepairItemService getRepairItemService() {
+        return repairItemService;
     }
 
     @Override

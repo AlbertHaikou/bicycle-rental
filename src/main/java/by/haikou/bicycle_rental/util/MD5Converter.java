@@ -7,11 +7,19 @@ import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+/**
+ * Converts string to hash using <b>MD5</b>.
+ * Use to get the user password hash
+ */
 public class MD5Converter {
     private static final Logger log = LogManager.getLogger(MD5Converter.class);
 
+    /**
+     * @param string
+     * @return MD5 hash of incoming string.
+     */
     public static String getHash(String string) {
-        MessageDigest messageDigest = null;
+        MessageDigest messageDigest;
         byte[] digest = new byte[0];
         try {
             messageDigest = MessageDigest.getInstance("MD5");

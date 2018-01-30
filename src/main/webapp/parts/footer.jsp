@@ -20,7 +20,7 @@
             </li>
             <li>
                 <button onclick="changeLang('eng')" class="btn" style=" background-color: transparent;">
-                    <img src="/img/United-States.png">
+                    <img src="/img/United-Kingdom.png">
                 </button>
 
             </li>

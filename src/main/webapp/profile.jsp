@@ -24,7 +24,7 @@
                 <div class="profile-sidebar">
                     <!-- SIDEBAR USERPIC -->
                     <div class="profile-userpic">
-                        <img src="img/Belarus.png"
+                        <img src="img/user.png"
                              class="img-responsive" alt="">
                     </div>
                     <!-- END SIDEBAR USERPIC -->

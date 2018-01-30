@@ -1,13 +1,13 @@
 package by.haikou.bicycle_rental.entity;
 
-public class SupportItemEntity extends AbstractEntity {
+public class RepairItemEntity {
 
     private int itemId;
     private int bikeId;
     private String description;
     private Boolean status;
 
-    public SupportItemEntity() {
+    public RepairItemEntity() {
         super();
     }
 
@@ -45,7 +45,7 @@ public class SupportItemEntity extends AbstractEntity {
 
     @Override
     public String toString() {
-        return "SupportItemEntity{" + "itemId=" + itemId + ", bikeId=" + bikeId
+        return "RepairItemEntity{" + "itemId=" + itemId + ", bikeId=" + bikeId
                 + ", description=" + description + ", status=" + status + '}';
     }
 

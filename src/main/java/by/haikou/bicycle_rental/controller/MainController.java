@@ -14,7 +14,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-
+/**
+ * Master controller. Processes all requests from the site and passes them on
+ * to subsequent processing to the appropriate classes that implement the interface {@link ICommand}
+ */
 public class MainController extends HttpServlet {
     private static final CommandFactory commandFactory = CommandFactory.getFactory();
     private final static Logger LOGGER = LogManager.getLogger(MainController.class);

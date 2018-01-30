@@ -5,6 +5,11 @@ import javax.servlet.http.HttpSession;
 
 public class RequestUtils {
 
+    /**
+     * Changes the localization of the current session.
+     *
+     * @param request
+     */
     public static void setLocale(HttpServletRequest request) {
         HttpSession session = request.getSession(true);
         String locale = request.getParameter("locale");
@@ -17,6 +22,10 @@ public class RequestUtils {
         }
     }
 
+    /**
+     * @param request
+     * @return current session localization.
+     */
     public static String getLocale(HttpServletRequest request) {
         String locale = (String) request.getSession().getAttribute("locale");
         if (StringUtils.isEmpty(locale)) {
