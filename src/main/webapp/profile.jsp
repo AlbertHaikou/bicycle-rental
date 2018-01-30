@@ -22,12 +22,11 @@
         <div class="row profile">
             <div class="col-md-4">
                 <div class="profile-sidebar">
-                    <!-- SIDEBAR USERPIC -->
+
                     <div class="profile-userpic">
                         <img src="img/user.png"
                              class="img-responsive" alt="">
                     </div>
-                    <!-- END SIDEBAR USERPIC -->
 
                     <div class="profile-usertitle">
                         <div class="profile-usertitle-name">
@@ -50,17 +49,17 @@
                         <ul class="nav">
                             <li>
                                 <a href="main?command=showEditProfilePage&id=<c:out value="${requestScope.profile.id}"/>">
-                                    <i class="glyphicon glyphicon-user"></i>
+                                    <i class="glyphicon glyphicon-pencil"></i>
                                     <fmt:message key="UPDATE"/> </a>
                             </li>
                             <li>
                                 <a href="main?command=showBalanceManagePage">
-                                    <i class="glyphicon glyphicon-ok"></i>
+                                    <i class="glyphicon glyphicon-edit"></i>
                                     <fmt:message key="BALANCE_MANAGE"/> </a>
                             </li>
                             <li>
                                 <a href="main?command=showRentalHistory">
-                                    <i class="glyphicon glyphicon-flag"></i>
+                                    <i class="glyphicon glyphicon-time"></i>
                                     <fmt:message key="FULL_RENTAL_HISTORY"/> </a>
                             </li>
                         </ul>

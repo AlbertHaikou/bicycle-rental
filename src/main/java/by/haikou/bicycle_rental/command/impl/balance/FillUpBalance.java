@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.math.BigDecimal;
 
 /**
- * Used to transfer money to a user account.
+ * Use to transfer money to a user account.
  * When the work is done, <code>response.sendRedirect</code> is used to avoid re-querying.
  * If the user has a loan - first the money is used to repay it.
  *

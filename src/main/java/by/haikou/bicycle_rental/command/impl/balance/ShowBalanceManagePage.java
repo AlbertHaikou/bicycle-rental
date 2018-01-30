@@ -13,6 +13,9 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.math.BigDecimal;
 
+/**
+ * Collects the server information needed to display the balance control page and directs the user to that page.
+ */
 public class ShowBalanceManagePage implements ICommand {
     UserService userService = ServiceFactory.getFactory().getUserService();
 

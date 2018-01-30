@@ -99,7 +99,7 @@
                         <td>
                             <c:if test="${not user.banned}">
                                 <c:if test="${empty userRentedBikeId}">
-                                    <a href="main?command=rentBike&id=<c:out value="${bike.bicycleId}"/>"><fmt:message
+                                    <a class="btn btn-rent" href="main?command=rentBike&id=<c:out value="${bike.bicycleId}"/>"><fmt:message
                                             key="TO_RENT"/></a>
                                 </c:if>
                             </c:if>
@@ -108,7 +108,7 @@
                     <c:otherwise>
                         <td>
                             <c:if test="${not empty userRentedBikeId && bike.bicycleId eq userRentedBikeId}">
-                                <a href="main?command=returnBike&id=<c:out value="${bike.bicycleId}"/>"><fmt:message
+                                <a class="btn btn-rent" href="main?command=returnBike&id=<c:out value="${bike.bicycleId}"/>"><fmt:message
                                         key="TO_RETURN"/></a>
                             </c:if>
                         </td>
@@ -120,6 +120,7 @@
     </tbody>
 </table>
 <%@ include file="parts/pagination.jsp" %>
+<br/>
 <c:if test="${sessionScope.user.role.value.equalsIgnoreCase(ADMINISTRATOR)}">
     <div class="center-block"><a href="main?command=addBikePage">
         <button class="center-block btn-add btn"><fmt:message key="ADD_BIKE"/></button>

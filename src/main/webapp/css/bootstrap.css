@@ -431,8 +431,8 @@ th {
 }
 
 .glyphicon-cog:before {
-    content: "\e019";
-}
+     content: "\e019";
+ }
 
 .glyphicon-trash:before {
     content: "\e020";
@@ -5377,135 +5377,6 @@ fieldset[disabled] .navbar-inverse .btn-link:focus {
     }
 }
 
-.pagination {
-    display: inline-block;
-    padding-left: 0;
-    margin: 20px 0;
-    border-radius: 3px;
-}
-
-@media (max-width: 768px) {
-    .pagination {
-        text-align: center;
-        width: 100%;
-    }
-}
-
-.pagination > li {
-    display: inline;
-}
-
-@media (max-width: 768px) {
-    .pagination > li {
-        display: inline-block;
-        float: none;
-    }
-}
-
-.pagination > li > a,
-.pagination > li > span {
-    position: relative;
-    float: left;
-    padding: 3px 3px;
-    margin: 18px;
-    line-height: 1.428571429;
-    text-decoration: none;
-    color: #e41d3b;
-    background-color: transparent;
-    margin-left: -1px;
-}
-
-.pagination > li.last > a,
-.pagination > li.first > a,
-.pagination > li.last > span,
-.pagination > li.first > span {
-    border-radius: 2px;
-    background-color: #e41d3b;
-    color: white;
-    padding: 3px 12px 6px;
-    font-size: 2em;
-    line-height: .8em;
-}
-
-.pagination > li.last:hover a,
-.pagination > li.first:hover a,
-.pagination > li.last:hover span,
-.pagination > li.first:hover span {
-    background: #e41d3b !important;
-    color: white !important;
-}
-
-.pagination > li > a:hover,
-.pagination > li > span:hover,
-.pagination > li > a:focus,
-.pagination > li > span:focus {
-    color: #242427;
-    background-color: transparent;
-    border-color: #e41d3b;
-}
-
-.pagination > .active > a,
-.pagination > .active > span,
-.pagination > .active > a:hover,
-.pagination > .active > span:hover,
-.pagination > .active > a:focus,
-.pagination > .active > span:focus {
-    z-index: 2;
-    color: #242427;
-    border-bottom: 3px solid #242427;
-    background-color: transparent;
-    cursor: default;
-    border-radius: 0 !important;
-}
-
-.pagination > .disabled > span,
-.pagination > .disabled > span:hover,
-.pagination > .disabled > span:focus,
-.pagination > .disabled > a,
-.pagination > .disabled > a:hover,
-.pagination > .disabled > a:focus {
-    color: #999999;
-    background-color: #ffffff;
-    border-color: #dddddd;
-    cursor: not-allowed;
-}
-
-.pagination-lg > li > a,
-.pagination-lg > li > span {
-    padding: 10px 16px;
-    font-size: 18px;
-}
-
-.pagination-lg > li:first-child > a,
-.pagination-lg > li:first-child > span {
-    border-bottom-left-radius: 6px;
-    border-top-left-radius: 6px;
-}
-
-.pagination-lg > li:last-child > a,
-.pagination-lg > li:last-child > span {
-    border-bottom-right-radius: 6px;
-    border-top-right-radius: 6px;
-}
-
-.pagination-sm > li > a,
-.pagination-sm > li > span {
-    padding: 5px 10px;
-    font-size: 12px;
-}
-
-.pagination-sm > li:first-child > a,
-.pagination-sm > li:first-child > span {
-    border-bottom-left-radius: 3px;
-    border-top-left-radius: 3px;
-}
-
-.pagination-sm > li:last-child > a,
-.pagination-sm > li:last-child > span {
-    border-bottom-right-radius: 3px;
-    border-top-right-radius: 3px;
-}
-
 .pager {
     padding-left: 0;
     margin: 20px 0;
@@ -8329,7 +8200,6 @@ td {
 table, th, td {
 
     text-align: center;
-    border-style: solid;
     border-width: 1px;
     border-collapse: collapse;
     padding: 2px;
@@ -8363,4 +8233,50 @@ th {
     background-color: #7ec371;
     color: white;
     text-align: center;
+}
+
+.btn-rent {
+    color: #ffffff;
+    background-color: #8eb85b;
+    border-color: #90ae67;
+}
+
+.btn-rent:hover,
+.btn-rent:focus,
+.btn-rent:active,
+.btn-rent.active,
+.open > .dropdown-toggle.btn-rent {
+    color: #ffffff;
+    background-color: #449d44;
+    border-color: #398439;
+}
+
+.btn-rent:active,
+.btn-rent.active,
+.open > .dropdown-toggle.btn-rent {
+    background-image: none;
+}
+
+.btn-rent.disabled,
+.btn-rent[disabled],
+fieldset[disabled] .btn-rent,
+.btn-rent.disabled:hover,
+.btn-rent[disabled]:hover,
+fieldset[disabled] .btn-rent:hover,
+.btn-rent.disabled:focus,
+.btn-rent[disabled]:focus,
+fieldset[disabled] .btn-rent:focus,
+.btn-rent.disabled:active,
+.btn-rent[disabled]:active,
+fieldset[disabled] .btn-rent:active,
+.btn-rent.disabled.active,
+.btn-rent[disabled].active,
+fieldset[disabled] .btn-rent.active {
+    background-color: #5cb85c;
+    border-color: #4cae4c;
+}
+
+.btn-rent .badge {
+    color: #5cb85c;
+    background-color: #ffffff;
 }

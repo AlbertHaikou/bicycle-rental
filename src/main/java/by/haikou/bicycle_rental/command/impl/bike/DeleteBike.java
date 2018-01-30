@@ -16,14 +16,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * Start point of chain to delete bicycle by id.
+ * Delegates the task to the service, then sends the user to the page with a list of bikes
+ */
 public class DeleteBike implements ICommand {
     private static final Logger LOGGER = LogManager.getLogger(DeleteBike.class);
     private BikeService bikeService = ServiceFactory.getFactory().getBikeService();
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String action = request.getParameter("id");
-        bikeService.deleteBike(Integer.parseInt(action));
+        String id = request.getParameter("id");
+        bikeService.deleteBike(Integer.parseInt(id));
         try {
             CommandFactory.getFactory().createCommand(CommandEnum.SHOW_BIKES).execute(request, response);
         } catch (CommandException e) {
@@ -33,4 +37,3 @@ public class DeleteBike implements ICommand {
         }
     }
 }
-
