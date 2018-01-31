@@ -14,6 +14,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * <p>Collects information about chosen bicycle, and about all parkings from database using {@link BikeService#getBikeById(Integer)}, {@link ParkingService#getAllParking()}.</p>
+ * <p>Then directs user to the editing bike page.</p>
+ */
 public class ShowEditBikePage implements ICommand {
     private static final Logger LOGGER = LogManager.getLogger(ShowEditBikePage.class);
     private BikeService bikeService = ServiceFactory.getFactory().getBikeService();

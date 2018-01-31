@@ -1,9 +1,7 @@
 package by.haikou.bicycle_rental.command.impl.general;
 
 import by.haikou.bicycle_rental.command.ICommand;
-import by.haikou.bicycle_rental.command.exception.CommandException;
 import by.haikou.bicycle_rental.entity.User;
-import by.haikou.bicycle_rental.exception.UnauthorizedException;
 import by.haikou.bicycle_rental.service.UserService;
 import by.haikou.bicycle_rental.service.factory.ServiceFactory;
 import by.haikou.bicycle_rental.util.*;
@@ -19,12 +17,16 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * <p>Checks the input parameters for correctness and passes the user authorization command to the {@link UserService#login(String, String)}.</p>
+ * <p>If successful, directs user to the main page.</p>
+ */
 public class Login implements ICommand {
     private static final Logger LOGGER = LogManager.getLogger(Login.class);
     private UserService userService = ServiceFactory.getFactory().getUserService();
 
     @Override
-    public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, UnauthorizedException, CommandException {
+    public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String login = request.getParameter(ConstantsMng.PARAM_NAME_LOGIN);
         String password = MD5Converter.getHash(request.getParameter(ConstantsMng.PARAM_NAME_PASSWORD));
         Map<String, String> errorMap = validateLoginDetails(login, password, request);

@@ -21,6 +21,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * Gets the manager information from the request, creates a new object, and sends the command to the service to write the new manager to the database.
+ */
 public class AddManager implements ICommand {
     private static final Logger LOGGER = LogManager.getLogger(AddManager.class);
     private UserService userService = ServiceFactory.getFactory().getUserService();

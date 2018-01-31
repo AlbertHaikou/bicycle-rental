@@ -15,6 +15,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * <p>Extracts from the request the data about the parking.</p>
+ * <p>Forms a new object and sends the service a command to update chosen parking in the database.</p>
+ */
 public class UpdateParking implements ICommand {
     private static final Logger LOGGER = LogManager.getLogger(UpdateParking.class);
     private ParkingService parkingService = ServiceFactory.getFactory().getParkingService();

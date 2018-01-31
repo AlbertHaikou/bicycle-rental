@@ -16,6 +16,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * <p>Start point of chain to delete manager by id.</p>
+ * Delegates the task to the service method {@link ParkingService#deleteParking(Integer)}, then transfer control to {@link ShowParkingsPage} class.
+ */
 public class DeleteParking implements ICommand {
     private static final Logger LOGGER = LogManager.getLogger(DeleteParking.class);
     private ParkingService parkingService = ServiceFactory.getFactory().getParkingService();

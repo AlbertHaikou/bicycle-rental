@@ -13,6 +13,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * <p>Collects information about chosen parking from database using {@link ParkingService#getParkingById(Integer)}.</p>
+ * <p>Then sends the user to the parking editing page</p>
+ */
 public class ShowEditParkingPage implements ICommand {
     private static final Logger LOGGER = LogManager.getLogger(ShowEditParkingPage.class);
     private ParkingService parkingService = ServiceFactory.getFactory().getParkingService();

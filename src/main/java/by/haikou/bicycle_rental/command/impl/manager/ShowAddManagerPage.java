@@ -8,9 +8,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * Directs the user to the manager's add page.
+ */
 public class ShowAddManagerPage implements ICommand {
+
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher(ConstantsMng.ADD_EDIT_SUPPORTS).forward(request, response);
+        request.getRequestDispatcher(ConstantsMng.ADD_EDIT_MANAGER).forward(request, response);
     }
 }

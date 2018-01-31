@@ -14,6 +14,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.math.BigDecimal;
 
+/**
+ * Extracts from the request the data about the bicycle, forms a new object and sends the service a command to update chosen bicycle in the database.
+ */
 public class UpdateBike implements ICommand {
     private static final Logger LOGGER = LogManager.getLogger(UpdateBike.class);
     private BikeService bikeService = ServiceFactory.getFactory().getBikeService();

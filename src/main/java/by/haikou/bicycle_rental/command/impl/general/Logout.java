@@ -12,7 +12,7 @@ import java.io.IOException;
 
 public class Logout implements ICommand {
     @Override
-    public void execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException, CommandException, UnauthorizedException {
+    public void execute(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         HttpSession session = req.getSession();
         session.invalidate();
         resp.sendRedirect("main?");

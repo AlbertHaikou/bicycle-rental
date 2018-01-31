@@ -1,4 +1,4 @@
-package by.haikou.bicycle_rental.command.impl.user;
+package by.haikou.bicycle_rental.command.impl.manager;
 
 import by.haikou.bicycle_rental.command.CommandEnum;
 import by.haikou.bicycle_rental.command.ICommand;
@@ -16,6 +16,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * Removes manager privileges from the selected user.
+ */
 public class WithdrawPrivileges implements ICommand {
     private static final Logger LOGGER = LogManager.getLogger(WithdrawPrivileges.class);
     private UserService userService = ServiceFactory.getFactory().getUserService();

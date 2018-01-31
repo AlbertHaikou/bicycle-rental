@@ -13,18 +13,16 @@ import java.io.IOException;
 import static by.haikou.bicycle_rental.command.CommandEnum.SHOW_BIKES_IN_PARKING_PAGE;
 import static by.haikou.bicycle_rental.util.PaginationObject.DEFAULT_PAGE;
 
+/**
+ * <p>Takes information about bicycles on the selected parking from the database, using {@link BikeService#showBikeByParkingId(Integer, Integer)}.</p>
+ * <p>Then sends the user to the page with the received list of bicycles.</p>
+ */
 public class ShowBikesInParking implements ICommand {
     private BikeService bikeService = ServiceFactory.getFactory().getBikeService();
 
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-//        Map parameterMap = req.getParameterMap();
-//        if (parameterMap.containsKey("available") && req.getParameter("available").equals("true")) {
-//            req.setAttribute("bikes", bikeService.showAvailableBike());
-//        } else {
-//            req.setAttribute("bikes", bikeService.getAllBikes());
-//        }
         int id = Integer.parseInt(req.getParameter("id"));
         int page;
         try {

@@ -15,6 +15,9 @@ import java.io.IOException;
 import static by.haikou.bicycle_rental.command.CommandEnum.SHOW_MANAGERS;
 import static by.haikou.bicycle_rental.util.PaginationObject.DEFAULT_PAGE;
 
+/**
+ * <p>Forms a list of managers, given the number of the current page.</p>
+ */
 public class ShowManagersPage implements ICommand {
     private UserService userService = ServiceFactory.getFactory().getUserService();
 
@@ -33,6 +36,6 @@ public class ShowManagersPage implements ICommand {
             throw new CommandException(exc);
         }
         req.setAttribute("command", SHOW_MANAGERS.getValue());
-        req.getRequestDispatcher(ConstantsMng.LIST_SUPPORTS).forward(req, resp);
+        req.getRequestDispatcher(ConstantsMng.LIST_MANAGERS).forward(req, resp);
     }
 }

@@ -16,6 +16,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * <p>Start point of chain to delete manager by id.</p>
+ * Delegates the task to the service method {@link UserService#deleteUser(Integer)}, then transfer control to {@link ShowManagersPage} class.
+ */
 public class DeleteManager implements ICommand {
     private static final Logger LOGGER = LogManager.getLogger(DeleteManager.class);
     private UserService userService = ServiceFactory.getFactory().getUserService();

@@ -15,6 +15,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * Gets the parking information from the request, creates a new object, and sends the command to the service to write the new parking to the database.
+ */
 public class AddParking implements ICommand {
     private static final Logger LOGGER = LogManager.getLogger(AddParking.class);
     private ParkingService parkingService = ServiceFactory.getFactory().getParkingService();

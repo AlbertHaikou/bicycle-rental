@@ -11,6 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * Directs the user to the parking's add page.
+ */
 public class ShowAddParkingPage implements ICommand {
     ServiceFactory factory = ServiceFactory.getFactory();
 

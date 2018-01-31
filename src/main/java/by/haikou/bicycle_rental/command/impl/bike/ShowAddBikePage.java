@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * Collects information about parkings from database using {@link ParkingService#getAllParking()} and directs user to the adding bike page.
+ * Collects information about parkings from database using {@link ParkingService#getAllParking()} and directs user Directs the user to the page of adding a bicycle.
  */
 public class ShowAddBikePage implements ICommand {
     private ParkingService parkingService = ServiceFactory.getFactory().getParkingService();

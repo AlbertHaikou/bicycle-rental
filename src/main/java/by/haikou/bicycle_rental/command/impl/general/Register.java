@@ -1,9 +1,7 @@
 package by.haikou.bicycle_rental.command.impl.general;
 
 import by.haikou.bicycle_rental.command.ICommand;
-import by.haikou.bicycle_rental.command.exception.CommandException;
 import by.haikou.bicycle_rental.entity.User;
-import by.haikou.bicycle_rental.exception.UnauthorizedException;
 import by.haikou.bicycle_rental.service.UserService;
 import by.haikou.bicycle_rental.service.factory.ServiceFactory;
 import by.haikou.bicycle_rental.util.*;
@@ -19,12 +17,16 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * <p>Checks the input parameters for validity and passes the user registration command with user information to the {@link UserService#addUser(User)}.</p>
+ * <p>If successful, directs user to the main page.</p>
+ */
 public class Register implements ICommand {
     private static final Logger LOGGER = LogManager.getLogger(Register.class);
     UserService userService = ServiceFactory.getFactory().getUserService();
 
     @Override
-    public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, CommandException, UnauthorizedException {
+    public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         String firstName = request.getParameter(ConstantsMng.PARAM_NAME_FIRST_NAME);
         String lastName = request.getParameter(ConstantsMng.PARAM_NAME_LAST_NAME);

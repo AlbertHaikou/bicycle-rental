@@ -21,6 +21,10 @@ import java.util.Map;
 import static by.haikou.bicycle_rental.command.CommandEnum.SHOW_BIKES;
 import static by.haikou.bicycle_rental.util.PaginationObject.DEFAULT_PAGE;
 
+/**
+ * <p>Depending on the request parameters, forms a list of available or all bicycles, given the number of the current page.</p>
+ * <p>Adds to the request information about bike rental by the current user</p>
+ */
 public class ShowBikesList implements ICommand {
     private BikeService bikeService = ServiceFactory.getFactory().getBikeService();
     private RentItemService rentItemService = ServiceFactory.getFactory().getRentItemService();

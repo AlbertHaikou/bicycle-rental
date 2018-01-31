@@ -15,7 +15,10 @@ import java.io.IOException;
 import static by.haikou.bicycle_rental.command.CommandEnum.SHOW_PARKINGS;
 import static by.haikou.bicycle_rental.util.PaginationObject.DEFAULT_PAGE;
 
-public class ShowParkingPage implements ICommand {
+/**
+ * <p>Forms a list of rental points, given the number of the current page.</p>
+ */
+public class ShowParkingsPage implements ICommand {
     private ParkingService parkingService = ServiceFactory.getFactory().getParkingService();
 
     @Override

@@ -6,7 +6,7 @@ import javax.servlet.http.HttpSession;
 public class RequestUtils {
 
     /**
-     * Changes the localization of the current session.
+     * Changes the localization of the current session using the request parameter "locale".
      *
      * @param request
      */

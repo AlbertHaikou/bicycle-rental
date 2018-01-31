@@ -47,7 +47,7 @@ public class CommandFactory {
         commands.put(RENT_BIKE, new RentBike());
         commands.put(RETURN_BIKE, new ReturnBike());
 
-        commands.put(SHOW_PARKINGS, new ShowParkingPage());
+        commands.put(SHOW_PARKINGS, new ShowParkingsPage());
         commands.put(ADD_PARKING, new AddParking());
         commands.put(EDIT_PARKING, new UpdateParking());
         commands.put(SHOW_EDIT_PARKING_PAGE, new ShowEditParkingPage());

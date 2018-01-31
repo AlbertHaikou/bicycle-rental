@@ -25,13 +25,6 @@ public class FillUpBalance implements ICommand {
     private static final Logger LOGGER = LogManager.getLogger(FillUpBalance.class);
     UserService userService = ServiceFactory.getFactory().getUserService();
 
-    /**
-     * @param request
-     * @param response
-     * @throws ServletException
-     * @throws IOException
-     * @see ICommand
-     */
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
