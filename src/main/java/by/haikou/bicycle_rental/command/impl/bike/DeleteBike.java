@@ -17,8 +17,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * Start point of chain to delete bicycle by id.
- * Delegates the task to the service, then sends the user to the page with a list of bikes
+ * <p>Start point of chain to delete bicycle by id.</p>
+ * Delegates the task to the service method {@link BikeService#deleteBike(Integer)}, then transfer control to {@link ShowBikesList} class.
  */
 public class DeleteBike implements ICommand {
     private static final Logger LOGGER = LogManager.getLogger(DeleteBike.class);

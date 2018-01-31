@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.math.BigDecimal;
 
 /**
- * Use to take a loan.
+ * <p>Use to take a loan.</p>
  * The user is given money on credit, and he will be marked by the system as a debtor.
  */
 public class TakeALoan implements ICommand {

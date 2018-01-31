@@ -14,6 +14,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
+/**
+ * <p>Start point of chain to realize logic of rent bicycle by user.</p>
+ * Delegates the task to the service method {@link BikeService#rentBike(Integer, Integer)}, then redirect the user to the page with a list of bikes.
+ */
 public class RentBike implements ICommand {
     private static final Logger LOGGER = LogManager.getLogger(RentBike.class);
     private BikeService bikeService = ServiceFactory.getFactory().getBikeService();
