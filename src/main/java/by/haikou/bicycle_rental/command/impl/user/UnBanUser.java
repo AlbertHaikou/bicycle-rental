@@ -16,6 +16,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * Unban selected user.
+ */
 public class UnBanUser implements ICommand {
     private static final Logger LOGGER = LogManager.getLogger(UnBanUser.class);
     private UserService userService = ServiceFactory.getFactory().getUserService();

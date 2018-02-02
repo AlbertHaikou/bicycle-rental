@@ -14,7 +14,10 @@ import by.haikou.bicycle_rental.command.impl.profile.ShowEditProfilePage;
 import by.haikou.bicycle_rental.command.impl.profile.ShowProfile;
 import by.haikou.bicycle_rental.command.impl.profile.ShowRentalHistory;
 import by.haikou.bicycle_rental.command.impl.profile.UpdateProfile;
-import by.haikou.bicycle_rental.command.impl.user.*;
+import by.haikou.bicycle_rental.command.impl.user.AppointAsManager;
+import by.haikou.bicycle_rental.command.impl.user.BanUser;
+import by.haikou.bicycle_rental.command.impl.user.ShowUsersList;
+import by.haikou.bicycle_rental.command.impl.user.UnBanUser;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -79,6 +82,12 @@ public class CommandFactory {
         return factory;
     }
 
+    /**
+     * Returns an instance of the command class specified by the input parameter
+     *
+     * @param command
+     * @return instance of the command class
+     */
     public ICommand createCommand(CommandEnum command) {
         if (commands.containsKey(command)) {
             return commands.get(command);

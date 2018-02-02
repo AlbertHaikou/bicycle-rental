@@ -13,6 +13,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * <p>Collects information about current user from database using {@link UserService#getUserById(Integer)}.</p>
+ * <p>Then sends the user to profile editing page</p>
+ */
 public class ShowEditProfilePage implements ICommand {
     private static final Logger LOGGER = LogManager.getLogger(ShowEditProfilePage.class);
     private UserService userService = ServiceFactory.getFactory().getUserService();

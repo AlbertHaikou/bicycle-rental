@@ -16,6 +16,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * <p>Collects information about current user and his last rents from database using {@link UserService#getUserById(Integer)} and {@link RentItemService#allHistoryRent(Integer)}.</p>
+ * <p>Then sends the user to profile editing page</p>
+ */
 public class ShowProfile implements ICommand {
     private UserService userService = ServiceFactory.getFactory().getUserService();
     private RentItemService rentItemService = ServiceFactory.getFactory().getRentItemService();

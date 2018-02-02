@@ -88,7 +88,7 @@ public class ConnectionPool {
             try {
                 statement.close();
             } catch (SQLException e) {
-                LOGGER.error("Can't close prepared statement.", e);
+                LOGGER.log(Level.ERROR, "Can't close prepared statement.", e);
             }
         }
     }
@@ -98,7 +98,7 @@ public class ConnectionPool {
             try {
                 resultSet.close();
             } catch (SQLException e) {
-                LOGGER.error("Can't close result set.", e);
+                LOGGER.log(Level.ERROR, "Can't close result set.", e);
             }
         }
     }

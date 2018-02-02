@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * <p>Collects information about chosen manager from database using {@link UserService#getUserById(Integer)}}.</p>
+ * <p>Collects information about chosen manager from database using {@link UserService#getUserById(Integer)}.</p>
  * <p>Then sends the user to the manager editing page</p>
  */
 public class ShowEditManagerPage implements ICommand {

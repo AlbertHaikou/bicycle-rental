@@ -15,6 +15,9 @@ import java.io.IOException;
 import static by.haikou.bicycle_rental.command.CommandEnum.SHOW_USERS;
 import static by.haikou.bicycle_rental.util.PaginationObject.DEFAULT_PAGE;
 
+/**
+ * <p>Forms a list of users, given the number of the current page.</p>
+ */
 public class ShowUsersList implements ICommand {
     private UserService userService = ServiceFactory.getFactory().getUserService();
 

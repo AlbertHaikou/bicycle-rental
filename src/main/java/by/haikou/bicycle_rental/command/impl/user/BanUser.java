@@ -16,6 +16,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * Ban selected user.
+ */
 public class BanUser implements ICommand {
     private static final Logger LOGGER = LogManager.getLogger(BanUser.class);
     private UserService userService = ServiceFactory.getFactory().getUserService();

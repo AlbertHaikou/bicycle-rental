@@ -18,6 +18,10 @@ import java.io.IOException;
 import static by.haikou.bicycle_rental.command.CommandEnum.SHOW_RENTAL_HISTORY;
 import static by.haikou.bicycle_rental.util.PaginationObject.DEFAULT_PAGE;
 
+/**
+ * <p>Collects information about current user rents from database using {@link RentItemService#historyRent(Integer, Integer)}.</p>
+ * <p>Then sends the user to the rental history page.</p>
+ */
 public class ShowRentalHistory implements ICommand {
     private RentItemService rentItemService = ServiceFactory.getFactory().getRentItemService();
 

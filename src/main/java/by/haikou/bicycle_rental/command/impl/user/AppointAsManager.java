@@ -16,6 +16,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * Adds manager privileges to the selected user.
+ */
 public class AppointAsManager implements ICommand {
     private static final Logger LOGGER = LogManager.getLogger(AppointAsManager.class);
     private UserService userService = ServiceFactory.getFactory().getUserService();

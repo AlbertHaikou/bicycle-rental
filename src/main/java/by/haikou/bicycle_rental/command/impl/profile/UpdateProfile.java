@@ -20,6 +20,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * <p>Extracts from the request the data about the user and checks email for uniqueness.</p>
+ * <p>Forms a new object and sends the service a command to update current user in the database.</p>
+ */
 public class UpdateProfile implements ICommand {
     private static final Logger LOGGER = LogManager.getLogger(UpdateProfile.class);
     private UserService userService = ServiceFactory.getFactory().getUserService();
