@@ -12,6 +12,7 @@
 </head>
 <body>
 <jsp:include page="parts/navigation.jsp"/>
+<center><h3 class="red"><c:out value="${errorMsg}"/></h3></center>
 <div class="container">
     <div class="row">
         <div class="col-md-6 col-md-offset-3">

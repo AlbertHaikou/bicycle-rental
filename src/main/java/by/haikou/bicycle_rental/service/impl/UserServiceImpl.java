@@ -1,5 +1,6 @@
 package by.haikou.bicycle_rental.service.impl;
 
+import by.haikou.bicycle_rental.dao.RentItemDao;
 import by.haikou.bicycle_rental.dao.UserDao;
 import by.haikou.bicycle_rental.dao.factory.DAOFactory;
 import by.haikou.bicycle_rental.entity.User;
@@ -18,6 +19,7 @@ public class UserServiceImpl implements UserService {
 
     private static Logger LOGGER = LogManager.getLogger(UserService.class);
     private UserDao userDao = DAOFactory.getFactory().getUserDao();
+    private RentItemDao rentItemDao = DAOFactory.getFactory().getRentItemDao();
 
     @Override
     public User login(String login, String password) throws UserException {
@@ -43,6 +45,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void deleteUser(Integer userId) {
+
+        rentItemDao.deleteHistoryByUserId(userId);
         userDao.delete(userId);
     }
 

@@ -20,6 +20,13 @@ public class MySqlRentItemDao implements RentItemDao {
     private static final String SQL_FOR_FIND_TAKEN_BY_USER = "SELECT `id`,`bicycle_id`,`user_id`,`start_date`,`parking_from_id`," +
             "`start_date`, `end_date`,`parking_to_id`,`price`,`total_price` FROM `rent_item`  " +
             "WHERE `user_id`=? AND `total_price` IS NULL ORDER BY `start_date` DESC";
+    private static final String SQL_FOR_FIND_TAKEN_BY_BIKE = "SELECT `id`,`bicycle_id`,`user_id`,`start_date`,`parking_from_id`," +
+            "`start_date`, `end_date`,`parking_to_id`,`price`,`total_price` FROM `rent_item`  " +
+            "WHERE `bicycle_id`=? AND `total_price` IS NULL ORDER BY `start_date` DESC";
+
+    private static final String SQL_FOR_DELETE_HISTORY_BY_BIKE = "DELETE FROM `rent_item` WHERE `bicycle_id`= ?";
+
+    private static final String SQL_FOR_DELETE_HISTORY_BY_USER = "DELETE FROM `rent_item` WHERE `user_id`= ?";
 
 
     private final ConnectionPool pool = ConnectionPool.getPool();
@@ -113,9 +120,6 @@ public class MySqlRentItemDao implements RentItemDao {
 
             if (set.next()) {
                 result = ResultSetConverter.createRentItemEntity(set);
-//                if (result.getStatus()) {
-//                    result = null;
-//                }
             }
         } catch (SQLException e) {
             throw new DAOException(e);
@@ -125,5 +129,67 @@ public class MySqlRentItemDao implements RentItemDao {
         }
 
         return result;
+    }
+
+    @Override
+    public RentItem findTakenByBike(Integer bikeId) {
+        Connection connection = null;
+        PreparedStatement statement = null;
+        ResultSet set = null;
+        RentItem result = null;
+
+        try {
+            connection = pool.getConnection();
+            statement = connection.prepareStatement(SQL_FOR_FIND_TAKEN_BY_BIKE);
+            statement.setInt(1, bikeId);
+            set = statement.executeQuery();
+
+            if (set.next()) {
+                result = ResultSetConverter.createRentItemEntity(set);
+            }
+        } catch (SQLException e) {
+            throw new DAOException(e);
+        } finally {
+            pool.returnConnectionToPool(connection);
+            ConnectionPool.getPool().closeDbResources(statement, set);
+        }
+
+        return result;
+    }
+
+    @Override
+    public void deleteHistoryByBikeId(Integer bikeId) {
+        Connection connection = null;
+        PreparedStatement statement = null;
+
+        try {
+            connection = pool.getConnection();
+            statement = connection.prepareStatement(SQL_FOR_DELETE_HISTORY_BY_BIKE);
+            statement.setInt(1, bikeId);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new DAOException(e);
+        } finally {
+            pool.returnConnectionToPool(connection);
+            ConnectionPool.getPool().closeDbResources(statement);
+        }
+    }
+
+    @Override
+    public void deleteHistoryByUserId(Integer userId) {
+        Connection connection = null;
+        PreparedStatement statement = null;
+
+        try {
+            connection = pool.getConnection();
+            statement = connection.prepareStatement(SQL_FOR_DELETE_HISTORY_BY_USER);
+            statement.setInt(1, userId);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new DAOException(e);
+        } finally {
+            pool.returnConnectionToPool(connection);
+            ConnectionPool.getPool().closeDbResources(statement);
+        }
     }
 }

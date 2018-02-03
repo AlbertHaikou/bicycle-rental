@@ -15,7 +15,33 @@
 <body style="margin-bottom: 0px;">
 <jsp:include page="parts/navigation.jsp"/>
 <center style="color:graytext;"><h3><fmt:message key="BIKES"/></h3></center>
-<center style="color:graytext;"><h4><c:out value="${bid}"/></h4></center>
+<center><h3 class="red"><c:out value="${errorMsg}"/></h3></center>
+<c:choose>
+    <c:when test="${'true'.equalsIgnoreCase(param.available)}">
+        <center>
+            <a href="main?command=showBikes">
+                <button class="btn btn-mini"
+                        type="button" style="border-top-width: 2px;padding-left: 0px;
+    padding-right: 0px; padding-top: 0px; padding-bottom: 0px;border-bottom-width: 2px;
+    border-left-width: 5px; border-right-width: 5px;
+    color: navy;"><fmt:message key="SHOW_ALL_BIKES"/></button>
+            </a>
+        </center>
+        </br>
+    </c:when>
+    <c:otherwise>
+        <center>
+            <a href="main?command=showBikes&available=true">
+                <button class="btn btn-mini"
+                        type="button" style="border-top-width: 2px;padding-left: 0px;
+            padding-right: 0px; padding-top: 0px; padding-bottom: 0px;border-bottom-width: 2px;
+            border-left-width: 5px; border-right-width: 5px;color: navy;">
+                    <fmt:message key="SHOW_AVALAIBLE_BIKES"/></button>
+            </a>
+        </center>
+        </br>
+    </c:otherwise>
+</c:choose>
 <table class="table table-hover">
     <thead>
     <tr>
@@ -38,32 +64,6 @@
     </tr>
     </thead>
     <tbody>
-    <c:choose>
-        <c:when test="${'true'.equalsIgnoreCase(param.available)}">
-            <center>
-                <a href="main?command=showBikes">
-                    <button class="btn btn-mini"
-                            type="button" style="border-top-width: 2px;padding-left: 0px;
-    padding-right: 0px; padding-top: 0px; padding-bottom: 0px;border-bottom-width: 2px;
-    border-left-width: 5px; border-right-width: 5px;
-    color: navy;"><fmt:message key="SHOW_ALL_BIKES"/></button>
-                </a>
-            </center>
-            </br>
-        </c:when>
-        <c:otherwise>
-            <center>
-                <a href="main?command=showBikes&available=true">
-                    <button class="btn btn-mini"
-                            type="button" style="border-top-width: 2px;padding-left: 0px;
-            padding-right: 0px; padding-top: 0px; padding-bottom: 0px;border-bottom-width: 2px;
-            border-left-width: 5px; border-right-width: 5px;color: navy;">
-                        <fmt:message key="SHOW_AVALAIBLE_BIKES"/></button>
-                </a>
-            </center>
-            </br>
-        </c:otherwise>
-    </c:choose>
     <c:forEach items="${items.elementList}" var="bike">
         <tr>
             <td><c:out value="${bike.bicycleId}"/></td>
@@ -99,7 +99,8 @@
                         <td>
                             <c:if test="${not user.banned}">
                                 <c:if test="${empty userRentedBikeId}">
-                                    <a class="btn btn-rent" href="main?command=rentBike&id=<c:out value="${bike.bicycleId}"/>"><fmt:message
+                                    <a class="btn btn-rent"
+                                       href="main?command=rentBike&id=<c:out value="${bike.bicycleId}"/>"><fmt:message
                                             key="TO_RENT"/></a>
                                 </c:if>
                             </c:if>
@@ -108,7 +109,8 @@
                     <c:otherwise>
                         <td>
                             <c:if test="${not empty userRentedBikeId && bike.bicycleId eq userRentedBikeId}">
-                                <a class="btn btn-rent" href="main?command=returnBike&id=<c:out value="${bike.bicycleId}"/>"><fmt:message
+                                <a class="btn btn-rent"
+                                   href="main?command=returnBike&id=<c:out value="${bike.bicycleId}"/>"><fmt:message
                                         key="TO_RETURN"/></a>
                             </c:if>
                         </td>

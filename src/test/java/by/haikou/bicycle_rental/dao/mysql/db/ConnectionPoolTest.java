@@ -4,7 +4,7 @@ import org.testng.annotations.Test;
 
 import java.sql.Connection;
 
-import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
 
 
 public class ConnectionPoolTest {
@@ -13,6 +13,6 @@ public class ConnectionPoolTest {
         ConnectionPool pool = ConnectionPool.getPool();
         Connection c = pool.getConnection();
         pool.returnConnectionToPool(c);
-        assertEquals(true, c != null);
+        assertTrue(c != null);
     }
 }

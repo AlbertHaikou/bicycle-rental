@@ -15,4 +15,10 @@ public interface RentItemDao {
 
     RentItem findTakenByUser(Integer userId);
 
+    RentItem findTakenByBike(Integer bikeId);
+
+    void deleteHistoryByBikeId(Integer bikeId);
+
+    void deleteHistoryByUserId(Integer bikeId);
+
 }

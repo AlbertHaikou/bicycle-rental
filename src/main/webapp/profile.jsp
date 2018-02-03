@@ -24,7 +24,7 @@
                 <div class="profile-sidebar">
 
                     <div class="profile-userpic">
-                        <img src="img/user.png"
+                        <img src="img/user.jpg"
                              class="img-responsive" alt="">
                     </div>
 

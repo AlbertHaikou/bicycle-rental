@@ -21,6 +21,7 @@ public class BikeServiceImpl implements BikeService {
 
     @Override
     public void deleteBike(Integer id) {
+        rentItemDao.deleteHistoryByBikeId(id);
         bikeDao.deleteBike(id);
     }
 
@@ -53,6 +54,11 @@ public class BikeServiceImpl implements BikeService {
 
     @Override
     public void updateBike(Bicycle bike) {
+
+        if (bikeDao.getBikeById(bike.getBicycleId()).getIsAvailable() == false) {
+            RentItem item = rentItemDao.findTakenByBike(bike.getBicycleId());
+            returnBike(item.getBikeId(), item.getUserId());
+        }
         bikeDao.updateBike(bike);
     }
 

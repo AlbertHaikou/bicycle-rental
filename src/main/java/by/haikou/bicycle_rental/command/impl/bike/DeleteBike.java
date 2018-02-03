@@ -7,6 +7,9 @@ import by.haikou.bicycle_rental.command.factory.CommandFactory;
 import by.haikou.bicycle_rental.exception.UnauthorizedException;
 import by.haikou.bicycle_rental.service.BikeService;
 import by.haikou.bicycle_rental.service.factory.ServiceFactory;
+import by.haikou.bicycle_rental.util.ConstantsMng;
+import by.haikou.bicycle_rental.util.MessageUtils;
+import by.haikou.bicycle_rental.util.RequestUtils;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -26,8 +29,13 @@ public class DeleteBike implements ICommand {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String id = request.getParameter("id");
-        bikeService.deleteBike(Integer.parseInt(id));
+        Integer id = Integer.parseInt(request.getParameter("id"));
+        if (bikeService.getBikeById(id).getIsAvailable()) {
+            bikeService.deleteBike(id);
+        } else {
+            String deleteBikeErrMsg = MessageUtils.getProperty(RequestUtils.getLocale(request), MessageUtils.DELETE_BIKE_ERROR_MESSAGE);
+            request.setAttribute(ConstantsMng.ATR_ERRORS, deleteBikeErrMsg);
+        }
         try {
             CommandFactory.getFactory().createCommand(CommandEnum.SHOW_BIKES).execute(request, response);
         } catch (CommandException e) {

@@ -2,7 +2,7 @@ package by.haikou.bicycle_rental.dao;
 
 import by.haikou.bicycle_rental.dao.exceptions.DAOException;
 import by.haikou.bicycle_rental.dao.factory.MySQLDAOFactory;
-import by.haikou.bicycle_rental.entity.User;
+import by.haikou.bicycle_rental.entity.Parking;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -12,18 +12,18 @@ import java.util.List;
 
 import static org.testng.Assert.assertTrue;
 
-public class UserDAOTest {
-    private static final Logger LOGGER = LogManager.getLogger(UserDAOTest.class);
+public class ParkingDAOTest {
+    private static final Logger LOGGER = LogManager.getLogger(ParkingDAOTest.class);
 
     @Test
     public void getAllUsersTest() {
-        List<User> users = null;
-        UserDao dao = MySQLDAOFactory.getFactory().getUserDao();
+        List<Parking> parkings = null;
+        ParkingDao dao = MySQLDAOFactory.getFactory().getParkingDao();
         try {
-            users = dao.getAllUsers();
+            parkings = dao.getAllParking();
         } catch (DAOException exc) {
             LOGGER.log(Level.ERROR, exc);
         }
-        assertTrue(users.size() > 0);
+        assertTrue(parkings.size() > 0);
     }
 }

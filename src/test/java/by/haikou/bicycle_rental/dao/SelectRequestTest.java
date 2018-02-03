@@ -11,7 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
 
 public class SelectRequestTest {
     private static final Logger LOGGER = LogManager.getLogger(SelectRequestTest.class);
@@ -31,6 +31,6 @@ public class SelectRequestTest {
         } catch (SQLException exc) {
             LOGGER.log(Level.ERROR, exc);
         }
-        assertEquals(true, resultSet != null);
+        assertTrue(resultSet != null);
     }
 }
