@@ -34,7 +34,7 @@ public class ShowManagersPage implements ICommand {
         }
 
         try {
-            request.setAttribute("items", userService.getAllSupports(page));
+            request.setAttribute("items", userService.getAllManagers(page));
         } catch (DAOException exc) {
             throw new CommandException(exc);
         }

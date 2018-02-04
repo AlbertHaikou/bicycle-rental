@@ -58,21 +58,27 @@ public class UserServiceImpl implements UserService {
         return userDao.getBalanceByUserId(userId);
     }
 
+    /**
+     * If user not a debtor, he just add money to his balance, else he first pay off his credit.
+     *
+     * @param sum
+     * @param userId
+     */
     @Override
-    public void fillUpUserBalance(BigDecimal sum, Integer id) {
-        if (!userDao.isUserDebtor(id)) {
-            userDao.fillUpBalance(sum, id);
+    public void fillUpUserBalance(BigDecimal sum, Integer userId) {
+        if (!userDao.isUserDebtor(userId)) {
+            userDao.fillUpBalance(sum, userId);
         } else {
-            BigDecimal credit = userDao.getCreditByUserId(id);
+            BigDecimal credit = userDao.getCreditByUserId(userId);
             if (sum.compareTo(credit) > 0) {
-                userDao.repayALoan(credit.negate(), id);
-                userDao.updateIsDebtor(false, id);
-                userDao.fillUpBalance(sum.add(credit.negate()), id);
+                userDao.repayALoan(credit.negate(), userId);
+                userDao.updateIsDebtor(false, userId);
+                userDao.fillUpBalance(sum.add(credit.negate()), userId);
             } else if (sum.compareTo(credit) < 0) {
-                userDao.repayALoan(sum.negate(), id);
+                userDao.repayALoan(sum.negate(), userId);
             } else {
-                userDao.repayALoan(credit.negate(), id);
-                userDao.updateIsDebtor(false, id);
+                userDao.repayALoan(credit.negate(), userId);
+                userDao.updateIsDebtor(false, userId);
             }
         }
     }
@@ -82,6 +88,13 @@ public class UserServiceImpl implements UserService {
         userDao.addUser(user);
     }
 
+    /**
+     * Registers the taking of a loan by the user.
+     * User gets money for balance, but becomes debtor.
+     *
+     * @param sum
+     * @param id
+     */
     @Override
     public void takeALoan(BigDecimal sum, Integer id) {
         userDao.repayALoan(sum, id);
@@ -125,12 +138,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> getAllSupports() {
+    public List<User> getAllManagers() {
         return userDao.getAllManagers();
     }
 
     @Override
-    public PaginationObject<User> getAllSupports(Integer page) {
+    public PaginationObject<User> getAllManagers(Integer page) {
         PaginationObject<User> paginationObject = new PaginationObject<>();
         List<User> users = userDao.getAllManagers();
         paginationObject.setPageCount((int) Math.ceil((double) users.size() / PaginationObject.PER_PAGE));
