@@ -37,7 +37,7 @@ public interface ICommand {
                 return;
             }
         }
-        throw new UnauthorizedException("Not enough permissions for this operation " + currentRole + " " + ServiceFactory.getFactory().getUserService().getUserById(1));
+        throw new UnauthorizedException("Not enough permissions for this operation");
     }
 
 
