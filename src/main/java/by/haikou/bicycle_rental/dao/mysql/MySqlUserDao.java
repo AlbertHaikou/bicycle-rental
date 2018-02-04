@@ -31,7 +31,7 @@ public class MySqlUserDao implements UserDao {
     private static final String SQL_FOR_UPDATE_PROFILE = "UPDATE `user` SET `first_name`=?, `last_name`=?, `email`=?\n" +
             "WHERE `id`=?";
 
-    private static final String SQL_FOR_GET_USER_BY_ID = "SELECT `id`,`first_name`,`last_name`,`email`,`password`,`role`, `banned`, `balance` " +
+    private static final String SQL_FOR_GET_USER_BY_ID = "SELECT `id`,`first_name`,`last_name`,`email`,`password`,`role`, `banned`, `balance`" +
             "FROM `user` \n" +
             "WHERE `id`=?";
     private static final String SQL_FOR_DELETE_USER = "DELETE " +
@@ -63,6 +63,19 @@ public class MySqlUserDao implements UserDao {
     private final ConnectionPool pool = ConnectionPool.getPool();
 
     @Override
+    public User getUser(String login, String password) throws DAOException {
+        User user = getUser(login);
+        if (user != null) {
+            if (password.equals(user.getPassword())) {
+                return user;
+            } else {
+                return null;
+            }
+        }
+        return null;
+    }
+
+    @Override
     public User getUser(String login) throws DAOException {
         User entity = null;
         User.Role role = User.Role.USER;
@@ -86,9 +99,7 @@ public class MySqlUserDao implements UserDao {
                     entity.setRole(role);
                 }
             }
-
             return entity;
-
         } catch (SQLException e) {
             throw new DAOException(e);
         } finally {
@@ -98,17 +109,38 @@ public class MySqlUserDao implements UserDao {
     }
 
     @Override
-    public User getUser(String login, String password) throws DAOException {
-        User user = getUser(login);
-        if (user != null) {
-            if (password.equals(user.getPassword())) {
-                return user;
-            } else {
-                return null;
-            }
+    public User getUserById(Integer userId) throws DAOException {
+        if (userId == null) {
+            return null;
         }
-        return null;
+        User entity = null;
+        User.Role role = User.Role.USER;
+        Connection connection = null;
+        PreparedStatement statement = null;
+        ResultSet set = null;
+
+        try {
+            connection = pool.getConnection();
+            statement = connection.prepareStatement(SQL_FOR_GET_USER_BY_ID);
+            statement.setInt(1, userId);
+            set = statement.executeQuery();
+
+            while (set.next()) {
+                role = User.Role.valueOf(set.getString("role").toUpperCase());
+            }
+            if (set.previous()) {
+                entity = ResultSetConverter.createUserEntity(set);
+                entity.setRole(role);
+            }
+            return entity;
+        } catch (SQLException e) {
+            throw new DAOException(e);
+        } finally {
+            pool.returnConnectionToPool(connection);
+            ConnectionPool.getPool().closeDbResources(statement, set);
+        }
     }
+
 
     @Override
     public List<User> getAllUsers() throws DAOException {
@@ -182,36 +214,6 @@ public class MySqlUserDao implements UserDao {
             pool.returnConnectionToPool(connection);
             ConnectionPool.getPool().closeDbResources(statement);
         }
-    }
-
-
-    @Override
-    public User getUserById(Integer userId) throws DAOException {
-        if (userId == null) {
-            return null;
-        }
-        Connection connection = null;
-        PreparedStatement statement = null;
-        ResultSet set = null;
-
-        try {
-            connection = pool.getConnection();
-            statement = connection.prepareStatement(SQL_FOR_GET_USER_BY_ID);
-            statement.setInt(1, userId);
-            set = statement.executeQuery();
-
-            if (set.next()) {
-                User entity = ResultSetConverter.createUserEntity(set);
-                return entity;
-            }
-        } catch (SQLException e) {
-            throw new DAOException(e);
-        } finally {
-            pool.returnConnectionToPool(connection);
-            ConnectionPool.getPool().closeDbResources(statement, set);
-        }
-
-        return null;
     }
 
     @Override

@@ -2,6 +2,8 @@ package by.haikou.bicycle_rental.command.impl.bike;
 
 import by.haikou.bicycle_rental.command.ICommand;
 import by.haikou.bicycle_rental.entity.Bicycle;
+import by.haikou.bicycle_rental.entity.User;
+import by.haikou.bicycle_rental.exception.UnauthorizedException;
 import by.haikou.bicycle_rental.service.BikeService;
 import by.haikou.bicycle_rental.service.ParkingService;
 import by.haikou.bicycle_rental.service.factory.ServiceFactory;
@@ -19,12 +21,14 @@ import java.io.IOException;
  * <p>Then directs user to the editing bike page.</p>
  */
 public class ShowEditBikePage implements ICommand {
+
     private static final Logger LOGGER = LogManager.getLogger(ShowEditBikePage.class);
     private BikeService bikeService = ServiceFactory.getFactory().getBikeService();
     private ParkingService parkingService = ServiceFactory.getFactory().getParkingService();
 
     @Override
-    public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, UnauthorizedException {
+        checkRoots(request, new User.Role[]{User.Role.MANAGER, User.Role.ADMINISTRATOR});
         Bicycle bike = bikeService.getBikeById(Integer.parseInt(request.getParameter("id")));
         request.setAttribute("bike", bike);
         request.setAttribute("parkings", parkingService.getAllParking());

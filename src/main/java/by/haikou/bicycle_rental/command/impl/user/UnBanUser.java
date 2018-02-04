@@ -4,6 +4,7 @@ import by.haikou.bicycle_rental.command.CommandEnum;
 import by.haikou.bicycle_rental.command.ICommand;
 import by.haikou.bicycle_rental.command.exception.CommandException;
 import by.haikou.bicycle_rental.command.factory.CommandFactory;
+import by.haikou.bicycle_rental.entity.User;
 import by.haikou.bicycle_rental.exception.UnauthorizedException;
 import by.haikou.bicycle_rental.service.UserService;
 import by.haikou.bicycle_rental.service.factory.ServiceFactory;
@@ -24,7 +25,8 @@ public class UnBanUser implements ICommand {
     private UserService userService = ServiceFactory.getFactory().getUserService();
 
     @Override
-    public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException , UnauthorizedException {
+        checkRoots(request, new User.Role[]{User.Role.MANAGER, User.Role.ADMINISTRATOR});
         Integer id = Integer.parseInt(request.getParameter("id"));
         userService.unBanUser(id);
         try {

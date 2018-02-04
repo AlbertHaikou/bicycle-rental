@@ -3,6 +3,7 @@ package by.haikou.bicycle_rental.command.impl.parking;
 import by.haikou.bicycle_rental.command.ICommand;
 import by.haikou.bicycle_rental.command.exception.CommandException;
 import by.haikou.bicycle_rental.entity.Parking;
+import by.haikou.bicycle_rental.entity.User;
 import by.haikou.bicycle_rental.exception.UnauthorizedException;
 import by.haikou.bicycle_rental.service.ParkingService;
 import by.haikou.bicycle_rental.service.factory.ServiceFactory;
@@ -24,10 +25,11 @@ public class UpdateParking implements ICommand {
     private ParkingService parkingService = ServiceFactory.getFactory().getParkingService();
 
     @Override
-    public void execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException, CommandException, UnauthorizedException {
+    public void execute(HttpServletRequest request, HttpServletResponse resp) throws ServletException, IOException, CommandException, UnauthorizedException {
+        checkRoots(request, new User.Role[]{User.Role.MANAGER, User.Role.ADMINISTRATOR});
         Parking parking = new Parking();
-        parking.setStreet(req.getParameter("street"));
-        parking.setParkingId(Integer.parseInt(req.getParameter("id")));
+        parking.setStreet(request.getParameter("street"));
+        parking.setParkingId(Integer.parseInt(request.getParameter("id")));
         parkingService.updateParking(parking);
         resp.sendRedirect(ConstantsMng.SHOW_PARKINGS);
 

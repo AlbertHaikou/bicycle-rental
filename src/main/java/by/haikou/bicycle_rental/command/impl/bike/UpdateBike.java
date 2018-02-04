@@ -2,6 +2,8 @@ package by.haikou.bicycle_rental.command.impl.bike;
 
 import by.haikou.bicycle_rental.command.ICommand;
 import by.haikou.bicycle_rental.entity.Bicycle;
+import by.haikou.bicycle_rental.entity.User;
+import by.haikou.bicycle_rental.exception.UnauthorizedException;
 import by.haikou.bicycle_rental.service.BikeService;
 import by.haikou.bicycle_rental.service.factory.ServiceFactory;
 import by.haikou.bicycle_rental.util.ConstantsMng;
@@ -22,7 +24,8 @@ public class UpdateBike implements ICommand {
     private BikeService bikeService = ServiceFactory.getFactory().getBikeService();
 
     @Override
-    public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, UnauthorizedException {
+        checkRoots(request, new User.Role[]{User.Role.MANAGER, User.Role.ADMINISTRATOR});
         Bicycle bike = new Bicycle();
         bike.setType(request.getParameter("type"));
         bike.setModel(request.getParameter("model"));

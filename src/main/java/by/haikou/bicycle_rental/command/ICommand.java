@@ -3,6 +3,7 @@ package by.haikou.bicycle_rental.command;
 import by.haikou.bicycle_rental.command.exception.CommandException;
 import by.haikou.bicycle_rental.entity.User;
 import by.haikou.bicycle_rental.exception.UnauthorizedException;
+import by.haikou.bicycle_rental.service.factory.ServiceFactory;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -15,19 +16,30 @@ import java.io.IOException;
  * @author Albert Haikou
  */
 public interface ICommand {
-    default void checkRoots(HttpServletRequest req, User.Role[] needLevels)
-            throws ServletException, IOException, CommandException, UnauthorizedException {
+    /**
+     * Checks if the user has enough access level for further execution
+     *
+     * @param request
+     * @param needLevels required access levels
+     * @throws ServletException
+     * @throws IOException
+     * @throws UnauthorizedException
+     */
+    default void checkRoots(HttpServletRequest request, User.Role[] needLevels)
+            throws ServletException, IOException, UnauthorizedException {
         if ((needLevels.length == 0) || (needLevels == null)) {
             return;
         }
-        String currentLevel = (String) req.getSession().getAttribute("role");
+        User currentUser = (User) request.getSession().getAttribute("user");
+        User.Role currentRole = ServiceFactory.getFactory().getUserService().getUserById(currentUser.getId()).getRole();
         for (User.Role needLevel : needLevels) {
-            if (needLevel.getValue().equals(currentLevel)) {
+            if (needLevel.equals(currentRole)) {
                 return;
             }
         }
-        throw new UnauthorizedException("Not enough permissions for this operation");
+        throw new UnauthorizedException("Not enough permissions for this operation " + currentRole + " " + ServiceFactory.getFactory().getUserService().getUserById(1));
     }
+
 
     /**
      * Main project method. Used in all Command classes to realize program logic.

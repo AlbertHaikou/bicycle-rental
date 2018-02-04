@@ -28,17 +28,6 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User login(String login) {
-        User user = null;
-        try {
-            user = userDao.getUser(login);
-        } catch (Exception e) {
-            LOGGER.log(Level.ERROR, e);
-        }
-        return user;
-    }
-
-    @Override
     public List<User> getAllUsers() {
         return userDao.getAllUsers();
     }

@@ -4,6 +4,7 @@ import by.haikou.bicycle_rental.command.CommandEnum;
 import by.haikou.bicycle_rental.command.ICommand;
 import by.haikou.bicycle_rental.command.exception.CommandException;
 import by.haikou.bicycle_rental.command.factory.CommandFactory;
+import by.haikou.bicycle_rental.entity.User;
 import by.haikou.bicycle_rental.exception.UnauthorizedException;
 import by.haikou.bicycle_rental.service.ParkingService;
 import by.haikou.bicycle_rental.service.factory.ServiceFactory;
@@ -25,7 +26,8 @@ public class DeleteParking implements ICommand {
     private ParkingService parkingService = ServiceFactory.getFactory().getParkingService();
 
     @Override
-    public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, UnauthorizedException {
+        checkRoots(request, new User.Role[]{User.Role.MANAGER, User.Role.ADMINISTRATOR});
         String id = request.getParameter("id");
         parkingService.deleteParking(Integer.parseInt(id));
         try {

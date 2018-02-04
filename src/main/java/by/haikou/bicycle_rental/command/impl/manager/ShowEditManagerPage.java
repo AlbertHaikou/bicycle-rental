@@ -2,6 +2,7 @@ package by.haikou.bicycle_rental.command.impl.manager;
 
 import by.haikou.bicycle_rental.command.ICommand;
 import by.haikou.bicycle_rental.entity.User;
+import by.haikou.bicycle_rental.exception.UnauthorizedException;
 import by.haikou.bicycle_rental.service.UserService;
 import by.haikou.bicycle_rental.service.factory.ServiceFactory;
 import by.haikou.bicycle_rental.util.ConstantsMng;
@@ -23,7 +24,8 @@ public class ShowEditManagerPage implements ICommand {
 
 
     @Override
-    public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, UnauthorizedException {
+        checkRoots(request, new User.Role[]{User.Role.ADMINISTRATOR});
         User user = userService.getUserById(Integer.parseInt(request.getParameter("id")));
         request.setAttribute("manager", user);
         request.getRequestDispatcher(ConstantsMng.ADD_EDIT_MANAGER).forward(request, response);

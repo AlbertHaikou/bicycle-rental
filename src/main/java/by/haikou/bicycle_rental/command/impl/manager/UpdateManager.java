@@ -29,7 +29,8 @@ public class UpdateManager implements ICommand {
     private UserService userService = ServiceFactory.getFactory().getUserService();
 
     @Override
-    public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, UnauthorizedException {
+        checkRoots(request, new User.Role[]{User.Role.ADMINISTRATOR});
         String loginMsg = MessageUtils.getProperty(RequestUtils.getLocale(request), MessageUtils.NOT_UNIQ_LIGIN_ERROR_MESSAGE);
         if (!request.getParameter("currentEmail").equals(request.getParameter("email"))
                 && !userService.isLoginFree(request.getParameter("email"))) {

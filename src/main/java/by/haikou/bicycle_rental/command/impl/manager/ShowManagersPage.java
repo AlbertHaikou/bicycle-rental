@@ -3,6 +3,8 @@ package by.haikou.bicycle_rental.command.impl.manager;
 import by.haikou.bicycle_rental.command.ICommand;
 import by.haikou.bicycle_rental.command.exception.CommandException;
 import by.haikou.bicycle_rental.dao.exceptions.DAOException;
+import by.haikou.bicycle_rental.entity.User;
+import by.haikou.bicycle_rental.exception.UnauthorizedException;
 import by.haikou.bicycle_rental.service.UserService;
 import by.haikou.bicycle_rental.service.factory.ServiceFactory;
 import by.haikou.bicycle_rental.util.ConstantsMng;
@@ -22,20 +24,21 @@ public class ShowManagersPage implements ICommand {
     private UserService userService = ServiceFactory.getFactory().getUserService();
 
     @Override
-    public void execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException, CommandException {
+    public void execute(HttpServletRequest request, HttpServletResponse resp) throws ServletException, IOException, CommandException , UnauthorizedException {
+        checkRoots(request, new User.Role[]{User.Role.ADMINISTRATOR});
         int page;
         try {
-            page = Integer.parseInt(req.getParameter("page"));
+            page = Integer.parseInt(request.getParameter("page"));
         } catch (NumberFormatException exc) {
             page = DEFAULT_PAGE;
         }
 
         try {
-            req.setAttribute("items", userService.getAllSupports(page));
+            request.setAttribute("items", userService.getAllSupports(page));
         } catch (DAOException exc) {
             throw new CommandException(exc);
         }
-        req.setAttribute("command", SHOW_MANAGERS.getValue());
-        req.getRequestDispatcher(ConstantsMng.LIST_MANAGERS).forward(req, resp);
+        request.setAttribute("command", SHOW_MANAGERS.getValue());
+        request.getRequestDispatcher(ConstantsMng.LIST_MANAGERS).forward(request, resp);
     }
 }

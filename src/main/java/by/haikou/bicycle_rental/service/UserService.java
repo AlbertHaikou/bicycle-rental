@@ -8,10 +8,15 @@ import java.math.BigDecimal;
 import java.util.List;
 
 public interface UserService {
-
+    /**
+     * Checks login and password for correspondence in the database and authorizes the user in case of success.
+     *
+     * @param login
+     * @param password
+     * @return
+     * @throws UserException
+     */
     User login(String login, String password) throws UserException;
-
-    User login(String login) throws UserException;
 
     List<User> getAllUsers();
 
