@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<fmt:setLocale value="${not empty sessionScope.locale ? sessionScope.locale : 'en_US'}"/>
+<fmt:setLocale value="${not empty sessionScope.locale ? sessionScope.locale : 'ru_RU'}"/>
 <fmt:setBundle basename="messages"/>
 <!doctype html>
 <html>
@@ -87,7 +87,7 @@
                             <label><fmt:message key="PARKING"/></label><br/>
                             <select class="input-sm" name="parkingId">
                                 <c:forEach items="${parkings}" var="parking">
-                                    <option value="${parking.parkingId}"  ${parking.parkingId == bike.parkingId ? 'selected' : ''}>
+                                    <option value="${parking.parkingId}"  ${parking.parkingId eq bike.parkingId ? 'selected' : ''}>
                                         <c:out value="${parking.street}"/>
                                     </option>
                                 </c:forEach>

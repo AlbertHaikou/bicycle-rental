@@ -2,7 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page session="true" %>
-<fmt:setLocale value="${not empty sessionScope.locale ? sessionScope.locale : 'en_US'}"/>
+<fmt:setLocale value="${not empty sessionScope.locale ? sessionScope.locale : 'ru_RU'}"/>
 <fmt:setBundle basename="messages"/>
 <!doctype html>
 <html>
@@ -22,12 +22,10 @@
         <div class="row profile">
             <div class="col-md-4">
                 <div class="profile-sidebar">
-
                     <div class="profile-userpic">
                         <img src="img/user.jpg"
                              class="img-responsive" alt="">
                     </div>
-
                     <div class="profile-usertitle">
                         <div class="profile-usertitle-name">
                             <c:out value="${requestScope.profile.firstName}"/> <c:out

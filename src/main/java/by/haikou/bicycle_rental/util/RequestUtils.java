@@ -13,12 +13,16 @@ public class RequestUtils {
     public static void setLocale(HttpServletRequest request) {
         HttpSession session = request.getSession(true);
         String locale = request.getParameter("locale");
-        if (locale.equals("eng")) {
-            session.setAttribute("locale", "en_US");
-        } else if (locale.equals("rus")) {
-            session.setAttribute("locale", "ru_RU");
-        } else if (locale.equals("bel")) {
-            session.setAttribute("locale", "by_BY");
+        switch (locale) {
+            case "rus":
+                session.setAttribute("locale", "ru_RU");
+                break;
+            case "eng":
+                session.setAttribute("locale", "en_US");
+                break;
+            case "bel":
+                session.setAttribute("locale", "by_BY");
+                break;
         }
     }
 
@@ -29,7 +33,7 @@ public class RequestUtils {
     public static String getLocale(HttpServletRequest request) {
         String locale = (String) request.getSession().getAttribute("locale");
         if (StringUtils.isEmpty(locale)) {
-            locale = "en_US";
+            locale = "ru_RU";
         }
         return locale;
     }

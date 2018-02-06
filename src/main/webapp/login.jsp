@@ -1,7 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<fmt:setLocale value="${not empty sessionScope.locale ? sessionScope.locale : 'en_US'}"/>
+<fmt:setLocale value="${not empty sessionScope.locale ? sessionScope.locale : 'ru_RU'}"/>
 <fmt:setBundle basename="messages"/>
 <!doctype html>
 <html>
@@ -46,8 +46,7 @@
                        required
                        title="Use Latin letters, ._%+- and digits, then @, followed by Latin letters, symbols -. and numbers. Further . and after it domain of 2-4 Latin letters"
                        name="email" placeholder="<fmt:message key="EMAIL"/>"
-                       rel="tooltp" pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
-                       title='<fmt:message key="ENTER_EMAIL"/>'>
+                       pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
                 <c:out value="${error.login}"/>
             </div>
             <div class="form-group">
@@ -59,8 +58,7 @@
                        required
                        pattern="(?=^.{6,}$)^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$"
                        title="Min 1 UpperCase latin, 1 LowerCase latin and 1 Number, 6+ symbols"
-                       placeholder="<fmt:message key="PASSWORD"/>" rel="tooltp"
-                       title="<fmt:message key="ENTER_PASSWORD"/>">
+                       placeholder="<fmt:message key="PASSWORD"/>">
                 <c:out value="${error.password}"/>
             </div>
         </div>

@@ -1,12 +1,10 @@
 (function ($) {
     $.fn.floatLabels = function (options) {
 
-        // Settings
         var self = this;
         var settings = $.extend({}, options);
 
 
-        // Event Handlers
         function registerEventHandlers() {
             self.on('input keyup change', 'input, textarea', function () {
                 actions.swapLabels(this);
@@ -14,7 +12,6 @@
         }
 
 
-        // Actions
         var actions = {
             initialize: function () {
                 self.each(function () {
@@ -54,7 +51,6 @@
         }
 
 
-        // Initialization
         function init() {
             registerEventHandlers();
 

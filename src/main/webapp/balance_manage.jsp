@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<fmt:setLocale value="${not empty sessionScope.locale ? sessionScope.locale : 'en_US'}"/>
+<fmt:setLocale value="${not empty sessionScope.locale ? sessionScope.locale : 'ru_RU'}"/>
 <fmt:setBundle basename="messages"/>
 <!doctype html>
 <html>
@@ -36,7 +36,7 @@
                     </div>
                 </form>
                 <br/>
-                <c:if test="${balance < 10 && not debtor}">
+                <c:if test="${balance < 10 and not debtor}">
                     <form method="post" action="main?command=takeALoan">
                         <div role="form">
                             <div class="form-group float-label-control">

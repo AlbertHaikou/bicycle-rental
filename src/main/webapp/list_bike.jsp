@@ -2,7 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page session="true" %>
-<fmt:setLocale value="${not empty sessionScope.locale ? sessionScope.locale : 'en_US'}"/>
+<fmt:setLocale value="${not empty sessionScope.locale ? sessionScope.locale : 'ru_RU'}"/>
 <fmt:setBundle basename="messages"/>
 <!doctype html>
 <html>
@@ -18,7 +18,7 @@
 <c:choose>
     <c:when test="${'true'.equalsIgnoreCase(param.available)}">
         <c:choose>
-            <c:when test="${null != sessionScope.parkingScope}">
+            <c:when test="${null ne sessionScope.parkingScope}">
                 <center>
                     <a href="main?command=showBikesInParkingPage&id=${sessionScope.parkingScope}">
                         <button class="btn btn-mini"
@@ -45,7 +45,7 @@
     </c:when>
     <c:otherwise>
         <c:choose>
-            <c:when test="${null != sessionScope.parkingScope}">
+            <c:when test="${null ne sessionScope.parkingScope}">
                 <center>
                     <a href="main?command=showBikesInParkingPage&id=${sessionScope.parkingScope}&available=true">
                         <button class="btn btn-mini"
@@ -137,7 +137,7 @@
                     </c:when>
                     <c:otherwise>
                         <td>
-                            <c:if test="${not empty userRentedBikeId && bike.bicycleId eq userRentedBikeId}">
+                            <c:if test="${not empty userRentedBikeId and bike.bicycleId eq userRentedBikeId}">
                                 <a class="btn btn-rent"
                                    href="main?command=returnBike&id=<c:out value="${bike.bicycleId}"/>"><fmt:message
                                         key="TO_RETURN"/></a>

@@ -7,7 +7,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="ctg" uri="customtags" %>
 <%@ page session="true" %>
-<fmt:setLocale value="${not empty sessionScope.locale ? sessionScope.locale : 'en_US'}"/>
+<fmt:setLocale value="${not empty sessionScope.locale ? sessionScope.locale : 'ru_RU'}"/>
 <fmt:setBundle basename="messages"/>
 
 <nav class="navbar navbar-default">
@@ -20,7 +20,7 @@
             </button>
             <a class="logo" href="../index.jsp">
                 <img src="../img/logo.png" alt="" class="animated bounceInDown">
-                <span class="name"> rent-bike </span>
+                <span class="name"> planet bike </span>
                 <small><fmt:message key="BIKE_RENTAL_SYSTEM"/></small>
                 <c:if test="${not empty sessionScope.user}">
                     <h5>

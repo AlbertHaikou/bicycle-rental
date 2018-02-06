@@ -1,7 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<fmt:setLocale value="${not empty sessionScope.locale ? sessionScope.locale : 'en_US'}"/>
+<fmt:setLocale value="${not empty sessionScope.locale ? sessionScope.locale : 'ru_RU'}"/>
 <fmt:setBundle basename="messages"/>
 <!doctype html>
 <html>
@@ -53,8 +53,8 @@
                            required
                            pattern="[A-Za-zа-яА-Я]{3,}"
                            title="3+ letters"
-                           name="firstName" placeholder="<fmt:message key="FIRST_NAME"/>"
-                           rel="tooltp" title="<fmt:message key="ENTER_FIRST_NAME"/>">
+                           name="firstName"
+                           placeholder="<fmt:message key="FIRST_NAME"/>">
                     <c:out value="${errormsg.firstName}"/>
                 </div>
                 <div class="form-group">
@@ -63,8 +63,8 @@
                            required
                            pattern="[A-Za-zа-яА-Я]{3,}"
                            title="3+ letters"
-                           name="lastName" placeholder="<fmt:message key="LAST_NAME"/>"
-                           rel="tooltp" title="<fmt:message key="ENTER_LAST_NAME"/>">
+                           name="lastName"
+                           placeholder="<fmt:message key="LAST_NAME"/>">
                     <c:out value="${errormsg.lastName}"/>
                 </div>
 
@@ -76,8 +76,7 @@
                        required
                        title="Use Latin letters, ._%+- and digits, then @, followed by Latin letters, symbols -. and numbers. Further . and after it domain of 2-4 Latin letters"
                        name="email" placeholder="<fmt:message key="EMAIL"/>"
-                       rel="tooltp" pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
-                       title='<fmt:message key="ENTER_EMAIL"/>'>
+                       pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
                 <c:out value="${errormsg.login}"/>
             </div>
             <div class="form-group">
@@ -86,10 +85,9 @@
                        class="form-control "
                        required
                        title="9 digits"
-                       name="phoneNumber" placeholder="Номер телефона"
-                       rel="tooltp" min="111111111"
-                       max="999999999"
-                       title='Введите номер телефона'>
+                       name="phoneNumber" placeholder="<fmt:message key="PHONE_NUMBER"/>"
+                       min="111111111"
+                       max="999999999">
                 <c:out value="${errormsg.phoneNumber}"/>
             </div>
             <div class="form-group">
@@ -100,8 +98,8 @@
                        required
                        pattern="(?=^.{6,}$)^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$"
                        title="Min 1 UpperCase latin, 1 LowerCase latin and 1 Number, 6+ symbols"
-                       name="password" placeholder="<fmt:message key="PASSWORD"/>"
-                       rel="tooltp" title='<fmt:message key="ENTER_PASSWORD"/>'>
+                       name="password"
+                       placeholder="<fmt:message key="PASSWORD"/>">
                 <c:out value="${errormsg.password}"/>
             </div>
         </div>
