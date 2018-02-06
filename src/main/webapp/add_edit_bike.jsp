@@ -22,31 +22,51 @@
         <div class="col-md-6 col-md-offset-3">
             <div class=" profile profile-content">
                 <center><h3><fmt:message key="${empty bike ?'ADDING':'EDITING'}"/></h3></center>
-                <form method="post" action="main?command=${empty bike ? 'addBike' : 'editBike'}">
+
+                <form method="post" enctype="multipart/form-data"
+                      action="main?command=${empty bike ? 'addBike' : 'editBike'}">
                     <div role="form">
                         <input type="hidden" name="id" class="form-control"
                                value="<c:out value="${bike.bicycleId}" />"/>
+                        <c:if test="${not empty bike}">
+                            <img class="center-block" height="100" src="main?command=getImage&bikeId=${bike.bicycleId}">
+                        </c:if>
+                        <div class="form-group">
+                            <br/>
+                            <label class="btn btn-info" for="bike_image">
+                                <input id="bike_image"
+                                       <c:if test="${empty bike}">required </c:if> type="file"
+                                       accept="image/png,image/jpeg" name="image"
+                                       style="display:none"
+                                       onchange="$('#upload-file-info').html(this.files[0].name)">
+                                <fmt:message key="CHOOSE_IMAGE"/>
+                            </label>
+                            <span class='label label-warning' id="upload-file-info"><c:if
+                                    test="${empty bike}"><fmt:message key="MUST_CHOOSE_IMAGE"/></c:if></span>
+
+                        </div>
                         <div class="form-group float-label-control">
                             <label><fmt:message key="TYPE"/></label>
-                            <input type="text" name="type" pattern="[a-zA-Z]{4,}" required
+                            <input type="text" name="type" pattern="[а-яА-Яa-zA-Z]{4,}" required
                                    class="form-control" placeholder="<fmt:message key="TYPE"/>"
                                    value="<c:out value="${bike.type}" />"/>
                         </div>
                         <div class="form-group float-label-control">
                             <label><fmt:message key="PRICE"/></label>
-                            <input type="number" name="price" min="1" max="100" required class="form-control"
+                            <input type="number" name="price" min="1" max="10" required class="form-control"
                                    placeholder="<fmt:message key="PRICE"/>"
                                    value="<c:out value="${bike.price}" />"/>
                         </div>
                         <div class="form-group float-label-control">
                             <label><fmt:message key="MODEL"/></label>
                             <input type="text" name="model" required class="form-control"
+                                   pattern="[а-яА-Яa-zA-Z 0-9]{4,}"
                                    placeholder="<fmt:message key="MODEL"/>"
                                    value="<c:out value="${bike.model}" />"/>
                         </div>
                         <div class="form-group float-label-control">
                             <label><fmt:message key="SIZE"/></label>
-                            <input type="number" maxlength="2" name="size" class="form-control"
+                            <input type="number" min="12" max="30" name="size" class="form-control"
                                    placeholder="<fmt:message key="SIZE"/>"
                                    required value="<c:out value="${bike.size}"/>"/>
                         </div>

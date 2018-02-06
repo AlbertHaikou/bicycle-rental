@@ -9,6 +9,7 @@ import by.haikou.bicycle_rental.entity.RentItem;
 import by.haikou.bicycle_rental.service.BikeService;
 import by.haikou.bicycle_rental.util.PaginationObject;
 
+import javax.servlet.http.Part;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
@@ -39,10 +40,10 @@ public class BikeServiceImpl implements BikeService {
     public PaginationObject<Bicycle> getAllBikes(Integer page) {
         PaginationObject<Bicycle> paginationObject = new PaginationObject<>();
         List<Bicycle> bikes = bikeDao.getAllBikes();
-        paginationObject.setPageCount((int) Math.ceil((double) bikes.size() / PaginationObject.PER_PAGE));
+        paginationObject.setPageCount((int) Math.ceil((double) bikes.size() / 4));
         paginationObject.setPage(page);
-        int start = (paginationObject.getPage() - 1) * PaginationObject.PER_PAGE;
-        int end = start + PaginationObject.PER_PAGE > bikes.size() ? bikes.size() : start + PaginationObject.PER_PAGE;
+        int start = (paginationObject.getPage() - 1) * 4;
+        int end = start + 4> bikes.size() ? bikes.size() : start + 4;
         paginationObject.setElementList(bikes.subList(start, end));
         return paginationObject;
     }
@@ -50,6 +51,21 @@ public class BikeServiceImpl implements BikeService {
     @Override
     public void createBike(Bicycle bike) {
         bikeDao.createBike(bike);
+    }
+
+    @Override
+    public void createBike(Bicycle bike, Part image) {
+        bikeDao.createBike(bike, image);
+    }
+
+    @Override
+    public void setBikeImage(int id, Part image) {
+        bikeDao.setBikeImage(id, image);
+    }
+
+    @Override
+    public byte[] getBikeImage(Integer id) {
+        return bikeDao.getBikeImage(id);
     }
 
     @Override
@@ -71,10 +87,10 @@ public class BikeServiceImpl implements BikeService {
     public PaginationObject<Bicycle> showAvailableBike(Integer page) {
         PaginationObject<Bicycle> paginationObject = new PaginationObject<>();
         List<Bicycle> bikes = bikeDao.showAvailableBike();
-        paginationObject.setPageCount((int) Math.ceil((double) bikes.size() / PaginationObject.PER_PAGE));
+        paginationObject.setPageCount((int) Math.ceil((double) bikes.size() / 4));
         paginationObject.setPage(page);
-        int start = (paginationObject.getPage() - 1) * PaginationObject.PER_PAGE;
-        int end = start + PaginationObject.PER_PAGE > bikes.size() ? bikes.size() : start + PaginationObject.PER_PAGE;
+        int start = (paginationObject.getPage() - 1) * 4;
+        int end = start + 4 > bikes.size() ? bikes.size() : start + 4;
         paginationObject.setElementList(bikes.subList(start, end));
         return paginationObject;
     }
@@ -109,10 +125,10 @@ public class BikeServiceImpl implements BikeService {
     public PaginationObject<Bicycle> showBikeByParkingId(Integer id, Integer page) {
         PaginationObject<Bicycle> paginationObject = new PaginationObject<>();
         List<Bicycle> bikes = bikeDao.showBikeByParkingId(id);
-        paginationObject.setPageCount((int) Math.ceil((double) bikes.size() / PaginationObject.PER_PAGE));
+        paginationObject.setPageCount((int) Math.ceil((double) bikes.size() / 4));
         paginationObject.setPage(page);
-        int start = (paginationObject.getPage() - 1) * PaginationObject.PER_PAGE;
-        int end = start + PaginationObject.PER_PAGE > bikes.size() ? bikes.size() : start + PaginationObject.PER_PAGE;
+        int start = (paginationObject.getPage() - 1) * 4;
+        int end = start + 4 > bikes.size() ? bikes.size() : start + 4;
         paginationObject.setElementList(bikes.subList(start, end));
         return paginationObject;
     }

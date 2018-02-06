@@ -41,7 +41,8 @@ public enum CommandEnum {
     SHOW_BALANCE_MANAGE_PAGE("showBalanceManagePage"),
     FILL_UP_BALANCE("fillUpBalance"),
     TAKE_A_LOAN("takeALoan"),
-    SHOW_RENTAL_HISTORY("showRentalHistory");
+    SHOW_RENTAL_HISTORY("showRentalHistory"),
+    GET_IMAGE("getImage");
 
     private String value;
 

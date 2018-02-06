@@ -14,6 +14,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-10 col-md-offset-1">
+                <h3>${errorMsg}</h3>
                 <h3>${message}</h3>
                 <h3 class="red"><fmt:message key="ERR_NOTIFICATION"/></h3>
                 <a href="<c:url value="main?command=showMainPage" />"><fmt:message key="MAIN"/></a>

@@ -45,7 +45,7 @@
 <table class="table table-hover">
     <thead>
     <tr>
-        <th>№</th>
+        <th></th>
         <th><fmt:message key="TYPE"/></th>
         <th><fmt:message key="MODEL"/></th>
         <th><fmt:message key="SIZE"/></th>
@@ -66,7 +66,7 @@
     <tbody>
     <c:forEach items="${items.elementList}" var="bike">
         <tr>
-            <td><c:out value="${bike.bicycleId}"/></td>
+            <td><img height="100" src="main?command=getImage&bikeId=${bike.bicycleId}"></td>
             <td><c:out value="${bike.type}"/></td>
             <td><c:out value="${bike.model}"/></td>
             <td><c:out value="${bike.size}"/></td>

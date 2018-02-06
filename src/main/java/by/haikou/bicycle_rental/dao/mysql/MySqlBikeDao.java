@@ -8,6 +8,9 @@ import by.haikou.bicycle_rental.entity.Bicycle;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import javax.servlet.http.Part;
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -19,6 +22,9 @@ public class MySqlBikeDao implements BikeDao {
     private static final Logger LOGGER = LogManager.getLogger(MySqlBikeDao.class);
     private static final String SQL_FOR_CREATE_BIKE = "INSERT INTO `bicycle` (`type`,`model`,`size`,`available`,`fk_parking_id`,`price`)" +
             " VALUES (?, ?, ?, ?, ?, ?)";
+    private static final String SQL_FOR_CREATE_BIKE_WITH_IMAGE = "INSERT INTO `bicycle` (`type`,`model`,`size`," +
+            "`available`,`fk_parking_id`,`price`, `foto`)" +
+            " VALUES (?, ?, ?, ?, ?, ?, ?)";
     private static final String SQL_FOR_DELETE_BIKE = "DELETE FROM `bicycle` WHERE `id`= ?";
     private static final String SQL_FOR_RENT_BIKE = "UPDATE `bicycle` SET `available`= '0' WHERE `id`=?";
     private static final String SQL_FOR_RETURN_BIKE = "UPDATE `bicycle` SET `available`= '1' WHERE `id`=?";
@@ -29,6 +35,9 @@ public class MySqlBikeDao implements BikeDao {
             "FROM `bicycle` WHERE `available` = '1'";
     private static final String SQL_FOR_GET_BIKES_BY_PARKING_ID = "SELECT `id`,`type`,`model`,`size`,`available`,`fk_parking_id`,`price` " +
             "FROM `bicycle` WHERE `fk_parking_id` = ?";
+    private static final String SQL_FOR_SET_BIKE_IMAGE = "UPDATE `bicycle` SET `foto`= ? WHERE `id`=?";
+
+    private static final String SQL_FOR_GET_BIKE_IMAGE_BY_ID = "SELECT `foto` FROM `bicycle` WHERE `id` = ?";
 
 
     private final ConnectionPool pool = ConnectionPool.getPool();
@@ -51,6 +60,33 @@ public class MySqlBikeDao implements BikeDao {
 
         } catch (SQLException e) {
             throw new DAOException(e);
+        } finally {
+            pool.returnConnectionToPool(connection);
+            ConnectionPool.getPool().closeDbResources(statement);
+        }
+    }
+
+    @Override
+    public void createBike(Bicycle bike, Part image) throws DAOException {
+        Connection connection = null;
+        PreparedStatement statement = null;
+
+        try (InputStream is = image.getInputStream()) {
+            connection = pool.getConnection();
+            statement = connection.prepareStatement(SQL_FOR_CREATE_BIKE_WITH_IMAGE);
+            statement.setString(1, bike.getType());
+            statement.setString(2, bike.getModel());
+            statement.setString(3, bike.getSize());
+            statement.setBoolean(4, bike.getIsAvailable());
+            statement.setInt(5, bike.getParkingId());
+            statement.setBigDecimal(6, bike.getPrice());
+            statement.setBlob(7, is);
+            statement.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new DAOException(e);
+        } catch (IOException e) {
+            throw new DAOException("InputStream error with Part.getInputStream", e);
         } finally {
             pool.returnConnectionToPool(connection);
             ConnectionPool.getPool().closeDbResources(statement);
@@ -247,7 +283,56 @@ public class MySqlBikeDao implements BikeDao {
         }
 
         return result;
+    }
 
+    @Override
+    public void setBikeImage(int id, Part image) throws DAOException {
+        Connection connection = null;
+        PreparedStatement statement = null;
+        try {
+            connection = pool.getConnection();
+            statement = connection.prepareStatement(SQL_FOR_SET_BIKE_IMAGE);
+            InputStream is = image.getInputStream();
+            statement.setBlob(1, is);
+            statement.setInt(2, id);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new DAOException(e);
+        } catch (IOException e) {
+            throw new DAOException("InputStream error with Part.getInputStream", e);
+        } finally {
+            pool.returnConnectionToPool(connection);
+            ConnectionPool.getPool().closeDbResources(statement);
+        }
+    }
+
+    @Override
+    public byte[] getBikeImage(Integer bikeId) throws DAOException {
+        if (bikeId == null) {
+            return null;
+        }
+        Connection connection = null;
+        PreparedStatement statement = null;
+        ResultSet set = null;
+
+        try {
+            connection = pool.getConnection();
+            statement = connection.prepareStatement(SQL_FOR_GET_BIKE_IMAGE_BY_ID);
+            statement.setInt(1, bikeId);
+            set = statement.executeQuery();
+
+            if (set.next()) {
+                byte[] image = set.getBytes("foto");
+                return image;
+            }
+        } catch (SQLException e) {
+            throw new DAOException(e);
+        } finally {
+            pool.returnConnectionToPool(connection);
+            ConnectionPool.getPool().closeDbResources(statement, set);
+        }
+
+        return null;
     }
 
 }

@@ -3,15 +3,22 @@ package by.haikou.bicycle_rental.dao;
 import by.haikou.bicycle_rental.dao.exceptions.DAOException;
 import by.haikou.bicycle_rental.entity.Bicycle;
 
+import javax.servlet.http.Part;
 import java.util.List;
 
 public interface BikeDao {
 
     void createBike(Bicycle bike) throws DAOException;
 
+    void createBike(Bicycle bike, Part image) throws DAOException;
+
     void deleteBike(Integer bikeId) throws DAOException;
 
     void updateBike(Bicycle bike) throws DAOException;
+
+    void setBikeImage(int id, Part image) throws DAOException;
+
+    byte[] getBikeImage(Integer id) throws DAOException;
 
     List<Bicycle> getAllBikes() throws DAOException;
 

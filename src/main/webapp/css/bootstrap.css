@@ -431,8 +431,8 @@ th {
 }
 
 .glyphicon-cog:before {
-     content: "\e019";
- }
+    content: "\e019";
+}
 
 .glyphicon-trash:before {
     content: "\e020";
@@ -2624,7 +2624,6 @@ th {
 .table > tfoot > tr > td {
     padding: 8px;
     line-height: 1.428571429;
-    vertical-align: top;
     border-top: 1px solid #dddddd;
 }
 

@@ -2,7 +2,9 @@ package by.haikou.bicycle_rental.service;
 
 import by.haikou.bicycle_rental.entity.Bicycle;
 import by.haikou.bicycle_rental.util.PaginationObject;
+import org.omg.CORBA.INTERNAL;
 
+import javax.servlet.http.Part;
 import java.util.List;
 
 public interface BikeService {
@@ -43,6 +45,12 @@ public interface BikeService {
      * @param bike
      */
     void createBike(Bicycle bike);
+
+    void createBike(Bicycle bike, Part image);
+
+    void setBikeImage(int id, Part image);
+
+    byte[] getBikeImage(Integer id);
 
     /**
      * Updates bicycle information in database.
