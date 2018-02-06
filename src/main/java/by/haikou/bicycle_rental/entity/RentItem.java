@@ -13,7 +13,7 @@ public class RentItem {
     private Date fromDate;
     private Date toDate;
     private BigDecimal price;
-    private Boolean status;
+    private boolean status;
     private BigDecimal totalPrice;
 
     public int getId() {
@@ -72,11 +72,11 @@ public class RentItem {
         this.userId = userId;
     }
 
-    public Boolean getStatus() {
+    public boolean getStatus() {
         return status;
     }
 
-    public void setStatus(Boolean status) {
+    public void setStatus(boolean status) {
         this.status = status;
     }
 

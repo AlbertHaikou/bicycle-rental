@@ -4,13 +4,13 @@ import java.math.BigDecimal;
 
 public class Bicycle {
 
-    private Integer bicycleId;
+    private int bicycleId;
     private String type;
     private String model;
     private String size;
     private BigDecimal price;
-    private Boolean isAvailable;
-    private Integer parkingId;
+    private boolean isAvailable;
+    private int parkingId;
 
     public Bicycle() {
         super();
@@ -24,11 +24,11 @@ public class Bicycle {
         this.price = price;
     }
 
-    public Integer getBicycleId() {
+    public int getBicycleId() {
         return bicycleId;
     }
 
-    public void setBicycleId(Integer bikeId) {
+    public void setBicycleId(int bikeId) {
         this.bicycleId = bikeId;
     }
 
@@ -56,11 +56,11 @@ public class Bicycle {
         this.size = size;
     }
 
-    public Boolean getIsAvailable() {
+    public boolean getIsAvailable() {
         return isAvailable;
     }
 
-    public void setIsAvailable(Boolean isAvailable) {
+    public void setIsAvailable(boolean isAvailable) {
         this.isAvailable = isAvailable;
     }
 
@@ -68,7 +68,7 @@ public class Bicycle {
         return parkingId;
     }
 
-    public void setParkingId(Integer parkingId) {
+    public void setParkingId(int parkingId) {
         this.parkingId = parkingId;
     }
 

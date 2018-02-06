@@ -49,8 +49,12 @@ public class RentBike implements ICommand {
             }
         } else {
             bikeService.rentBike(bikeId, userId);
-            response.sendRedirect(ConstantsMng.SHOW_BIKES);
+            Integer parkingId = (Integer) session.getAttribute("parkingScope");
+            if (null != parkingId) {
+                response.sendRedirect("main?command=showBikesInParkingPage&id=" + parkingId);
+            } else {
+                response.sendRedirect(ConstantsMng.SHOW_BIKES);
+            }
         }
-
     }
 }

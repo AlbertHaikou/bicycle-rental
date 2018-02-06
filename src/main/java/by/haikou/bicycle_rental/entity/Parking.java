@@ -2,18 +2,18 @@ package by.haikou.bicycle_rental.entity;
 
 public class Parking {
 
-    private Integer parkingId;
+    private int parkingId;
     private String street;
 
     public Parking() {
         super();
     }
 
-    public Integer getParkingId() {
+    public int getParkingId() {
         return parkingId;
     }
 
-    public void setParkingId(Integer parkingId) {
+    public void setParkingId(int parkingId) {
         this.parkingId = parkingId;
     }
 

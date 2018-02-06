@@ -39,6 +39,8 @@ public interface BikeService {
      */
     PaginationObject<Bicycle> showAvailableBike(Integer page);
 
+    PaginationObject<Bicycle> showAvailableBikeByParkingId(Integer parkingId, Integer page);
+
     /**
      * Adds a new bicycle into a database.
      *

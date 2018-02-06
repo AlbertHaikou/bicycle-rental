@@ -14,6 +14,7 @@ import org.apache.logging.log4j.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -45,6 +46,12 @@ public class UpdateBike implements ICommand {
                 LOGGER.log(Level.ERROR, e);
             }
         }
-        response.sendRedirect(ConstantsMng.SHOW_BIKES);
+        HttpSession session = request.getSession();
+        Integer parkingId = (Integer) session.getAttribute("parkingScope");
+        if (null != parkingId) {
+            response.sendRedirect("main?command=showBikesInParkingPage&id=" + parkingId);
+        } else {
+            response.sendRedirect(ConstantsMng.SHOW_BIKES);
+        }
     }
 }

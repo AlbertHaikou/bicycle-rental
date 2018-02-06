@@ -19,6 +19,7 @@ import org.apache.logging.log4j.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 /**
@@ -42,10 +43,16 @@ public class DeleteBike implements ICommand {
                 request.setAttribute(ConstantsMng.ATR_ERRORS, deleteBikeErrMsg);
             }
         }
-        try {
-            CommandFactory.getFactory().createCommand(CommandEnum.SHOW_BIKES).execute(request, response);
-        } catch (CommandException e) {
-            LOGGER.log(Level.ERROR, e);
+        HttpSession session = request.getSession();
+        Integer parkingId = (Integer) session.getAttribute("parkingScope");
+        if (null != parkingId) {
+            response.sendRedirect("main?command=showBikesInParkingPage&id=" + parkingId);
+        } else {
+            try {
+                CommandFactory.getFactory().createCommand(CommandEnum.SHOW_BIKES).execute(request, response);
+            } catch (CommandException e) {
+                LOGGER.log(Level.ERROR, e);
+            }
         }
     }
 }

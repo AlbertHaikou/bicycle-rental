@@ -12,33 +12,62 @@
     <link rel="stylesheet" href="css/bootstrap.css">
     <link href="<c:url value="css/pagination.css"/>" rel="stylesheet"/>
 </head>
-<body style="margin-bottom: 0px;">
 <jsp:include page="parts/navigation.jsp"/>
 <center style="color:graytext;"><h3><fmt:message key="BIKES"/></h3></center>
 <center><h3 class="red"><c:out value="${errorMsg}"/></h3></center>
 <c:choose>
     <c:when test="${'true'.equalsIgnoreCase(param.available)}">
-        <center>
-            <a href="main?command=showBikes">
-                <button class="btn btn-mini"
-                        type="button" style="border-top-width: 2px;padding-left: 0px;
-    padding-right: 0px; padding-top: 0px; padding-bottom: 0px;border-bottom-width: 2px;
-    border-left-width: 5px; border-right-width: 5px;
-    color: navy;"><fmt:message key="SHOW_ALL_BIKES"/></button>
-            </a>
-        </center>
+        <c:choose>
+            <c:when test="${null != sessionScope.parkingScope}">
+                <center>
+                    <a href="main?command=showBikesInParkingPage&id=${sessionScope.parkingScope}">
+                        <button class="btn btn-mini"
+                                type="button" style="border-top-width: 2px;padding-left: 0px;
+            padding-right: 0px; padding-top: 0px; padding-bottom: 0px;border-bottom-width: 2px;
+            border-left-width: 5px; border-right-width: 5px;color: navy;">
+                            <fmt:message key="SHOW_ALL_BIKES"/></button>
+                    </a>
+                </center>
+            </c:when>
+            <c:otherwise>
+                <center>
+                    <a href="main?command=showBikes">
+                        <button class="btn btn-mini"
+                                type="button" style="border-top-width: 2px;padding-left: 0px;
+            padding-right: 0px; padding-top: 0px; padding-bottom: 0px;border-bottom-width: 2px;
+            border-left-width: 5px; border-right-width: 5px;color: navy;">
+                            <fmt:message key="SHOW_ALL_BIKES"/></button>
+                    </a>
+                </center>
+            </c:otherwise>
+        </c:choose>
         </br>
     </c:when>
     <c:otherwise>
-        <center>
-            <a href="main?command=showBikes&available=true">
-                <button class="btn btn-mini"
-                        type="button" style="border-top-width: 2px;padding-left: 0px;
+        <c:choose>
+            <c:when test="${null != sessionScope.parkingScope}">
+                <center>
+                    <a href="main?command=showBikesInParkingPage&id=${sessionScope.parkingScope}&available=true">
+                        <button class="btn btn-mini"
+                                type="button" style="border-top-width: 2px;padding-left: 0px;
             padding-right: 0px; padding-top: 0px; padding-bottom: 0px;border-bottom-width: 2px;
             border-left-width: 5px; border-right-width: 5px;color: navy;">
-                    <fmt:message key="SHOW_AVALAIBLE_BIKES"/></button>
-            </a>
-        </center>
+                            <fmt:message key="SHOW_AVALAIBLE_BIKES"/></button>
+                    </a>
+                </center>
+            </c:when>
+            <c:otherwise>
+                <center>
+                    <a href="main?command=showBikes&available=true">
+                        <button class="btn btn-mini"
+                                type="button" style="border-top-width: 2px;padding-left: 0px;
+            padding-right: 0px; padding-top: 0px; padding-bottom: 0px;border-bottom-width: 2px;
+            border-left-width: 5px; border-right-width: 5px;color: navy;">
+                            <fmt:message key="SHOW_AVALAIBLE_BIKES"/></button>
+                    </a>
+                </center>
+            </c:otherwise>
+        </c:choose>
         </br>
     </c:otherwise>
 </c:choose>
@@ -122,13 +151,15 @@
     </tbody>
 </table>
 <%@ include file="parts/pagination.jsp" %>
-<br/>
-<c:if test="${sessionScope.user.role.value.equalsIgnoreCase(ADMINISTRATOR)}">
-    <div class="center-block"><a href="main?command=addBikePage">
+<p>
+    <c:if test="${sessionScope.user.role.value.equalsIgnoreCase(ADMINISTRATOR)}">
+<div class="center-block">
+    <a href="main?command=addBikePage">
         <button class="center-block btn-add btn"><fmt:message key="ADD_BIKE"/></button>
-    </a></div>
-    <br/><br/>
+    </a>
+</div>
 </c:if>
+</p>
 <jsp:include page="parts/footer.jsp"/>
 </body>
 </html>

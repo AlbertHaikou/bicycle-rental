@@ -81,6 +81,18 @@
                 <c:out value="${errormsg.login}"/>
             </div>
             <div class="form-group">
+                <label for="phoneNumber"></label>
+                <input type="number" id="phoneNumber"
+                       class="form-control "
+                       required
+                       title="9 digits"
+                       name="phoneNumber" placeholder="Номер телефона"
+                       rel="tooltp" min="111111111"
+                       max="999999999"
+                       title='Введите номер телефона'>
+                <c:out value="${errormsg.phoneNumber}"/>
+            </div>
+            <div class="form-group">
                 <label for="password"></label>
                 <input type="password"
                        class="form-control big "

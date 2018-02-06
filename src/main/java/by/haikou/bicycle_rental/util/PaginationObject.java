@@ -7,6 +7,7 @@ import java.util.List;
  */
 public class PaginationObject<T> {
     public static final int PER_PAGE = 8;
+    public static final int PER_PAGE_FOR_BIKES = 4;
     public static final int DEFAULT_PAGE = 1;
 
     /**

@@ -18,9 +18,9 @@
 <table class="table">
     <thead>
     <tr>
-        <th>№</th>
         <th><fmt:message key="FIRST_NAME"/></th>
         <th><fmt:message key="LAST_NAME"/></th>
+        <th>№</th>
         <th><fmt:message key="EMAIL"/></th>
         <th><fmt:message key="BALANCE"/></th>
         <th><fmt:message key="ACTION"/></th>
@@ -32,9 +32,9 @@
     <tbody>
     <c:forEach items="${items.elementList}" var="user">
         <tr>
-            <td><c:out value="${user.id}"/></td>
             <td><c:out value="${user.firstName}"/></td>
             <td><c:out value="${user.lastName}"/></td>
+            <td><c:out value="+375 ${user.phoneNumber}"/></td>
             <td><c:out value="${user.email}"/></td>
             <td><c:out value="${user.balance}"/></td>
             <c:choose>

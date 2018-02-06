@@ -32,6 +32,7 @@ public class Register implements ICommand {
         String lastName = request.getParameter(ConstantsMng.PARAM_NAME_LAST_NAME);
         String login = request.getParameter(ConstantsMng.PARAM_NAME_LOGIN);
         String password = MD5Converter.getHash(request.getParameter(ConstantsMng.PARAM_NAME_PASSWORD));
+        String phone = request.getParameter("phoneNumber");
 
         Map<String, String> errorMap = validateRegisterDetails(request, firstName, lastName, login, password);
 
@@ -42,12 +43,9 @@ public class Register implements ICommand {
             user.setLastName(lastName);
             user.setPassword(password);
             user.setRole(User.Role.USER);
+            user.setPhoneNumber(phone);
             userService.addUser(user);
-            HttpSession session = request.getSession(true);
-            session.setAttribute(ConstantsMng.PARAM_NAME_FIRST_NAME, user.getFirstName());
-            session.setAttribute(ConstantsMng.PARAM_NAME_LAST_NAME, user.getLastName());
-            session.setAttribute(ConstantsMng.PARAM_NAME_LOGIN, user.getEmail());
-            session.setAttribute(ConstantsMng.PARAM_NAME_PASSWORD, user.getPassword());
+            request.getSession(true);
             String msg = MessageUtils.getProperty(RequestUtils.getLocale(request),
                     MessageUtils.VALIDATION_SUCCESSFUL_MESSAGE);
             request.setAttribute(ConstantsMng.ATR_SUCCESSFUL, msg);

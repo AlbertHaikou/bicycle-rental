@@ -5,15 +5,24 @@ import java.math.BigDecimal;
 public class User {
     private String firstName;
     private String email;
-    private Integer id;
+    private int id;
     private String lastName;
     private String password;
     private Role role;
     private boolean banned;
     private BigDecimal balance;
+    private String phoneNumber;
 
     public User() {
         super();
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public BigDecimal getBalance() {
@@ -76,11 +85,11 @@ public class User {
         this.role = role;
     }
 
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 

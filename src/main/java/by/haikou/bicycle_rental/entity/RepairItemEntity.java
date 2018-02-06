@@ -5,7 +5,7 @@ public class RepairItemEntity {
     private int itemId;
     private int bikeId;
     private String description;
-    private Boolean status;
+    private boolean status;
 
     public RepairItemEntity() {
         super();
@@ -23,7 +23,7 @@ public class RepairItemEntity {
         return description;
     }
 
-    public Boolean getStatus() {
+    public boolean getStatus() {
         return status;
     }
 
@@ -35,7 +35,7 @@ public class RepairItemEntity {
         this.description = description;
     }
 
-    public void setStatus(Boolean status) {
+    public void setStatus(boolean status) {
         this.status = status;
     }
 

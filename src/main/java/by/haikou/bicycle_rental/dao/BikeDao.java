@@ -26,6 +26,8 @@ public interface BikeDao {
 
     List<Bicycle> showAvailableBike() throws DAOException;
 
+    List<Bicycle> showAvailableBikeByParkingId(Integer parkingId);
+
     void rentBike(Integer bikeId) throws DAOException;
 
     void returnBike(Integer bikeId) throws DAOException;

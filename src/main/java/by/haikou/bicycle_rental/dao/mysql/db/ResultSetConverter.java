@@ -23,6 +23,7 @@ public final class ResultSetConverter {
         entity.setPassword(set.getString("password"));
         entity.setBanned(set.getBoolean("banned"));
         entity.setBalance(set.getBigDecimal("balance"));
+        entity.setPhoneNumber(set.getString("phone_number"));
 
         return entity;
     }

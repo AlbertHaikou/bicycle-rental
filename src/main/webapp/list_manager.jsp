@@ -25,9 +25,9 @@
 <table class="table">
     <thead>
     <tr class="tab-pane">
-        <th>№</th>
         <th><fmt:message key="FIRST_NAME"/></th>
         <th><fmt:message key="LAST_NAME"/></th>
+        <th>№</th>
         <th><fmt:message key="EMAIL"/></th>
         <c:set var="ADMINISTRATOR" value="ADMINISTRATOR"/>
         <c:if test="${sessionScope.user.role.value=='ADMINISTRATOR'}">
@@ -39,9 +39,9 @@
     <tbody>
     <c:forEach items="${items.elementList}" var="support">
         <tr>
-            <td><c:out value="${support.id}"/></td>
             <td><c:out value="${support.firstName}"/></td>
             <td><c:out value="${support.lastName}"/></td>
+            <td><c:out value="+375 ${support.phoneNumber}"/></td>
             <td><c:out value="${support.email}"/></td>
             <c:if test="${sessionScope.user.role eq 'ADMINISTRATOR'}">
                 <td><a href="main?command=showEditManagerPage&id=<c:out value="${support.id}"/>"

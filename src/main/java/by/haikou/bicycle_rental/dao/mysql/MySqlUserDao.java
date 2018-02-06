@@ -19,11 +19,11 @@ import java.util.List;
 public class MySqlUserDao implements UserDao {
     private static final Logger LOGGER = LogManager.getLogger(MySqlUserDao.class);
 
-    private static final String SQL_FOR_GET_ALL_USERS = "SELECT `id`,`first_name`,`last_name`,`email`,`password`, `banned`, `balance` FROM `user` \n" +
+    private static final String SQL_FOR_GET_ALL_USERS = "SELECT `id`,`first_name`,`last_name`,`email`,`password`, `banned`, `phone_number`, `balance` FROM `user` \n" +
             "WHERE `role`=\"user\"";
-    private static final String SQL_FOR_GET_ALL_MANAGERS = "SELECT `id`,`first_name`,`last_name`,`email`,`password`, `banned`, `balance` FROM `user` \n" +
+    private static final String SQL_FOR_GET_ALL_MANAGERS = "SELECT `id`,`first_name`,`last_name`,`email`,`password`, `banned`, `phone_number`, `balance` FROM `user` \n" +
             "WHERE `role`=\"manager\"";
-    private static final String SQL_FOR_GET_USER = "SELECT `id`,`first_name`,`last_name`,`email`,`password`,`role`, `banned`, `balance`" +
+    private static final String SQL_FOR_GET_USER = "SELECT `id`,`first_name`,`last_name`,`email`,`password`,`role`, `banned`, `phone_number`, `balance`" +
             "FROM `user` \n" +
             "WHERE `email`=?";
     private static final String SQL_FOR_UPDATE_USER = "UPDATE `user` SET `first_name`=?, `last_name`=?, `email`=? , `password`=?, `role`=?, `banned`=?, `balance`=?\n" +
@@ -31,7 +31,7 @@ public class MySqlUserDao implements UserDao {
     private static final String SQL_FOR_UPDATE_PROFILE = "UPDATE `user` SET `first_name`=?, `last_name`=?, `email`=?\n" +
             "WHERE `id`=?";
 
-    private static final String SQL_FOR_GET_USER_BY_ID = "SELECT `id`,`first_name`,`last_name`,`email`,`password`,`role`, `banned`, `balance`" +
+    private static final String SQL_FOR_GET_USER_BY_ID = "SELECT `id`,`first_name`,`last_name`,`email`,`password`,`role`, `banned`,`phone_number`, `balance`" +
             "FROM `user` \n" +
             "WHERE `id`=?";
     private static final String SQL_FOR_DELETE_USER = "DELETE " +
@@ -47,8 +47,8 @@ public class MySqlUserDao implements UserDao {
             "SET `role`=? " +
             "WHERE `id`=?";
     private static final String SQL_FOR_ADD_USER = "INSERT INTO `user` (`first_name`,`last_name`,`email`,`password`, `role`," +
-            " `banned`, `balance`, `credit_sum`, `debtor`) " +
-            "VALUES (?,?,?,?,?,?,?,?,?)";
+            " `banned`, `balance`, `credit_sum`, `debtor`, `phone_number`) " +
+            "VALUES (?,?,?,?,?,?,?,?,?,?)";
     private static final String SQL_FOR_GET_BALANCE_BY_USER_ID = "SELECT `balance` " +
             "FROM `user` \n" +
             "WHERE `id`=?";
@@ -400,6 +400,7 @@ public class MySqlUserDao implements UserDao {
             statement.setBigDecimal(7, new BigDecimal(0));
             statement.setBigDecimal(8, new BigDecimal(0));
             statement.setBoolean(9, false);
+            statement.setString(10, user.getPhoneNumber());
             statement.executeUpdate();
         } catch (SQLException e) {
             throw new DAOException(e);

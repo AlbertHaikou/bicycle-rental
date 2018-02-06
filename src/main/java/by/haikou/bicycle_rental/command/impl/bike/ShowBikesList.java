@@ -33,6 +33,7 @@ public class ShowBikesList implements ICommand {
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException, CommandException {
         HttpSession session = req.getSession();
+        session.setAttribute("parkingScope", null);
         User user = (User) session.getAttribute("user");
         Integer userId = user.getId();
         user = userService.getUserById(userId);

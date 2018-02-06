@@ -33,6 +33,8 @@ public class MySqlBikeDao implements BikeDao {
     private static final String SQL_FOR_GET_BIKE_BY_ID = "SELECT `id`,`type`,`model`,`size`,`available`,`fk_parking_id`,`price` FROM `bicycle` WHERE `id` = ?";
     private static final String SQL_FOR_GET_AVAILABLE_BIKES = "SELECT `id`,`type`,`model`,`size`,`available`,`fk_parking_id`,`price` " +
             "FROM `bicycle` WHERE `available` = '1'";
+    private static final String SQL_FOR_GET_AVAILABLE_BIKES_BY_PARKING_ID = "SELECT `id`,`type`,`model`,`size`,`available`,`fk_parking_id`,`price` " +
+            "FROM `bicycle` WHERE `fk_parking_id` = ? HAVING `available`='1'";
     private static final String SQL_FOR_GET_BIKES_BY_PARKING_ID = "SELECT `id`,`type`,`model`,`size`,`available`,`fk_parking_id`,`price` " +
             "FROM `bicycle` WHERE `fk_parking_id` = ?";
     private static final String SQL_FOR_SET_BIKE_IMAGE = "UPDATE `bicycle` SET `foto`= ? WHERE `id`=?";
@@ -254,23 +256,18 @@ public class MySqlBikeDao implements BikeDao {
 
     @Override
     public List<Bicycle> showBikeByParkingId(Integer parkingId) throws DAOException {
-
         if (parkingId == null) {
             return null;
         }
-
         Connection connection = null;
         PreparedStatement statement = null;
         ResultSet set = null;
         List<Bicycle> result = new ArrayList<>();
         try {
             connection = pool.getConnection();
-
             statement = connection.prepareStatement(SQL_FOR_GET_BIKES_BY_PARKING_ID);
             statement.setInt(1, parkingId);
-
             set = statement.executeQuery();
-
             while (set.next()) {
                 Bicycle entity = ResultSetConverter.createBikeEntity(set);
                 result.add(entity);
@@ -281,7 +278,33 @@ public class MySqlBikeDao implements BikeDao {
             pool.returnConnectionToPool(connection);
             ConnectionPool.getPool().closeDbResources(statement, set);
         }
+        return result;
+    }
 
+    @Override
+    public List<Bicycle> showAvailableBikeByParkingId(Integer parkingId) throws DAOException {
+        if (parkingId == null) {
+            return null;
+        }
+        Connection connection = null;
+        PreparedStatement statement = null;
+        ResultSet set = null;
+        List<Bicycle> result = new ArrayList<>();
+        try {
+            connection = pool.getConnection();
+            statement = connection.prepareStatement(SQL_FOR_GET_AVAILABLE_BIKES_BY_PARKING_ID);
+            statement.setInt(1, parkingId);
+            set = statement.executeQuery();
+            while (set.next()) {
+                Bicycle entity = ResultSetConverter.createBikeEntity(set);
+                result.add(entity);
+            }
+        } catch (SQLException e) {
+            throw new DAOException(e);
+        } finally {
+            pool.returnConnectionToPool(connection);
+            ConnectionPool.getPool().closeDbResources(statement, set);
+        }
         return result;
     }
 
