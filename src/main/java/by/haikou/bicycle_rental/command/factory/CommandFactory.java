@@ -5,7 +5,7 @@ import by.haikou.bicycle_rental.command.ICommand;
 import by.haikou.bicycle_rental.command.impl.ShowMainPage;
 import by.haikou.bicycle_rental.command.impl.balance.FillUpBalance;
 import by.haikou.bicycle_rental.command.impl.balance.ShowBalanceManagePage;
-import by.haikou.bicycle_rental.command.impl.balance.TakeALoan;
+import by.haikou.bicycle_rental.command.impl.balance.TakeLoan;
 import by.haikou.bicycle_rental.command.impl.bike.*;
 import by.haikou.bicycle_rental.command.impl.general.*;
 import by.haikou.bicycle_rental.command.impl.manager.*;
@@ -51,13 +51,13 @@ public class CommandFactory {
         commands.put(RENT_BIKE, new RentBike());
         commands.put(RETURN_BIKE, new ReturnBike());
 
-        commands.put(SHOW_PARKINGS, new ShowParkingsPage());
+        commands.put(SHOW_PARKINGS, new ShowParkingsList());
         commands.put(ADD_PARKING, new AddParking());
         commands.put(EDIT_PARKING, new UpdateParking());
         commands.put(SHOW_EDIT_PARKING_PAGE, new ShowEditParkingPage());
         commands.put(SHOW_ADD_PARKING_PAGE, new ShowAddParkingPage());
         commands.put(DELETE_PARKING, new DeleteParking());
-        commands.put(SHOW_BIKES_IN_PARKING_PAGE, new ShowBikesInParking());
+        commands.put(SHOW_BIKES_IN_PARKING_PAGE, new ShowParkingsBikes());
 
         commands.put(SHOW_ADD_MANAGER_PAGE, new ShowAddManagerPage());
         commands.put(ADD_MANAGER, new AddManager());
@@ -75,7 +75,7 @@ public class CommandFactory {
         commands.put(UPDATE_PROFILE, new UpdateProfile());
         commands.put(SHOW_BALANCE_MANAGE_PAGE, new ShowBalanceManagePage());
         commands.put(FILL_UP_BALANCE, new FillUpBalance());
-        commands.put(TAKE_A_LOAN, new TakeALoan());
+        commands.put(TAKE_A_LOAN, new TakeLoan());
         commands.put(SHOW_RENTAL_HISTORY, new ShowRentalHistory());
     }
 

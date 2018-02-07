@@ -5,7 +5,7 @@
 <link rel="stylesheet" href="css/bootstrap.css">
 <script src="/js/changeLang.js"></script>
 <div class="footer">
-    <small>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<fmt:message key="COPYRIGHT"/></small>
+    <small><fmt:message key="COPYRIGHT"/></small>
     <div class="container">
         <ul>
             <li>

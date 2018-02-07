@@ -19,7 +19,7 @@ import java.io.IOException;
 
 /**
  * <p>Start point of chain to delete manager by id.</p>
- * Delegates the task to the service method {@link ParkingService#deleteParking(Integer)}, then transfer control to {@link ShowParkingsPage} class.
+ * Delegates the task to the service method {@link ParkingService#deleteParking(Integer)}, then transfer control to {@link ShowParkingsList} class.
  */
 public class DeleteParking implements ICommand {
     private static final Logger LOGGER = LogManager.getLogger(DeleteParking.class);

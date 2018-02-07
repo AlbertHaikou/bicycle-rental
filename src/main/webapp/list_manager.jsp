@@ -27,7 +27,7 @@
     <tr class="tab-pane">
         <th><fmt:message key="FIRST_NAME"/></th>
         <th><fmt:message key="LAST_NAME"/></th>
-        <th>№</th>
+        <th><fmt:message key="PHONE_NUMBER"/></th>
         <th><fmt:message key="EMAIL"/></th>
         <c:set var="ADMINISTRATOR" value="ADMINISTRATOR"/>
         <c:if test="${sessionScope.user.role.value=='ADMINISTRATOR'}">

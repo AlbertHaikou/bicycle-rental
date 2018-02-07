@@ -25,7 +25,7 @@ import static by.haikou.bicycle_rental.util.PaginationObject.DEFAULT_PAGE;
  * <p>Takes information about bicycles on the selected parking from the database, using {@link BikeService#showBikeByParkingId(Integer, Integer)}.</p>
  * <p>Then sends the user to the page with the received list of bicycles.</p>
  */
-public class ShowBikesInParking implements ICommand {
+public class ShowParkingsBikes implements ICommand {
     private BikeService bikeService = ServiceFactory.getFactory().getBikeService();
     private UserService userService = ServiceFactory.getFactory().getUserService();
     private RentItemService rentItemService = ServiceFactory.getFactory().getRentItemService();

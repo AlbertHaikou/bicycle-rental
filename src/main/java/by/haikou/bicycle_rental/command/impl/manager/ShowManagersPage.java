@@ -24,7 +24,7 @@ public class ShowManagersPage implements ICommand {
     private UserService userService = ServiceFactory.getFactory().getUserService();
 
     @Override
-    public void execute(HttpServletRequest request, HttpServletResponse resp) throws ServletException, IOException, CommandException , UnauthorizedException {
+    public void execute(HttpServletRequest request, HttpServletResponse resp) throws ServletException, IOException, CommandException, UnauthorizedException {
         checkRoots(request, new User.Role[]{User.Role.ADMINISTRATOR});
         int page;
         try {

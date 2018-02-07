@@ -9,21 +9,7 @@
     <meta charset="UTF-8">
     <title> rent-bike </title>
     <link rel="stylesheet" href="css/bootstrap.css">
-    <script>
-        function validateForm() {
-            var email = document.forms["myForm"]["email"].value;
-            var password = document.forms["myForm"]["password"].value;
-
-            if (email == null || email.trim() == "") {
-                alert("<fmt:message key="EMPTY_EMAIL_ERROR_MESSAGE"/>");
-                return false;
-            }
-            if (password == null || password.trim() == "") {
-                alert("<fmt:message key="EMPTY_PASSWORD_ERROR_MESSAGE"/>");
-                return false;
-            }
-        }
-    </script>
+    <link rel="stylesheet" type="text/css" href="css/login-form.css">
 </head>
 <body style="margin-bottom: 0px;">
 <jsp:include page="parts/navigation.jsp"/>
@@ -31,37 +17,44 @@
     <h3><c:out value="${successMsg}"/></h3></center>
 <center style="color:graytext;">
     <h3><c:out value="${errorMsg}"/></h3></center>
-
-﻿
-<div class="auth-window animated fadeInDown" style="margin-top: 10px;">
+<div class="auth-window animated fadeInDown">
     <div class="title"><fmt:message key="LOGIN"/></div>
-    <form role="form" method="post" name="myForm"
-          onsubmit="return validateForm()" action="main?command=login">
-        <div class="wrap">
-            <div class="form-group">
-                <label for="email"></label>
-                <input type="email"
-                       class="form-control big "
-                       id="email"
-                       required
-                       title="Use Latin letters, ._%+- and digits, then @, followed by Latin letters, symbols -. and numbers. Further . and after it domain of 2-4 Latin letters"
-                       name="email" placeholder="<fmt:message key="EMAIL"/>"
-                       pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
-                <c:out value="${error.login}"/>
+    <form class="loginForm" id="loginForm" role="form" method="post" name="myForm" action="main?command=login">
+        <fieldset id="inputs">
+            <div ID="items">
+                <span>
+                    <label for="username">
+                        <input id="username" type="text" autofocus required
+                               class="form-control big"
+                               pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+                               title="Use Latin letters, ._%+- and digits, then @, followed by Latin letters, symbols -. and numbers. Further . and after it domain of 2-4 Latin letters"
+                               name="email" placeholder="<fmt:message key="EMAIL"/>">
+                            <ul class="input-requirements">
+                                <li>Need's to contain @ after letters</li>
+                                <li>Needs to contain . after @ and letter</li>
+                            </ul>
+                        <c:out value="${error.login}"/>
+                </label>
+                </span>
+                <span>
+                <label for="password">
+                            <input id="password" type="password" placeholder="<fmt:message key="PASSWORD"/>"
+                                   required class="form-control big"
+                                   pattern="(?=^.{6,}$)^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$"
+                                   title="Min 1 UpperCase latin, 1 LowerCase latin and 1 Number, 6+ symbols"
+                                   minlength="6"
+                                   name="password">
+                            <ul class="input-requirements">
+                                <li>At least 6 characters long</li>
+                                <li>Contains at least 1 number</li>
+                                <li>Contains at least 1 lowercase letter</li>
+                                <li>Contains at least 1 uppercase letter</li>
+                            </ul>
+                    <c:out value="${errormsg.password}"/>
+                </label>
+            </span>
             </div>
-            <div class="form-group">
-                <label for="password"></label>
-                <input type="password"
-                       class="form-control big "
-                       id="password"
-                       name="password"
-                       required
-                       pattern="(?=^.{6,}$)^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$"
-                       title="Min 1 UpperCase latin, 1 LowerCase latin and 1 Number, 6+ symbols"
-                       placeholder="<fmt:message key="PASSWORD"/>">
-                <c:out value="${error.password}"/>
-            </div>
-        </div>
+        </fieldset>
         <div class="auth-window__bottom">
             <div class="row">
                 <div class="col-md-6">
@@ -69,14 +62,14 @@
                             data-loading-text="Авторизация..."><fmt:message key="LOGIN"/></button>
                 </div>
                 <div class="col-md-6">
-                    <a href="registration.jsp" class="btn btn-block btn-default">
-                        <i class="fa fa-user text-muted"></i> &nbsp;<fmt:message key="REGISTRATION"/></a>
+                    <button type="button" onclick="javascript:window.location='registration.jsp'" class="btn btn-default btn-block btn-lg">
+                       <fmt:message key="REGISTRATION"/></button>
                 </div>
             </div>
         </div>
     </form>
 </div>
 <jsp:include page="parts/footer.jsp"/>
+<script src="js/login.js"></script>
 </body>
 </html>
-

@@ -16,7 +16,7 @@ import java.math.BigDecimal;
  * <p>Use to take a loan.</p>
  * The user is given money on credit, and he will be marked by the system as a debtor.
  */
-public class TakeALoan implements ICommand {
+public class TakeLoan implements ICommand {
     UserService userService = ServiceFactory.getFactory().getUserService();
 
     @Override

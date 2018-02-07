@@ -19,7 +19,7 @@ import java.math.BigDecimal;
  * <p>When the work is done, <code>response.sendRedirect</code> is used to avoid re-querying.</p>
  * <p>If the user has a loan - first the money is used to repay it.</p>
  *
- * @see TakeALoan
+ * @see TakeLoan
  */
 public class FillUpBalance implements ICommand {
     private static final Logger LOGGER = LogManager.getLogger(FillUpBalance.class);

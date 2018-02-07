@@ -20,7 +20,7 @@
     <tr>
         <th><fmt:message key="FIRST_NAME"/></th>
         <th><fmt:message key="LAST_NAME"/></th>
-        <th>№</th>
+        <th><fmt:message key="PHONE_NUMBER"/></th>
         <th><fmt:message key="EMAIL"/></th>
         <th><fmt:message key="BALANCE"/></th>
         <th><fmt:message key="ACTION"/></th>

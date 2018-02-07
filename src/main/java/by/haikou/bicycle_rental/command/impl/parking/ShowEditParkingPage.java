@@ -24,7 +24,7 @@ public class ShowEditParkingPage implements ICommand {
     private ParkingService parkingService = ServiceFactory.getFactory().getParkingService();
 
     @Override
-    public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException , UnauthorizedException {
+    public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, UnauthorizedException {
         checkRoots(request, new User.Role[]{User.Role.MANAGER, User.Role.ADMINISTRATOR});
         Parking parking = parkingService.getParkingById(Integer.parseInt(request.getParameter("id")));
         request.setAttribute("parking", parking);

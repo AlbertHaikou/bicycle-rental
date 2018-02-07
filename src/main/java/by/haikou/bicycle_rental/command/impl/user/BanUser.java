@@ -25,7 +25,7 @@ public class BanUser implements ICommand {
     private UserService userService = ServiceFactory.getFactory().getUserService();
 
     @Override
-    public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException , UnauthorizedException {
+    public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, UnauthorizedException {
         checkRoots(request, new User.Role[]{User.Role.MANAGER, User.Role.ADMINISTRATOR});
         Integer id = Integer.parseInt(request.getParameter("id"));
         userService.banUser(id);

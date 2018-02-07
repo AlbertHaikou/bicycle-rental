@@ -18,7 +18,7 @@ import static by.haikou.bicycle_rental.util.PaginationObject.DEFAULT_PAGE;
 /**
  * <p>Forms a list of rental points, given the number of the current page.</p>
  */
-public class ShowParkingsPage implements ICommand {
+public class ShowParkingsList implements ICommand {
     private ParkingService parkingService = ServiceFactory.getFactory().getParkingService();
 
     @Override
