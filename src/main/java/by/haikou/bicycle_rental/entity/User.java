@@ -3,9 +3,9 @@ package by.haikou.bicycle_rental.entity;
 import java.math.BigDecimal;
 
 public class User {
-    private String firstName;
     private String email;
     private int id;
+    private String firstName;
     private String lastName;
     private String password;
     private Role role;
@@ -39,10 +39,6 @@ public class User {
 
     public void setBanned(boolean banned) {
         this.banned = banned;
-    }
-
-    public void setName(String firstName) {
-        this.firstName = firstName;
     }
 
     public String getFirstName() {

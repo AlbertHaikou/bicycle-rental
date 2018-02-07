@@ -26,7 +26,7 @@
                 <span>
                     <label for="username">
                         <input id="username" type="text" autofocus required
-                               class="form-control"
+                               class="form-control big"
                                pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
                                title="Use Latin letters, ._%+- and digits, then @, followed by Latin letters, symbols -. and numbers. Further . and after it domain of 2-4 Latin letters"
                                name="email" placeholder="<fmt:message key="EMAIL"/>">
@@ -39,7 +39,7 @@
                 <span>
                 <label for="password">
                             <input id="password" type="password" placeholder="<fmt:message key="PASSWORD"/>"
-                                   required class="form-control"
+                                   required class="form-control big"
                                    pattern="(?=^.{6,}$)^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$"
                                    title="Min 1 UpperCase latin, 1 LowerCase latin and 1 Number, 6+ symbols"
                                    minlength="6"
@@ -54,8 +54,9 @@
             </span>
                 <span>
                 <label for="password_repeat">
-                            <input id="password_repeat" type="password" placeholder="<fmt:message key="REPEAT_PASSWORD"/>"
-                                   required class="form-control"
+                            <input id="password_repeat" type="password"
+                                   placeholder="<fmt:message key="REPEAT_PASSWORD"/>"
+                                   required class="form-control big"
                                    pattern="(?=^.{6,}$)^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$"
                                    title="Min 1 UpperCase latin, 1 LowerCase latin and 1 Number, 6+ symbols"
                                    minlength="6"
@@ -65,13 +66,13 @@
 
                 <span>
                 <label for="firstName">
-                            <input id="firstName" type="text" placeholder="<fmt:message key="FIRST_NAME"/>"
+                            <input id="firstName" type="text"
+                                   placeholder="<fmt:message key="FIRST_NAME"/>"
                                    required class="form-control big"
                                    pattern="[A-Za-zа-яА-Я]{3,}"
                                    title="3+ letters"
                                    name="firstName">
                 </label>
-                    <c:out value="${errormsg.firstName}"/>
             </span>
                 <span>
                 <label for="lastName">
@@ -83,7 +84,6 @@
                                    title="3+ letters"
                                    name="lastName">
                 </label>
-                     <c:out value="${errormsg.lastName}"/>
             </span>
 
                 <span>
