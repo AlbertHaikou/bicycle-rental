@@ -27,7 +27,7 @@ public class MySqlBikeDao implements BikeDao {
             " VALUES (?, ?, ?, ?, ?, ?, ?)";
     private static final String SQL_FOR_DELETE_BIKE = "DELETE FROM `bicycle` WHERE `id`= ?";
     private static final String SQL_FOR_RENT_BIKE = "UPDATE `bicycle` SET `available`= '0' WHERE `id`=?";
-    private static final String SQL_FOR_RETURN_BIKE = "UPDATE `bicycle` SET `available`= '1' WHERE `id`=?";
+    private static final String SQL_FOR_RETURN_BIKE = "UPDATE `bicycle` SET `available`= '1', fk_parking_id = ? WHERE `id`=?";
     private static final String SQL_FOR_UPDATE_BIKE = "UPDATE `bicycle` SET `type`=?, `model`=?, `size`=?, `available`=?, `fk_parking_id`=?, `price`=? WHERE `id`=?";
     private static final String SQL_FOR_GET_ALL_BIKES = "SELECT `id`,`type`,`model`,`size`,`available`,`fk_parking_id`,`price` FROM `bicycle`";
     private static final String SQL_FOR_GET_BIKE_BY_ID = "SELECT `id`,`type`,`model`,`size`,`available`,`fk_parking_id`,`price` FROM `bicycle` WHERE `id` = ?";
@@ -237,14 +237,15 @@ public class MySqlBikeDao implements BikeDao {
     }
 
     @Override
-    public void returnBike(Integer bikeId) throws DAOException {
+    public void returnBike(Integer bikeId, Integer parkingId) throws DAOException {
         Connection connection = null;
         PreparedStatement statement = null;
 
         try {
             connection = pool.getConnection();
             statement = connection.prepareStatement(SQL_FOR_RETURN_BIKE);
-            statement.setInt(1, bikeId);
+            statement.setInt(1, parkingId);
+            statement.setInt(2, bikeId);
             statement.executeUpdate();
         } catch (SQLException e) {
             throw new DAOException(e);

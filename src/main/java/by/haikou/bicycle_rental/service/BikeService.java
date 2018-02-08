@@ -82,6 +82,8 @@ public interface BikeService {
      */
     void returnBike(Integer bikeId, Integer userId);
 
+    void returnBike(Integer bikeId, Integer userId, Integer parkingId);
+
     /**
      * @return List of bicycles at chosen parking for the selected page.
      */

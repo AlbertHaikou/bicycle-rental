@@ -16,7 +16,7 @@
 <jsp:include page="parts/navigation.jsp"/>
 <center class="graytext"><h3><fmt:message key="BIKE_PARKINGS"/></h3></center>
 <br/>
-<c:if test="${sessionScope.user.role.value=='ADMINISTRATOR'}">
+<c:if test="${sessionScope.user.role.value eq 'ADMINISTRATOR' or sessionScope.user.role.value eq 'MANAGER'}">
     <div class="center-block"><a href="main?command=addParkingPage">
         <button class="btn center-block btn-success"><fmt:message key="ADD_PARKING"/></button>
     </a></div>
@@ -28,8 +28,7 @@
         <th>№</th>
         <th><fmt:message key="STREET"/></th>
         <th><fmt:message key="SHOW"/></th>
-        <c:set var="ADMINISTRATOR" value="ADMINISTRATOR"/>
-        <c:if test="${sessionScope.user.role.value eq 'ADMINISTRATOR'}">
+        <c:if test="${sessionScope.user.role.value eq 'ADMINISTRATOR' or sessionScope.user.role.value eq 'MANAGER'}">
             <th colspan=2><fmt:message key="ACTION"/></th>
         </c:if>
     </tr>
@@ -42,7 +41,7 @@
             <td><a class="btn btn-info"
                    href="main?command=showBikesInParkingPage&id=<c:out value="${parking.parkingId}"/>"><fmt:message
                     key="LIST_BIKES"/></a></td>
-            <c:if test="${sessionScope.user.role.value eq 'ADMINISTRATOR'}">
+            <c:if test="${sessionScope.user.role.value eq 'ADMINISTRATOR' or sessionScope.user.role.value eq 'MANAGER'}">
                 <td><a class="btn btn-success"
                        href="main?command=showEditParkingPage&id=<c:out value="${parking.parkingId}"/>"><fmt:message
                         key="UPDATE"/></a></td>

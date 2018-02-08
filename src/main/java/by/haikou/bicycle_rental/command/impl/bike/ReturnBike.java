@@ -27,8 +27,13 @@ public class ReturnBike implements ICommand {
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
         Integer userId = user.getId();
-        Integer id = Integer.parseInt(request.getParameter("id"));
-        bikeService.returnBike(id, userId);
+        Integer bikeId = Integer.parseInt(request.getParameter("id"));
+        Integer chosenParkingId = Integer.parseInt(request.getParameter("chosenParkingId"));
+        if (null != chosenParkingId) {
+            bikeService.returnBike(bikeId, userId, chosenParkingId);
+        } else {
+            bikeService.returnBike(bikeId, userId);
+        }
         Integer parkingId = (Integer) session.getAttribute("parkingScope");
         if (null != parkingId) {
             response.sendRedirect("main?command=showBikesInParkingPage&id=" + parkingId);

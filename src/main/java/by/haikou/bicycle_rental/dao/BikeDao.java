@@ -30,7 +30,7 @@ public interface BikeDao {
 
     void rentBike(Integer bikeId) throws DAOException;
 
-    void returnBike(Integer bikeId) throws DAOException;
+    void returnBike(Integer bikeId, Integer parkingId) throws DAOException;
 
     List<Bicycle> showBikeByParkingId(Integer parkingId) throws DAOException;
 

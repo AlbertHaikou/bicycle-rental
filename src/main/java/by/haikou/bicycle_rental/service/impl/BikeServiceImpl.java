@@ -8,6 +8,9 @@ import by.haikou.bicycle_rental.entity.Bicycle;
 import by.haikou.bicycle_rental.entity.RentItem;
 import by.haikou.bicycle_rental.service.BikeService;
 import by.haikou.bicycle_rental.util.PaginationObject;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.Part;
 import java.math.BigDecimal;
@@ -15,6 +18,7 @@ import java.util.Date;
 import java.util.List;
 
 public class BikeServiceImpl implements BikeService {
+    private static final Logger LOGGER = LogManager.getLogger(BikeServiceImpl.class);
 
     private BikeDao bikeDao = DAOFactory.getFactory().getBikeDao();
     private RentItemDao rentItemDao = DAOFactory.getFactory().getRentItemDao();
@@ -71,9 +75,11 @@ public class BikeServiceImpl implements BikeService {
     @Override
     public void updateBike(Bicycle bike) {
 
-        if (bikeDao.getBikeById(bike.getBicycleId()).getIsAvailable() == false) {
-            RentItem item = rentItemDao.findTakenByBike(bike.getBicycleId());
-            returnBike(item.getBikeId(), item.getUserId());
+        if (!bikeDao.getBikeById(bike.getBicycleId()).getIsAvailable()) {
+            LOGGER.log(Level.ERROR, "basdgasdgasdg");
+            if (null != rentItemDao.findTakenByBike(bike.getBicycleId())) {
+                returnBike(bike.getBicycleId(), rentItemDao.findTakenByBike(bike.getBicycleId()).getUserId());
+            }
         }
         bikeDao.updateBike(bike);
     }
@@ -121,16 +127,22 @@ public class BikeServiceImpl implements BikeService {
 
     @Override
     public void returnBike(Integer bikeId, Integer userId) {
+        Bicycle bicycle = bikeDao.getBikeById(bikeId);
+        returnBike(bikeId, userId, bicycle.getParkingId());
+    }
+
+    @Override
+    public void returnBike(Integer bikeId, Integer userId, Integer parkingId) {
         RentItem rentItem = rentItemDao.findTakenByUser(userId);
         Date fromDate = rentItem.getFromDate();
         Date newDate = new Date();
         BigDecimal amount = rentItem.getPrice().multiply(new BigDecimal((newDate.getTime() - fromDate.getTime()) / 3600000.));
         userDao.fillUpBalance(amount.negate(), userId);
         rentItem.setToDate(newDate);
-        rentItem.setParkingToId(1);
+        rentItem.setParkingToId(parkingId);
         rentItem.setTotalPrice(amount);
         rentItemDao.updateItem(rentItem);
-        bikeDao.returnBike(bikeId);
+        bikeDao.returnBike(bikeId, parkingId);
     }
 
     @Override

@@ -22,10 +22,7 @@
             <c:when test="${null ne sessionScope.parkingScope}">
                 <center>
                     <a href="main?command=showBikesInParkingPage&id=${sessionScope.parkingScope}">
-                        <button class="btn btn-mini"
-                                type="button" style="border-top-width: 2px;padding-left: 0px;
-            padding-right: 0px; padding-top: 0px; padding-bottom: 0px;border-bottom-width: 2px;
-            border-left-width: 5px; border-right-width: 5px;color: navy;">
+                        <button class="btn btn-xs text-success" type="button">
                             <fmt:message key="SHOW_ALL_BIKES"/></button>
                     </a>
                 </center>
@@ -33,10 +30,7 @@
             <c:otherwise>
                 <center>
                     <a href="main?command=showBikes">
-                        <button class="btn btn-mini"
-                                type="button" style="border-top-width: 2px;padding-left: 0px;
-            padding-right: 0px; padding-top: 0px; padding-bottom: 0px;border-bottom-width: 2px;
-            border-left-width: 5px; border-right-width: 5px;color: navy;">
+                        <button class="btn btn-xs text-success" type="button">
                             <fmt:message key="SHOW_ALL_BIKES"/></button>
                     </a>
                 </center>
@@ -49,10 +43,7 @@
             <c:when test="${null ne sessionScope.parkingScope}">
                 <center>
                     <a href="main?command=showBikesInParkingPage&id=${sessionScope.parkingScope}&available=true">
-                        <button class="btn btn-mini"
-                                type="button" style="border-top-width: 2px;padding-left: 0px;
-            padding-right: 0px; padding-top: 0px; padding-bottom: 0px;border-bottom-width: 2px;
-            border-left-width: 5px; border-right-width: 5px;color: navy;">
+                        <button class="btn btn-xs text-success" type="button">
                             <fmt:message key="SHOW_AVALAIBLE_BIKES"/></button>
                     </a>
                 </center>
@@ -60,10 +51,7 @@
             <c:otherwise>
                 <center>
                     <a href="main?command=showBikes&available=true">
-                        <button class="btn btn-mini"
-                                type="button" style="border-top-width: 2px;padding-left: 0px;
-            padding-right: 0px; padding-top: 0px; padding-bottom: 0px;border-bottom-width: 2px;
-            border-left-width: 5px; border-right-width: 5px;color: navy;">
+                        <button class="btn btn-xs text-success" type="button">
                             <fmt:message key="SHOW_AVALAIBLE_BIKES"/></button>
                     </a>
                 </center>
@@ -139,9 +127,19 @@
                     <c:otherwise>
                         <td>
                             <c:if test="${not empty userRentedBikeId and bike.bicycleId eq userRentedBikeId}">
-                                <a class="btn btn-rent"
-                                   href="main?command=returnBike&id=<c:out value="${bike.bicycleId}"/>"><fmt:message
-                                        key="TO_RETURN"/></a>
+                                <form method="post"
+                                      action="main?command=returnBike&id=<c:out value="${bike.bicycleId}"/>">
+                                    <p>
+                                        <button type="submit" class="btn btn-rent"><fmt:message
+                                                key="TO_RETURN"/></button>
+                                    </p>
+                                    <select class="btn btn-xs" name="chosenParkingId">
+                                        <c:forEach items="${parkings}" var="parking">
+                                            <option value="${parking.parkingId}"  ${parking.parkingId eq bike.parkingId ? 'selected' : ''}>
+                                                <c:out value="${parking.street}"/>
+                                            </option>
+                                        </c:forEach>
+                                    </select></form>
                             </c:if>
                         </td>
                     </c:otherwise>
@@ -153,7 +151,7 @@
 </table>
 <%@ include file="parts/pagination.jsp" %>
 <p>
-    <c:if test="${sessionScope.user.role.value.equalsIgnoreCase(ADMINISTRATOR)}">
+    <c:if test="${sessionScope.user.role.value eq 'ADMINISTRATOR' or sessionScope.user.role.value eq 'MANAGER'}">
 <div class="center-block">
     <a href="main?command=addBikePage">
         <button class="center-block btn-add btn"><fmt:message key="ADD_BIKE"/></button>
