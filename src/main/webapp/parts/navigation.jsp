@@ -20,7 +20,7 @@
             </button>
             <a class="logo" href="../index.jsp">
                 <img src="../img/logo.png" alt="" class="animated bounceInDown">
-                <span class="name"> planet bike </span>
+                <span class="name"> city bike </span>
                 <small><fmt:message key="BIKE_RENTAL_SYSTEM"/></small>
                 <c:if test="${not empty sessionScope.user}">
                     <h5>

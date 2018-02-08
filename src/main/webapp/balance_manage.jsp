@@ -8,7 +8,7 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="css/bootstrap.css">
-    <title>Bicycle Rental</title>
+    <title> City bike </title>
 </head>
 <body>
 <jsp:include page="parts/navigation.jsp"/>
@@ -17,8 +17,7 @@
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
             <div class=" profile profile-content">
-                <center><h3><fmt:message key="BALANCE_MANAGE"/></h3></center>
-                <br/>
+                <center class="graytext"><h3><fmt:message key="BALANCE_MANAGE"/></h3></center>
                 <center><h3><label><fmt:message key="BALANCE"/><c:out value=": ${balance}"></c:out></label></h3>
                 </center>
                 <c:if test="${debtor}">

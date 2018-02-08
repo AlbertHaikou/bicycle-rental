@@ -7,17 +7,16 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title> rental-bicycle </title>
+    <title> City bike </title>
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="css/login-form.css">
 
 </head>
-<body style="margin-bottom: 0px;">
+<body>
 <jsp:include page="parts/navigation.jsp"/>
 
-<center style="color:graytext;">
+<center class="graytext">
     <h3><c:out value="${errorMsg.email}"/></h3></center>
-</h3></center>
 <div class="auth-window animated  fadeInDown" style="margin-top: 50px;">
     <div class="title"><fmt:message key="REGISTRATION"/></div>
     <form class="loginForm" id="loginForm" role="form" method="post" name="myForm" action="main?command=register">

@@ -8,13 +8,13 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title> rent-bike </title>
+    <title> City bike </title>
     <link rel="stylesheet" href="css/bootstrap.css">
 
 </head>
-<body style="margin-bottom: 0px;">
+<body>
 <jsp:include page="parts/navigation.jsp"/>
-<center style="color:graytext;"><h3><fmt:message key="REQUEST_FOR_REPAIR"/></h3></center>
+<center class="graytext"><h3><fmt:message key="REQUEST_FOR_REPAIR"/></h3></center>
 <table border=2>
     <thead>
     <tr>

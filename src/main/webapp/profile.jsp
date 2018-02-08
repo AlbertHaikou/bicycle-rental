@@ -8,12 +8,12 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title> rent-bike </title>
+    <title> City bike </title>
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/profile.css">
 
 </head>
-<body style="margin-bottom: 0px;">
+<body>
 <header>
     <jsp:include page="parts/navigation.jsp"/>
 </header>

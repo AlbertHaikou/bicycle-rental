@@ -7,12 +7,12 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title> rent-bike </title>
+    <title> City bike </title>
     <link rel="stylesheet" href="css/bootstrap.css">
 </head>
-<body style="margin-bottom: 0px;">
+<body>
 <jsp:include page="parts/navigation.jsp"/>
-<center style="color:graytext;"><h3><fmt:message key="APPLICATION_FOR_REPAIR_OF_BIKE"/></h3>
+<center class="graytext"><h3><fmt:message key="APPLICATION_FOR_REPAIR_OF_BIKE"/></h3>
     <br/>
     <div id="centerLayer">
         <form method="post" action="main?command=create">

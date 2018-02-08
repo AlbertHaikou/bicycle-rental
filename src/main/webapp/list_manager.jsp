@@ -8,13 +8,13 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title> rent-bike </title>
+    <title> City bike </title>
     <link rel="stylesheet" href="css/bootstrap.css">
     <link href="<c:url value="css/pagination.css"/>" rel="stylesheet"/>
 </head>
 <body>
 <jsp:include page="parts/navigation.jsp"/>
-<center><h3><fmt:message key="MANAGER"/></h3></center>
+<center class="graytext"><h3><fmt:message key="MANAGER"/></h3></center>
 <br/>
 <c:if test="${sessionScope.user.role.value=='ADMINISTRATOR'}">
     <div class="center-block"><a href="main?command=showAddManagerPage">

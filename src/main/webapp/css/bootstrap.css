@@ -8279,3 +8279,7 @@ fieldset[disabled] .btn-rent.active {
     color: #5cb85c;
     background-color: #ffffff;
 }
+
+.graytext{
+    color:graytext;
+}

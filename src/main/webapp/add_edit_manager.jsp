@@ -7,13 +7,13 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title> rent-bike </title>
+    <title> City bike </title>
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/edit.css">
     <script src="js/jquery/jquery.js"></script>
     <script src="js/edit.js"></script>
 </head>
-<body style="margin-bottom: 0px;">
+<body>
 <header>
     <jsp:include page="parts/navigation.jsp"/>
 </header>
@@ -24,7 +24,7 @@
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
             <div class=" profile profile-content">
-                <center style="color:graytext;"><h3><fmt:message key="${empty manager ? 'ADDING' : 'EDITING'}"/></h3>
+                <center class="graytext"><h3><fmt:message key="${empty manager ? 'ADDING' : 'EDITING'}"/></h3>
                 </center>
                 <form method="post" action="main?command=${empty manager ? 'addManager' : 'editManager'}">
                     <div role="form">

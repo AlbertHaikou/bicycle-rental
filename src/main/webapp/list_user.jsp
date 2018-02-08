@@ -7,13 +7,13 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title> rent-bike </title>
+    <title> City bike </title>
     <link rel="stylesheet" href="css/bootstrap.css">
     <link href="<c:url value="css/pagination.css"/>" rel="stylesheet"/>
 </head>
-<body style="margin-bottom: 0px;">
+<body>
 <jsp:include page="parts/navigation.jsp"/>
-<center style="color:graytext;"><h3><fmt:message key="CLIENTS"/></h3></center>
+<center class="graytext"><h3><fmt:message key="CLIENTS"/></h3></center>
 <br/>
 <table class="table">
     <thead>
