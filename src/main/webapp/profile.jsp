@@ -91,9 +91,19 @@
                                 <c:choose>
                                     <c:when test="${null eq (rent.totalPrice)}">
                                         <td><fmt:message key="TAKEN"/>
-                                            </p><a href="main?command=returnBike&id=<c:out value="${rent.bikeId}"/>">
-                                                <button class="btn btn-success"><fmt:message key="TO_RETURN"/></button>
-                                            </a>
+                                            <form method="post"
+                                                  action="main?command=returnBike&id=<c:out value="${rent.bikeId}"/>">
+                                                <p>
+                                                    <button type="submit" class="btn btn-rent"><fmt:message
+                                                            key="TO_RETURN"/></button>
+                                                </p>
+                                                <select class="btn btn-info btn-xs" name="chosenParkingId">
+                                                    <c:forEach items="${parkings}" var="parking">
+                                                        <option value="${parking.parkingId}"  ${parking.parkingId eq rent.parkingFromId ? 'selected' : ''}>
+                                                            <c:out value="${parking.street}"/>
+                                                        </option>
+                                                    </c:forEach>
+                                                </select></form>
                                         </td>
 
                                     </c:when>

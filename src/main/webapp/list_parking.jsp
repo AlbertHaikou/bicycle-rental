@@ -26,7 +26,7 @@
     <thead>
     <tr>
         <th>№</th>
-        <th><fmt:message key="STREET"/></th>
+        <th><fmt:message key="ADRESS"/></th>
         <th><fmt:message key="SHOW"/></th>
         <c:if test="${sessionScope.user.role.value eq 'ADMINISTRATOR' or sessionScope.user.role.value eq 'MANAGER'}">
             <th colspan=2><fmt:message key="ACTION"/></th>

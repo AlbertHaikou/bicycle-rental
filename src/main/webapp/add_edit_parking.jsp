@@ -27,11 +27,11 @@
                         <input type="hidden" name="id" class="form-control"
                                value="<c:out value="${parking.parkingId}" />"/>
                         <div class="form-group float-label-control">
-                            <label><fmt:message key="STREET"/></label>
+                            <label><fmt:message key="ADRESS"/></label>
                             <input type="text" required name="street"
                                    pattern="[a-zA-Zа-яА-Я]{4,}" class="form-control"
                                    title="4+ letters"
-                                   placeholder="<fmt:message key="STREET"/>"
+                                   placeholder="<fmt:message key="ADRESS"/>"
                                    value="<c:out value="${parking.street}"/>"/>
                         </div>
                     </div>

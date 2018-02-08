@@ -3,6 +3,7 @@ package by.haikou.bicycle_rental.command.impl.profile;
 import by.haikou.bicycle_rental.command.ICommand;
 import by.haikou.bicycle_rental.entity.RentItem;
 import by.haikou.bicycle_rental.entity.User;
+import by.haikou.bicycle_rental.service.ParkingService;
 import by.haikou.bicycle_rental.service.RentItemService;
 import by.haikou.bicycle_rental.service.UserService;
 import by.haikou.bicycle_rental.service.factory.ServiceFactory;
@@ -23,6 +24,7 @@ import java.util.List;
 public class ShowProfile implements ICommand {
     private UserService userService = ServiceFactory.getFactory().getUserService();
     private RentItemService rentItemService = ServiceFactory.getFactory().getRentItemService();
+    private ParkingService parkingService = ServiceFactory.getFactory().getParkingService();
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -39,7 +41,7 @@ public class ShowProfile implements ICommand {
         } else {
             rentItems.addAll(temp);
         }
-
+        request.setAttribute("parkings", parkingService.getAllParking());
         request.setAttribute("rents", rentItems);
         request.setAttribute("profile", userService.getUserById(userId));
 

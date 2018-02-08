@@ -1,13 +1,13 @@
 package by.haikou.bicycle_rental.entity;
 
-public class RepairItemEntity {
+public class RepairItem {
 
     private int itemId;
     private int bikeId;
     private String description;
     private boolean status;
 
-    public RepairItemEntity() {
+    public RepairItem() {
         super();
     }
 
@@ -45,7 +45,7 @@ public class RepairItemEntity {
 
     @Override
     public String toString() {
-        return "RepairItemEntity{" + "itemId=" + itemId + ", bikeId=" + bikeId
+        return "RepairItem{" + "itemId=" + itemId + ", bikeId=" + bikeId
                 + ", description=" + description + ", status=" + status + '}';
     }
 

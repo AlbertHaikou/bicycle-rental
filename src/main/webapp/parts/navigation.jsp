@@ -46,16 +46,14 @@
                         <li class=""><a href="main?command=showBikes"><fmt:message key="BIKES"/></a></li>
                         <c:if test="${sessionScope.user.role.value eq 'ADMINISTRATOR'}">
                             <li class=""><a href="main?command=showManagers"><fmt:message key="MANAGER"/></a></li>
-                            <li class=""><a href="main?command=showUsers"><fmt:message key="CLIENTS"/></a></li>
                         </c:if>
-                        <c:if test="${sessionScope.user.role.value eq 'MANAGER'}">
-                            <li class=""><a href="main?command=showListItem"><fmt:message key="REQUEST_FOR_REPAIR"/></a>
+                        <c:if test="${sessionScope.user.role.value eq 'MANAGER' or sessionScope.user.role.value eq 'ADMINISTRATOR'}">
+                            <li class=""><a href="main?command=showRepairList"><fmt:message key="REQUEST_FOR_REPAIR"/></a>
                             </li>
                             <li class=""><a href="main?command=showUsers"><fmt:message key="CLIENTS"/></a></li>
                         </c:if>
-                        <c:if test="${not empty sessionScope.user.role}">
+
                             <li class=""><a href="main?command=showProfile"><fmt:message key="MY_PROFILE"/></a></li>
-                        </c:if>
                         <li class=""><a href="main?command=logout"><fmt:message key="EXIT"/></a></li>
                     </c:otherwise>
                 </c:choose>

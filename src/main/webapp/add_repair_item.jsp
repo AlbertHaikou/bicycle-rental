@@ -15,12 +15,11 @@
 <center class="graytext"><h3><fmt:message key="APPLICATION_FOR_REPAIR_OF_BIKE"/></h3>
     <br/>
     <div id="centerLayer">
-        <form method="post" action="main?command=create">
+        <form method="post" action="main?command=createRepairItem">
             <input type="hidden" name="id"
-                   value="<c:out value="${bike.bicycleId}" />"/> <br/><br/>
-            <input type="hidden" name="status" value="false"/>
-            <p><textarea rows="10" cols="45" name="description"></textarea></p>
-            <input type="submit" value="<fmt:message key="TO_SEND"/>"/>
+                   value="<c:out value="${id}" />"/> <br/><br/>
+            <p><textarea class="input-lg" rows="10" cols="30" name="description"></textarea></p>
+            <input class="btn btn-success" type="submit" value="<fmt:message key="TO_SEND"/>"/>
         </form>
     </div>
 </center>

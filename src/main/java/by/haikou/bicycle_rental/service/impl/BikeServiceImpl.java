@@ -8,7 +8,6 @@ import by.haikou.bicycle_rental.entity.Bicycle;
 import by.haikou.bicycle_rental.entity.RentItem;
 import by.haikou.bicycle_rental.service.BikeService;
 import by.haikou.bicycle_rental.util.PaginationObject;
-import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -37,6 +36,7 @@ public class BikeServiceImpl implements BikeService {
 
     @Override
     public List<Bicycle> getAllBikes() {
+
         return bikeDao.getAllBikes();
     }
 
@@ -76,7 +76,6 @@ public class BikeServiceImpl implements BikeService {
     public void updateBike(Bicycle bike) {
 
         if (!bikeDao.getBikeById(bike.getBicycleId()).getIsAvailable()) {
-            LOGGER.log(Level.ERROR, "basdgasdgasdg");
             if (null != rentItemDao.findTakenByBike(bike.getBicycleId())) {
                 returnBike(bike.getBicycleId(), rentItemDao.findTakenByBike(bike.getBicycleId()).getUserId());
             }

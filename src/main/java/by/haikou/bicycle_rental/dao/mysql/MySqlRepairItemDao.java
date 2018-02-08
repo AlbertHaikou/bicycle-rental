@@ -4,7 +4,7 @@ import by.haikou.bicycle_rental.dao.RepairItemDao;
 import by.haikou.bicycle_rental.dao.exceptions.DAOException;
 import by.haikou.bicycle_rental.dao.mysql.db.ConnectionPool;
 import by.haikou.bicycle_rental.dao.mysql.db.ResultSetConverter;
-import by.haikou.bicycle_rental.entity.RepairItemEntity;
+import by.haikou.bicycle_rental.entity.RepairItem;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -18,12 +18,12 @@ public class MySqlRepairItemDao implements RepairItemDao {
     private final static String SQL_FOR_GET_ALL_ITEMS = "SELECT `id`,`bicycle_id`,`description`,`status` FROM `repair_item`";
     private final static String SQL_FOR_GET_UNPERFORMED_ITEMS = "SELECT `id`,`bicycle_id`,`description`,`status` FROM `repair_item` WHERE `status`='0'";
     private final static String SQL_FOR_GET_ITEM_BY_BIKE_ID = "SELECT `id`,`bicycle_id`,`description`,`status` FROM `repair_item` WHERE `bicycle_id`=?";
-    private final static String SQL_FOR_GET_REPAIR_BIKE = "UPDATE `repair_item` SET `status` = 1 WHERE `bicycle_id`=?";
+    private final static String SQL_FOR_REPAIR_BIKE = "UPDATE `repair_item` SET `status` = 1 WHERE `id`=?";
 
     private final ConnectionPool pool = ConnectionPool.getPool();
 
     @Override
-    public void createItem(RepairItemEntity supportItem) throws DAOException {
+    public void createItem(RepairItem supportItem) throws DAOException {
         Connection connection = null;
         PreparedStatement statement = null;
 
@@ -45,12 +45,12 @@ public class MySqlRepairItemDao implements RepairItemDao {
     }
 
     @Override
-    public List<RepairItemEntity> getAllItems() throws DAOException {
+    public List<RepairItem> getAllItems() throws DAOException {
         Connection connection = null;
         PreparedStatement statement = null;
         ResultSet set = null;
 
-        List<RepairItemEntity> result = new ArrayList<>();
+        List<RepairItem> result = new ArrayList<>();
 
         try {
             connection = pool.getConnection();
@@ -58,7 +58,7 @@ public class MySqlRepairItemDao implements RepairItemDao {
             set = statement.executeQuery();
 
             while (set.next()) {
-                RepairItemEntity entity = ResultSetConverter.createRepairItemEntity(set);
+                RepairItem entity = ResultSetConverter.createRepairItemEntity(set);
                 result.add(entity);
             }
         } catch (SQLException e) {
@@ -72,12 +72,12 @@ public class MySqlRepairItemDao implements RepairItemDao {
     }
 
     @Override
-    public List<RepairItemEntity> unperformedItem() throws DAOException {
+    public List<RepairItem> unperformedItem() throws DAOException {
         Connection connection = null;
         PreparedStatement statement = null;
         ResultSet set = null;
 
-        List<RepairItemEntity> result = new ArrayList<>();
+        List<RepairItem> result = new ArrayList<>();
 
         try {
             connection = pool.getConnection();
@@ -85,7 +85,7 @@ public class MySqlRepairItemDao implements RepairItemDao {
             set = statement.executeQuery();
 
             while (set.next()) {
-                RepairItemEntity entity = ResultSetConverter.createRepairItemEntity(set);
+                RepairItem entity = ResultSetConverter.createRepairItemEntity(set);
                 result.add(entity);
             }
         } catch (SQLException e) {
@@ -99,7 +99,7 @@ public class MySqlRepairItemDao implements RepairItemDao {
     }
 
     @Override
-    public RepairItemEntity getItemById(Integer bikeId) throws DAOException {
+    public RepairItem getItemById(Integer bikeId) throws DAOException {
         if (bikeId == null) {
             return null;
         }
@@ -114,7 +114,7 @@ public class MySqlRepairItemDao implements RepairItemDao {
             set = statement.executeQuery();
 
             if (set.next()) {
-                RepairItemEntity entity = ResultSetConverter.createRepairItemEntity(set);
+                RepairItem entity = ResultSetConverter.createRepairItemEntity(set);
                 return entity;
             }
         } catch (SQLException e) {
@@ -134,7 +134,7 @@ public class MySqlRepairItemDao implements RepairItemDao {
 
         try {
             connection = pool.getConnection();
-            statement = connection.prepareStatement(SQL_FOR_GET_REPAIR_BIKE);
+            statement = connection.prepareStatement(SQL_FOR_REPAIR_BIKE);
             statement.setInt(1, id);
             statement.executeUpdate();
         } catch (SQLException e) {

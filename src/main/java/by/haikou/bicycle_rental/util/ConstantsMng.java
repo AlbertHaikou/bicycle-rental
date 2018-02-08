@@ -22,9 +22,9 @@ public class ConstantsMng {
     public static final String MAIN = "main?";
     public static final String LIST_PARKING = "/list_parking.jsp";
     public static final String PROFILE = "/profile.jsp";
-    public static final String LIST_HISTORY_RENT = "/list_historyRent.jsp";
-    public static final String ADD_ITEMS = "/add_items.jsp";
-    public static final String LIST_ITEMS = "/list_item.jsp";
+    public static final String LIST_HISTORY_RENT = "/list_history_rent.jsp";
+    public static final String ADD_ITEMS = "/add_repair_item.jsp";
+    public static final String LIST_ITEMS = "/list_repair_item.jsp";
     public static final String LIST_MANAGERS = "/list_manager.jsp";
     public static final String LIST_USERS = "/list_user.jsp";
     public static final String BALANCE_MANAGE = "/balance_manage.jsp";

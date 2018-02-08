@@ -29,14 +29,16 @@ public class MySqlBikeDao implements BikeDao {
     private static final String SQL_FOR_RENT_BIKE = "UPDATE `bicycle` SET `available`= '0' WHERE `id`=?";
     private static final String SQL_FOR_RETURN_BIKE = "UPDATE `bicycle` SET `available`= '1', fk_parking_id = ? WHERE `id`=?";
     private static final String SQL_FOR_UPDATE_BIKE = "UPDATE `bicycle` SET `type`=?, `model`=?, `size`=?, `available`=?, `fk_parking_id`=?, `price`=? WHERE `id`=?";
-    private static final String SQL_FOR_GET_ALL_BIKES = "SELECT `id`,`type`,`model`,`size`,`available`,`fk_parking_id`,`price` FROM `bicycle`";
+    private static final String SQL_FOR_GET_ALL_BIKES = "SELECT `id`,`type`,`model`,`size`,`available`,`fk_parking_id`,`price` " +
+            "FROM `bicycle` WHERE NOT `id` IN (SELECT `bicycle_id` FROM `repair_item` WHERE `status` = 0 GROUP BY `bicycle_id`)";
     private static final String SQL_FOR_GET_BIKE_BY_ID = "SELECT `id`,`type`,`model`,`size`,`available`,`fk_parking_id`,`price` FROM `bicycle` WHERE `id` = ?";
     private static final String SQL_FOR_GET_AVAILABLE_BIKES = "SELECT `id`,`type`,`model`,`size`,`available`,`fk_parking_id`,`price` " +
-            "FROM `bicycle` WHERE `available` = '1'";
+            "FROM `bicycle` WHERE `available` = '1' AND NOT `id` IN (SELECT `bicycle_id` FROM `repair_item` WHERE `status` = 0 GROUP BY `bicycle_id`)";
     private static final String SQL_FOR_GET_AVAILABLE_BIKES_BY_PARKING_ID = "SELECT `id`,`type`,`model`,`size`,`available`,`fk_parking_id`,`price` " +
-            "FROM `bicycle` WHERE `fk_parking_id` = ? HAVING `available`='1'";
+            "FROM `bicycle` WHERE `fk_parking_id` = ? " +
+            "AND NOT `id` IN (SELECT `bicycle_id` FROM `repair_item` WHERE `status` = 0 GROUP BY `bicycle_id`) HAVING `available`='1'";
     private static final String SQL_FOR_GET_BIKES_BY_PARKING_ID = "SELECT `id`,`type`,`model`,`size`,`available`,`fk_parking_id`,`price` " +
-            "FROM `bicycle` WHERE `fk_parking_id` = ?";
+            "FROM `bicycle` WHERE `fk_parking_id` = ? AND NOT `id` IN (SELECT `bicycle_id` FROM `repair_item` WHERE `status` = 0 GROUP BY `bicycle_id`)";
     private static final String SQL_FOR_SET_BIKE_IMAGE = "UPDATE `bicycle` SET `foto`= ? WHERE `id`=?";
 
     private static final String SQL_FOR_GET_BIKE_IMAGE_BY_ID = "SELECT `foto` FROM `bicycle` WHERE `id` = ?";

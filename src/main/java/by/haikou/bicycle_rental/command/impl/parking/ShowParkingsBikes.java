@@ -6,6 +6,7 @@ import by.haikou.bicycle_rental.dao.exceptions.DAOException;
 import by.haikou.bicycle_rental.entity.RentItem;
 import by.haikou.bicycle_rental.entity.User;
 import by.haikou.bicycle_rental.service.BikeService;
+import by.haikou.bicycle_rental.service.ParkingService;
 import by.haikou.bicycle_rental.service.RentItemService;
 import by.haikou.bicycle_rental.service.UserService;
 import by.haikou.bicycle_rental.service.factory.ServiceFactory;
@@ -29,41 +30,43 @@ public class ShowParkingsBikes implements ICommand {
     private BikeService bikeService = ServiceFactory.getFactory().getBikeService();
     private UserService userService = ServiceFactory.getFactory().getUserService();
     private RentItemService rentItemService = ServiceFactory.getFactory().getRentItemService();
+    private ParkingService parkingService = ServiceFactory.getFactory().getParkingService();
 
     @Override
-    public void execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException, CommandException {
-        int parkingId = Integer.parseInt(req.getParameter("id"));
-        HttpSession session = req.getSession();
+    public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, CommandException {
+        request.setAttribute("parkings", parkingService.getAllParking());
+        int parkingId = Integer.parseInt(request.getParameter("id"));
+        HttpSession session = request.getSession();
         session.setAttribute("parkingScope", parkingId);
         User user = (User) session.getAttribute("user");
         Integer userId = user.getId();
         user = userService.getUserById(userId);
-        req.setAttribute("user", user);
+        request.setAttribute("user", user);
         RentItem rentItem = rentItemService.findTakenByUser(userId);
         if (rentItem != null) {
-            req.setAttribute("userRentedBikeId", rentItem.getBikeId());
+            request.setAttribute("userRentedBikeId", rentItem.getBikeId());
         }
 
         int page;
         try {
-            page = Integer.parseInt(req.getParameter("page"));
+            page = Integer.parseInt(request.getParameter("page"));
         } catch (NumberFormatException exc) {
             page = DEFAULT_PAGE;
         }
 
 
         try {
-            Map parameterMap = req.getParameterMap();
-            if (parameterMap.containsKey("available") && req.getParameter("available").equals("true")) {
-                req.setAttribute("items", bikeService.showAvailableBikeByParkingId(parkingId, page));
+            Map parameterMap = request.getParameterMap();
+            if (parameterMap.containsKey("available") && request.getParameter("available").equals("true")) {
+                request.setAttribute("items", bikeService.showAvailableBikeByParkingId(parkingId, page));
             } else {
-                req.setAttribute("items", bikeService.showBikeByParkingId(parkingId, page));
+                request.setAttribute("items", bikeService.showBikeByParkingId(parkingId, page));
             }
         } catch (DAOException exc) {
             throw new CommandException(exc);
         }
 
-        req.setAttribute("command", SHOW_BIKES_IN_PARKING_PAGE.getValue() + "&id=" + parkingId);
-        req.getRequestDispatcher(ConstantsMng.LIST_BIKES).forward(req, resp);
+        request.setAttribute("command", SHOW_BIKES_IN_PARKING_PAGE.getValue() + "&id=" + parkingId);
+        request.getRequestDispatcher(ConstantsMng.LIST_BIKES).forward(request, response);
     }
 }

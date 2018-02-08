@@ -68,7 +68,7 @@
         <th><fmt:message key="MODEL"/></th>
         <th><fmt:message key="SIZE"/></th>
         <th><fmt:message key="STATUS"/></th>
-        <th><fmt:message key="№_PARKING"/></th>
+        <th><fmt:message key="ADRESS"/></th>
         <th><fmt:message key="PRICE"/></th>
         <c:set var="USER" value="USER"/>
         <c:if test="${sessionScope.user.role.value eq 'ADMINISTRATOR' or sessionScope.user.role.value eq 'MANAGER'}">
@@ -96,8 +96,11 @@
                     <td><fmt:message key="BUSY"/></td>
                 </c:otherwise>
             </c:choose>
-            <input type="hidden" name="parkingId" value="<c:out value="${bike.parkingId}" />"/>
-            <td><c:out value="${bike.parkingId}"/></td>
+            <c:forEach items="${parkings}" var="parking">
+                <c:if test="${bike.parkingId==parking.parkingId}">
+            <td><c:out value="${parking.street}"/></td>
+                </c:if>
+            </c:forEach>
             <td><c:out value="${bike.price}"/></td>
             <c:if test="${sessionScope.user.role.value eq 'ADMINISTRATOR' or sessionScope.user.role.value eq 'MANAGER'}">
                 <td><a href="main?command=showEditBikePage&id=<c:out value="${bike.bicycleId}" />"
@@ -106,11 +109,12 @@
                 <td><a class="btn btn-danger"
                        href="main?command=deleteBike&id=<c:out value="${bike.bicycleId}" />"><fmt:message
                         key="DELETE"/></a></td>
-                <td><a class="btn btn-info"
-                       href="main?command=repair&id=<c:out value="${bike.bicycleId}"/>"><fmt:message
-                        key="BID"/></a></td>
+
+                    <td> <c:if test="${bike.isAvailable}"><a class="btn btn-info"
+                           href="main?command=showAddRepairPage&id=<c:out value="${bike.bicycleId}"/>"><fmt:message
+                            key="BID"/></a></c:if></td>
+
             </c:if>
-            <c:set var="CLIENT" value="CLIENT"/>
             <c:if test="${not empty sessionScope.user}">
                 <c:choose>
                     <c:when test="${bike.isAvailable}">

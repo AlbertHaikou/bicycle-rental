@@ -42,7 +42,12 @@ public enum CommandEnum {
     FILL_UP_BALANCE("fillUpBalance"),
     TAKE_A_LOAN("takeALoan"),
     SHOW_RENTAL_HISTORY("showRentalHistory"),
-    GET_IMAGE("getImage");
+    GET_IMAGE("getImage"),
+    SHOW_ADD_REPAIR_PAGE("showAddRepairPage"),
+    CREATE_REPAIR_ITEM("createRepairItem"),
+    SHOW_REPAIR_LIST("showRepairList"),
+    REPAIR_BIKE("repairBike");
+
 
     private String value;
 
