@@ -16,4 +16,6 @@ public interface RepairItemDao {
     RepairItem getItemById(Integer bikeId) throws DAOException;
 
     void repairItem(Integer repairId) throws DAOException;
+
+    void deleteRepairsByBikeId(Integer bikeId) throws DAOException;
 }

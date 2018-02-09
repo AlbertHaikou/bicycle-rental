@@ -2,6 +2,7 @@ package by.haikou.bicycle_rental.service.impl;
 
 import by.haikou.bicycle_rental.dao.BikeDao;
 import by.haikou.bicycle_rental.dao.RentItemDao;
+import by.haikou.bicycle_rental.dao.RepairItemDao;
 import by.haikou.bicycle_rental.dao.UserDao;
 import by.haikou.bicycle_rental.dao.factory.DAOFactory;
 import by.haikou.bicycle_rental.entity.Bicycle;
@@ -22,9 +23,11 @@ public class BikeServiceImpl implements BikeService {
     private BikeDao bikeDao = DAOFactory.getFactory().getBikeDao();
     private RentItemDao rentItemDao = DAOFactory.getFactory().getRentItemDao();
     private UserDao userDao = DAOFactory.getFactory().getUserDao();
+    private RepairItemDao repairItemDao = DAOFactory.getFactory().getRepairItemDao();
 
     @Override
     public void deleteBike(Integer id) {
+        repairItemDao.deleteRepairsByBikeId(id);
         rentItemDao.deleteHistoryByBikeId(id);
         bikeDao.deleteBike(id);
     }

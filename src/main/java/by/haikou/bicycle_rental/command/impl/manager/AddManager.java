@@ -47,6 +47,7 @@ public class AddManager implements ICommand {
             user.setLastName(request.getParameter("lastName"));
             user.setEmail(request.getParameter("email"));
             user.setPassword(MD5Converter.getHash(request.getParameter("password")));
+            user.setPhoneNumber(request.getParameter("phoneNumber"));
             user.setRole(User.Role.MANAGER);
             userService.addUser(user);
 

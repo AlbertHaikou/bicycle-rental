@@ -7,9 +7,6 @@ public class RepairItem {
     private String description;
     private boolean status;
 
-    public RepairItem() {
-        super();
-    }
 
     public int getItemId() {
         return itemId;

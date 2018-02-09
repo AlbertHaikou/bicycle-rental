@@ -19,6 +19,7 @@ public class MySqlRepairItemDao implements RepairItemDao {
     private final static String SQL_FOR_GET_UNPERFORMED_ITEMS = "SELECT `id`,`bicycle_id`,`description`,`status` FROM `repair_item` WHERE `status`='0'";
     private final static String SQL_FOR_GET_ITEM_BY_BIKE_ID = "SELECT `id`,`bicycle_id`,`description`,`status` FROM `repair_item` WHERE `bicycle_id`=?";
     private final static String SQL_FOR_REPAIR_BIKE = "UPDATE `repair_item` SET `status` = 1 WHERE `id`=?";
+    private static final String SQL_FOR_DELETE_REPAIR_BY_BIKE = "DELETE FROM `repair_item` WHERE `bicycle_id`= ?";
 
     private final ConnectionPool pool = ConnectionPool.getPool();
 
@@ -136,6 +137,24 @@ public class MySqlRepairItemDao implements RepairItemDao {
             connection = pool.getConnection();
             statement = connection.prepareStatement(SQL_FOR_REPAIR_BIKE);
             statement.setInt(1, id);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new DAOException(e);
+        } finally {
+            pool.returnConnectionToPool(connection);
+            ConnectionPool.getPool().closeDbResources(statement);
+        }
+    }
+
+    @Override
+    public void deleteRepairsByBikeId(Integer bikeId) throws DAOException {
+        Connection connection = null;
+        PreparedStatement statement = null;
+
+        try {
+            connection = pool.getConnection();
+            statement = connection.prepareStatement(SQL_FOR_DELETE_REPAIR_BY_BIKE);
+            statement.setInt(1, bikeId);
             statement.executeUpdate();
         } catch (SQLException e) {
             throw new DAOException(e);

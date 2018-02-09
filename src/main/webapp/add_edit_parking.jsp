@@ -29,8 +29,8 @@
                         <div class="form-group float-label-control">
                             <label><fmt:message key="ADRESS"/></label>
                             <input type="text" required name="street"
-                                   pattern="[a-zA-Zа-яА-Я]{4,}" class="form-control"
-                                   title="4+ letters"
+                                   pattern="[a-zA-Zа-яА-ЯёЁ, 0-9]{4,}" class="form-control"
+                                   title="4+ symbols"
                                    placeholder="<fmt:message key="ADRESS"/>"
                                    value="<c:out value="${parking.street}"/>"/>
                         </div>

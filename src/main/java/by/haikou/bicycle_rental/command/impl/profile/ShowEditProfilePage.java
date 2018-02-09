@@ -23,7 +23,8 @@ public class ShowEditProfilePage implements ICommand {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        User user = userService.getUserById(Integer.parseInt(request.getParameter("id")));
+        User sessionUser = (User) request.getSession().getAttribute("user");
+        User user = userService.getUserById(sessionUser.getId());
         request.setAttribute("profile", user);
         request.getRequestDispatcher(ConstantsMng.ADD_OR_EDIT_PROFILE).forward(request, response);
     }

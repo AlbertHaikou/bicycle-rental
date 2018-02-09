@@ -56,6 +56,18 @@
                         </div>
                         <c:if test="${empty manager}">
                             <div class="form-group float-label-control">
+                                <label><fmt:message key="PHONE_NUMBER"/></label>
+                                <input type="number" id="phoneNumber"
+                                       class="form-control big"
+                                       required
+                                       title="9 digits"
+                                       name="phoneNumber"
+                                       placeholder="<fmt:message key="PHONE_NUMBER"/>"
+                                       min="111111111"
+                                       max="999999999"
+                                       class="form-control"/>
+                            </div>
+                            <div class="form-group float-label-control">
                                 <label><fmt:message key="PASSWORD"/></label>
                                 <input type="text" name="password" class="form-control"
                                        pattern="(?=^.{6,}$)^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$"
