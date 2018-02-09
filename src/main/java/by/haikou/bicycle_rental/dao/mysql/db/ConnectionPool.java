@@ -41,6 +41,7 @@ public class ConnectionPool {
                 connections.offer(connection);
             } catch (SQLException exc) {
                 LOGGER.log(Level.ERROR, exc);
+                throw new RuntimeException(exc);
             }
         }
     }
