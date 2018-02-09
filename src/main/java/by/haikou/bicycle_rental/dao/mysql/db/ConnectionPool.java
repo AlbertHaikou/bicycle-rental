@@ -7,6 +7,8 @@ import org.apache.logging.log4j.Logger;
 import java.sql.*;
 import java.util.Properties;
 import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class ConnectionPool {
@@ -17,8 +19,8 @@ public class ConnectionPool {
 
     private static final String DB_DRIVER_NAME = "com.mysql.jdbc.Driver";
 
-    private ArrayBlockingQueue<Connection> connections;
-    private ReentrantLock lockForReturnConnection;
+    private BlockingQueue<Connection> connections;
+    private Lock lockForReturnConnection;
 
     private ConnectionPool(Properties properties) {
         try {
