@@ -71,6 +71,7 @@ public class ConnectionPool {
 
     @Override
     protected void finalize() throws Throwable {
+         //connections.forEach(cn -> cn.close()); // can't throw checked exceptions
         for (Connection c : connections) {
             c.close();
         }
