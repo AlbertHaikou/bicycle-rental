@@ -31,7 +31,9 @@ public class FillUpBalance implements ICommand {
         User user = (User) session.getAttribute("user");
         Integer userId = user.getId();
         BigDecimal sum = new BigDecimal(request.getParameter("sum"));
-        userService.fillUpUserBalance(sum, userId);
+        if (sum.compareTo(new BigDecimal(0)) > 0) {
+            userService.fillUpUserBalance(sum, userId);
+        }
 
         response.sendRedirect("main?command=showBalanceManagePage");
     }

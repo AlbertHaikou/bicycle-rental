@@ -20,7 +20,7 @@ public class RentItemDAOTest {
         List<RentItem> rentItems = null;
         RentItemDao dao = MySQLDAOFactory.getFactory().getRentItemDao();
         try {
-
+            rentItems = dao.historyRent(1);
         } catch (DAOException exc) {
             LOGGER.log(Level.ERROR, exc);
         }
